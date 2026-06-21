@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronograma — Lucas | Jun–Nov 2026</title>
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --card-bg: #FFFFFF;
+    --border: #E5E3DD;
+    --text-primary: #1F1E1C;
+    --text-secondary: #5C5A54;
+    --text-tertiary: #8C8A82;
+    --accent-purple: #3C3489;
+    --accent-purple-bg: #EEEDFE;
+    --accent-green: #085041;
+    --accent-green-bg: #E1F5EE;
+    --accent-orange: #633806;
+    --accent-orange-bg: #FAEEDA;
+    --accent-pink: #72243E;
+    --accent-pink-bg: #FBEAF0;
+    --accent-blue: #0C447C;
+    --accent-blue-bg: #E6F1FB;
+    --accent-red: #A32D2D;
+    --accent-red-bg: #FCEBEB;
+    --radius-lg: 14px;
+    --radius-md: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.5;
+    padding: 0;
+  }
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  header.main {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  header.main h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  header.main p {
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+  .meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .meta-pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    background: var(--card-bg);
+  }
+
+  nav.toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 22px;
+    margin-bottom: 36px;
+  }
+  nav.toc h2 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: 10px;
+  }
+  nav.toc ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  nav.toc a {
+    font-size: 13px;
+    color: var(--accent-blue);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--accent-blue-bg);
+  }
+  nav.toc a:hover { opacity: 0.8; }
+
+  section { margin-bottom: 44px; }
+  section h2.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--text-primary);
+    display: inline-block;
+  }
+
+  .box {
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .box-warn { background: var(--accent-orange-bg); color: var(--accent-orange); }
+  .box-tip { background: var(--accent-green-bg); color: var(--accent-green); }
+  .box-info { background: var(--accent-blue-bg); color: var(--accent-blue); }
+  .box strong { font-weight: 600; }
+
+  table.fossil {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 22px;
+    font-size: 13px;
+  }
+  table.fossil th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.fossil td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  table.fossil td:first-child { color: var(--accent-red); font-weight: 600; white-space: nowrap; }
+  table.fossil tr:last-child td { border-bottom: none; }
+
+  .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin: 20px 0 10px;
+  }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 18px; }
+  .pill {
+    font-size: 11px;
+    padding: 3px 11px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .strat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px;
+  }
+  .strat-card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .strat-card p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .month-block {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 26px;
+    margin-bottom: 24px;
+    scroll-margin-top: 20px;
+  }
+  .month-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .month-name { font-size: 20px; font-weight: 600; }
+  .month-focus { font-size: 13px; color: var(--text-secondary); }
+
+  .week-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin: 18px 0 8px;
+  }
+  .aula {
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+  }
+  .aula-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    min-width: 28px;
+    padding-top: 2px;
+  }
+  .aula-title { font-size: 13.5px; font-weight: 600; margin-bottom: 3px; }
+  .aula-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
+  .aula-desc em { color: var(--text-primary); font-style: normal; font-weight: 600; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
+  .tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+  .tag-gram { background: var(--accent-purple-bg); color: var(--accent-purple); }
+  .tag-speak { background: var(--accent-green-bg); color: var(--accent-green); }
+  .tag-fce { background: var(--accent-orange-bg); color: var(--accent-orange); }
+  .tag-music { background: var(--accent-pink-bg); color: var(--accent-pink); }
+  .tag-fix { background: var(--accent-red-bg); color: var(--accent-red); }
+
+  table.rotation {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  table.rotation th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.rotation td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+  table.rotation td:first-child { color: var(--accent-purple); font-weight: 600; }
+
+  footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  @media print {
+    body { background: white; }
+    .month-block { break-inside: avoid; page-break-inside: avoid; }
+    nav.toc { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .strategy-grid { grid-template-columns: 1fr; }
+    .page { padding: 24px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="main">
+    <h1>Cronograma — Lucas</h1>
+    <p>Plano de aulas individualizado · Junho a Novembro 2026 · Foco: FCE (Cambridge First)</p>
+    <div class="meta-row">
+      <span class="meta-pill">19 anos · B2−</span>
+      <span class="meta-pill">2 aulas/semana · 55 min</span>
+      <span class="meta-pill">Seg & Qua 15h</span>
+      <span class="meta-pill">8 aulas/mês</span>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <h2>Navegação</h2>
+    <ul>
+      <li><a href="#problema">O problema real</a></li>
+      <li><a href="#estrategia">Estratégia</a></li>
+      <li><a href="#junho">Junho</a></li>
+      <li><a href="#julho">Julho</a></li>
+      <li><a href="#agosto">Agosto</a></li>
+      <li><a href="#setembro">Setembro</a></li>
+      <li><a href="#outnov">Out–Nov</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============ PROBLEMA ============ -->
+  <section id="problema">
+    <h2 class="section-title">O problema real</h2>
+
+    <div class="box box-warn">
+      Lucas <strong>sabe as regras</strong> — o problema é que não monitora a própria fala enquanto produz. Isso é um erro de <strong>automatização</strong>, não de conhecimento. É o gap mais comum em alunos B2: a gramática está na cabeça, mas não virou hábito motor ainda.
+    </div>
+
+    <div class="label">Erros fossilizados mapeados</div>
+    <table class="fossil">
+      <thead>
+        <tr><th>Erro</th><th>Exemplo típico</th><th>O que está faltando</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>He/she/it sem -s</td><td>"She go to church every Sunday"</td><td>Monitoramento automático no presente simples</td></tr>
+        <tr><td>Mistura de tempos</td><td>"Yesterday I go there and she tells me..."</td><td>Consciência do eixo temporal dentro do discurso</td></tr>
+        <tr><td>Passado irregular inconsistente</td><td>"He goed / he seen it"</td><td>Automatização dos irregulares mais comuns</td></tr>
+        <tr><td>Futuro com presente contínuo</td><td>"Tomorrow I going to..."</td><td>Distinção will / going to / present continuous</td></tr>
+      </tbody>
+    </table>
+
+    <div class="label">Por que é difícil de corrigir?</div>
+    <div class="box box-info">
+      Erros fossilizados existem há anos na produção dele. O cérebro automatizou a versão <em>errada</em>. Corrigir exige <strong>interrupção consciente e repetição com atenção</strong>, não mais explicação. A regra ele já sabe — precisa virar reflexo.
+    </div>
+
+    <div class="label">O que NÃO funciona</div>
+    <div class="pill-row">
+      <span class="pill">Explicar a regra de novo</span>
+      <span class="pill">Exercícios de gramática isolados</span>
+      <span class="pill">Corrigir tudo na hora (paralisa)</span>
+      <span class="pill">Ignorar os erros (reforça o fossilizado)</span>
+    </div>
+
+    <div class="label">O que funciona</div>
+    <div class="pill-row">
+      <span class="pill">Sinal combinado para autocorreção</span>
+      <span class="pill">Foco em 1–2 erros por aula, não todos</span>
+      <span class="pill">Repetição em contexto de fala real</span>
+      <span class="pill">Ele ouvir a si mesmo (gravação)</span>
+      <span class="pill">Recast sutil (você repete correto, ele percebe)</span>
+    </div>
+  </section>
+
+  <!-- ============ ESTRATÉGIA ============ -->
+  <section id="estrategia">
+    <h2 class="section-title">Estratégia</h2>
+
+    <div class="box box-tip">
+      A estratégia central é <strong>consciência + repetição em contexto</strong>. Cada aula tem um "erro do dia" definido antes de começar. Tudo o mais passa. Só aquele erro é interrompido.
+    </div>
+
+    <div class="strategy-grid">
+      <div class="strat-card">
+        <h4>Sinal combinado</h4>
+        <p>Combinar um gesto silencioso (levantar um dedo, bater na mesa) quando o erro do dia aparecer. Ele para, se autocorrige e continua. Sem quebrar o ritmo da conversa.</p>
+      </div>
+      <div class="strat-card">
+        <h4>Recast imediato</h4>
+        <p>Quando ele diz algo errado, você repete a frase certa de forma natural na sua próxima fala, sem sinalizar. Ele internaliza sem ser interrompido.</p>
+      </div>
+      <div class="strat-card">
+        <h4>Erro do dia</h4>
+        <p>No início da aula: <em>"Today we're watching for present simple — he/she/it."</em> Só esse. Semana seguinte, troca. Rotação mensal pelos 4 erros principais.</p>
+      </div>
+      <div class="strat-card">
+        <h4>Retelling cronometrado</h4>
+        <p>Ele reconta algo (fds, namoro, igreja) em 90 segundos. Você só conta quantos erros de tense aparecem. Virar jogo: bater o recorde da semana passada.</p>
+      </div>
+      <div class="strat-card">
+        <h4>Gravação mensal</h4>
+        <p>Uma vez por mês, gravar 2 minutos de fala livre. Ouvir juntos. Ele mesmo identifica os erros. Guardar para comparar mês a mês — progresso visível.</p>
+      </div>
+      <div class="strat-card">
+        <h4>Estrutura de 8 aulas/mês</h4>
+        <p>Aulas 1–2: tense da semana em contexto. Aulas 3–4: conteúdo FCE com monitoramento. Aulas 5–6: tema engajante + erro do dia. Aulas 7–8: simulado / escrita / revisão.</p>
+      </div>
+    </div>
+
+    <div class="label">Rotação mensal dos erros</div>
+    <table class="rotation">
+      <thead><tr><th>Mês</th><th>Erro principal</th><th>Contexto de trabalho</th></tr></thead>
+      <tbody>
+        <tr><td>Junho</td><td>He/she/it — presente simples</td><td>Contar sobre pessoas da vida dele (namorada, família, amigos)</td></tr>
+        <tr><td>Julho</td><td>Eixo temporal — passado consistente</td><td>Retellings de filmes, músicas narrativas, fim de semana</td></tr>
+        <tr><td>Agosto</td><td>Will / going to / present continuous</td><td>Planos de vida, intercâmbio, casamento, faculdade</td></tr>
+        <tr><td>Setembro</td><td>Revisão dos 3 + simulado FCE Speaking</td><td>Fala livre monitorada, condições de exame</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ JUNHO ============ -->
+  <section id="junho" class="month-block">
+    <div class="month-header">
+      <span class="month-name">Junho</span>
+      <span class="month-focus">Erro do mês: he/she/it no presente simples</span>
+    </div>
+    <div class="box box-info">8 aulas = 2 por semana. O erro do mês é he/she/it. Toda vez que aparecer na fala, sinal combinado. Tudo mais passa livre.</div>
+
+    <div class="week-title">Semana 1</div>
+    <div class="aula">
+      <div class="aula-num">A1</div>
+      <div>
+        <div class="aula-title">Diagnóstico + combinado</div>
+        <div class="aula-desc">Conversa livre: ele fala sobre o fim de semana, a namorada, a faculdade. Você só ouve e anota os erros. No final, mostram juntos o padrão. Combinam o sinal do mês.</div>
+        <div class="tags"><span class="tag tag-fix">diagnóstico</span><span class="tag tag-speak">fala livre</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A2</div>
+      <div>
+        <div class="aula-title">Taylor Swift — análise de letra + he/she/it</div>
+        <div class="aula-desc">Pegar uma música com protagonista feminino. Ele descreve o que <em>she does, she feels, she wants</em> em cada verso. Sinal sempre que esquecer o -s.</div>
+        <div class="tags"><span class="tag tag-music">música</span><span class="tag tag-fix">he/she/it</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 2</div>
+    <div class="aula">
+      <div class="aula-num">A3</div>
+      <div>
+        <div class="aula-title">FCE Reading Part 5 — tema tecnologia</div>
+        <div class="aula-desc">Texto sobre IA ou redes sociais. Resolver as questões, depois discutir o tema. Monitorar he/she/it quando ele opinar sobre o que a tecnologia <em>does / affects / changes</em>.</div>
+        <div class="tags"><span class="tag tag-fce">FCE Reading</span><span class="tag tag-fix">he/she/it</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A4</div>
+      <div>
+        <div class="aula-title">Retelling cronometrado — 90 segundos</div>
+        <div class="aula-desc">Ele reconta um episódio recente (faculdade ou namorada). Você conta os erros de he/she/it silenciosamente. Depois, ele tenta de novo batendo o recorde.</div>
+        <div class="tags"><span class="tag tag-fix">he/she/it</span><span class="tag tag-speak">fluência</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 3</div>
+    <div class="aula">
+      <div class="aula-num">A5</div>
+      <div>
+        <div class="aula-title">Debate: fé e ciência</div>
+        <div class="aula-desc">Tema que ele ama. Debate livre, você participa também. Foco só no he/she/it. Quando ele falar sobre Deus, sobre a ciência, sobre o que <em>a pessoa acredita</em> — o sinal entra.</div>
+        <div class="tags"><span class="tag tag-speak">debate</span><span class="tag tag-fix">he/she/it</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A6</div>
+      <div>
+        <div class="aula-title">FCE Writing Part 1 — essay</div>
+        <div class="aula-desc">Tema próximo a ele: <em>"Social media does more harm than good for young people."</em> Apresentar o formato, ele planeja em aula, escreve em casa como tarefa.</div>
+        <div class="tags"><span class="tag tag-fce">FCE Writing</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 4</div>
+    <div class="aula">
+      <div class="aula-num">A7</div>
+      <div>
+        <div class="aula-title">Correção da essay + discussão</div>
+        <div class="aula-desc">Leitura em voz alta da essay. Anotar erros de tense na escrita também (diferente da fala — escrita dá mais tempo de monitorar). Feedback específico.</div>
+        <div class="tags"><span class="tag tag-fce">FCE Writing</span><span class="tag tag-fix">tenses na escrita</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A8</div>
+      <div>
+        <div class="aula-title">Gravação mensal + balanço</div>
+        <div class="aula-desc">Gravar 2 minutos de fala livre. Ouvir juntos. Ele mesmo aponta os erros de he/she/it. Comparar com o diagnóstico da A1. Celebrar o progresso visível.</div>
+        <div class="tags"><span class="tag tag-fix">gravação</span><span class="tag tag-speak">autoconsciência</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JULHO ============ -->
+  <section id="julho" class="month-block">
+    <div class="month-header">
+      <span class="month-name">Julho</span>
+      <span class="month-focus">Erro do mês: eixo temporal — passado consistente</span>
+    </div>
+    <div class="box box-info">Ele mistura passado e presente ao narrar. Foco em manter a linha do tempo coerente ao contar histórias. He/she/it continua monitorado, mas não é mais o foco principal.</div>
+
+    <div class="week-title">Semana 1</div>
+    <div class="aula">
+      <div class="aula-num">A1</div>
+      <div>
+        <div class="aula-title">Retelling de Jogos Vorazes</div>
+        <div class="aula-desc">Ele reconta o enredo do primeiro filme/livro em 3 minutos. Interrupção (sinal) quando sair do passado. Depois discutem o que Katniss <em>decided, felt, did</em>.</div>
+        <div class="tags"><span class="tag tag-fix">passado consistente</span><span class="tag tag-speak">narração</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A2</div>
+      <div>
+        <div class="aula-title">Música narrativa — All Too Well (10 min version)</div>
+        <div class="aula-desc">Letra inteira é uma narrativa no passado. Ele explica o que aconteceu usando simple past e past continuous. <em>"She was driving when he said..."</em></div>
+        <div class="tags"><span class="tag tag-music">música</span><span class="tag tag-fix">past simple / continuous</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 2</div>
+    <div class="aula">
+      <div class="aula-num">A3</div>
+      <div>
+        <div class="aula-title">FCE Use of English Part 4 — key word transformation</div>
+        <div class="aula-desc">Foco em transformações que envolvem mudança de tempo verbal. Trabalhar o raciocínio: o que mudou na frase? Tempo, voz, estrutura?</div>
+        <div class="tags"><span class="tag tag-fce">FCE Use of English</span><span class="tag tag-gram">tenses</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A4</div>
+      <div>
+        <div class="aula-title">"O fim de semana mais marcante da minha vida"</div>
+        <div class="aula-desc">Ele conta uma história real, importante. Você só monitora a linha do tempo. Pode ser a primeira vez que foi à igreja, início do namoro, qualquer coisa real.</div>
+        <div class="tags"><span class="tag tag-fix">eixo temporal</span><span class="tag tag-speak">história pessoal</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 3</div>
+    <div class="aula">
+      <div class="aula-num">A5</div>
+      <div>
+        <div class="aula-title">Condicionais 3 — e se Narnia fosse real?</div>
+        <div class="aula-desc">Tema que engaja + gramática FCE. <em>"If Aslan hadn't come back, what would have happened?"</em> Condicionais 3 emergem naturalmente sem precisar "ensinar" a estrutura.</div>
+        <div class="tags"><span class="tag tag-gram">conditional 3</span><span class="tag tag-fce">FCE Speaking</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A6</div>
+      <div>
+        <div class="aula-title">FCE Speaking Part 2 — simulação</div>
+        <div class="aula-desc">Duas fotos, 1 minuto de fala. Trabalhar a estrutura: descrever, comparar, especular. Ele tende a acelerar — combinar pausa antes de começar.</div>
+        <div class="tags"><span class="tag tag-fce">FCE Speaking</span><span class="tag tag-speak">velocidade</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 4</div>
+    <div class="aula">
+      <div class="aula-num">A7</div>
+      <div>
+        <div class="aula-title">Debate livre + duplo monitoramento</div>
+        <div class="aula-desc">Tema livre (ele escolhe). Monitorar he/she/it <em>e</em> eixo temporal ao mesmo tempo. Ver se o primeiro já está mais automático enquanto o segundo ainda falha.</div>
+        <div class="tags"><span class="tag tag-fix">he/she/it + eixo temporal</span><span class="tag tag-speak">debate</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A8</div>
+      <div>
+        <div class="aula-title">Gravação mensal + comparação</div>
+        <div class="aula-desc">Gravar 2 minutos. Comparar com a gravação de junho. Progresso em he/she/it? Novos padrões no eixo temporal? Ele vê a evolução concreta.</div>
+        <div class="tags"><span class="tag tag-fix">gravação comparativa</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AGOSTO ============ -->
+  <section id="agosto" class="month-block">
+    <div class="month-header">
+      <span class="month-name">Agosto</span>
+      <span class="month-focus">Erro do mês: will / going to / present continuous para futuro</span>
+    </div>
+    <div class="box box-info">Com os dois primeiros erros mais conscientes, introduzir o terceiro: confusão entre formas de futuro. Ele fala de planos de vida (intercâmbio, casamento, empresa) — contexto natural e motivador.</div>
+
+    <div class="week-title">Semana 1</div>
+    <div class="aula">
+      <div class="aula-num">A1</div>
+      <div>
+        <div class="aula-title">"Meus planos para os próximos 5 anos"</div>
+        <div class="aula-desc">Ele fala livremente sobre intercâmbio, empresa da família, namoro, casamento. Você monitora como ele expressa o futuro. Não interrompe ainda — só anota.</div>
+        <div class="tags"><span class="tag tag-fix">futuro — diagnóstico</span><span class="tag tag-speak">planos pessoais</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A2</div>
+      <div>
+        <div class="aula-title">Will vs going to — distinção em contexto real</div>
+        <div class="aula-desc">Usar os planos da aula anterior para mostrar a distinção: decisão no momento (<em>will</em>), plano já decidido (<em>going to</em>), compromisso agendado (<em>present continuous</em>). Sem metalinguagem pesada.</div>
+        <div class="tags"><span class="tag tag-gram">futuro</span><span class="tag tag-fix">will / going to</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 2 — 3</div>
+    <div class="aula">
+      <div class="aula-num">A3–A6</div>
+      <div>
+        <div class="aula-title">FCE intensivo — rotação de partes</div>
+        <div class="aula-desc">Uma parte do exame por aula: <em>A3</em> Reading Part 6 (gapped text), <em>A4</em> Writing Part 2 (article sobre música ou tecnologia), <em>A5</em> Listening Part 4 (multiple choice), <em>A6</em> Speaking Part 3 (collaborative task solo). Monitorar futuro em todas as falas.</div>
+        <div class="tags"><span class="tag tag-fce">FCE rotação</span><span class="tag tag-fix">futuro monitorado</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 4</div>
+    <div class="aula">
+      <div class="aula-num">A7</div>
+      <div>
+        <div class="aula-title">Debate: IA vai substituir profissões?</div>
+        <div class="aula-desc">Tema que une tecnologia + futuro profissional (engenharia química + empresa da família). Futuro emerge naturalmente. Monitorar as três formas.</div>
+        <div class="tags"><span class="tag tag-speak">debate</span><span class="tag tag-fix">futuro</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A8</div>
+      <div>
+        <div class="aula-title">Gravação + simulado FCE Speaking parcial</div>
+        <div class="aula-desc">Gravar Parts 1 e 2 do speaking em condições de prova. Ouvir juntos. Ele conta os próprios erros de tense. Celebrar os que já sumiram.</div>
+        <div class="tags"><span class="tag tag-fce">simulado parcial</span><span class="tag tag-fix">gravação</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SETEMBRO ============ -->
+  <section id="setembro" class="month-block">
+    <div class="month-header">
+      <span class="month-name">Setembro</span>
+      <span class="month-focus">Revisão dos 3 erros + simulados FCE completos</span>
+    </div>
+    <div class="box box-info">Mês de consolidação e confiança. Os três erros principais já foram trabalhados conscientemente. Agora é manter o monitoramento e começar simulados em condições reais de prova.</div>
+
+    <div class="week-title">Semanas 1–2</div>
+    <div class="aula">
+      <div class="aula-num">A1–A4</div>
+      <div>
+        <div class="aula-title">Simulados FCE por seção + revisão cirúrgica</div>
+        <div class="aula-desc"><em>A1:</em> Reading + Use of English cronometrados. <em>A2:</em> Revisão dos erros do simulado. <em>A3:</em> Writing em condições reais (essay + email). <em>A4:</em> Speaking completo (Parts 1–4). Feedback específico em cada um.</div>
+        <div class="tags"><span class="tag tag-fce">simulado FCE</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 3</div>
+    <div class="aula">
+      <div class="aula-num">A5</div>
+      <div>
+        <div class="aula-title">Aula de prazer — ele escolhe</div>
+        <div class="aula-desc">Recarregar a motivação antes da reta final. Música, tema favorito, debate livre. Nada de exame. Monitoramento de tenses existe mas levíssimo.</div>
+        <div class="tags"><span class="tag tag-music">tema livre</span><span class="tag tag-speak">motivação</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A6</div>
+      <div>
+        <div class="aula-title">Estratégias de prova — a parte mental</div>
+        <div class="aula-desc">O que fazer quando travar no speaking? Como gerenciar o tempo no reading? O que fazer se não souber uma palavra? Ensinar estratégias, não só inglês.</div>
+        <div class="tags"><span class="tag tag-fce">estratégias FCE</span></div>
+      </div>
+    </div>
+
+    <div class="week-title">Semana 4</div>
+    <div class="aula">
+      <div class="aula-num">A7</div>
+      <div>
+        <div class="aula-title">Mock exam — simulado completo</div>
+        <div class="aula-desc">Prova completa em condições reais, espalhada pelas duas aulas da semana. Score estimado, pontos fortes e o que ainda afinar em outubro.</div>
+        <div class="tags"><span class="tag tag-fce">mock exam</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A8</div>
+      <div>
+        <div class="aula-title">Gravação final + balanço de 4 meses</div>
+        <div class="aula-desc">Comparar gravação de setembro com a de junho. Mostrar a evolução real. Esse momento de ver o próprio progresso é o maior motivador para entrar bem na prova.</div>
+        <div class="tags"><span class="tag tag-fix">gravação comparativa</span><span class="tag tag-speak">motivação</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUT-NOV ============ -->
+  <section id="outnov" class="month-block">
+    <div class="month-header">
+      <span class="month-name">Outubro — Novembro</span>
+      <span class="month-focus">Afinar, confiar, entrar bem</span>
+    </div>
+    <div class="box box-tip">Não introduzir nada novo. O risco maior em outubro é ele ficar ansioso e entrar em modo de estudo mecânico. O trabalho é manter a confiança e afinar os pontos específicos que os simulados mostraram.</div>
+
+    <div class="week-title">Outubro — 8 aulas</div>
+    <div class="aula">
+      <div class="aula-num">A1–A2</div>
+      <div>
+        <div class="aula-title">Pontos cirúrgicos do simulado de setembro</div>
+        <div class="aula-desc">Identificar as 2–3 coisas específicas que ainda travam. Aulas focadas nisso, nada mais. Não virar maratona de exercícios.</div>
+        <div class="tags"><span class="tag tag-fce">revisão cirúrgica</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A3–A4</div>
+      <div>
+        <div class="aula-title">Speaking Parts 3 e 4 — colaboração e opinião</div>
+        <div class="aula-desc">As partes mais difíceis de simular sozinho. Trabalhar linguagem de colaboração, dar e pedir opinião, concordar parcialmente. <em>"I see what you mean, but..."</em></div>
+        <div class="tags"><span class="tag tag-fce">FCE Speaking</span><span class="tag tag-speak">colaboração</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A5–A6</div>
+      <div>
+        <div class="aula-title">Writing calibration final</div>
+        <div class="aula-desc">Essay + uma das opções da Part 2. Dar um score estimado com o critério real da prova. Ele sabe exatamente onde está e o que o examiner vai avaliar.</div>
+        <div class="tags"><span class="tag tag-fce">writing FCE</span></div>
+      </div>
+    </div>
+    <div class="aula">
+      <div class="aula-num">A7–A8</div>
+      <div>
+        <div class="aula-title">Aula leve + conversa final</div>
+        <div class="aula-desc">Tema que ele ama, debate ou música. Lembrar que na prova os examinadores querem ver comunicação real, não perfeição. Ele já está pronto.</div>
+        <div class="tags"><span class="tag tag-speak">confiança</span><span class="tag tag-music">tema livre</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Cronograma elaborado para Lucas · Atualizado em 01/06/2026 · Lari — aulas particulares de inglês
+  </footer>
+
+</div>
+</body>
+</html>
