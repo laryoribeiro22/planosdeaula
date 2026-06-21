@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendário Júlia — Jun–Dez 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F7F4EE;--warm:#FDFCF9;--ink:#1C1A17;--ink-soft:#4A4640;--ink-muted:#8C8880;
+  --blush:#E8B4A0;--blush-light:#F5DDD4;--blush-deep:#C27A5E;
+  --teal:#4A9B8E;--teal-light:#D4EDEA;--teal-deep:#2D7068;
+  --gold:#C9963A;--gold-light:#F5E8CC;
+  --seg:#7B6FD6;--seg-light:#EEEDFE;--seg-dark:#3C3489;
+  --qui:#1D9E75;--qui-light:#E1F5EE;--qui-dark:#085041;
+  --radius:14px;--radius-sm:8px;
+}
+html{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6}
+.site-header{background:var(--ink);color:var(--warm);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
+.site-header::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 100% 110%,#7B6FD622,transparent 65%);pointer-events:none}
+.header-eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--blush);font-weight:500;margin-bottom:10px}
+.header-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,6vw,2.8rem);font-weight:400;line-height:1.1;margin-bottom:8px}
+.header-title em{font-style:italic;color:var(--blush)}
+.header-sub{font-size:13px;color:#BDB8AF;max-width:480px}
+.header-stats{display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap}
+.stat{text-align:left}
+.stat-num{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--blush);line-height:1}
+.stat-label{font-size:11px;color:#BDB8AF;text-transform:uppercase;letter-spacing:.08em}
+.month-nav{display:flex;gap:6px;flex-wrap:wrap;padding:1.25rem 1.25rem .5rem;position:sticky;top:0;background:var(--cream);z-index:10;border-bottom:1px solid #E4E0D8}
+.mnav-btn{padding:5px 14px;border-radius:99px;border:1.5px solid #D6D2CA;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;background:var(--warm);color:var(--ink-soft);transition:all .15s;white-space:nowrap}
+.mnav-btn:hover{border-color:var(--blush);background:var(--blush-light)}
+.mnav-btn.active{background:var(--ink);color:var(--warm);border-color:var(--ink)}
+.legend{display:flex;gap:1rem;padding:.75rem 1.25rem;font-size:12px;color:var(--ink-muted);flex-wrap:wrap}
+.leg-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.month-section{display:none;padding:1.25rem}
+.month-section.active{display:block}
+.month-header{margin-bottom:1.25rem}
+.month-name{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;color:var(--ink)}
+.month-theme{display:inline-block;background:var(--gold-light);color:var(--gold);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:99px;margin-top:4px}
+.month-grammar{font-size:13px;color:var(--ink-muted);margin-top:6px}
+.month-grammar strong{color:var(--ink-soft)}
+.aula-list{display:flex;flex-direction:column;gap:10px}
+.aula-card{background:var(--warm);border:1px solid #E4E0D8;border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
+.aula-card:hover{box-shadow:0 2px 12px #1C1A1710}
+.aula-header{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.aula-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.aula-dot.seg{background:var(--seg)}
+.aula-dot.qui{background:var(--qui)}
+.aula-meta{flex:1;min-width:0}
+.aula-date{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.aula-date.seg{color:var(--seg)}
+.aula-date.qui{color:var(--qui)}
+.aula-title{font-size:14px;font-weight:500;color:var(--ink);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aula-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.tag{font-size:10px;padding:2px 7px;border-radius:99px;font-weight:500}
+.tag-grammar{background:var(--blush-light);color:var(--blush-deep)}
+.tag-speaking{background:var(--seg-light);color:var(--seg-dark)}
+.tag-listening{background:var(--teal-light);color:var(--teal-deep)}
+.tag-vocabulary{background:var(--gold-light);color:var(--gold)}
+.tag-culture{background:#EDE9FE;color:#4C1D95}
+.tag-review{background:#F3F4F6;color:#374151}
+.tag-project{background:#FEF3C7;color:#92400E}
+.tag-pronunciation{background:#FCE7F3;color:#9D174D}
+.tag-reading{background:#DBEAFE;color:#1E3A8A}
+.tag-writing{background:#FEE2E2;color:#991B1B}
+.aula-chevron{color:var(--ink-muted);font-size:16px;transition:transform .2s;flex-shrink:0}
+.aula-card.open .aula-chevron{transform:rotate(180deg)}
+.aula-body{display:none;padding:0 16px 14px;border-top:1px solid #F0EDE6}
+.aula-card.open .aula-body{display:block}
+.aula-desc{font-size:13px;color:var(--ink-soft);margin-top:10px;line-height:1.7}
+.aula-hooks{margin-top:10px}
+.aula-hooks-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-muted);margin-bottom:5px}
+.hook-item{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--ink-soft);margin-bottom:4px}
+.hook-icon{flex-shrink:0;margin-top:2px}
+.aula-tip{background:var(--cream);border-left:3px solid var(--blush);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:8px 12px;font-size:12px;color:var(--ink-soft);margin-top:10px;font-style:italic}
+@media(max-width:480px){.header-stats{gap:1rem}.aula-title{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="site-header">
+  <p class="header-eyebrow">Planejamento pedagógico · v2</p>
+  <h1 class="header-title">Júlia — <em>Jun a Dez 2026 · v3</em></h1>
+  <p class="header-sub">Calendário aula a aula · Segundas e quintas · 55–60 min · A1+ → A2 sólido</p>
+  <div class="header-stats">
+    <div class="stat"><div class="stat-num">52</div><div class="stat-label">aulas</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-label">meses</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">eixos</div></div>
+  </div>
+</div>
+<nav class="month-nav" id="monthNav">
+  <button class="mnav-btn active" onclick="showMonth('jun',this)">Jun</button>
+  <button class="mnav-btn" onclick="showMonth('jul',this)">Jul</button>
+  <button class="mnav-btn" onclick="showMonth('ago',this)">Ago</button>
+  <button class="mnav-btn" onclick="showMonth('set',this)">Set</button>
+  <button class="mnav-btn" onclick="showMonth('out',this)">Out</button>
+  <button class="mnav-btn" onclick="showMonth('nov',this)">Nov</button>
+  <button class="mnav-btn" onclick="showMonth('dez',this)">Dez</button>
+</nav>
+<div class="legend">
+  <span><span class="leg-dot" style="background:var(--seg)"></span>Segunda — expansão</span>
+  <span><span class="leg-dot" style="background:var(--qui)"></span>Quinta — consolidação</span>
+</div>
+<div class="month-section active" id="jun">
+  <div class="month-header">
+    <div class="month-name">Junho</div>
+    <div class="month-theme">Fase 1 · Fundação — consolidar o que já foi visto + abrir o próximo passo</div>
+    <div class="month-grammar"><strong>Conteúdo:</strong> Revisão ágil: Simple Present, Verb to be, There is/are, Comparatives, Superlatives · Início: Simple Past irregulares</div>
+  </div>
+  <div class="aula-list" id="jun-list"></div>
+</div>
+<div class="month-section" id="jul">
+  <div class="month-header">
+    <div class="month-name">Julho</div>
+    <div class="month-theme">Fase 1 · Fundação — passado, pronúncia e rotina</div>
+    <div class="month-grammar"><strong>Conteúdo:</strong> Simple Past irregulares (continuação), Past Continuous, Pronúncia (consoantes finais + -ed + -s)</div>
+  </div>
+  <div class="aula-list" id="jul-list"></div>
+</div>
+<div class="month-section" id="ago">
+  <div class="month-header">
+    <div class="month-name">Agosto</div>
+    <div class="month-theme">Fase 2 · Expansão — planos, modais e o futuro</div>
+    <div class="month-grammar"><strong>Conteúdo:</strong> Going to, Will, Present Continuous (revisão), Modais: can/could/should/must/have to</div>
+  </div>
+  <div class="aula-list" id="ago-list"></div>
+</div>
+<div class="month-section" id="set">
+  <div class="month-header">
+    <div class="month-name">Setembro</div>
+    <div class="month-theme">Fase 2 · Expansão — viagem, cidade e trabalho</div>
+    <div class="month-grammar"><strong>Conteúdo:</strong> Quantifiers (revisão), preposições de lugar (revisão), vocabulário de cidade/direções, projeto viagem</div>
+  </div>
+  <div class="aula-list" id="set-list"></div>
+</div>
+<div class="month-section" id="out">
+  <div class="month-header">
+    <div class="month-name">Outubro</div>
+    <div class="month-theme">Fase 3 · Fluência funcional — experiências e o que já vivi</div>
+    <div class="month-grammar"><strong>Conteúdo:</strong> Present Perfect (ever/never/already/yet/for/since), Pronomes, Halloween</div>
+  </div>
+  <div class="aula-list" id="out-list"></div>
+</div>
+<div class="month-section" id="nov">
+  <div class="month-header">
+    <div class="month-name">Novembro</div>
+    <div class="month-theme">Fase 3 · Fluência funcional — condições, pedidos e small talk</div>
+    <div class="month-grammar"><strong>Conteúdo:</strong> First Conditional, Second Conditional (intro), Question words (revisão), Thanksgiving</div>
+  </div>
+  <div class="aula-list" id="nov-list"></div>
+</div>
+<div class="month-section" id="dez">
+  <div class="month-header">
+    <div class="month-name">Dezembro</div>
+    <div class="month-theme">Fase 3 · Celebração — revisão, projeto final e progresso real</div>
+    <div class="month-grammar"><strong>Conteúdo:</strong> Revisão integrada · Mini projeto My English Story · Christmas/fim de ano</div>
+  </div>
+  <div class="aula-list" id="dez-list"></div>
+</div>
+<script>
+const AULAS = {
+  "jun": [
+    {
+      "date": "22/06 · Seg",
+      "type": "seg",
+      "title": "Revisão ágil: Simple Present + Verb to be",
+      "tags": [
+        "grammar",
+        "review",
+        "speaking"
+      ],
+      "desc": "Primeira aula depois do diagnóstico — ela já viu Simple Present (com o erro do he/she/it), Verb to be e there is/are. Hoje é revisão rápida e ativa dos dois primeiros, não ensino do zero. Objetivo: confirmar o que ficou firme antes de seguir em frente.",
+      "hooks": [
+        "Descrever a própria rotina e a de um colega de trabalho (he/she/it)",
+        "Mini quiz oral rápido misturando to be e present simple",
+        "Corrigir juntas 3-4 frases com erros comuns dela"
+      ],
+      "tip": "Não passar de 20-25 min nessa revisão — o objetivo é confirmar, não reensinar do zero."
+    },
+    {
+      "date": "25/06 · Qui",
+      "type": "qui",
+      "title": "Revisão ágil: There is/are + Comparatives",
+      "tags": [
+        "grammar",
+        "review",
+        "speaking"
+      ],
+      "desc": "Continuação da revisão — there is/are e comparatives, ambos já vistos. Trazer para conversação ativa: descrever lugares (there is/are) e compará-los (comparatives) na mesma aula, já que se conectam naturalmente.",
+      "hooks": [
+        "Descrever o escritório da WebContinental com there is/are",
+        "Comparar o escritório com a casa dela usando comparatives",
+        "'Is there a better café near your work or near your house?' — combina os dois"
+      ],
+      "tip": "Aproveitar que os dois tópicos se conectam bem — there is/are para descrever, comparative para comparar o que foi descrito."
+    },
+    {
+      "date": "29/06 · Seg",
+      "type": "seg",
+      "title": "Revisão ativa: Superlatives em conversação",
+      "tags": [
+        "grammar",
+        "review",
+        "speaking"
+      ],
+      "desc": "Última revisão da rodada — superlativos, vistos na aula assíncrona. Hoje é só prática em conversação livre, sem reexplicar a regra. Encerra o bloco de revisão e prepara o terreno para Simple Past, que começa na próxima aula.",
+      "hooks": [
+        "'What is the best series you've ever watched? The worst day of your week?'",
+        "Eleger: melhor lugar de Porto Alegre, livro favorito da Ali Hazelwood, pior trânsito",
+        "Comparar 3 coisas (não só 2) usando superlativo, sem ajuda"
+      ],
+      "tip": "Se ela estiver segura nos três tópicos revisados essa semana, pode acelerar e já plantar uma pergunta no passado para preparar a próxima aula."
+    },
+    {
+      "date": "02/07 · Qui",
+      "type": "qui",
+      "title": "Simple Past: irregulares mais usados no dia a dia",
+      "tags": [
+        "grammar",
+        "vocabulary",
+        "speaking"
+      ],
+      "desc": "Ela já viu Simple Past, mas hoje aprofunda nos irregulares mais usados no contexto dela: went, came, saw, had, ate, drank, felt, said, got, knew. Tratar como continuação natural, não como tópico novo do zero.",
+      "hooks": [
+        "Flashcard dinâmico: base form → ela diz o Past",
+        "Ela conta a semana usando os irregulares revisados",
+        "Mini história com lacunas para completar"
+      ],
+      "tip": "Perguntar antes: 'What do you remember about Simple Past?' — deixar ela mostrar o que já sabe antes de adicionar."
+    }
+  ],
+  "jul": [
+    {
+      "date": "06/07 · Seg",
+      "type": "seg",
+      "title": "Cultura: 4th of July (mais próxima do feriado)",
+      "tags": [
+        "culture",
+        "listening",
+        "vocabulary"
+      ],
+      "desc": "Aula cultural especial — Independence Day americano cai num sábado, então a aula mais próxima é hoje. Vocabulário: fireworks, BBQ, parade, flag, celebration. Contexto leve, sem aprofundar política — foco em curiosidade cultural, no espírito da aula de St. Patrick's Day que marcou ela.",
+      "hooks": [
+        "Curiosidades sobre como os EUA celebram o feriado",
+        "Comparar com alguma data comemorativa brasileira",
+        "Vocabulário de celebração: usar em frases sobre festas que ela já foi"
+      ],
+      "tip": "Manter leve e cultural — não é aula de história, é aula de curiosidade e vocabulário."
+    },
+    {
+      "date": "09/07 · Qui",
+      "type": "qui",
+      "title": "Simple Past irregulares — parte 2 + perguntas",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Novos irregulares: bought, brought, made, took, left, told, thought, kept, gave. Junto, introduzir a estrutura de perguntas no passado: Where did you go? What did you do?",
+      "hooks": [
+        "'Tell me about the last time you bought something you loved'",
+        "Criar 5 perguntas para entrevistar uma colega de trabalho imaginária",
+        "Jogo rápido: base form → past, resposta em 3 segundos"
+      ],
+      "tip": "'Bought' e 'brought' sempre confundem — dar atenção especial com exemplo claro."
+    },
+    {
+      "date": "13/07 · Seg",
+      "type": "seg",
+      "title": "Pronúncia: consoantes finais e o erro fossilizado",
+      "tags": [
+        "pronunciation",
+        "listening"
+      ],
+      "desc": "Aula dedicada ao maior erro fossilizado dela: adicionar 'i' no fim de palavras que terminam em consoante (type → typei, like → likei). Trabalhar de forma explícita e com shadowing — ela imita bem, então esse é o caminho. Também trabalhar os 3 sons do -s: /s/ (works), /z/ (plays), /ɪz/ (watches).",
+      "hooks": [
+        "Lista de 10 palavras do universo dela com consoante final: work, like, beach, think, speak",
+        "Shadowing exagerado: parar a consoante final de forma consciente antes de continuar",
+        "Gravar ela falando e ouvir junto — sem julgamento, como ferramenta de percepção"
+      ],
+      "tip": "Nomear o erro explicitamente: 'Essa é a nossa missão de pronúncia do semestre.' Ela precisa saber o que está corrigindo."
+    },
+    {
+      "date": "16/07 · Qui",
+      "type": "qui",
+      "title": "Past Continuous: o que estava acontecendo",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Introdução ao Past Continuous (was/were + -ing). Contexto: descrever o que estava fazendo quando algo aconteceu. Apresentar como 'o cenário de fundo' de uma história.",
+      "hooks": [
+        "'What were you doing last Sunday at 8pm?'",
+        "O que os personagens de Off Campus estavam fazendo numa cena",
+        "3 frases sobre a semana usando was/were + -ing"
+      ],
+      "tip": "Simple Past é o evento, Continuous é o fundo — essa metáfora ajuda ela a visualizar."
+    },
+    {
+      "date": "20/07 · Seg",
+      "type": "seg",
+      "title": "Chunks e frases prontas para fluência",
+      "tags": [
+        "vocabulary",
+        "speaking"
+      ],
+      "desc": "Aula dedicada a frases prontas (chunks) que ela pode usar sem precisar traduzir mentalmente — ataca diretamente a dependência do português. Frases como: 'I totally agree', 'That makes sense', 'To be honest…', 'It depends', 'I'm not sure, but…'",
+      "hooks": [
+        "Apresentar 8 chunks e praticar em mini-diálogos",
+        "Ela usa pelo menos 4 chunks numa conversa livre de 5 min",
+        "Criar um 'kit de sobrevivência' no caderno dela com os chunks favoritos"
+      ],
+      "tip": "O objetivo é ela memorizar como bloco, não montar a frase peça por peça — isso reduz a lentidão na fala."
+    },
+    {
+      "date": "23/07 · Qui",
+      "type": "qui",
+      "title": "Listening: Beyoncé + pronúncia conectada",
+      "tags": [
+        "listening",
+        "pronunciation",
+        "culture"
+      ],
+      "desc": "Shadowing com trecho de música da Beyoncé (30-45s). Trabalhar pronúncia conectada (gonna, wanna, I'm) e reforçar consoantes finais em contexto musical — ela gosta e imita bem.",
+      "hooks": [
+        "Trecho de 'Halo' ou 'Irreplaceable' (letras mais acessíveis)",
+        "Ouvir → tentar transcrever → shadowing",
+        "Destacar 5 expressões do trecho para usar na fala"
+      ],
+      "tip": "Contexto ideal para reforçar o trabalho de pronúncia da semana passada — ela está no modo imitação."
+    },
+    {
+      "date": "27/07 · Seg",
+      "type": "seg",
+      "title": "Vocabulário emocional + falar sobre séries",
+      "tags": [
+        "vocabulary",
+        "speaking"
+      ],
+      "desc": "Expandir vocabulário emocional com mais nuance: disappointed, relieved, nervous, jealous, excited, overwhelmed, heartbroken. Contexto: Off Campus e como os personagens (e ela) se sentem.",
+      "hooks": [
+        "'How did you feel when [personagem] did X?'",
+        "Descrever uma cena emocionante com os novos adjetivos",
+        "Frases de trabalho usando vocabulário emocional"
+      ],
+      "tip": "Vocabulário emocional abre conversa sobre vida pessoal — ela gosta desse assunto."
+    },
+    {
+      "date": "30/07 · Qui",
+      "type": "qui",
+      "title": "Consolidação: Past Simple + Continuous em narrativa",
+      "tags": [
+        "speaking",
+        "review"
+      ],
+      "desc": "Ela conta uma história real usando Simple Past e Past Continuous juntos. Foco em fluência narrativa com conectores (and then, but, suddenly, while, when). Correção nos erros prioritários do mês.",
+      "hooks": [
+        "'Tell me a story that happened this month'",
+        "Reconstruir a cena de Off Campus que mais marcou ela",
+        "Mini ditado: você conta, ela escreve as frases-chave"
+      ],
+      "tip": "Se ela parar de falar, perguntar 'And then what?' ou 'How did that make you feel?'"
+    }
+  ],
+  "ago": [
+    {
+      "date": "03/08 · Seg",
+      "type": "seg",
+      "title": "Going to: planos e intenções",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Introdução ao futuro com going to — planos concretos e intenções. Contexto: planos das próximas semanas, metas no trabalho.",
+      "hooks": [
+        "'What are you going to do this weekend?'",
+        "Planejar uma semana ideal usando going to",
+        "'Are you going to have a meeting this week?'"
+      ],
+      "tip": "Não aprofundar will ainda — só mencionar que existe."
+    },
+    {
+      "date": "06/08 · Qui",
+      "type": "qui",
+      "title": "Will: decisões do momento e previsões",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Introdução ao will — decisões espontâneas e previsões. Diferença com going to: going to = plano, will = decisão na hora.",
+      "hooks": [
+        "Situações: 'The phone is ringing — I'll get it' vs 'I'm going to call him later'",
+        "Previsões sobre o futuro do inglês dela, da série, do trabalho",
+        "Identificar will em um trecho curto de vídeo"
+      ],
+      "tip": "Não cobrar perfeição na distinção indo to/will ainda."
+    },
+    {
+      "date": "10/08 · Seg",
+      "type": "seg",
+      "title": "Present Continuous: revisão rápida",
+      "tags": [
+        "grammar",
+        "review",
+        "speaking"
+      ],
+      "desc": "Revisão ágil do Present Continuous para situações em progresso, já visto antes. Diferenciar do Simple Present habitual. Contexto: o que está acontecendo no trabalho essa semana.",
+      "hooks": [
+        "'What are you working on this week?'",
+        "Descrever uma cena da série em tempo real",
+        "'Right now, I am…' — mini descrição"
+      ],
+      "tip": "Revisão rápida, não passar de 15-20 min — ela já tem essa base."
+    },
+    {
+      "date": "13/08 · Qui",
+      "type": "qui",
+      "title": "Modal verbs: can / can't",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Can e can't para habilidades e possibilidades no presente. Contexto: o que ela consegue fazer em inglês hoje, o que consegue/não consegue fazer no trabalho.",
+      "hooks": [
+        "'What can you do in English now?'",
+        "Listar 5 coisas que ela pode e não pode fazer no trabalho",
+        "Jogo: adivinhar habilidades da outra pessoa"
+      ],
+      "tip": "Ponto de partida fácil — ela já usa can intuitivamente, é mais sistematizar."
+    },
+    {
+      "date": "17/08 · Seg",
+      "type": "seg",
+      "title": "Modal verbs: could (passado e pedidos educados)",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Could como passado de can (habilidade passada) e como pedido educado — muito útil no contexto profissional dela com fornecedores estrangeiros.",
+      "hooks": [
+        "'What could you do as a child that you can't do now?'",
+        "'Could you send me the report by Friday?' — 5 frases do trabalho dela",
+        "Comparar can vs could em pedidos: qual soa mais educado"
+      ],
+      "tip": "Could é especialmente valioso no trabalho — vale enfatizar isso."
+    },
+    {
+      "date": "20/08 · Qui",
+      "type": "qui",
+      "title": "Modal verbs: should + conselhos",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Should para dar e pedir conselhos. Contexto: trabalho, vida pessoal, e plantar a semente do projeto de viagem que vem em setembro.",
+      "hooks": [
+        "'What should I do if I visit Porto Alegre for the first time?'",
+        "5 conselhos sobre algo que ela entende bem",
+        "Situação de trabalho: 'What should we do about [problema X]?'"
+      ],
+      "tip": "Should é o modal mais natural pra ela — ela tem muita opinião pra dar."
+    },
+    {
+      "date": "24/08 · Seg",
+      "type": "seg",
+      "title": "Modal verbs: must e have to",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Diferença entre must (obrigação interna/forte) e have to (obrigação externa/regra). Contexto: regras do trabalho, regras de viagem (documentos, vacinas), obrigações pessoais.",
+      "hooks": [
+        "'What do you have to do every day at work?'",
+        "'What must you bring when you travel abroad?'",
+        "Comparar regras da empresa vs regras pessoais"
+      ],
+      "tip": "Não aprofundar mustn't vs don't have to ainda — só a diferença básica de uso."
+    },
+    {
+      "date": "27/08 · Qui",
+      "type": "qui",
+      "title": "Small talk: iniciar e manter conversa",
+      "tags": [
+        "speaking",
+        "vocabulary"
+      ],
+      "desc": "Aula dedicada a small talk — habilidade que vai além da gramática e ataca diretamente a insegurança dela em falar com nativos. Frases para abrir conversa, manter com perguntas, e fechar educadamente.",
+      "hooks": [
+        "Frases de abertura: 'How's it going?', 'Long time no see!'",
+        "Praticar manter conversa com follow-up questions ('And you? What about you?')",
+        "Simular small talk antes de uma reunião de trabalho"
+      ],
+      "tip": "Ela não sabe manter conversa sozinha — essa aula treina exatamente isso, de forma estruturada."
+    },
+    {
+      "date": "31/08 · Seg",
+      "type": "seg",
+      "title": "Revisão de agosto + apresentação do projeto viagem",
+      "tags": [
+        "review",
+        "project",
+        "speaking"
+      ],
+      "desc": "Revisão suave do mês + apresentação do Mini Projeto Viagem que vai guiar setembro. Ela escolhe o destino, pesquisa 3 coisas básicas e apresenta a ideia.",
+      "hooks": [
+        "'If you could travel anywhere, where would you go?'",
+        "Escolher o destino e vocab básico do lugar",
+        "Tarefa: trazer 3 coisas sobre o destino"
+      ],
+      "tip": "Quanto mais ela gostar do destino escolhido, melhor vai render o mês inteiro."
+    }
+  ],
+  "set": [
+    {
+      "date": "03/09 · Qui",
+      "type": "qui",
+      "title": "Vocabulário de cidade e direções",
+      "tags": [
+        "vocabulary",
+        "speaking"
+      ],
+      "desc": "Vocabulário de lugares na cidade e como pedir/dar direções — útil tanto para o projeto de viagem quanto para o dia a dia em Porto Alegre. Turn left/right, go straight, it's next to/across from, how do I get to…?",
+      "hooks": [
+        "Dar direções de um lugar conhecido em Porto Alegre",
+        "'How do I get to the airport from your house?'",
+        "Mapa simples do destino da viagem — praticar direções nele"
+      ],
+      "tip": "Conectar diretamente ao projeto de viagem que começa essa semana."
+    },
+    {
+      "date": "07/09 · Seg",
+      "type": "seg",
+      "title": "Preposições de lugar e tempo — revisão rápida",
+      "tags": [
+        "grammar",
+        "review"
+      ],
+      "desc": "Revisão ágil de in/on/at (lugar e tempo), já vista antes. Contexto: detalhes práticos da viagem — horários de voo, datas, localização do hotel.",
+      "hooks": [
+        "'The flight is at 3pm, on Monday, in July'",
+        "Descrever a localização do hotel escolhido usando in/on/at",
+        "Mini quiz rápido de preposições com frases da vida dela"
+      ],
+      "tip": "Revisão rápida — só 15 min, ela já tem a base."
+    },
+    {
+      "date": "10/09 · Qui",
+      "type": "qui",
+      "title": "Vocabulary de viagem: antes de embarcar",
+      "tags": [
+        "vocabulary",
+        "speaking",
+        "project"
+      ],
+      "desc": "Vocabulário prático de viagem para o destino escolhido. Flight, check-in, luggage, passport, currency, exchange rate, accommodation, booking, itinerary.",
+      "hooks": [
+        "Ela apresenta as 3 coisas que pesquisou sobre o destino",
+        "Criar o roteiro básico: onde ficar, como chegar",
+        "'What would you pack? What documents do you need?'"
+      ],
+      "tip": "Conectar com o objetivo real dela de viajar — motivação embutida."
+    },
+    {
+      "date": "14/09 · Seg",
+      "type": "seg",
+      "title": "Situações de viagem: aeroporto e hotel",
+      "tags": [
+        "vocabulary",
+        "speaking",
+        "project"
+      ],
+      "desc": "Frases funcionais para usar de verdade — check-in, pedir informação, perguntas no hotel. Contextualizar como planejamento real, não roleplay forçado (ela não gosta de roleplay artificial).",
+      "hooks": [
+        "'What would you say at the hotel check-in?'",
+        "Mini diálogo escrito primeiro, depois oral",
+        "3 perguntas que ela faria no hotel do destino dela"
+      ],
+      "tip": "Evitar tom de teatro — tratar como planejamento real da viagem dela."
+    },
+    {
+      "date": "17/09 · Qui",
+      "type": "qui",
+      "title": "Estratégias de listening: pause, predict, context clues",
+      "tags": [
+        "listening",
+        "speaking"
+      ],
+      "desc": "Aula sobre COMO ouvir, não só prática de listening. Ensinar estratégias: prever o que vem a seguir, usar palavras-chave para entender o sentido geral sem traduzir tudo, não travar quando perder uma palavra.",
+      "hooks": [
+        "Ouvir um trecho e parar a cada frase para prever o que vem",
+        "Identificar 3 palavras-chave que sustentam o sentido, ignorando o resto",
+        "Praticar 'continuar ouvindo mesmo perdendo uma palavra' com um áudio curto"
+      ],
+      "tip": "Essa é a habilidade que mais vai ajudar no listening natural — ensinar a estratégia, não só aplicar."
+    },
+    {
+      "date": "21/09 · Seg",
+      "type": "seg",
+      "title": "Quantifiers — revisão rápida",
+      "tags": [
+        "grammar",
+        "review",
+        "vocabulary"
+      ],
+      "desc": "Revisão ágil de some/any/much/many/a lot of, já vista antes. Contexto: planejamento da viagem (quanto dinheiro levar, quantas roupas, quanto tempo).",
+      "hooks": [
+        "'How much money will you take? How many days will you stay?'",
+        "Lista de mala usando some/any",
+        "Quiz rápido com frases do projeto de viagem"
+      ],
+      "tip": "Revisão rápida de 15 min, encaixada no contexto da viagem para não parecer desconectada."
+    },
+    {
+      "date": "24/09 · Qui",
+      "type": "qui",
+      "title": "Mini projeto viagem: apresentação completa",
+      "tags": [
+        "speaking",
+        "project",
+        "review"
+      ],
+      "desc": "Ela apresenta o plano de viagem completo — destino, roteiro, acomodação, o que vai fazer, o que precisa saber. Usa tudo do mês: vocabulário de viagem, modais, preposições, quantifiers.",
+      "hooks": [
+        "Apresentação de 3-5 minutos sem interrupção",
+        "Perguntas depois: 'Why did you choose this? What would you do if…?'",
+        "Ela escolhe a melhor frase da apresentação para o caderno"
+      ],
+      "tip": "Parabenizar com evidência concreta: 'You used should, could and going to — that's months of grammar in one presentation.'"
+    },
+    {
+      "date": "28/09 · Seg",
+      "type": "seg",
+      "title": "Vocabulário profissional: reuniões e e-mails",
+      "tags": [
+        "vocabulary",
+        "speaking",
+        "writing"
+      ],
+      "desc": "Vocabulário para reuniões com fornecedores estrangeiros e e-mails. Frases reais: 'I'm reaching out to…', 'As discussed in our meeting…', 'Could you please confirm…', 'I'll follow up by…'",
+      "hooks": [
+        "Ela conta uma situação real de trabalho, vocês transformam em inglês juntas",
+        "Escrever 3 frases que ela poderia mandar hoje por e-mail",
+        "'How do you start a meeting in Portuguese? Now let's do it in English'"
+      ],
+      "tip": "Vocabulário com aplicação imediata no trabalho é o maior motivador dela."
+    }
+  ],
+  "out": [
+    {
+      "date": "01/10 · Qui",
+      "type": "qui",
+      "title": "Leitura: texto curto autêntico",
+      "tags": [
+        "reading",
+        "vocabulary"
+      ],
+      "desc": "Aula de leitura com texto curto e autêntico — ela lê muito bem e isso já funcionou muito antes. Usar trecho de resenha de livro da Ali Hazelwood ou artigo curto sobre viagem/trabalho.",
+      "hooks": [
+        "Leitura silenciosa primeiro, depois discussão em inglês",
+        "Identificar 5 palavras novas pelo contexto, sem dicionário",
+        "Ela dá a opinião dela sobre o texto"
+      ],
+      "tip": "Reading é ponto forte dela — usar essa aula para reforçar autoestima através de uma habilidade que ela já domina."
+    },
+    {
+      "date": "05/10 · Seg",
+      "type": "seg",
+      "title": "Present Perfect: introdução — o que já aconteceu",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Introdução ao Present Perfect (have/has + past participle) com ever/never. 'Have you ever been to another country? I've never eaten sushi.'",
+      "hooks": [
+        "'Have you ever been to a concert? Have you ever spoken English at work?'",
+        "5 coisas que já fez, 5 que nunca fez",
+        "Jogo: adivinhar experiências da outra pessoa com 'Have you ever…?'"
+      ],
+      "tip": "Ever/never tornam o Present Perfect natural — começar por aí antes de complicar."
+    },
+    {
+      "date": "08/10 · Qui",
+      "type": "qui",
+      "title": "Present Perfect: already e yet",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Expandir com already e yet. 'I've already sent the email. Have you finished yet?' Contexto de trabalho e rotina diária.",
+      "hooks": [
+        "'Have you already had lunch? Have you checked your emails yet?'",
+        "5 frases sobre a semana de trabalho usando already/yet",
+        "Final do dia: o que já fez e ainda não fez"
+      ],
+      "tip": "Already/yet são muito usados no trabalho — conexão direta com o objetivo profissional dela."
+    },
+    {
+      "date": "12/10 · Seg",
+      "type": "seg",
+      "title": "Pronomes: subject, object, possessive",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Sistematizar os pronomes que ela já usa intuitivamente mas às vezes mistura: I/me/my, she/her/her, they/them/their. Contexto: descrever pessoas e posses no dia a dia.",
+      "hooks": [
+        "Descrever a família ou colegas de trabalho usando os três tipos",
+        "Corrigir frases com pronome errado de forma colaborativa",
+        "'This is my dog. He is hers' — praticar possessive pronouns"
+      ],
+      "tip": "Ela provavelmente já usa a maioria certo — o foco é nos casos que ela hesita (object pronouns principalmente)."
+    },
+    {
+      "date": "15/10 · Qui",
+      "type": "qui",
+      "title": "Present Perfect vs Simple Past",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "A distinção mais importante do mês. Present Perfect = sem tempo específico. Simple Past = com tempo específico. 'I've been to São Paulo' vs 'I went to São Paulo last year.'",
+      "hooks": [
+        "Pares de frases: ela decide qual forma usar",
+        "'I've read an Ali Hazelwood book' vs 'I read it last month'",
+        "Quando usar cada um em e-mail de trabalho"
+      ],
+      "tip": "Não cobrar perfeição — o objetivo é ela perceber a diferença, não dominar ainda."
+    },
+    {
+      "date": "19/10 · Seg",
+      "type": "seg",
+      "title": "Present Perfect: for e since",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Expandir com for (duração) e since (início). Contexto: a trajetória dela — na empresa, em Gravataí, aprendendo inglês.",
+      "hooks": [
+        "'How long have you worked at WebContinental? How long have you lived in Gravataí?'",
+        "Frases sobre a própria história usando for e since",
+        "'I've been studying English for… and I've already learned…'"
+      ],
+      "tip": "Conectar com a história de vida dela torna for/since pessoal e memorável."
+    },
+    {
+      "date": "22/10 · Qui",
+      "type": "qui",
+      "title": "Escrita: e-mail simples",
+      "tags": [
+        "writing",
+        "vocabulary"
+      ],
+      "desc": "Primeira aula de escrita guiada — e-mail curto e simples usando o vocabulário profissional já visto. Estrutura: saudação, corpo, fechamento. Foco em clareza, não perfeição gramatical.",
+      "hooks": [
+        "Escrever um e-mail real (ou fictício) para uma situação do trabalho dela",
+        "Revisar juntas, focando em 2-3 pontos, não tudo",
+        "Criar um template que ela pode reusar no trabalho"
+      ],
+      "tip": "Ela só faz tarefa de casa quando é assim — algo que ela vai usar de verdade. Conectar com o trabalho real."
+    },
+    {
+      "date": "26/10 · Seg",
+      "type": "seg",
+      "title": "Como pedir para repetir / ganhar tempo",
+      "tags": [
+        "speaking",
+        "vocabulary"
+      ],
+      "desc": "Frases funcionais para quando ela não entende ou precisa de tempo para pensar — ataca diretamente a insegurança com nativos. 'Could you say that again?', 'What do you mean?', 'Sorry, I didn't catch that', 'Let me think about that.'",
+      "hooks": [
+        "Praticar essas frases em situações simuladas de não-entendimento",
+        "Ela usa pelo menos 3 dessas frases na conversa de hoje",
+        "Criar cartão de referência rápida no caderno"
+      ],
+      "tip": "Essas frases tiram a pressão de 'entender tudo' — ela pode pedir ajuda sem se sentir mal."
+    },
+    {
+      "date": "29/10 · Qui",
+      "type": "qui",
+      "title": "Halloween: vocabulário cultural (mais próxima do feriado)",
+      "tags": [
+        "culture",
+        "vocabulary",
+        "speaking"
+      ],
+      "desc": "Aula cultural especial — Halloween cai num sábado, essa é a quinta mais próxima. Vocabulário: costume, haunted, trick or treat, scary, spooky, ghost, witch. No espírito da aula de St. Patrick's Day que marcou ela.",
+      "hooks": [
+        "'Would you dress up for Halloween? What would you be?'",
+        "Recomendações de filmes/séries de Halloween — ela descreve uma opção",
+        "Shadowing com trecho temático de série"
+      ],
+      "tip": "Aulas culturais especiais têm alto impacto emocional — ela costuma lembrar dessas aulas."
+    }
+  ],
+  "nov": [
+    {
+      "date": "02/11 · Seg",
+      "type": "seg",
+      "title": "First Conditional: se isso acontecer…",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Introdução ao First Conditional — situações reais e possíveis. 'If I get the promotion, I'll celebrate.' Contexto: planos, metas, trabalho.",
+      "hooks": [
+        "'If you get a promotion this year, what will you do?'",
+        "5 condicionais sobre trabalho e vida",
+        "'If you could go anywhere next year, where will you go?'"
+      ],
+      "tip": "First conditional é muito natural pra ela — cheio de exemplos do cotidiano."
+    },
+    {
+      "date": "05/11 · Qui",
+      "type": "qui",
+      "title": "First Conditional em conversação + unless",
+      "tags": [
+        "grammar",
+        "speaking",
+        "review"
+      ],
+      "desc": "Consolidação em conversa espontânea sobre planos reais. Introduzir unless (a menos que) e when (quando — certezas).",
+      "hooks": [
+        "'Unless I practice every day, I won't improve'",
+        "Debate leve: o que ela vai fazer se conseguir (ou não) a promoção",
+        "'When I travel to [destino], I'll…'"
+      ],
+      "tip": "Unless é um upgrade pequeno mas poderoso — ela vai gostar de usar."
+    },
+    {
+      "date": "09/11 · Seg",
+      "type": "seg",
+      "title": "Question words — revisão rápida",
+      "tags": [
+        "grammar",
+        "review",
+        "speaking"
+      ],
+      "desc": "Revisão ágil de wh-questions (who, what, where, when, why, how), já vistas antes. Reforçar especialmente a ordem das palavras na pergunta, que ainda gera hesitação às vezes.",
+      "hooks": [
+        "Jogo de perguntas rápidas sobre a semana dela",
+        "Ela formula 5 perguntas para fazer numa entrevista de trabalho fictícia",
+        "Corrigir ordem de palavras de forma colaborativa"
+      ],
+      "tip": "Revisão rápida de 15 min — ela já usa bem, é mais polimento."
+    },
+    {
+      "date": "12/11 · Qui",
+      "type": "qui",
+      "title": "Second Conditional: e se fosse diferente…",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Introdução suave ao Second Conditional — situações imaginárias. 'If I were a CEO, I would change everything.' Não exigir perfeição — plantar a semente.",
+      "hooks": [
+        "'If you could have any job in the world, what would you do?'",
+        "'If you spoke perfect English right now, what would be different?'",
+        "3 frases com If I were / If I had…"
+      ],
+      "tip": "'If I were you, I would…' é muito útil para dar conselhos — destacar esse uso."
+    },
+    {
+      "date": "16/11 · Seg",
+      "type": "seg",
+      "title": "Vocabulário profissional avançado: reunião",
+      "tags": [
+        "vocabulary",
+        "speaking"
+      ],
+      "desc": "Vocabulário mais sofisticado para reuniões: 'To summarize…', 'Going back to what you said…', 'Just to clarify…', 'I'd like to add…'",
+      "hooks": [
+        "Simular o início de uma reunião com fornecedor estrangeiro",
+        "'How would you open a meeting with a foreign client?'",
+        "Praticar interromper educadamente: 'Sorry to interrupt, but…'"
+      ],
+      "tip": "Essas frases são o objetivo principal dela — vale passar mais tempo aqui."
+    },
+    {
+      "date": "19/11 · Qui",
+      "type": "qui",
+      "title": "Listening: conversa de trabalho em inglês",
+      "tags": [
+        "listening",
+        "vocabulary"
+      ],
+      "desc": "Listening focado em contexto profissional — conversa entre colegas ou trecho de reunião. Aplicar as estratégias de listening vistas em setembro (pause, predict, context clues).",
+      "hooks": [
+        "Áudio de 2-3 min de reunião/conversa de trabalho",
+        "Resumir o que ouviu em 4-5 frases",
+        "Destacar 3 expressões que ela pode usar no trabalho dela"
+      ],
+      "tip": "Reunião em inglês é o maior medo dela — ouvir outras pessoas fazendo isso normaliza."
+    },
+    {
+      "date": "23/11 · Seg",
+      "type": "seg",
+      "title": "Relative clauses: quem, que, onde",
+      "tags": [
+        "grammar",
+        "speaking"
+      ],
+      "desc": "Introdução a who, that, where para enriquecer as frases e deixar a fala menos telegráfica. 'The colleague who speaks English. The café where we always meet.'",
+      "hooks": [
+        "Descrever 3 pessoas do trabalho usando who",
+        "Descrever a WebContinental e o bairro usando where",
+        "'Tell me about something that changed your life'"
+      ],
+      "tip": "Relative clauses transformam a fala dela — ela vai soar muito mais fluente rapidamente."
+    },
+    {
+      "date": "26/11 · Qui",
+      "type": "qui",
+      "title": "Thanksgiving: gratidão + vocabulário cultural",
+      "tags": [
+        "culture",
+        "vocabulary",
+        "speaking"
+      ],
+      "desc": "Thanksgiving cai exatamente nessa quinta-feira em 2026 — coincidência perfeita. Vocabulário: grateful, thankful, turkey, feast, tradition. Conversa sobre gratidão conecta com o momento de reflexão de progresso do ano.",
+      "hooks": [
+        "'What are you grateful for this year?'",
+        "Curiosidades sobre a tradição americana",
+        "Ela lista 5 coisas pelas quais é grata, em inglês"
+      ],
+      "tip": "Aula com alta carga emocional positiva — bom momento para ela refletir sobre o próprio ano."
+    },
+    {
+      "date": "30/11 · Seg",
+      "type": "seg",
+      "title": "Revisão de novembro + preparação do projeto final",
+      "tags": [
+        "review",
+        "project",
+        "speaking"
+      ],
+      "desc": "Revisão do mês e início do Mini Projeto Final: 'My English Story'. Ela vai contar a história do próprio aprendizado. Hoje monta o roteiro em português e traduz os pontos principais com ajuda.",
+      "hooks": [
+        "'What was your English like in January this year?'",
+        "Estruturar a apresentação: passado → presente → futuro",
+        "3-5 bullet points do que ela quer contar"
+      ],
+      "tip": "O projeto final é a vitrine de progresso mais poderosa — ela vai precisar de encorajamento para acreditar que consegue."
+    }
+  ],
+  "dez": [
+    {
+      "date": "03/12 · Qui",
+      "type": "qui",
+      "title": "Adjetivos + ordem dos adjetivos — revisão rápida",
+      "tags": [
+        "grammar",
+        "review",
+        "vocabulary"
+      ],
+      "desc": "Revisão ágil da ordem dos adjetivos (opinion-size-age-color-origin), já vista antes. Contexto: descrever roupas, lugares, pessoas — útil para a apresentação final.",
+      "hooks": [
+        "Descrever um look ou lugar favorito com 3+ adjetivos em ordem",
+        "Corrigir frases com ordem errada de forma colaborativa",
+        "Aplicar na descrição de alguma cena de Off Campus"
+      ],
+      "tip": "Revisão rápida de 15-20 min, antes de focar no projeto final."
+    },
+    {
+      "date": "07/12 · Seg",
+      "type": "seg",
+      "title": "Mini projeto: rascunho e prática da apresentação",
+      "tags": [
+        "project",
+        "speaking",
+        "review"
+      ],
+      "desc": "Ela ensaia 'My English Story' com suas palavras, sem script. Você ajuda com vocabulário faltante e naturalidade das frases, sem corrigir tudo — preservar a voz dela.",
+      "hooks": [
+        "Ela fala por 4-5 minutos sem parar sobre a própria história",
+        "Anotar os pontos mais bonitos e as lacunas de vocabulário",
+        "Criar juntas 3 frases-chave para a versão final"
+      ],
+      "tip": "Essa aula é mais de coach do que de professora — ouvir mais do que falar."
+    },
+    {
+      "date": "10/12 · Qui",
+      "type": "qui",
+      "title": "Mini projeto: apresentação final",
+      "tags": [
+        "project",
+        "speaking",
+        "review"
+      ],
+      "desc": "Ela apresenta 'My English Story' — a história do próprio aprendizado do zero ao presente. Você não interrompe. Depois, o feedback mais completo do semestre, com evidências concretas de progresso.",
+      "hooks": [
+        "Apresentação de 5-6 minutos sem interrupção",
+        "Feedback com comparação real: junho vs dezembro",
+        "Lista de estruturas que ela domina hoje"
+      ],
+      "tip": "Momento emocional mais importante do semestre — deixar acontecer, sem pressa."
+    },
+    {
+      "date": "14/12 · Seg",
+      "type": "seg",
+      "title": "Revisão geral + curiosidades de fim de ano",
+      "tags": [
+        "review",
+        "culture",
+        "speaking"
+      ],
+      "desc": "Aula leve, sem conteúdo novo. Christmas é dia 25/12 mas as aulas terminam antes — aproveitar para trazer vocabulário de fim de ano e fechar o semestre com leveza. Resolution, celebration, grateful, reflect.",
+      "hooks": [
+        "'What was your favorite lesson this year? Why?'",
+        "Curiosidades sobre o Natal americano vs o brasileiro",
+        "Ela cria a própria 'palavra do ano' em inglês"
+      ],
+      "tip": "Aula comemorativa — sem cobranças, só celebração do que foi construído."
+    },
+    {
+      "date": "17/12 · Qui",
+      "type": "qui",
+      "title": "Conversação livre: metas para 2027",
+      "tags": [
+        "speaking",
+        "project"
+      ],
+      "desc": "Última aula do ano. Conversa livre sobre o futuro — o que ela quer do inglês no próximo ano, usando tudo que aprendeu: Past, Present Perfect, Future, Conditionals, opinião, emoção.",
+      "hooks": [
+        "'What do you want your English to look like in December 2027?'",
+        "'What's one thing you'd tell yourself in January this year?'",
+        "Registrar as metas dela para o próximo semestre"
+      ],
+      "tip": "Guardar essas metas — vão ser material poderoso para a primeira aula do próximo ano."
+    }
+  ]
+};
+function renderAulas(monthId) {
+  const list = document.getElementById(monthId + '-list');
+  if (!list || list.children.length > 0) return;
+  const aulas = AULAS[monthId];
+  if (!aulas) return;
+
+  aulas.forEach((a) => {
+    const card = document.createElement('div');
+    card.className = 'aula-card';
+    const tagsHtml = a.tags.map(t => `<span class="tag tag-${t}">${t}</span>`).join('');
+    const hooksHtml = a.hooks.map(h => `<div class="hook-item"><span class="hook-icon">→</span><span>${h}</span></div>`).join('');
+
+    card.innerHTML = `
+      <div class="aula-header" onclick="toggleCard(this.parentElement)">
+        <div class="aula-dot ${a.type}"></div>
+        <div class="aula-meta">
+          <div class="aula-date ${a.type}">${a.date}</div>
+          <div class="aula-title">${a.title}</div>
+          <div class="aula-tags">${tagsHtml}</div>
+        </div>
+        <div class="aula-chevron">▾</div>
+      </div>
+      <div class="aula-body">
+        <p class="aula-desc">${a.desc}</p>
+        <div class="aula-hooks">
+          <div class="aula-hooks-title">Ganchos de aula</div>
+          ${hooksHtml}
+        </div>
+        <div class="aula-tip">💡 ${a.tip}</div>
+      </div>`;
+    list.appendChild(card);
+  });
+}
+
+function toggleCard(card) {
+  card.classList.toggle('open');
+}
+
+function showMonth(id, btn) {
+  document.querySelectorAll('.month-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  renderAulas(id);
+}
+
+renderAulas('jun');
+</script>
+</body>
+</html>
