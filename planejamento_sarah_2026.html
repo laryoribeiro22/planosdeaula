@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planejamento Sarah 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --pink:         #D4537E;
+    --pink-l:       #FBEAF0;
+    --pink-b:       #ED93B1;
+    --pink-d:       #993556;
+    --purple:       #7F77DD;
+    --purple-l:     #EEEDFE;
+    --purple-b:     #AFA9EC;
+    --purple-d:     #534AB7;
+    --green:        #27AE79;
+    --green-l:      #E1F5EE;
+    --green-b:      #6DC8A4;
+    --green-d:      #0F6E56;
+    --amber:        #EF9F27;
+    --amber-l:      #FAEEDA;
+    --amber-b:      #EFC27A;
+    --amber-d:      #854F0B;
+    --coral:        #E07355;
+    --coral-l:      #FAECE7;
+    --coral-b:      #F0A88F;
+    --coral-d:      #993C1D;
+    --teal:         #2AA8B5;
+    --teal-l:       #E0F5F7;
+    --teal-b:       #7DCCD4;
+    --teal-d:       #1A6B74;
+    --ink:          #1A1118;
+    --ink-mid:      #3D2B36;
+    --ink-soft:     #6B5260;
+    --border:       #EAE0E6;
+    --surface:      #FFFFFF;
+    --bg:           #FDF8FA;
+    --sans:         'DM Sans', system-ui, sans-serif;
+    --mono:         'DM Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--pink-d);
+    padding: 2.75rem 2rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: '🎀';
+    position: absolute; right: 2.5rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 7rem; opacity: 0.1; pointer-events: none;
+  }
+  .hero-eye {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--pink-b); margin-bottom: 0.5rem;
+  }
+  .hero-title {
+    font-size: clamp(28px, 5vw, 44px); font-weight: 600;
+    color: white; letter-spacing: -0.025em; line-height: 1.1;
+    margin-bottom: 0.6rem;
+  }
+  .hero-title span { color: var(--pink-b); }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.65); max-width: 460px; line-height: 1.6; }
+  .hero-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 1.25rem; }
+  .hchip {
+    background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.22);
+    border-radius: 20px; padding: 4px 12px;
+    font-size: 12px; color: white; font-weight: 400;
+  }
+
+  /* ─── PILARES ─── */
+  .section-wrap { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+  .sec-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-soft);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 1rem; margin-top: 2.25rem;
+  }
+  .sec-label::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+  .sec-label:first-child { margin-top: 0; }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 10px; margin-bottom: 0.5rem;
+  }
+  .pillar {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.1rem;
+    border-top: 3px solid var(--pink);
+  }
+  .pillar-icon { font-size: 22px; margin-bottom: 6px; }
+  .pillar-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .pillar-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+
+  /* ─── MONTH TABS ─── */
+  .tab-row { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .tab-btn {
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    padding: 6px 16px; border-radius: 20px;
+    border: 0.5px solid var(--border);
+    background: var(--surface); color: var(--ink-soft);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .tab-btn:hover { background: var(--pink-l); border-color: var(--pink-b); color: var(--pink-d); }
+  .tab-btn.active { background: var(--pink-l); border-color: var(--pink-b); color: var(--pink-d); }
+
+  /* ─── MONTH PANEL ─── */
+  .month-panel { display: none; }
+  .month-panel.visible { display: block; }
+
+  .month-hero {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 1.1rem 1.4rem;
+    display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .month-badge {
+    font-size: 12px; font-weight: 500; padding: 5px 14px;
+    border-radius: 20px; background: var(--pink-l);
+    border: 0.5px solid var(--pink-b); color: var(--pink-d);
+    flex-shrink: 0; white-space: nowrap;
+  }
+  .month-info { flex: 1; }
+  .month-theme { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .month-focus { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+  .month-grammar { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .gram-pill {
+    background: var(--purple-l); border: 0.5px solid var(--purple-b);
+    border-radius: 6px; padding: 3px 10px;
+    font-size: 11px; color: var(--purple-d); font-weight: 500; font-style: italic;
+  }
+
+  /* ─── WEEKS ─── */
+  .week-block { margin-bottom: 1.5rem; }
+  .week-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-soft);
+    display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+  }
+  .week-label::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+
+  .lessons-pair {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px;
+  }
+  .lesson-card {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.1rem;
+    border-left: 3px solid var(--pink);
+  }
+  .lesson-card.qua { border-left-color: var(--purple); }
+  .lc-day {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 3px;
+    color: var(--pink-d);
+  }
+  .lc-day.qua { color: var(--purple-d); }
+  .lc-num {
+    font-family: var(--mono); font-size: 10px; color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+  .lc-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .lc-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .lc-items li {
+    font-size: 12px; color: var(--ink-soft); line-height: 1.5;
+    display: flex; gap: 7px; align-items: flex-start;
+  }
+  .lc-items li::before {
+    content: '→'; color: var(--pink); font-size: 11px;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .lc-items li.q::before { color: var(--purple); }
+
+  /* ─── MONTH TIPS STRIP ─── */
+  .tips-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    gap: 8px; margin-top: 0.5rem;
+  }
+  .tip-card {
+    background: var(--bg); border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 0.7rem 0.9rem;
+  }
+  .tip-lbl {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px;
+  }
+  .tip-txt { font-size: 12px; color: var(--ink-mid); line-height: 1.55; }
+
+  /* ─── GOLDEN RULES ─── */
+  .golden {
+    background: var(--ink); border-radius: 14px;
+    padding: 1.4rem 1.6rem; margin-top: 2.5rem;
+  }
+  .golden-title {
+    font-size: 13px; font-weight: 600; color: var(--pink-b);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 7px;
+  }
+  .golden-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .golden-list li {
+    font-size: 13px; color: rgba(255,255,255,0.72);
+    display: flex; gap: 10px; line-height: 1.6;
+  }
+  .golden-list li::before { content: '✦'; color: var(--pink-b); font-size: 11px; flex-shrink: 0; margin-top: 3px; }
+
+  .avoid {
+    background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,100,100,0.3);
+    border-radius: 10px; padding: 0.75rem 1rem; margin-top: 12px;
+  }
+  .avoid-lbl { font-size: 11px; font-weight: 600; color: #F08080; margin-bottom: 5px; }
+  .avoid-txt { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* ─── PRINT ─── */
+  @media print {
+    .hero, .golden { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .month-panel { display: block !important; }
+    .tab-row { display: none; }
+    .month-panel { page-break-before: always; }
+    .month-panel:first-of-type { page-break-before: auto; }
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 2rem 1.25rem 1.5rem; }
+    .section-wrap { padding: 1.5rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eye">Planejamento de aulas · Junho — Novembro 2026</div>
+  <div class="hero-title">Sarah — <span>8 aulas/mês</span></div>
+  <div class="hero-sub">Segundas e Quartas · ~55 min · Online · Atualizado 28/05/2026</div>
+  <div class="hero-chips">
+    <span class="hchip">10 anos (11 em agosto)</span>
+    <span class="hchip">Pré-intermediário</span>
+    <span class="hchip">KPOP · Hello Kitty · Roblox</span>
+    <span class="hchip">Mickey o gato persa 🐱</span>
+    <span class="hchip">Competitiva · Elétrica</span>
+  </div>
+</div>
+
+<div class="section-wrap">
+
+  <!-- PILARES -->
+  <div class="sec-label">Pilares pedagógicos</div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">🏆</div>
+      <div class="pillar-name">Competição & desafios</div>
+      <div class="pillar-desc">Ranking, pontuação, timer. Ela performa melhor quando há algo em jogo.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">💖</div>
+      <div class="pillar-name">Temas que ela ama</div>
+      <div class="pillar-desc">KPOP, Halloween, Hello Kitty, Roblox, gatos. Qualquer aula ancorada nisso ganha atenção imediata.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">✨</div>
+      <div class="pillar-name">Novidade constante</div>
+      <div class="pillar-desc">Nada repetitivo. Cada aula precisa de pelo menos um elemento novo — formato, tema ou atividade.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">⭐</div>
+      <div class="pillar-name">Elogio estratégico</div>
+      <div class="pillar-desc">Precisa de validação frequente. Elogie o processo com especificidade, nunca genérico.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🧶</div>
+      <div class="pillar-name">Mãos ocupadas = foco</div>
+      <div class="pillar-desc">Crochê, massinha, biscuit durante a aula são aliados. Deixa ela fazer.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">📖</div>
+      <div class="pillar-name">Vocabulário em contexto</div>
+      <div class="pillar-desc">Aprende vocab rapidíssimo. Gramática só cola quando embutida no uso real.</div>
+    </div>
+  </div>
+
+  <!-- CALENDÁRIO -->
+  <div class="sec-label">Calendário — junho a novembro 2026</div>
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem;font-size:12px;color:var(--ink-soft);">
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:var(--pink);display:inline-block;"></span> Segunda-feira</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:var(--purple);display:inline-block;"></span> Quarta-feira</span>
+  </div>
+
+  <div class="tab-row">
+    <button class="tab-btn active" onclick="showMonth('jun',this)">Junho</button>
+    <button class="tab-btn" onclick="showMonth('jul',this)">Julho</button>
+    <button class="tab-btn" onclick="showMonth('ago',this)">Agosto</button>
+    <button class="tab-btn" onclick="showMonth('set',this)">Setembro</button>
+    <button class="tab-btn" onclick="showMonth('out',this)">Outubro</button>
+    <button class="tab-btn" onclick="showMonth('nov',this)">Novembro</button>
+  </div>
+
+  <!-- ══ JUNHO ══ -->
+  <div id="panel-jun" class="month-panel visible">
+    <div class="month-hero">
+      <span class="month-badge">Junho</span>
+      <div class="month-info">
+        <div class="month-theme">🌏 Travel & Adventures</div>
+        <div class="month-focus">Viagem à Argentina como ponto de partida · Vocabulário de viagem · Narrativa no passado</div>
+        <div class="month-grammar">
+          <span class="gram-pill">Simple past</span>
+          <span class="gram-pill">Comparativos</span>
+          <span class="gram-pill">Sequenciadores</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 1</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div>
+          <div class="lc-num">Aula 1</div>
+          <div class="lc-title">My Trip to Argentina</div>
+          <ul class="lc-items">
+            <li>Ela conta a viagem em inglês — você escuta sem interromper e anota os erros</li>
+            <li>Vocabulário: países, transportes, "I went to / I saw / I tried"</li>
+            <li>Jogo: "True or False" com frases sobre a viagem dela</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div>
+          <div class="lc-num">Aula 2</div>
+          <div class="lc-title">Argentina Pt. 2 — Deepdive</div>
+          <ul class="lc-items">
+            <li class="q">Revisitar a viagem com mais vocabulário: comida, clima, hotel, dinheiro</li>
+            <li class="q">Desafio: ela escreve 5 frases sobre Argentina sem ajuda</li>
+            <li class="q">Speed round: quanto vocabulário de viagem ela já sabe?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 2</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div>
+          <div class="lc-num">Aula 3</div>
+          <div class="lc-title">Dream Trip Planner</div>
+          <ul class="lc-items">
+            <li>Ela planeja uma viagem dos sonhos — destino, atividades, comida</li>
+            <li>Vocabulário: comparativos (bigger, better, more exciting)</li>
+            <li>Pitch de 60 segundos: apresentar o plano como influencer de viagem</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div>
+          <div class="lc-num">Aula 4</div>
+          <div class="lc-title">Budget Your Trip</div>
+          <ul class="lc-items">
+            <li class="q">Ela "gasta" um budget imaginário planejando a viagem em inglês</li>
+            <li class="q">Vocabulário: números grandes, "how much does it cost / it's worth it"</li>
+            <li class="q">Competição: quem planeja a viagem mais incrível com o mesmo orçamento?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 3</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div>
+          <div class="lc-num">Aula 5</div>
+          <div class="lc-title">Around the World Quiz</div>
+          <ul class="lc-items">
+            <li>Quiz de países, capitais e curiosidades — formato game show</li>
+            <li>Estrutura: "Did you know that...?" para apresentar fatos</li>
+            <li>Ela escolhe 3 países que quer visitar e justifica em inglês</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div>
+          <div class="lc-num">Aula 6</div>
+          <div class="lc-title">Travel Vlog Script</div>
+          <ul class="lc-items">
+            <li class="q">Ela escreve/fala o roteiro de um vlog imaginário da viagem dos sonhos</li>
+            <li class="q">Vocabulário: expressões de vlogs, transições, reações</li>
+            <li class="q">Foco: sequenciadores — "first, then, after that, finally"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 4</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div>
+          <div class="lc-num">Aula 7</div>
+          <div class="lc-title">Airport Chaos Challenge</div>
+          <ul class="lc-items">
+            <li>Vocabulário de aeroporto em situações absurdas e engraçadas</li>
+            <li>Simulação: "What do you do if your suitcase is lost?"</li>
+            <li>Desafio: ela é a atendente do aeroporto lidando com passageiros caóticos</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div>
+          <div class="lc-num">Aula 8</div>
+          <div class="lc-title">June Travel Wrap-Up</div>
+          <ul class="lc-items">
+            <li class="q">Revisão lúdica do mês em formato competitivo — pontuação por tempo e precisão</li>
+            <li class="q">Ela reconta a viagem à Argentina de novo — compare com a aula 1 para mostrar evolução</li>
+            <li class="q">Teaser do tema de julho como surpresa</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-strip">
+      <div class="tip-card"><div class="tip-lbl">Personalização</div><div class="tip-txt">Use fotos/relatos reais da Argentina na aula 1. Contexto pessoal = engajamento imediato.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Ferramentas</div><div class="tip-txt">Wordwall viagem · Mapa interativo · Slides com fotos de países</div></div>
+      <div class="tip-card"><div class="tip-lbl">Ritmo</div><div class="tip-txt">Segunda introduz o tema, Quarta aprofunda ou traz outro ângulo.</div></div>
+    </div>
+  </div>
+
+  <!-- ══ JULHO ══ -->
+  <div id="panel-jul" class="month-panel">
+    <div class="month-hero">
+      <span class="month-badge">Julho</span>
+      <div class="month-info">
+        <div class="month-theme">🎤 KPOP World</div>
+        <div class="month-focus">Imersão total no universo dela · Vocabulário de fã · Opinião estruturada</div>
+        <div class="month-grammar">
+          <span class="gram-pill">Present perfect</span>
+          <span class="gram-pill">Opinião estruturada</span>
+          <span class="gram-pill">Descriptive language</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 1</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 1</div>
+          <div class="lc-title">KPOP Fan Magazine</div>
+          <ul class="lc-items">
+            <li>Ela "faz" uma entrevista imaginária com TWICE ou Illit</li>
+            <li>Vocabulário: descrever pessoas, personalidade, rotina</li>
+            <li>Estrutura: questions with "do you / have you / would you"</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 2</div>
+          <div class="lc-title">Idol Profile Cards</div>
+          <ul class="lc-items">
+            <li class="q">Criar "cards" descrevendo cada membro do grupo favorito</li>
+            <li class="q">Vocabulário: aparência, personalidade, habilidades — sem português</li>
+            <li class="q">Desafio: adivinhe qual membro pela descrição em inglês</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 2</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 3</div>
+          <div class="lc-title">Idol Battle — debate!</div>
+          <ul class="lc-items">
+            <li>Debate: qual grupo de KPOP é melhor e por quê</li>
+            <li>Estrutura: "I think / In my opinion / I disagree because"</li>
+            <li>Pontuação por argumento mais criativo em inglês</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 4</div>
+          <div class="lc-title">KPOP Fandom Dictionary</div>
+          <ul class="lc-items">
+            <li class="q">Ela ensina vocab de fã: "bias", "comeback", "stan", "era"</li>
+            <li class="q">Desafio: explicar cada termo em inglês sem usar português</li>
+            <li class="q">Jogo: adivinhe o grupo pela descrição em inglês</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 3</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 5</div>
+          <div class="lc-title">Write a Fan Letter</div>
+          <ul class="lc-items">
+            <li>Carta pequena para o grupo favorito em inglês</li>
+            <li>Vocabulário: sentimentos, agradecimentos, admiração</li>
+            <li>Foco: present perfect — "You have inspired me / I have listened to..."</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 6</div>
+          <div class="lc-title">The KPOP Award Show</div>
+          <ul class="lc-items">
+            <li class="q">Ela apresenta o "award show" em inglês — anuncia categorias e vencedores</li>
+            <li class="q">Vocabulário: apresentar, anunciar, elogiar, agradecer</li>
+            <li class="q">Discurso de agradecimento: ela ganha um prêmio e agradece em inglês</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 4</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 7</div>
+          <div class="lc-title">Create Your Own Group</div>
+          <ul class="lc-items">
+            <li>Ela cria um grupo de KPOP imaginário — nome, membros, conceito, debut</li>
+            <li>Vocabulário: criatividade, música, estética</li>
+            <li>Pitch do grupo em inglês para uma gravadora imaginária</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 8</div>
+          <div class="lc-title">July KPOP Wrap-Up</div>
+          <ul class="lc-items">
+            <li class="q">Revisão: vocab de fã, opinião, present perfect</li>
+            <li class="q">"KPOP Knowledge Battle" — quem sabe mais sobre o universo em inglês</li>
+            <li class="q">Teaser surpresa: "Em agosto você faz 11 anos — o que você quer aprender?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-strip">
+      <div class="tip-card"><div class="tip-lbl">Personalização</div><div class="tip-txt">TWICE, Illit, BlackPink, Le Sserafim, IVE — use os grupos reais em todos os exemplos.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Por que julho</div><div class="tip-txt">Férias = mais energia. Mês ideal para o tema de maior motivação dela.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Bônus</div><div class="tip-txt">Ela faz 11 anos em agosto — a aula 8 planta a semente para o mês especial.</div></div>
+    </div>
+  </div>
+
+  <!-- ══ AGOSTO ══ -->
+  <div id="panel-ago" class="month-panel">
+    <div class="month-hero">
+      <span class="month-badge">Agosto</span>
+      <div class="month-info">
+        <div class="month-theme">🎂 Level Up! — 11 anos</div>
+        <div class="month-focus">Aniversário + jogos + used to vs now · Consolidação do 1º semestre</div>
+        <div class="month-grammar">
+          <span class="gram-pill">Used to</span>
+          <span class="gram-pill">Will / going to</span>
+          <span class="gram-pill">Giving instructions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 1</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 1</div>
+          <div class="lc-title">🎂 Birthday Special!</div>
+          <ul class="lc-items">
+            <li>Aula temática de aniversário — wishlist, surpresas, o que ela quer</li>
+            <li>Vocabulário: wishes, celebrations, "I wish I could / I hope I get"</li>
+            <li>Jogo: "Guess my birthday wish" — dicas em inglês, você adivinha</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 2</div>
+          <div class="lc-title">Plan My Dream Birthday</div>
+          <ul class="lc-items">
+            <li class="q">Ela planeja sua festa dos sonhos — convidados, tema, comida, local</li>
+            <li class="q">Vocabulário: events, invitations, "there will be / I'm going to have"</li>
+            <li class="q">Desafio: escrever o convite da festa em inglês</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 2</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 3</div>
+          <div class="lc-title">My Glow Up — past vs now</div>
+          <ul class="lc-items">
+            <li>Comparar ela mesma: o que fazia antes vs o que faz agora</li>
+            <li>Vocabulário: mudanças, "I used to / Now I / I've learned to"</li>
+            <li>Desafio: descrever evolução no inglês em 5 frases</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 4</div>
+          <div class="lc-title">Mickey's World 🐱</div>
+          <ul class="lc-items">
+            <li class="q">Aula temática sobre o Mickey — o gato persa laranja dela</li>
+            <li class="q">"A day in Mickey's life" — ela narra o dia do gato em inglês</li>
+            <li class="q">Vocabulário: rotina de pet, "he likes to / he always / he never"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 3</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 5</div>
+          <div class="lc-title">Roblox & Minecraft: English Edition</div>
+          <ul class="lc-items">
+            <li>Vocabulário dos jogos em inglês — ela já conhece o contexto</li>
+            <li>Ela explica como jogar para alguém que nunca jogou</li>
+            <li>Missão: jogar 10 min com o chat em inglês e relatar depois</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 6</div>
+          <div class="lc-title">Design Your Game</div>
+          <ul class="lc-items">
+            <li class="q">Ela inventa um jogo — regras, fases, personagens, em inglês</li>
+            <li class="q">Vocabulário: "first you have to / the goal is / if you..."</li>
+            <li class="q">Desafio: você tenta jogar seguindo APENAS as instruções em inglês dela</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 4</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 7</div>
+          <div class="lc-title">Hello Kitty Takeover</div>
+          <ul class="lc-items">
+            <li>Aula temática Hello Kitty — descrever personagens, criar histórias curtas</li>
+            <li>Vocabulário: adjetivos cute, "she's known for / she loves"</li>
+            <li>Jogo: aventura da Hello Kitty — cada uma fala um trecho</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 8</div>
+          <div class="lc-title">August Speed Challenge</div>
+          <ul class="lc-items">
+            <li class="q">Revisão gamificada do trimestre — formato competitivo com timer</li>
+            <li class="q">Categorias: viagem, KPOP, aniversário, jogos, animais</li>
+            <li class="q">Mini diploma simbólico: "English Level Up Certificate" 🏆</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-strip">
+      <div class="tip-card"><div class="tip-lbl">Personalização</div><div class="tip-txt">Mickey na aula 4 é garantia de engajamento total. Use o nome real do gato em todas as frases.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Aula 8</div><div class="tip-txt">Funciona como revisão do trimestre — identifica gaps antes de setembro.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Energia</div><div class="tip-txt">Aniversário + férias = pico de energia. Aproveite para conteúdo um pouco mais denso.</div></div>
+    </div>
+  </div>
+
+  <!-- ══ SETEMBRO ══ -->
+  <div id="panel-set" class="month-panel">
+    <div class="month-hero">
+      <span class="month-badge">Setembro</span>
+      <div class="month-info">
+        <div class="month-theme">📚 School Stories</div>
+        <div class="month-focus">Vida real na escola · Amizades · Reported speech básico · Conditionals</div>
+        <div class="month-grammar">
+          <span class="gram-pill">Reported speech básico</span>
+          <span class="gram-pill">Conditionals simples</span>
+          <span class="gram-pill">Contrastivos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 1</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 1</div>
+          <div class="lc-title">Drama at School</div>
+          <ul class="lc-items">
+            <li>Ela conta as fofocas da escola em inglês — você facilita o vocabulário</li>
+            <li>Vocabulário: relacionamentos, conflito, reações</li>
+            <li>Reported speech natural: "She said that... / They told me..."</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 2</div>
+          <div class="lc-title">Advice Column</div>
+          <ul class="lc-items">
+            <li class="q">Ela lê "cartas de problemas escolares" fictícias e dá conselhos em inglês</li>
+            <li class="q">Vocabulário: "you should / you shouldn't / if I were you..."</li>
+            <li class="q">Desafio: inventar o problema e a solução ela mesma</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 2</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 3</div>
+          <div class="lc-title">My Friend Emily</div>
+          <ul class="lc-items">
+            <li>Descrever a amiga japonesa — cultura, diferenças, curiosidades</li>
+            <li>Vocabulário: comparar culturas, amizade, nacionalidades</li>
+            <li>Conexão: o que o Japão tem de KPOP — Emily como ponte cultural</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 4</div>
+          <div class="lc-title">Japan vs Brazil</div>
+          <ul class="lc-items">
+            <li class="q">Comparar Brasil e Japão em inglês — comida, escola, costumes</li>
+            <li class="q">Vocabulário: "whereas / while / on the other hand"</li>
+            <li class="q">Jogo: adivinhe o país pela descrição em inglês</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 3</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 5</div>
+          <div class="lc-title">The Perfect School Day</div>
+          <ul class="lc-items">
+            <li>Ela descreve sua escola dos sonhos em inglês</li>
+            <li>Vocabulário: matérias, rotina, facilities</li>
+            <li>Estrutura: "If I were the principal / There would be / Students could"</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 6</div>
+          <div class="lc-title">Worst School Day Ever</div>
+          <ul class="lc-items">
+            <li class="q">Versão caótica — descrever o pior dia de escola imaginário</li>
+            <li class="q">Vocabulário: desastres, "everything went wrong"</li>
+            <li class="q">Desafio: quem cria o dia mais catastrófico em inglês?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 4</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 7</div>
+          <div class="lc-title">Volleyball Star</div>
+          <ul class="lc-items">
+            <li>Ela fala sobre vôlei em inglês — regras, posições, campeonatos</li>
+            <li>Vocabulário: esportes, competição, "I play / I've been playing"</li>
+            <li>Conexão: esportes olímpicos — Brasil no cenário internacional</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 8</div>
+          <div class="lc-title">September Vocabulary Showdown</div>
+          <ul class="lc-items">
+            <li class="q">Competição de vocabulário do mês — quem define mais rápido</li>
+            <li class="q">Foco nas palavras que ela ainda fala em português</li>
+            <li class="q">Teaser do Halloween: "o melhor mês está chegando..."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-strip">
+      <div class="tip-card"><div class="tip-lbl">Personalização</div><div class="tip-txt">Emily como personagem recorrente é ouro — ela tem interesse real na amiga.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Atenção</div><div class="tip-txt">Setembro é pesado na escola. Aulas leves e com humor funcionam melhor.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Aula 6</div><div class="tip-txt">"Worst day ever" equilibra a semana séria — ela vai adorar esse formato caótico.</div></div>
+    </div>
+  </div>
+
+  <!-- ══ OUTUBRO ══ -->
+  <div id="panel-out" class="month-panel">
+    <div class="month-hero">
+      <span class="month-badge">Outubro</span>
+      <div class="month-info">
+        <div class="month-theme">🎃 Halloween Month — vai all in!</div>
+        <div class="month-focus">O mês favorito dela · Narrativa em inglês · Vocabulário atmosférico</div>
+        <div class="month-grammar">
+          <span class="gram-pill">Passive voice básico</span>
+          <span class="gram-pill">Narrative tenses</span>
+          <span class="gram-pill">Adjetivos intensificados</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 1</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 1</div>
+          <div class="lc-title">Halloween Origins</div>
+          <ul class="lc-items">
+            <li>Lendas de Halloween apresentadas com dramatização</li>
+            <li>Vocabulário: criaturas, atmosfera, "is said to / is believed to"</li>
+            <li>Jogo: verdade ou lenda? — ela decide e justifica em inglês</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 2</div>
+          <div class="lc-title">Create Your Monster</div>
+          <ul class="lc-items">
+            <li class="q">Ela cria uma criatura de Halloween — aparência, poderes, fraquezas</li>
+            <li class="q">Vocabulário: corpo, poderes sobrenaturais, adjetivos intensos</li>
+            <li class="q">Apresentação: vender o monstro como se fosse para um filme</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 2</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 3</div>
+          <div class="lc-title">Haunted Hello Kitty House</div>
+          <ul class="lc-items">
+            <li>Hello Kitty em versão terror — casa assombrada fofa</li>
+            <li>Vocabulário: preposições de lugar, "suddenly / meanwhile"</li>
+            <li>Desafio: narrar a história de 2 minutos com os personagens</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 4</div>
+          <div class="lc-title">Spooky KPOP Comeback</div>
+          <ul class="lc-items">
+            <li class="q">Criar um conceito de Halloween para um grupo de KPOP imaginário</li>
+            <li class="q">Vocabulário: moda, estética, "the theme is / the vibe is"</li>
+            <li class="q">Ela apresenta o conceito como showcase — inglês total</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 3</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 5</div>
+          <div class="lc-title">Trick or Treat Challenge</div>
+          <ul class="lc-items">
+            <li>Jogo de vocabulário: adivinhe o doce, o fantasma, o lugar</li>
+            <li>Foco: perguntas e respostas fluentes com timer</li>
+            <li>Pontuação: quem consegue mais "treats"?</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 6</div>
+          <div class="lc-title">Ghost Story Time</div>
+          <ul class="lc-items">
+            <li class="q">Ela conta uma história de terror em inglês — inventada ou real</li>
+            <li class="q">Vocabulário: suspense, "all of a sudden / it turned out that"</li>
+            <li class="q">Você tenta adivinhar o final antes que ela termine</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 4</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 7</div>
+          <div class="lc-title">Halloween Costume Designer</div>
+          <ul class="lc-items">
+            <li>Ela cria a fantasia de Halloween perfeita para ela e para o Mickey</li>
+            <li>Vocabulário: roupas, cores, estilo, "it looks like / inspired by"</li>
+            <li>Desafio: descrever a fantasia para você montar um desenho mental</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 8</div>
+          <div class="lc-title">Halloween Grand Finale 🎃</div>
+          <ul class="lc-items">
+            <li class="q">Mega competição de Halloween — todas as categorias do mês</li>
+            <li class="q">Ela é a "host" do Halloween special em inglês do começo ao fim</li>
+            <li class="q">Premiação: "Scariest English Speaker" title</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-strip">
+      <div class="tip-card"><div class="tip-lbl">Por que funciona</div><div class="tip-txt">Halloween é o tema de maior energia dela no ano. Outubro é o mês para metas mais ambiciosas.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Combo perfeito</div><div class="tip-txt">KPOP + Hello Kitty + Halloween juntos na semana 2 = imbatível para ela.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Ferramentas</div><div class="tip-txt">Slides temáticos · Wordwall Halloween · Sons de fundo para atmosfera</div></div>
+    </div>
+  </div>
+
+  <!-- ══ NOVEMBRO ══ -->
+  <div id="panel-nov" class="month-panel">
+    <div class="month-hero">
+      <span class="month-badge">Novembro</span>
+      <div class="month-info">
+        <div class="month-theme">🌟 My English, My World</div>
+        <div class="month-focus">Consolidação · Fluência em séries e doramas · Autonomia · Revisão do ano</div>
+        <div class="month-grammar">
+          <span class="gram-pill">Mixed tenses</span>
+          <span class="gram-pill">Future plans</span>
+          <span class="gram-pill">Storytelling fluente</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 1</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 1</div>
+          <div class="lc-title">The Last of Us — episode talk</div>
+          <ul class="lc-items">
+            <li>Conversa sobre a série em inglês — o que aconteceu, quem ela prefere</li>
+            <li>Vocabulário: resumir episódios, reagir, "I couldn't believe / it was so..."</li>
+            <li>Foco: fluência em reconto de histórias</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 2</div>
+          <div class="lc-title">Kitchen Nightmares Recap</div>
+          <ul class="lc-items">
+            <li class="q">Ela reconta episódios que assistiu com a mãe em inglês</li>
+            <li class="q">Vocabulário: culinária, Gordon Ramsay expressions</li>
+            <li class="q">Jogo: ela julga pratos imaginários como Gordon — em inglês</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 2</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 3</div>
+          <div class="lc-title">Dorama World</div>
+          <ul class="lc-items">
+            <li>Ela explica o que são doramas e por que gosta — em inglês</li>
+            <li>Vocabulário: gêneros, "plot twist", "cliffhanger", "binge-watch"</li>
+            <li>Pitch: convencer você a assistir um dorama em 1 minuto</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 4</div>
+          <div class="lc-title">Write Your Own Show</div>
+          <ul class="lc-items">
+            <li class="q">Ela inventa uma série — personagens, episódio piloto, drama</li>
+            <li class="q">Vocabulário: "the main character is / in this episode"</li>
+            <li class="q">Pitch da série para uma plataforma de streaming imaginária</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 3</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 5</div>
+          <div class="lc-title">English Everywhere</div>
+          <ul class="lc-items">
+            <li>Ela conta onde usou inglês fora das aulas ao longo do ano</li>
+            <li>Foco: reflexão sobre o próprio aprendizado — autonomia e orgulho</li>
+            <li>Vocabulário: "I realized / I managed to / I understood without help"</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 6</div>
+          <div class="lc-title">Meme & Trend Talk</div>
+          <ul class="lc-items">
+            <li class="q">Ela explica memes e trends atuais em inglês</li>
+            <li class="q">Vocabulário: "it went viral / it's trending / it means..."</li>
+            <li class="q">Desafio: explicar um meme brasileiro para alguém que não entende</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-block">
+      <div class="week-label">Semana 4</div>
+      <div class="lessons-pair">
+        <div class="lesson-card">
+          <div class="lc-day">Segunda</div><div class="lc-num">Aula 7</div>
+          <div class="lc-title">Goals for 2027</div>
+          <ul class="lc-items">
+            <li>Ela fala sobre o que quer aprender e conquistar em 2027 — em inglês</li>
+            <li>Vocabulário: planos, sonhos, "I want to / I'm going to / I hope to"</li>
+            <li>Você mostra o quanto ela evoluiu — compare com junho</li>
+          </ul>
+        </div>
+        <div class="lesson-card qua">
+          <div class="lc-day qua">Quarta</div><div class="lc-num">Aula 8</div>
+          <div class="lc-title">Sarah's Year in Review 🏆</div>
+          <ul class="lc-items">
+            <li class="q">Mega game show de revisão do ano — todas as categorias</li>
+            <li class="q">Ela é a host do show — conduz em inglês do começo ao fim</li>
+            <li class="q">Encerramento especial: o que ela quer aprender em 2027</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-strip">
+      <div class="tip-card"><div class="tip-lbl">Estratégia</div><div class="tip-txt">Novembro é para consolidar, não introduzir. Foco total em fluência e confiança.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Aula 7 — especial</div><div class="tip-txt">Mostrar a evolução desde junho é poderoso. Ela precisa ver o próprio progresso.</div></div>
+      <div class="tip-card"><div class="tip-lbl">Aula 8 — avaliação</div><div class="tip-txt">O game show revela o que ficou e o que ainda precisa de atenção em 2027.</div></div>
+    </div>
+  </div>
+
+  <!-- GOLDEN RULES -->
+  <div class="golden">
+    <div class="golden-title">✦ Regras de ouro — valem para toda aula da Sarah</div>
+    <ul class="golden-list">
+      <li>Nunca mais de 10 minutos seguidos na mesma atividade — troque o formato.</li>
+      <li>Segunda introduz o tema, Quarta aprofunda ou traz um ângulo diferente.</li>
+      <li>Sempre tem um elemento competitivo ou desafio com timer.</li>
+      <li>Comece com algo que ela já sabe — vitória rápida antes do conteúdo novo.</li>
+      <li>Gramática sempre embutida no contexto, nunca como regra solta.</li>
+      <li>Pelo menos 1 menção ao que ela ama por aula: KPOP, Mickey, Hello Kitty ou jogos.</li>
+      <li>Corrija pronúncia com leveza: "nice! you can also say it like..." — nunca "errado".</li>
+      <li>Elogio concreto pelo menos 3x por aula — nomear exatamente o que ela fez bem.</li>
+    </ul>
+    <div class="avoid">
+      <div class="avoid-lbl">Evitar em todas as aulas</div>
+      <div class="avoid-txt">Gramática isolada sem contexto · Professor falando mais do que ela · Escrita longa · Repetição do mesmo formato em 2 aulas seguidas · Qualquer referência a corpo ou peso</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showMonth(id, btn) {
+    document.querySelectorAll('.month-panel').forEach(p => p.classList.remove('visible'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('visible');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
