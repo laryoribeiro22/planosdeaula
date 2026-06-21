@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano Helena — Inglês 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fafafa; color: #1a1a1a; }
+  .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  .header { padding-bottom: 1.5rem; border-bottom: 1px solid #e5e5e5; margin-bottom: 1.5rem; }
+  .header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: #EEEDFE; color: #3C3489; letter-spacing: 0.03em; }
+  .date-tag { font-size: 12px; color: #888; }
+  .header h1 { font-size: 22px; font-weight: 600; color: #111; margin-bottom: 4px; }
+  .header p { font-size: 14px; color: #666; }
+
+  .tabs { display: flex; gap: 2px; margin-bottom: 1.5rem; border-bottom: 1px solid #e5e5e5; }
+  .tab { font-size: 13px; padding: 9px 16px; cursor: pointer; border: none; background: none; color: #666; border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: inherit; transition: color 0.15s; }
+  .tab:hover { color: #333; }
+  .tab.active { color: #534AB7; border-bottom-color: #534AB7; font-weight: 600; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* PERFIL */
+  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
+  .card { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 1rem 1.25rem; }
+  .card h3 { font-size: 11px; font-weight: 600; color: #999; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+  .tag-purple { background: #EEEDFE; color: #3C3489; }
+  .tag-teal { background: #E1F5EE; color: #085041; }
+  .tag-amber { background: #FAEEDA; color: #633806; }
+  .tag-green { background: #EAF3DE; color: #27500A; }
+
+  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
+  .do-card { background: #EAF3DE; border-radius: 12px; padding: 1rem 1.25rem; border: 1px solid #C0DD97; }
+  .dont-card { background: #FCEBEB; border-radius: 12px; padding: 1rem 1.25rem; border: 1px solid #F7C1C1; }
+  .do-card h3 { color: #27500A; font-size: 12px; font-weight: 700; margin-bottom: 10px; }
+  .dont-card h3 { color: #791F1F; font-size: 12px; font-weight: 700; margin-bottom: 10px; }
+  .list-item { font-size: 13px; padding: 3px 0; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+  .do-card .list-item { color: #3B6D11; }
+  .dont-card .list-item { color: #A32D2D; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+  .dot-green { background: #639922; }
+  .dot-red { background: #E24B4A; }
+
+  .time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+  .time-block { border-radius: 10px; padding: 12px; text-align: center; }
+  .time-num { font-size: 20px; font-weight: 700; margin-bottom: 2px; }
+  .time-label { font-size: 11px; font-weight: 600; margin-bottom: 2px; }
+  .time-desc { font-size: 11px; opacity: 0.75; }
+
+  /* PLANO */
+  .month-block { margin-bottom: 1.75rem; }
+  .month-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .month-pill { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+  .m1 { background: #EEEDFE; color: #3C3489; }
+  .m2 { background: #E1F5EE; color: #085041; }
+  .m3 { background: #FAEEDA; color: #633806; }
+  .m4 { background: #FAECE7; color: #712B13; }
+  .m5 { background: #E6F1FB; color: #0C447C; }
+  .month-sub { font-size: 13px; color: #666; }
+
+  .lessons-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+  .lesson-card { background: #fff; border-radius: 10px; padding: 12px; border: 1px solid #e8e8e8; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
+  .lesson-card:hover { border-color: #534AB7; box-shadow: 0 2px 8px rgba(83,74,183,0.08); }
+  .lesson-card.open { border-color: #534AB7; background: #EEEDFE; }
+  .lesson-num { font-size: 11px; color: #999; font-weight: 600; margin-bottom: 3px; }
+  .lesson-topic { font-size: 13px; font-weight: 600; color: #111; margin-bottom: 2px; }
+  .lesson-hook { font-size: 11px; color: #888; }
+
+  .detail-panel { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 1.25rem; margin-top: 10px; display: none; }
+  .detail-panel h3 { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0; }
+  .detail-section { margin-bottom: 12px; }
+  .detail-label { font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+  .detail-text { font-size: 13px; color: #333; line-height: 1.65; }
+  .activity-pill { display: inline-block; font-size: 12px; background: #EEEDFE; color: #3C3489; border-radius: 20px; padding: 4px 11px; margin: 3px 2px; font-weight: 500; }
+  .detail-tip { background: #FAEEDA; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #633806; line-height: 1.6; margin-top: 4px; }
+
+  /* PERSONALIZAÇÃO */
+  .insight-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .insight-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .insight-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .insight-title { font-size: 14px; font-weight: 700; color: #111; }
+  .insight-body { font-size: 13px; color: #444; line-height: 1.7; }
+  .highlight { background: #FAEEDA; color: #633806; border-radius: 4px; padding: 1px 6px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+
+  @media (max-width: 600px) {
+    .profile-grid, .do-dont { grid-template-columns: 1fr; }
+    .time-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-top">
+      <span class="badge">Plano ativo</span>
+      <span class="date-tag">Atualizado em 02 jun 2026</span>
+    </div>
+    <h1>Helena — Plano de Aulas de Inglês</h1>
+    <p>8 anos · Nível A0 · Online · 1x por semana · 55 min · Gravataí/RS</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('perfil', this)">Perfil</button>
+    <button class="tab" onclick="showTab('plano', this)">Plano Mensal</button>
+    <button class="tab" onclick="showTab('personalizacao', this)">Personalização</button>
+  </div>
+
+  <!-- PERFIL -->
+  <div id="perfil" class="section active">
+
+    <div class="profile-grid">
+      <div class="card">
+        <h3>Ela adora</h3>
+        <div class="tag-list">
+          <span class="tag tag-purple">Stitch</span>
+          <span class="tag tag-purple">Roblox</span>
+          <span class="tag tag-purple">Gatos</span>
+          <span class="tag tag-purple">Álbum da Copa</span>
+          <span class="tag tag-purple">Bichinhos de pelúcia</span>
+          <span class="tag tag-purple">Disney / Rei Leão</span>
+          <span class="tag tag-purple">Ana Castela</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Personalidade</h3>
+        <div class="tag-list">
+          <span class="tag tag-teal">Extrovertida</span>
+          <span class="tag tag-teal">Conversadeira</span>
+          <span class="tag tag-teal">Espoleta</span>
+          <span class="tag tag-teal">Competitiva</span>
+          <span class="tag tag-teal">Esperta</span>
+          <span class="tag tag-teal">Senso de humor</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Já domina</h3>
+        <div class="tag-list">
+          <span class="tag tag-green">Alphabet</span>
+          <span class="tag tag-green">Numbers 1–100</span>
+          <span class="tag tag-green">Shapes</span>
+          <span class="tag tag-green">School supplies</span>
+          <span class="tag tag-green">Boa pronúncia</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Pontos de atenção</h3>
+        <div class="tag-list">
+          <span class="tag tag-amber">Foco curto</span>
+          <span class="tag tag-amber">Frustra com erros</span>
+          <span class="tag tag-amber">Ama competição</span>
+          <span class="tag tag-amber">Precisa de estrutura</span>
+          <span class="tag tag-amber">Reage mal a atividades longas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="do-dont">
+      <div class="do-card">
+        <h3>✓ Sempre funciona</h3>
+        <div class="list-item"><span class="dot dot-green"></span><span>Bingo temático (Stitch, Roblox, Copa)</span></div>
+        <div class="list-item"><span class="dot dot-green"></span><span>Treasure Hunt com pistas em inglês</span></div>
+        <div class="list-item"><span class="dot dot-green"></span><span>10 min de conversa livre no final</span></div>
+        <div class="list-item"><span class="dot dot-green"></span><span>Desafios com placar de pontos</span></div>
+        <div class="list-item"><span class="dot dot-green"></span><span>Atividades curtas (5–10 min cada)</span></div>
+        <div class="list-item"><span class="dot dot-green"></span><span>Perguntar sobre o gato e o irmão</span></div>
+      </div>
+      <div class="dont-card">
+        <h3>✗ Evitar sempre</h3>
+        <div class="list-item"><span class="dot dot-red"></span><span>Complete the sentences</span></div>
+        <div class="list-item"><span class="dot dot-red"></span><span>Explicação longa sem prática</span></div>
+        <div class="list-item"><span class="dot dot-red"></span><span>Atividades de mais de 15 min</span></div>
+        <div class="list-item"><span class="dot dot-red"></span><span>Deixar ela livre sem direcionamento</span></div>
+        <div class="list-item"><span class="dot dot-red"></span><span>Desenhar formas (frustra)</span></div>
+        <div class="list-item"><span class="dot dot-red"></span><span>Repetir Alphabet e Numbers</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Estrutura ideal de aula — 55 minutos</h3>
+      <div class="time-grid">
+        <div class="time-block" style="background:#EEEDFE;">
+          <div class="time-num" style="color:#3C3489;">5'</div>
+          <div class="time-label" style="color:#3C3489;">Warm-up</div>
+          <div class="time-desc" style="color:#534AB7;">How are you today?</div>
+        </div>
+        <div class="time-block" style="background:#E1F5EE;">
+          <div class="time-num" style="color:#085041;">15'</div>
+          <div class="time-label" style="color:#085041;">Input</div>
+          <div class="time-desc" style="color:#0F6E56;">Conteúdo novo</div>
+        </div>
+        <div class="time-block" style="background:#FAEEDA;">
+          <div class="time-num" style="color:#633806;">25'</div>
+          <div class="time-label" style="color:#633806;">Jogo temático</div>
+          <div class="time-desc" style="color:#854F0B;">2–3 atividades curtas</div>
+        </div>
+        <div class="time-block" style="background:#FAECE7;">
+          <div class="time-num" style="color:#712B13;">10'</div>
+          <div class="time-label" style="color:#712B13;">Wrap-up</div>
+          <div class="time-desc" style="color:#993C1D;">Conversa livre</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANO MENSAL -->
+  <div id="plano" class="section">
+    <p style="font-size: 13px; color: #888; margin-bottom: 1.25rem;">Clique em qualquer aula para ver a ideia detalhada de personalização.</p>
+
+    <!-- JUNHO -->
+    <div class="month-block">
+      <div class="month-header">
+        <span class="month-pill m1">Junho 2026</span>
+        <span class="month-sub">Tema: "My World" — o universo dela em inglês</span>
+      </div>
+      <div class="lessons-row">
+        <div class="lesson-card" onclick="toggleLesson('j1')">
+          <div class="lesson-num">Aula 1</div>
+          <div class="lesson-topic">Greetings & Feelings</div>
+          <div class="lesson-hook">Como o Stitch se sente?</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('j2')">
+          <div class="lesson-num">Aula 2</div>
+          <div class="lesson-topic">Colors & Adjectives</div>
+          <div class="lesson-hook">Descrever o gato dela</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('j3')">
+          <div class="lesson-num">Aula 3</div>
+          <div class="lesson-topic">Animals</div>
+          <div class="lesson-hook">Bingo do Rei Leão</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('j4')">
+          <div class="lesson-num">Aula 4</div>
+          <div class="lesson-topic">My Body</div>
+          <div class="lesson-hook">Stitch perdeu suas partes!</div>
+        </div>
+      </div>
+      <div id="j1-detail" class="detail-panel"></div>
+      <div id="j2-detail" class="detail-panel"></div>
+      <div id="j3-detail" class="detail-panel"></div>
+      <div id="j4-detail" class="detail-panel"></div>
+    </div>
+
+    <!-- JULHO -->
+    <div class="month-block">
+      <div class="month-header">
+        <span class="month-pill m2">Julho 2026</span>
+        <span class="month-sub">Tema: "My Home & Family" — casa e família</span>
+      </div>
+      <div class="lessons-row">
+        <div class="lesson-card" onclick="toggleLesson('ju1')">
+          <div class="lesson-num">Aula 5</div>
+          <div class="lesson-topic">Family Members</div>
+          <div class="lesson-hook">A família do Lilo & Stitch</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('ju2')">
+          <div class="lesson-num">Aula 6</div>
+          <div class="lesson-topic">Rooms of the House</div>
+          <div class="lesson-hook">Treasure Hunt pela casa</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('ju3')">
+          <div class="lesson-num">Aula 7</div>
+          <div class="lesson-topic">Furniture & Objects</div>
+          <div class="lesson-hook">Decora o quarto do Stitch</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('ju4')">
+          <div class="lesson-num">Aula 8</div>
+          <div class="lesson-topic">Revisão + Mini Show</div>
+          <div class="lesson-hook">Ela apresenta a família</div>
+        </div>
+      </div>
+      <div id="ju1-detail" class="detail-panel"></div>
+      <div id="ju2-detail" class="detail-panel"></div>
+      <div id="ju3-detail" class="detail-panel"></div>
+      <div id="ju4-detail" class="detail-panel"></div>
+    </div>
+
+    <!-- AGOSTO -->
+    <div class="month-block">
+      <div class="month-header">
+        <span class="month-pill m3">Agosto 2026</span>
+        <span class="month-sub">Tema: "My Day" — rotina e ações</span>
+      </div>
+      <div class="lessons-row">
+        <div class="lesson-card" onclick="toggleLesson('a1')">
+          <div class="lesson-num">Aula 9</div>
+          <div class="lesson-topic">Daily Routines</div>
+          <div class="lesson-hook">Rotina do Stitch vs dela</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('a2')">
+          <div class="lesson-num">Aula 10</div>
+          <div class="lesson-topic">Action Verbs</div>
+          <div class="lesson-hook">Verbos no Roblox</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('a3')">
+          <div class="lesson-num">Aula 11</div>
+          <div class="lesson-topic">Food & Drinks</div>
+          <div class="lesson-hook">O que o Stitch come?</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('a4')">
+          <div class="lesson-num">Aula 12</div>
+          <div class="lesson-topic">Days & Time</div>
+          <div class="lesson-hook">Agenda da semana dela</div>
+        </div>
+      </div>
+      <div id="a1-detail" class="detail-panel"></div>
+      <div id="a2-detail" class="detail-panel"></div>
+      <div id="a3-detail" class="detail-panel"></div>
+      <div id="a4-detail" class="detail-panel"></div>
+    </div>
+
+    <!-- SETEMBRO -->
+    <div class="month-block">
+      <div class="month-header">
+        <span class="month-pill m4">Setembro 2026 🎂</span>
+        <span class="month-sub">Tema: "My Favorites" — aniversário de 9 anos (dia 13!)</span>
+      </div>
+      <div class="lessons-row">
+        <div class="lesson-card" onclick="toggleLesson('s1')">
+          <div class="lesson-num">Aula 13</div>
+          <div class="lesson-topic">Sports & Hobbies</div>
+          <div class="lesson-hook">O que ela ama fazer?</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('s2')">
+          <div class="lesson-num">Aula 14</div>
+          <div class="lesson-topic">Birthday Party 🎂</div>
+          <div class="lesson-hook">Festa do Stitch — e dela!</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('s3')">
+          <div class="lesson-num">Aula 15</div>
+          <div class="lesson-topic">Clothes & Appearance</div>
+          <div class="lesson-hook">Descreve o Stitch</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('s4')">
+          <div class="lesson-num">Aula 16</div>
+          <div class="lesson-topic">Revisão — Quiz</div>
+          <div class="lesson-hook">Helena vs Stitch</div>
+        </div>
+      </div>
+      <div id="s1-detail" class="detail-panel"></div>
+      <div id="s2-detail" class="detail-panel"></div>
+      <div id="s3-detail" class="detail-panel"></div>
+      <div id="s4-detail" class="detail-panel"></div>
+    </div>
+
+    <!-- OUTUBRO -->
+    <div class="month-block">
+      <div class="month-header">
+        <span class="month-pill m5">Outubro 2026</span>
+        <span class="month-sub">Tema: "My World Outside" — lugares, clima, comunidade</span>
+      </div>
+      <div class="lessons-row">
+        <div class="lesson-card" onclick="toggleLesson('o1')">
+          <div class="lesson-num">Aula 17</div>
+          <div class="lesson-topic">Weather</div>
+          <div class="lesson-hook">Que tempo faz em Gravataí?</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('o2')">
+          <div class="lesson-num">Aula 18</div>
+          <div class="lesson-topic">Places in Town</div>
+          <div class="lesson-hook">Mapa do bairro dela</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('o3')">
+          <div class="lesson-num">Aula 19</div>
+          <div class="lesson-topic">Transport</div>
+          <div class="lesson-hook">Como o Stitch viaja?</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('o4')">
+          <div class="lesson-num">Aula 20</div>
+          <div class="lesson-topic">Simple Sentences</div>
+          <div class="lesson-hook">O livro da Helena!</div>
+        </div>
+      </div>
+      <div id="o1-detail" class="detail-panel"></div>
+      <div id="o2-detail" class="detail-panel"></div>
+      <div id="o3-detail" class="detail-panel"></div>
+      <div id="o4-detail" class="detail-panel"></div>
+    </div>
+
+    <!-- NOVEMBRO -->
+    <div class="month-block">
+      <div class="month-header">
+        <span class="month-pill" style="background:#FBEAF0; color:#72243E;">Novembro 2026</span>
+        <span class="month-sub">Tema: "I Can!" — fluência e confiança com o que ela já sabe</span>
+      </div>
+      <div class="lessons-row">
+        <div class="lesson-card" onclick="toggleLesson('n1')">
+          <div class="lesson-num">Aula 21</div>
+          <div class="lesson-topic">Describing People</div>
+          <div class="lesson-hook">Quem é esse personagem?</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('n2')">
+          <div class="lesson-num">Aula 22</div>
+          <div class="lesson-topic">Storytelling Básico</div>
+          <div class="lesson-hook">A aventura do Stitch</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('n3')">
+          <div class="lesson-num">Aula 23</div>
+          <div class="lesson-topic">Questions & Answers</div>
+          <div class="lesson-hook">Ela entrevista o Stitch</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('n4')">
+          <div class="lesson-num">Aula 24</div>
+          <div class="lesson-topic">Revisão Game Show</div>
+          <div class="lesson-hook">Helena no palco!</div>
+        </div>
+      </div>
+      <div id="n1-detail" class="detail-panel"></div>
+      <div id="n2-detail" class="detail-panel"></div>
+      <div id="n3-detail" class="detail-panel"></div>
+      <div id="n4-detail" class="detail-panel"></div>
+    </div>
+
+    <!-- DEZEMBRO -->
+    <div class="month-block">
+      <div class="month-header">
+        <span class="month-pill" style="background:#E6F1FB; color:#0C447C;">Dezembro 2026 🌟</span>
+        <span class="month-sub">Tema: "My Year in English" — celebração e fechamento do ano</span>
+      </div>
+      <div class="lessons-row">
+        <div class="lesson-card" onclick="toggleLesson('d1')">
+          <div class="lesson-num">Aula 25</div>
+          <div class="lesson-topic">Christmas & Celebrations</div>
+          <div class="lesson-hook">Natal do Stitch em inglês</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('d2')">
+          <div class="lesson-num">Aula 26</div>
+          <div class="lesson-topic">My Wishlist in English</div>
+          <div class="lesson-hook">O que ela quer de Natal?</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('d3')">
+          <div class="lesson-num">Aula 27</div>
+          <div class="lesson-topic">My Year — Free Talk</div>
+          <div class="lesson-hook">Ela fala sobre o ano todo</div>
+        </div>
+        <div class="lesson-card" onclick="toggleLesson('d4')">
+          <div class="lesson-num">Aula 28</div>
+          <div class="lesson-topic">Grande Celebração Final 🏆</div>
+          <div class="lesson-hook">Show do que ela aprendeu</div>
+        </div>
+      </div>
+      <div id="d1-detail" class="detail-panel"></div>
+      <div id="d2-detail" class="detail-panel"></div>
+      <div id="d3-detail" class="detail-panel"></div>
+      <div id="d4-detail" class="detail-panel"></div>
+    </div>
+  </div>
+
+  <!-- PERSONALIZAÇÃO -->
+  <div id="personalizacao" class="section">
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <div class="insight-icon" style="background:#EEEDFE;">🐾</div>
+        <div class="insight-title">Use o Stitch como mascote fixo de toda aula</div>
+      </div>
+      <div class="insight-body">O Stitch é o maior interesse dela agora. Crie um <span class="highlight">personagem fixo da aula</span> — o Stitch aparece toda semana com um problema para Helena resolver em inglês. Ex: <em>"Stitch doesn't know what color his spaceship is. Can you help?"</em> Isso cria continuidade emocional e ela vai esperar o Stitch toda semana.</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <div class="insight-icon" style="background:#FAEEDA;">🎯</div>
+        <div class="insight-title">Placar Helena vs Stitch — explorar a competitividade</div>
+      </div>
+      <div class="insight-body">Ela é muito competitiva. Crie um <span class="highlight">placar visível na tela</span> durante a aula: Helena marca pontos respondendo certo, o Stitch "marca" quando ela erra. No final ela vê o resultado. A mãe também consegue acompanhar de semana a semana, o que reforça o engajamento em casa.</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <div class="insight-icon" style="background:#E1F5EE;">🎮</div>
+        <div class="insight-title">Mini-fases como no Roblox — sensação de progressão</div>
+      </div>
+      <div class="insight-body">No Roblox ela passa de fase. Adapte isso: cada atividade é uma <span class="highlight">"fase"</span> com começo e fim claros. <em>"Fase 1 completa! Próxima fase: encontre as palavras escondidas."</em> Atividades curtas viram parte de uma jornada maior, e ela não percebe o tempo passando.</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <div class="insight-icon" style="background:#FAECE7;">⚡</div>
+        <div class="insight-title">Warm-up idêntico toda semana — cria âncora</div>
+      </div>
+      <div class="insight-body">Começa TODA aula com a mesma rotina: <span class="highlight">"Helena, how are you today?"</span> + ela conta 1 coisa da semana em inglês (com sua ajuda). Em 2 meses isso vira automático. A mãe, que fica do lado, pode replicar essa rotina em casa sem precisar de instrução especial.</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <div class="insight-icon" style="background:#E6F1FB;">📸</div>
+        <div class="insight-title">Trazer o mundo real dela pra tela</div>
+      </div>
+      <div class="insight-body">Pede pra ela mostrar o gato na câmera: <em>"This is my cat. His name is ___. He is ___."</em> Trazer um bichinho de pelúcia. Mostrar o álbum de figurinhas e nomear países em inglês. Ela se torna <span class="highlight">protagonista da aula</span>, não só aluna — e o conteúdo fica ancorado na realidade dela.</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <div class="insight-icon" style="background:#EAF3DE;">🛡️</div>
+        <div class="insight-title">Lidar com o "não foi isso que eu falei"</div>
+      </div>
+      <div class="insight-body">Quando ela der gaslight sobre o erro, não entre na batalha. Use: <span class="highlight">"Great try! Stitch also said that — the trick is..."</span> Coloca o erro no Stitch, não nela. Ela aceita a correção sem se sentir atacada e segue sem o constrangimento que trava o aprendizado.</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-header">
+        <div class="insight-icon" style="background:#EEEDFE;">🎂</div>
+        <div class="insight-title">Setembro — aniversário de 9 anos (dia 13)</div>
+      </div>
+      <div class="insight-body">A aula próxima ao dia 13/09 merece ser especial. Decoração na câmera, surpresa visual do Stitch "comemorando", ela recebe um <span class="highlight">"certificado bilíngue"</span> da aula. Avisar a mãe com antecedência para ela poder filmar — vai ser um momento que a Helena vai lembrar.</div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const lessons = {
+  j1: { title: "Aula 1 — Greetings & Feelings", goal: "Saudações e estados emocionais básicos: happy, sad, hungry, tired, excited, scared, angry", hook: "\"How does Stitch feel?\" — mostrar imagens do Stitch com expressões diferentes", activities: ["Flashcards rápidos (5 min) — imagens de sentimentos, ela faz a expressão e fala a palavra", "Bingo de Feelings com rostos do Stitch (15 min)", "Treasure Hunt (10 min) — pistas em inglês: \"I'm happy when I see my ___\"", "Wrap-up (10 min) — \"How do YOU feel today, Helena?\""], tip: "Tudo oral e visual nessa aula. Ela ainda não constrói frases, foco total em reconhecimento e fala. Sem escrita." },
+  j2: { title: "Aula 2 — Colors & Adjectives", goal: "Revisar cores + big/small, soft/hard, cute/scary com adjetivos descritivos", hook: "\"Let's describe YOUR cat in English! What color is he?\"", activities: ["Warm-up com o gato na câmera (5 min) — descrever juntas em inglês", "Input (10 min) — cores + 4 adjetivos com imagens de gatos e do Stitch", "Color Hunt (15 min) — ela aponta objetos do quarto e descreve", "Bingo de Cores + Adjetivos (10 min)", "Wrap-up (10 min) — descrever o irmão e os pets em inglês"], tip: "Aproveitar que a mãe pode estar do lado: 'Can you ask your mom what color her favorite thing is?'" },
+  j3: { title: "Aula 3 — Animals", goal: "12–15 animais + perguntas simples: Is it big? Does it roar? Does it fly?", hook: "\"The Lion King animals — which ones can you name in English?\"", activities: ["Input com cenas do Rei Leão (10 min) — ela nomeia os animais", "Bingo de Animais do Rei Leão (15 min) — cartela com Simba, Pumba, Timão...", "20 Questions infantil (10 min) — 'Is it a cat? Does it fly?'", "Wrap-up (10 min) — descreve o gato e a cachorrinha dela"], tip: "Primeiro bingo com tema totalmente personalizado. Se possível, criar a cartela com imagens do filme." },
+  j4: { title: "Aula 4 — My Body", goal: "Partes do corpo + ações simples (head, hands, eyes, nose, mouth, ears, legs, feet)", hook: "\"Oh no! Stitch lost all his body parts! Can you help him put it back together?\"", activities: ["Drag & drop virtual (10 min) — partes do corpo do Stitch fora do lugar", "Head, Shoulders, Knees and Toes (5 min) — música com movimento", "Monster Challenge (15 min) — ela 'cria' um monstro falando as partes: 3 eyes, 2 heads...", "Wrap-up (10 min) — ela se descreve: 'I have brown eyes...'"], tip: "Música e movimento são essenciais aqui para manter o foco." },
+  ju1: { title: "Aula 5 — Family Members", goal: "Mom, dad, brother, sister, grandma, grandpa + adjetivos (tall, funny, cute, young, old)", hook: "\"Stitch found a family! It's Lilo's family — can you name everyone?\"", activities: ["Input com cenas do Lilo & Stitch (10 min) — nomear a família da Lilo", "Mystery Family Member (10 min) — ela dá dicas, você adivinha quem é", "Draw & Describe (10 min) — ela desenha (com caneta!) um familiar e descreve", "Wrap-up (10 min) — fala sobre o irmão: 'My brother is funny and small'"], tip: "Ótimo para envolver a mãe: 'Can you tell me something about YOUR mom in English?'" },
+  ju2: { title: "Aula 6 — Rooms of the House", goal: "Living room, bedroom, bathroom, kitchen, garden + preposições simples (in, on)", hook: "\"Stitch broke into a house and hid in every room! Find him!\"", activities: ["Input visual (10 min) — planta da casa, ela nomeia os cômodos", "Treasure Hunt virtual (20 min) — pistas de cômodo em cômodo: 'Go to the room where you sleep'", "Jogo de memória (10 min) — parear imagem do cômodo com a palavra", "Wrap-up (10 min) — 'Tell me about YOUR bedroom'"], tip: "Treasure Hunt é a atividade favorita dela — usar como atividade principal dessa aula." },
+  ju3: { title: "Aula 7 — Furniture & Objects", goal: "Bed, table, chair, TV, window, door, sofa + tem/não tem em frases simples", hook: "\"Stitch needs to decorate his room. What does he need?\"", activities: ["Input (10 min) — quarto bagunçado do Stitch, ela identifica objetos", "Bingo de Mobília (15 min)", "Simon Says com mobília (10 min) — 'Simon says touch something like a table'", "Wrap-up (10 min) — 'What's in YOUR room?'"], tip: "Conectar com a aula anterior de cômodos para revisão natural e orgânica." },
+  ju4: { title: "Aula 8 — Revisão + Mini Apresentação", goal: "Consolidar família e casa + primeira produção oral estruturada", hook: "\"You're the teacher today! Teach Stitch about YOUR family and home.\"", activities: ["Quiz Helena vs Stitch (15 min) — perguntas sobre família e casa, ela acumula pontos", "Apresentação ao vivo (15 min) — ela fala sobre a família em inglês para o Stitch", "Bingo de revisão (15 min)", "Celebração + wrap-up (10 min)"], tip: "Avisar a mãe antes para filmar. A Helena vai adorar 'ensinar' o Stitch — coloca ela no papel de especialista." },
+  a1: { title: "Aula 9 — Daily Routines", goal: "Wake up, brush teeth, eat breakfast, go to school, sleep + horários básicos", hook: "\"What does Stitch do every morning? Let's compare with YOUR routine!\"", activities: ["Input com tirinhas do Stitch na rotina (10 min) — ela ordena as ações", "Bingo de Rotina (15 min)", "Verdade ou Mentira (10 min) — 'Helena wakes up at 6am. True or false?'", "Wrap-up (10 min) — ela conta a rotina dela com ajuda"], tip: "Introduzir 'I' + verbo de forma bem leve: 'I wake up, I eat...' — sem chamar de gramática." },
+  a2: { title: "Aula 10 — Action Verbs", goal: "Run, jump, eat, sleep, play, dance, sing, swim + comandos simples", hook: "\"In Roblox, what does your character DO? Let's say it in English!\"", activities: ["Charades de verbos (15 min) — ela faz a ação, você adivinha", "Simon Says (10 min) — 'Simon says jump! Simon says dance!'", "Roblox Themed (10 min) — 'Your character needs to...' ela responde com verbo", "Wrap-up (10 min) — 'What did YOU do today?'"], tip: "Simon Says é perfeito pra ela — ativa, competitiva, em movimento constante." },
+  a3: { title: "Aula 11 — Food & Drinks", goal: "20 alimentos e bebidas + I like / I don't like / I love / I hate", hook: "\"What does Stitch eat? (hint: everything!) Let's find out what HE likes — and what YOU like!\"", activities: ["Input com comidas estranhas que o Stitch 'gostaria' de comer (10 min)", "Bingo de Comidas (15 min)", "Like or No Like? (10 min) — ela reage a imagens de comida com expressão e fala", "Wrap-up (10 min) — 'Tell me 3 foods you like and 1 you hate'"], tip: "Introduzir 'I like' e 'I don't like' como frases prontas — não explicar gramática." },
+  a4: { title: "Aula 12 — Days & Time", goal: "Dias da semana + morning/afternoon/night + On Monday I...", hook: "\"Let's build Stitch's weekly schedule — and compare with YOURS!\"", activities: ["Input com agenda visual do Stitch (10 min)", "Treasure Hunt semanal (15 min) — pistas com dias: 'I go to school on...'", "Perguntas e respostas (10 min) — 'What do you do on Saturday?'", "Wrap-up (10 min) — ela conta o que faz na semana"], tip: "Conectar com a vida real: a aula de inglês é 'On __day I have English class with [nome]!'" },
+  s1: { title: "Aula 13 — Sports & Hobbies", goal: "10 esportes + hobbies + I love / I like / I don't like playing...", hook: "\"Stitch wants to try a new sport! What should he try? And what do YOU love?\"", activities: ["Input (10 min) — imagens de esportes com personagens Disney fazendo cada um", "Bingo de Esportes (15 min)", "Entrevista (10 min) — ela te entrevista: 'Do you like football?'", "Wrap-up (10 min) — 'My favorite hobby is...'"], tip: "Deixar ela perguntar para você também — isso motiva muito mais a fala do que só responder." },
+  s2: { title: "Aula 14 — Birthday Party 🎂", goal: "Vocabulário de festa + Happy Birthday + wish list em inglês", hook: "AULA ESPECIAL pré-aniversário! \"Let's plan Stitch's birthday party — and YOURS too!\"", activities: ["Input (10 min) — cena de festa temática, vocabulário: cake, candles, presents, balloons, friends", "Treasure Hunt de presentes (15 min) — ela 'encontra' presentes com palavras em inglês", "Wish List (10 min) — ela fala 3 coisas que quer de aniversário em inglês", "Parabéns em inglês + celebração surpresa (10 min)"], tip: "Aniversário dela é dia 13/09. Avisar a mãe com antecedência para filmar. Decoração na câmera, surpresa visual do Stitch — ela vai lembrar dessa aula." },
+  s3: { title: "Aula 15 — Clothes & Appearance", goal: "Roupas básicas + cores + He/She is wearing... + descrevendo pessoas", hook: "\"Stitch is getting dressed for a party. What should he wear?\"", activities: ["Input visual (10 min) — outfit do Stitch, ela descreve", "Dress Up (15 min) — personagem interativo, ela nomeia roupas e cores", "Descrevendo personagens (10 min) — foto de personagem, ela descreve roupas + cor", "Wrap-up (10 min) — 'What are YOU wearing today?'"], tip: "Ela não gosta de moda, mas descrever PERSONAGENS é diferente — funciona bem." },
+  s4: { title: "Aula 16 — Revisão Geral — Quiz Helena vs Stitch", goal: "Revisar todo o conteúdo do trimestre de forma gamificada", hook: "\"Final challenge! Helena vs Stitch — who knows MORE English? Only YOU can win!\"", activities: ["Quiz por rodadas temáticas (30 min) — uma rodada por tema dos meses anteriores", "Certificado de conquista (5 min) — imprimir ou mostrar na tela", "Bingo surpresa (10 min)", "Conversa livre (10 min) — 'What was your favorite lesson?'"], tip: "Mostrar pra ela (e pra mãe) o quanto ela aprendeu desde a aula 1. Comparar com o ponto de partida — ela vai se surpreender." },
+  o1: { title: "Aula 17 — Weather", goal: "Sunny, rainy, cold, hot, cloudy, windy + Today is... / It's...", hook: "\"Look outside your window, Helena. What's the weather in Gravataí today?\"", activities: ["Input (10 min) — previsão do tempo com personagens em climas diferentes", "Bingo de Clima (15 min)", "Comparar cidades (10 min) — 'In Hawaii it's sunny and hot. In Gravataí today it's...'", "Wrap-up (10 min) — ela faz a 'previsão do tempo' como apresentadora de TV"], tip: "Ela pode virar 'repórter do tempo' — papel de protagonista motiva muito." },
+  o2: { title: "Aula 18 — Places in Town", goal: "School, park, supermarket, hospital, bakery, cinema + Where is...?", hook: "\"Stitch is lost in town! Help him find his way using only English!\"", activities: ["Input com mapa ilustrado (10 min) — cidade com lugares, ela nomeia", "Treasure Hunt urbano (20 min) — pistas com nomes de lugares", "Where should Stitch go? (10 min) — situações: 'He's sick. Where does he go?'", "Wrap-up (10 min) — 'Where do YOU go every week?'"], tip: "Conectar com o bairro real dela — Parque dos Anjos, escola, praça. Ela vira personagem do próprio mapa." },
+  o3: { title: "Aula 19 — Transport", goal: "Car, bus, bike, plane, boat, train + I go by... / I take the...", hook: "\"How does Stitch travel? (spaceship!) How do YOU get around Gravataí?\"", activities: ["Input (10 min) — meios de transporte com personagens", "Bingo de Transporte (15 min)", "Perguntas e respostas (10 min) — 'How do you go to school?'", "Wrap-up (10 min) — criar o 'transporte ideal' do Stitch"], tip: "Conectar com a aula anterior: 'I go to school by bus. I go to the park by...' — revisão natural." },
+  o4: { title: "Aula 20 — Simple Sentences (Marco!)", goal: "Construir frases simples sobre ela: I am, I have, I like, I live in, My name is", hook: "\"Today YOU write a little book about yourself in English. Helena's Book!\"", activities: ["Revisão oral rápida (10 min) — perguntas sobre ela, ela responde com frases", "Helena's Book (20 min) — frases sobre ela com apoio visual, ela preenche e personaliza", "Leitura em voz alta (10 min) — ela lê o próprio livro", "Celebração de 5 meses (10 min) — show de quanto ela aprendeu"], tip: "MARCO IMPORTANTE — ela vai poder ler o livro pra mãe. Avisar antes para registrar. É o fechamento perfeito desse ciclo de aprendizado." },
+  n1: { title: "Aula 21 — Describing People", goal: "Combinar adjetivos + partes do corpo + roupas para descrever pessoas e personagens com mais detalhes", hook: "\"Mystery character! I'm thinking of someone — can you guess who it is from my description?\"", activities: ["Input rápido (5 min) — revisar adjetivos e vocabulário já visto de forma fluida", "Jogo Quem Sou Eu? (20 min) — ela descreve personagens (Stitch, Simba, Roblox characters) e você adivinha, depois inverte", "Desafio do Detetive (15 min) — silhueta misteriosa na tela, ela descreve o que vê até revelar o personagem", "Wrap-up (10 min) — ela descreve um colega da escola em inglês sem dizer o nome"], tip: "Esse jogo ativa tudo que ela aprendeu nos meses anteriores sem parecer revisão — é pura brincadeira do ponto de vista dela." },
+  n2: { title: "Aula 22 — Storytelling Básico", goal: "Construir mini-histórias com sequência: First... Then... After that... The end!", hook: "\"Stitch had a CRAZY day! Let's tell his story together.\"", activities: ["Input com tiras em quadrinhos do Stitch (10 min) — ela ordena as cenas e narra cada uma", "Story Builder (20 min) — cartas visuais embaralhadas (personagem + lugar + ação), ela cria e conta a história", "Treasure Hunt narrativo (10 min) — pistas contam uma história, ela segue e termina", "Wrap-up (10 min) — ela inventa UMA frase para continuar a história do Stitch"], tip: "Ela gosta de inventar histórias, mas não sozinha — o scaffolding visual (cartas, tiras) é essencial para não travar." },
+  n3: { title: "Aula 23 — Questions & Answers", goal: "Formular perguntas simples: What, Where, Who, How old, Do you like + responder com confiança", hook: "\"Today YOU are the interviewer. You're going to interview Stitch — and ME!\"", activities: ["Input (10 min) — mostrar perguntas em cartões, ela pratica a pronúncia de cada uma", "Entrevista do Stitch (15 min) — ela faz perguntas, você responde 'como o Stitch' de forma engraçada", "Hot Seat (15 min) — ela no 'hot seat', você faz perguntas rápidas, ela responde em inglês o mais rápido que conseguir", "Wrap-up (10 min) — ela entrevista a mãe em inglês ao vivo (se a mãe topar!)"], tip: "Colocar ela no papel de entrevistadora inverte a dinâmica de poder — ela fica muito mais confiante e motivada para falar." },
+  n4: { title: "Aula 24 — Revisão Game Show", goal: "Revisar todo o vocabulário e frases do semestre em formato de game show competitivo", hook: "\"Welcome to Helena's English Game Show! Tonight's champion will be...\"", activities: ["Abertura do programa com trilha sonora (2 min) — criar o momento, dar nome ao show com ela", "Rodadas temáticas (30 min) — 5 rodadas de 6 min cada: Feelings, Family & House, Routines & Food, Places & Transport, Frases Completas", "Bingo final surpresa (10 min)", "Entrega do troféu + wrap-up (8 min) — certificado da temporada"], tip: "Estrutura de game show deixa a revisão invisível — ela só está 'jogando'. Criar um nome para o programa junto com ela na semana anterior aumenta a expectativa." },
+  d1: { title: "Aula 25 — Christmas & Celebrations", goal: "Vocabulário natalino: Christmas tree, presents, Santa Claus, snow, family, happy + frases de desejo: Merry Christmas, Happy New Year", hook: "\"Stitch has NEVER celebrated Christmas! Can you explain it to him in English?\"", activities: ["Input visual (10 min) — cena de natal com o Stitch descobrindo tudo pela primeira vez", "Bingo de Natal (15 min) — cartela temática com ilustrações natalinas", "Treasure Hunt natalino (10 min) — presentes escondidos, pistas em inglês para achar cada um", "Wrap-up (10 min) — ela ensina o Stitch a dizer Merry Christmas e explica o que é Natal"], tip: "Stitch nunca ter visto o Natal cria um papel encantador para ela: ela é a especialista que explica tudo. Ativa muita fala espontânea." },
+  d2: { title: "Aula 26 — My Wishlist in English", goal: "I want, I would like, Can I have...? + vocabulário de brinquedos, jogos e itens do universo dela", hook: "\"Let's write YOUR Christmas wishlist and Stitch's wishlist — in English!\"", activities: ["Input (10 min) — vocabulário de presentes com imagens do universo dela: Roblox itens, pelúcias, jogos", "Wishlist Challenge (15 min) — ela escreve (com apoio visual) os 5 itens que mais quer em inglês", "Comparar wishlists (10 min) — ela lê a lista do Stitch e diz se queria as mesmas coisas: 'Me too! / No way!'", "Wrap-up (10 min) — ela lê a própria wishlist em voz alta como se fosse para o Papai Noel"], tip: "Primeira vez que ela escreve com intenção real — a wishlist vai para o Papai Noel, não é só exercício. Isso muda completamente a motivação para escrever." },
+  d3: { title: "Aula 27 — My Year — Free Talk", goal: "Produção oral livre: falar sobre momentos do ano usando vocabulário de todo o semestre", hook: "\"It's almost the end of 2026! Let's look back at YOUR year together.\"", activities: ["Memory Lane (15 min) — mostrar imagens/icons dos temas de cada mês, ela conta uma coisa que lembra de cada aula", "Favourite Moments (15 min) — 'What was your favourite lesson? What was the hardest? What do you remember most?'", "Helena's English Highlights reel (10 min) — você lista 5 coisas incríveis que ela fez em inglês no ano, ela reage", "Wrap-up (10 min) — ela faz 1 frase sobre o que mais gostou do inglês em 2026"], tip: "Essa aula é principalmente emocional — mostrar para ela (e para a mãe) o quanto ela cresceu desde junho. Prepare os destaques específicos dela com antecedência." },
+  d4: { title: "Aula 28 — Grande Celebração Final 🏆", goal: "Aula-celebração: revisão leve, cerimônia de encerramento e olhar para 2027", hook: "\"This is our LAST class of 2026. And you have something HUGE to celebrate!\"", activities: ["Bingo temático especial (15 min) — cartela com palavras favoritas dela do ano todo", "Helena's Greatest Hits (15 min) — ela escolhe 5 palavras ou frases favoritas que aprendeu e explica por que", "Cerimônia de encerramento (10 min) — diploma bilíngue do ano, leitura em voz alta do que ela aprendeu", "Preview de 2027 (10 min) — contar o que vem no próximo ano para criar expectativa"], tip: "AVISAR A MÃE COM ANTECEDÊNCIA para participar ao vivo da cerimônia. O diploma impresso ou na tela é um objeto físico de conquista — algo que ela pode guardar e mostrar. Preparar tudo com cuidado: essa aula fica na memória dela." }
+};
+
+function toggleLesson(id) {
+  const card = event.currentTarget;
+  const panel = document.getElementById(id + '-detail');
+  const isOpen = panel.style.display === 'block';
+
+  document.querySelectorAll('.detail-panel').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.lesson-card').forEach(c => c.classList.remove('open'));
+
+  if (!isOpen) {
+    const l = lessons[id];
+    const acts = l.activities.map(a => `<span class="activity-pill">${a}</span>`).join('');
+    panel.innerHTML = `
+      <h3>${l.title}</h3>
+      <div class="detail-section">
+        <div class="detail-label">Objetivo da aula</div>
+        <div class="detail-text">${l.goal}</div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">Gancho de entrada</div>
+        <div class="detail-text">${l.hook}</div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">Atividades sugeridas (55 min)</div>
+        <div style="margin-top: 5px;">${acts}</div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">Dica especial da Helena</div>
+        <div class="detail-tip">${l.tip}</div>
+      </div>
+    `;
+    panel.style.display = 'block';
+    card.classList.add('open');
+  }
+}
+
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
