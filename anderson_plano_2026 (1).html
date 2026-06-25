@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anderson — Plano de Aulas 2026</title>
+<style>
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --surface-2: #f2f1ee;
+    --border: rgba(0,0,0,0.10);
+    --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1918;
+    --text-2: #5a5955;
+    --text-3: #9a9893;
+    --blue-bg: #E6F1FB;
+    --blue-text: #0C447C;
+    --blue-mid: #185FA5;
+    --teal-bg: #E1F5EE;
+    --teal-text: #085041;
+    --teal-mid: #0F6E56;
+    --amber-bg: #FAEEDA;
+    --amber-text: #633806;
+    --amber-mid: #854F0B;
+    --coral-bg: #FAECE7;
+    --coral-text: #712B13;
+    --purple-bg: #EEEDFE;
+    --purple-text: #3C3489;
+    --green-bg: #EAF3DE;
+    --green-text: #27500A;
+    --gray-bg: #F1EFE8;
+    --gray-text: #444441;
+    --red-line: #D85A30;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .page-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 2.5rem 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 6px;
+  }
+  .header-name {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: var(--text-2);
+  }
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-2);
+  }
+  .meta-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal-mid);
+    flex-shrink: 0;
+  }
+
+  /* LAYOUT */
+  .page-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 4rem;
+  }
+
+  /* TABS */
+  .tabs-nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .tab-btn {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-3);
+    border: none;
+    background: none;
+    padding: 14px 18px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text-2); }
+  .tab-btn.active {
+    color: var(--text);
+    border-bottom-color: var(--text);
+  }
+
+  .tab-panel { display: none; padding: 2rem 2.5rem; }
+  .tab-panel.active { display: block; }
+
+  /* SECTION TITLES */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 10px;
+    margin-top: 2rem;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* STAT CARDS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .stat-label { font-size: 11px; color: var(--text-3); margin-bottom: 4px; }
+  .stat-value { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.4; }
+
+  /* PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+  .pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .pill-blue { background: var(--blue-bg); color: var(--blue-text); }
+  .pill-teal { background: var(--teal-bg); color: var(--teal-text); }
+  .pill-amber { background: var(--amber-bg); color: var(--amber-text); }
+  .pill-coral { background: var(--coral-bg); color: var(--coral-text); }
+  .pill-purple { background: var(--purple-bg); color: var(--purple-text); }
+  .pill-gray { background: var(--gray-bg); color: var(--gray-text); }
+
+  /* PROGRESS BARS */
+  .skill-bars { margin-bottom: 1.5rem; }
+  .skill-row { margin-bottom: 10px; }
+  .skill-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-2);
+    margin-bottom: 5px;
+  }
+  .skill-meta strong { font-weight: 600; color: var(--text); }
+  .skill-track {
+    height: 5px;
+    background: var(--surface-2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .skill-fill { height: 100%; border-radius: 3px; }
+
+  /* STRUCTURE TIMELINE */
+  .timeline {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .timeline-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-time {
+    min-width: 80px;
+    padding: 14px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-3);
+    background: var(--surface-2);
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+  .timeline-content { padding: 14px 18px; }
+  .timeline-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .timeline-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+  /* TIP BLOCKS */
+  .tips { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+  .tip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    border-left: 3px solid var(--teal-mid);
+    padding: 14px 16px;
+  }
+  .tip.avoid { border-left-color: var(--red-line); }
+  .tip-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .tip-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+  /* MONTH BLOCK */
+  .month-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .month-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .month-title { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .month-sub { font-size: 13px; color: var(--text-2); }
+
+  /* LESSON ROWS */
+  .lesson-list { display: flex; flex-direction: column; gap: 0; }
+  .lesson {
+    display: flex;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .lesson:last-child { border-bottom: none; }
+  .lesson-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-3);
+    min-width: 52px;
+    padding-top: 2px;
+    letter-spacing: 0.04em;
+  }
+  .lesson-body { flex: 1; }
+  .lesson-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .lesson-desc { font-size: 13px; color: var(--text-2); line-height: 1.55; margin-bottom: 10px; }
+  .lesson-hook {
+    background: var(--blue-bg);
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+  .hook-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    margin-bottom: 3px;
+  }
+  .hook-text {
+    font-size: 13px;
+    color: var(--blue-text);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* EXTRA LESSON */
+  .extra-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 1.5rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--border-strong);
+  }
+  .extra-divider-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber-mid);
+    white-space: nowrap;
+  }
+  .extra-divider-line {
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--amber-mid) 0, var(--amber-mid) 4px, transparent 4px, transparent 10px);
+  }
+  .lesson.extra {
+    background: var(--amber-bg);
+    border-radius: 10px;
+    padding: 18px 16px;
+    border-bottom: none;
+    margin-top: 8px;
+  }
+  .lesson.extra .lesson-num { color: var(--amber-mid); }
+  .lesson.extra .lesson-hook { background: rgba(255,255,255,0.6); }
+  .lesson.extra .hook-label { color: var(--amber-mid); }
+  .lesson.extra .hook-text { color: var(--amber-text); }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+  /* FOOTER */
+  .page-footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 2.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-3);
+    background: var(--surface);
+  }
+
+  @media (max-width: 600px) {
+    .page-header, .tab-panel, .tabs-nav { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .timeline-time { min-width: 64px; font-size: 11px; }
+    .header-name { font-size: 22px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div style="background: var(--surface); border-bottom: 1px solid var(--border);">
+  <div class="page-header">
+    <div class="header-eyebrow">Plano de aulas — Jun → Dez 2026</div>
+    <div class="header-name">Anderson</div>
+    <div class="header-sub">Supervisor industrial · Gravataí · A2 em transição</div>
+    <div class="header-meta">
+      <div class="meta-item"><span class="meta-dot"></span> Terças 16h · 55 min · Online</div>
+      <div class="meta-item"><span class="meta-dot"></span> ~27 aulas regulares + 14 extras</div>
+      <div class="meta-item"><span class="meta-dot"></span> Atualizado em junho 2026</div>
+    </div>
+  </div>
+
+  <nav class="tabs-nav" style="max-width: 900px; margin: 0 auto;">
+    <button class="tab-btn active" onclick="showTab('perfil', this)">Perfil</button>
+    <button class="tab-btn" onclick="showTab('principios', this)">Princípios</button>
+    <button class="tab-btn" onclick="showTab('junho', this)">Junho</button>
+    <button class="tab-btn" onclick="showTab('julho', this)">Julho</button>
+    <button class="tab-btn" onclick="showTab('agosto', this)">Agosto</button>
+    <button class="tab-btn" onclick="showTab('setembro', this)">Setembro</button>
+    <button class="tab-btn" onclick="showTab('outubro', this)">Outubro</button>
+    <button class="tab-btn" onclick="showTab('novembro', this)">Novembro</button>
+    <button class="tab-btn" onclick="showTab('dezembro', this)">Dezembro</button>
+  </nav>
+</div>
+
+<div class="page-body">
+
+  <!-- PERFIL -->
+  <div class="tab-panel active" id="tab-perfil">
+    <div class="section-label">dados básicos</div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Aluno</div><div class="stat-value">Anderson, 44 anos · Gravataí</div></div>
+      <div class="stat-card"><div class="stat-label">Frequência</div><div class="stat-value">Terças 16h · 55 min · Online</div></div>
+      <div class="stat-card"><div class="stat-label">Nível atual</div><div class="stat-value">A2 em transição</div></div>
+      <div class="stat-card"><div class="stat-label">Área de trabalho</div><div class="stat-value">Supervisão industrial · Gestão de equipe</div></div>
+      <div class="stat-card"><div class="stat-label">Motivação principal</div><div class="stat-value">Trabalho, promoção, viagens</div></div>
+      <div class="stat-card"><div class="stat-label">Rotina semanal</div><div class="stat-value">Futebol terças · Padel quintas · Argentina frequente</div></div>
+    </div>
+
+    <div class="section-label">habilidades — onde está agora</div>
+    <div class="skill-bars">
+      <div class="skill-row">
+        <div class="skill-meta"><strong>Listening</strong><span>Ponto forte — entende frases e vídeos lentos</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:50%; background:#1D9E75;"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-meta"><strong>Reading</strong><span>Textos simples, traduz tudo, medo de texto longo</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:42%; background:#EF9F27;"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-meta"><strong>Speaking</strong><span>Frases simples, trava, medo de não conseguir responder</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:25%; background:#378ADD;"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-meta"><strong>Writing</strong><span>Frases soltas, não escreve com fluência ainda</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:15%; background:#D85A30;"></div></div>
+      </div>
+    </div>
+
+    <div class="section-label">ganchos de personalização</div>
+    <div class="pills">
+      <span class="pill pill-blue">Futebol</span>
+      <span class="pill pill-blue">Padel</span>
+      <span class="pill pill-teal">Família (esposa + filho)</span>
+      <span class="pill pill-teal">Churrasco</span>
+      <span class="pill pill-amber">Maquinário pesado</span>
+      <span class="pill pill-amber">Gestão industrial</span>
+      <span class="pill pill-coral">Viagens à Argentina</span>
+      <span class="pill pill-coral">The Chosen</span>
+      <span class="pill pill-purple">Dad rock</span>
+      <span class="pill pill-gray">Filmes de ação</span>
+    </div>
+
+    <div class="section-label">situações reais de trabalho</div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">O que vive no trabalho</div><div class="stat-value">Reuniões de alinhamento, feedback para equipe, fornecedores estrangeiros</div></div>
+      <div class="stat-card"><div class="stat-label">Maior medo</div><div class="stat-value">Entender o que dizem mas não conseguir responder</div></div>
+      <div class="stat-card"><div class="stat-label">Maior potencial</div><div class="stat-value">Business English — contexto profissional rico e motivador</div></div>
+      <div class="stat-card"><div class="stat-label">Objetivo do semestre</div><div class="stat-value">A2 sólido. Comunicação funcional e confiante no trabalho</div></div>
+    </div>
+
+    <div class="section-label">perfil de aprendizagem</div>
+    <div class="tips">
+      <div class="tip">
+        <div class="tip-title">Precisa sentir progresso rápido</div>
+        <div class="tip-desc">Mesmo que não peça validação, sair de cada aula sentindo "aprendi algo" é essencial para manter motivação. Sempre fechar com algo concreto e aplicável.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-title">Disciplinado mas esquece rápido</div>
+        <div class="tip-desc">Faz homework quando pedido, mas não revisa espontaneamente. Entre-aulas com pouca exposição ao inglês = retenção baixa. Missões semanais com uso real compensam isso.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-title">Aprende melhor com visão + contexto real</div>
+        <div class="tip-desc">Vídeo antes da gramática, situação antes da regra. Ele processa melhor quando vê o inglês em uso antes de entender a estrutura.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-title">Prefere rotina com conteúdo novo</div>
+        <div class="tip-desc">Estrutura de aula previsível dá segurança. Conteúdo diferente toda semana evita o tédio. A combinação ideal: mesma estrutura, tema sempre ancorado na vida dele.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCÍPIOS -->
+  <div class="tab-panel" id="tab-principios">
+    <div class="section-label">o que funciona com o anderson</div>
+    <div class="tips">
+      <div class="tip">
+        <div class="tip-title">Vídeo como aquecimento</div>
+        <div class="tip-desc">Começa toda aula com vídeo curto (1–2 min) relacionado ao trabalho, esporte ou interesse dele. O listening é o ponto forte — usar isso pra dar confiança antes de qualquer gramática.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-title">Gramática dentro da situação, nunca antes</div>
+        <div class="tip-desc">Nunca apresentar regra primeiro. Mostrar a situação real (reunião, email, fornecedor) e extrair o ponto gramatical de dentro dela. "A gente acabou de ver isso no vídeo — esse verbo aqui é o que a gente usa quando..."</div>
+      </div>
+      <div class="tip">
+        <div class="tip-title">Frase da semana com uso real garantido</div>
+        <div class="tip-desc">No fechamento, uma expressão ou frase que ele vai conseguir usar no trabalho naquela semana. Não para revisar — para usar de verdade. Quando tem consequência real, gruda.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-title">Produção oral guiada, não conversa livre</div>
+        <div class="tip-desc">Conversa livre trava. Perguntas guiadas com vocabulário de apoio visível funcionam muito melhor. Anderson fala mais quando sabe que tem uma rede de segurança de vocabulário na tela.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-title">Correção na medida certa</div>
+        <div class="tip-desc">Máx 2–3 erros por aula, sempre os mais impactantes para comunicação profissional. Anotar durante a fala, devolver no final. Não interromper no meio de uma ideia.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-title">Ganchos da vida pessoal como entrada</div>
+        <div class="tip-desc">Ele fala bastante da família, viagens, futebol. Usar as respostas do aquecimento para puxar vocabulário do tema da aula — a conversa real se torna material de ensino.</div>
+      </div>
+    </div>
+
+    <hr>
+    <div class="section-label">o que evitar</div>
+    <div class="tips">
+      <div class="tip avoid">
+        <div class="tip-title">Gramática pesada sem contexto</div>
+        <div class="tip-desc">Listas de regras ou exercícios descontextualizados entediam e desmotivam. Toda gramática precisa de uma situação real que a justifique.</div>
+      </div>
+      <div class="tip avoid">
+        <div class="tip-title">Roleplay frio e sem preparação</div>
+        <div class="tip-desc">Ele não gosta de roleplay. Se precisar simular situação, chamar de "vamos treinar como se fosse uma reunião real" e preparar muito bem antes — vocabulário, contexto, papel dele.</div>
+      </div>
+      <div class="tip avoid">
+        <div class="tip-title">Textos grandes sem preparação oral</div>
+        <div class="tip-desc">Medo de texto longo. Sempre introduzir o assunto oralmente antes de mostrar o texto, e recortar com uma tarefa específica por trecho.</div>
+      </div>
+      <div class="tip avoid">
+        <div class="tip-title">Conversa livre sem estrutura</div>
+        <div class="tip-desc">"Fala sobre o seu trabalho" é paralisante. "Explica pra mim o que tu gerencia, quem são as pessoas da tua equipe, e qual o maior desafio dessa semana" funciona muito melhor.</div>
+      </div>
+    </div>
+
+    <hr>
+    <div class="section-label">estrutura recomendada por aula — 55 min</div>
+    <div class="timeline">
+      <div class="timeline-row">
+        <div class="timeline-time">0–8 min</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Aquecimento situacional</div>
+          <div class="timeline-desc">Pergunta sobre a semana — trabalho, Argentina, família, futebol. A resposta dele puxa o vocabulário ou tema da aula de forma natural.</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">8–20 min</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Input com vídeo</div>
+          <div class="timeline-desc">Vídeo curto (1–2 min) com tarefa de compreensão simples. Sempre com contexto de trabalho, esporte ou tema atual. Aproveita o listening como força.</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">20–38 min</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Gramática / vocabulário em contexto</div>
+          <div class="timeline-desc">Extrair o ponto gramatical do vídeo ou da situação. Explicar brevemente, praticar com frases do universo real dele.</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">38–50 min</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Produção oral guiada</div>
+          <div class="timeline-desc">Anderson fala sobre o tema usando o que aprendeu. Não conversa livre — perguntas guiadas com vocabulário de apoio visível na tela.</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">50–55 min</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Fechamento + frase da semana</div>
+          <div class="timeline-desc">Uma expressão que ele vai usar no trabalho essa semana. Repetir em voz alta 2–3x antes de fechar. Sempre concreto, sempre aplicável imediatamente.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JUNHO -->
+  <div class="tab-panel" id="tab-junho">
+    <div class="month-header">
+      <span class="month-badge" style="background: var(--teal-bg); color: var(--teal-text);">Junho 2026</span>
+      <div>
+        <div class="month-title">Fundação: trabalho real</div>
+        <div class="month-sub">4 aulas · base sólida de comunicação profissional · confiança desde o início</div>
+      </div>
+    </div>
+    <div class="lesson-list">
+      <div class="lesson">
+        <div class="lesson-num">Aula 1</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Apresentação profissional</div>
+          <div class="lesson-desc">Como se apresentar em reunião: nome, cargo, empresa, o que faz. Frases-padrão de abertura de reunião. Foco em confiança, não perfeição. Vocabulário: I'm in charge of, I manage, I work for, I'm responsible for.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Você já teve que se apresentar em inglês pra alguém da Argentina?" — puxar situação real dele para dar propósito imediato à aula.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 2</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Rotina de trabalho — Simple present</div>
+          <div class="lesson-desc">Simple present para descrever o que faz no trabalho. Vocabulário: manage, oversee, coordinate, report to, deal with, handle. Contexto: supervisão de produção, manutenção, logística.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Vídeo de ~90s de um supervisor industrial falando sobre seu dia — Anderson identifica o que reconhece e o que não entende antes de aprender o vocabulário.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 3</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Perguntas e respostas básicas de trabalho</div>
+          <div class="lesson-desc">Wh-questions no presente: What do you do? Who do you report to? How many people do you manage? Where is the plant located? Treinar responder, não só perguntar — foco no que ele vai ouvir e precisar responder.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Imagina que um fornecedor te pergunta isso numa chamada de vídeo" — situação concreta que ele teme, mas com vocabulário garantido na tela.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 4</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Números, datas e acordos</div>
+          <div class="lesson-desc">Números de produção, datas de entrega, quantidades, prazos. Frases de confirmação: "We're expecting delivery on…", "We need at least…", "The deadline is…". Contexto: pedido e confirmação de peças com fornecedor.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Qual a última vez que tu precisou confirmar uma entrega com alguém de fora?" — se nunca fez em inglês, perguntar como seria se fosse agora.</div>
+          </div>
+        </div>
+      </div>
+      <div class="extra-divider">
+        <span class="extra-divider-label">aulas extras — junho</span>
+        <span class="extra-divider-line"></span>
+      </div>
+      <div class="lesson extra">
+        <div class="lesson-num">Extra 1</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Vocabulário de trabalho — mapa do escritório e da fábrica</div>
+          <div class="lesson-desc">Nomear os espaços, departamentos e funções do ambiente de trabalho dele em inglês: production floor, warehouse, maintenance area, office, shift supervisor, plant manager, quality control. Anderson cria o próprio glossário do trabalho. Útil como referência para o semestre inteiro.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Se alguém te pedisse um tour pela fábrica em inglês, como tu descreveria cada área?" — ele descreve o espaço que conhece de cor, só em inglês.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson extra" style="margin-top: 6px;">
+        <div class="lesson-num">Extra 2</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Pronúncia — sons que travam brasileiros no inglês profissional</div>
+          <div class="lesson-desc">Foco nos sons que mais causam mal-entendido no contexto de trabalho: th (think vs sink), vogais finais (management não é "managementi"), consoantes cortadas (project, product, contact). Treinamento com palavras que ele já usa todo dia — não fonética abstrata, vocabulário real do trabalho.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Já teve alguém que não entendeu o que tu disse em inglês, mesmo que a palavra fosse certa?" — o medo de ser mal-compreendido na pronúncia é real e tratável.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JULHO -->
+  <div class="tab-panel" id="tab-julho">
+    <div class="month-header">
+      <span class="month-badge" style="background: var(--blue-bg); color: var(--blue-text);">Julho 2026</span>
+      <div>
+        <div class="month-title">Passado + contexto Argentina</div>
+        <div class="month-sub">4 aulas · contar o que aconteceu, reportar situações · narrativa real como material</div>
+      </div>
+    </div>
+    <div class="lesson-list">
+      <div class="lesson">
+        <div class="lesson-num">Aula 5</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Simple past — viagem e trabalho</div>
+          <div class="lesson-desc">Regular + irregular verbs mais usados no contexto dele: went, had, talked, met, visited, signed, decided, needed, called. Frases sobre viagem à Argentina e situações de trabalho recentes.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Me conta o que tu fez na última ida pra Argentina" — narrativa real dele vira o material da aula. Professora anota os erros mais importantes.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 6</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Relatando reuniões e decisões</div>
+          <div class="lesson-desc">"We discussed…", "They agreed to…", "We decided to…", "I explained that…", "They asked about…". Vocabulário de gestão no passado. Treinar recap de reunião — situação real que ele vive toda semana.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Vídeo de meeting recap de ~60s — Anderson identifica os verbos no passado e reconstrói o que foi decidido antes de aprender as estruturas.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 7</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Problemas e soluções no passado</div>
+          <div class="lesson-desc">"There was a problem with…", "We had to…", "I contacted the supplier because…", "We solved it by…". Contexto: incidente de manutenção, parada de linha, problema com entrega.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Já teve um problema de máquina que precisou acionar alguém de fora urgente?" — narrativa real dele vira prática. O conteúdo já existe, o trabalho é só em inglês.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 8</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Revisão + mini-relato oral gravado</div>
+          <div class="lesson-desc">Anderson faz um relato guiado de 2–3 min sobre algo que aconteceu no trabalho naquele mês. Professora anota, corrige os 2–3 erros mais importantes no final. Marcador de progresso do semestre.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Gravar o áudio (só pra ele ouvir depois). Anderson percebe que já consegue contar uma história em inglês. Guardar essa gravação — ela vai ser usada em novembro como comparação.</div>
+          </div>
+        </div>
+      </div>
+      <div class="extra-divider">
+        <span class="extra-divider-label">aulas extras — julho</span>
+        <span class="extra-divider-line"></span>
+      </div>
+      <div class="lesson extra">
+        <div class="lesson-num">Extra 1</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Listening intensivo — sotaque argentino em inglês</div>
+          <div class="lesson-desc">Aula de listening puro com sotaque argentino ou espanhol neutro em inglês. Curto clipe de reunião, podcast ou entrevista com falante nativo de outra língua. Anderson treina o que mais teme: entender inglês com sotaque diferente do americano padrão. Depois: reconstrução oral do que entendeu.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Na Argentina, os colegas falam inglês com sotaque espanhol — é diferente do que tu ouve nos vídeos. Vamos treinar exatamente isso." Contexto real, medo real, prática real.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson extra" style="margin-top: 6px;">
+        <div class="lesson-num">Extra 2</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Expressões idiomáticas do ambiente corporativo</div>
+          <div class="lesson-desc">Expressões que aparecem em reuniões e que nenhum dicionário ensina direito: "let's touch base", "circle back", "bandwidth", "move the needle", "low-hanging fruit", "get the ball rolling", "on the same page". Contexto: como usar e quando evitar (algumas soam clichê). Anderson aprende a reconhecer e a usar com naturalidade.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Já ouviu alguém falar algo em inglês numa reunião e não entendeu, mesmo que as palavras fossem simples?" — idioms são exatamente isso. Nomear o problema deixa ele mais leve.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGOSTO -->
+  <div class="tab-panel" id="tab-agosto">
+    <div class="month-header">
+      <span class="month-badge" style="background: var(--amber-bg); color: var(--amber-text);">Agosto 2026</span>
+      <div>
+        <div class="month-title">Futuro + gestão de pessoas</div>
+        <div class="month-sub">4 aulas · planejar, propor, dar e receber feedback em inglês</div>
+      </div>
+    </div>
+    <div class="lesson-list">
+      <div class="lesson">
+        <div class="lesson-num">Aula 9</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Futuro — planos e compromissos</div>
+          <div class="lesson-desc">Will vs going to no contexto de trabalho. "We're going to implement…", "I'll send you the report by…", "We're planning to…". Situação: planejamento de equipe, próximos passos de projeto.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"O que tu tem planejado pro próximo mês na fábrica?" — resposta dele em português vira prática de construção de frases no futuro em inglês.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 10</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Feedback para equipe</div>
+          <div class="lesson-desc">Frases de feedback positivo e construtivo: "I noticed that…", "You did a great job with…", "I think we need to improve…", "Going forward, I'd like you to…". Tom profissional sem ser frio.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Vídeo curto de líder dando feedback — Anderson avalia se o tom está certo e identifica as frases-chave antes de praticar com situação real da própria equipe.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 11</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Pedindo e propondo em reunião — modais</div>
+          <div class="lesson-desc">Could, should, would no contexto de gestão. "Could you send me…?", "We should consider…", "I would suggest…", "Would it be possible to…?". Contexto: reunião de alinhamento com gestores ou fornecedores.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Imagina que tu precisa propor uma mudança de processo pra diretoria em inglês" — constrói junto com Anderson as frases da proposta usando conteúdo real.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 12</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Status update oral — mini-apresentação</div>
+          <div class="lesson-desc">Estrutura de update de 3 blocos: O que estava planejado / O que foi feito / Próximos passos. Anderson apresenta em voz alta usando projeto real que está gerenciando.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Usar projeto real atual — não simulado. O conteúdo já existe, o desafio é só o inglês. Isso elimina o medo de "não saber o que dizer" e foca no idioma.</div>
+          </div>
+        </div>
+      </div>
+      <div class="extra-divider">
+        <span class="extra-divider-label">aulas extras — agosto</span>
+        <span class="extra-divider-line"></span>
+      </div>
+      <div class="lesson extra">
+        <div class="lesson-num">Extra 1</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Segurança no trabalho — vocabulário e frases</div>
+          <div class="lesson-desc">Safety briefing, hazard, PPE (personal protective equipment), lockout/tagout, incident report, near miss, safety compliance. Frases de instrução: "Make sure you…", "You must always…", "It's required that…". Vocabulário que aparece em auditorias e documentação com parceiros internacionais.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Tu já precisou explicar um procedimento de segurança pra alguém de fora?" — área onde ele tem autoridade total no conteúdo, o inglês é o único desafio.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson extra" style="margin-top: 6px;">
+        <div class="lesson-num">Extra 2</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Qualidade e indicadores — KPIs em inglês</div>
+          <div class="lesson-desc">Vocabulário de qualidade industrial: defect rate, downtime, OEE (Overall Equipment Effectiveness), throughput, efficiency, target vs actual, variance. Como comentar indicadores oralmente: "We're currently at…", "We missed the target by…", "The trend is improving because…". Foco em reuniões de resultado.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Se tu tivesse que apresentar os indicadores da semana em inglês agora, quais números usarias?" — ele traz os números reais, a aula ensina a linguagem em volta deles.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETEMBRO -->
+  <div class="tab-panel" id="tab-setembro">
+    <div class="month-header">
+      <span class="month-badge" style="background: var(--purple-bg); color: var(--purple-text);">Setembro 2026</span>
+      <div>
+        <div class="month-title">Comunicação escrita + email</div>
+        <div class="month-sub">4 aulas · escrever com confiança em contexto profissional real</div>
+      </div>
+    </div>
+    <div class="lesson-list">
+      <div class="lesson">
+        <div class="lesson-num">Aula 13</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Email — estrutura e abertura</div>
+          <div class="lesson-desc">Subject lines claras, saudações profissionais, primeira linha de contexto. Não começar com "I am writing to inform you". Frases naturais de abertura que soam profissionais sem ser robóticas.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Mostrar um email real (genérico) de fornecedor — Anderson identifica a estrutura por conta própria antes de aprender. O que ele já reconhece vira ponto de partida.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 14</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Email — pedidos e confirmações</div>
+          <div class="lesson-desc">"Could you please…", "Please confirm by…", "I'd like to follow up on…", "Could you let me know the status of…". Contexto: pedido de peça, confirmação de entrega, follow-up com fornecedor internacional.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Se tu fosse mandar um email hoje pedindo aquele equipamento, o que escreveria?" — ele escreve em português, reescrevem juntos em inglês. O conteúdo é 100% real.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 15</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Email — reportando problemas</div>
+          <div class="lesson-desc">"I wanted to let you know that…", "Unfortunately, there has been a delay in…", "We're currently working on a solution and…", "We expect to resolve this by…". Tom direto e profissional sem ser agressivo.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Já precisou avisar um parceiro ou fornecedor de um problema urgente?" — situação real como base do email. Professora valida o vocabulário técnico que ele já conhece em inglês.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 16</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Email + resposta oral — integração das 4 skills</div>
+          <div class="lesson-desc">Anderson recebe um email "de fornecedor" e precisa: 1) entender o que foi pedido, 2) responder por escrito, 3) simular como falaria ao telefone para confirmar. Integração completa.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Email sobre tema que ele conhece muito bem (entrega de equipamento, peça específica) — conteúdo familiar, desafio é só no idioma. Elimina o ruído de "não sei do que se trata".</div>
+          </div>
+        </div>
+      </div>
+      <div class="extra-divider">
+        <span class="extra-divider-label">aulas extras — setembro</span>
+        <span class="extra-divider-line"></span>
+      </div>
+      <div class="lesson extra">
+        <div class="lesson-num">Extra 1</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Mensagens de texto e WhatsApp profissional</div>
+          <div class="lesson-desc">Comunicação curta e direta em inglês: como mandar uma mensagem rápida de atualização, confirmar horário de reunião, avisar atraso, agradecer por reunião. Diferença de tom entre email formal e mensagem informal mas profissional. Prática com situações reais do dia a dia dele.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Às vezes é mais rápido mandar uma mensagem do que um email — mas como fazer isso em inglês sem parecer grosseiro?" Necessidade real, barreira baixa, confiança alta ao final.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson extra" style="margin-top: 6px;">
+        <div class="lesson-num">Extra 2</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Leitura de documentos técnicos — estratégias práticas</div>
+          <div class="lesson-desc">Como ler manuais, especificações técnicas e relatórios em inglês sem traduzir palavra por palavra: identificar a estrutura, localizar a informação relevante, inferir pelo contexto. Treino com trecho real de manual ou spec sheet de equipamento industrial. Habilidade imediata para o trabalho.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Já veio manual de equipamento em inglês e tu teve que descobrir como usar?" — situação que ele provavelmente já viveu. A aula dá estratégia, não tradução.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTUBRO -->
+  <div class="tab-panel" id="tab-outubro">
+    <div class="month-header">
+      <span class="month-badge" style="background: var(--coral-bg); color: var(--coral-text);">Outubro 2026</span>
+      <div>
+        <div class="month-title">Reuniões e negociação</div>
+        <div class="month-sub">4 aulas · conduzir e participar de reuniões em inglês sem entrar em pânico</div>
+      </div>
+    </div>
+    <div class="lesson-list">
+      <div class="lesson">
+        <div class="lesson-num">Aula 17</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Frases de reunião — abertura e agenda</div>
+          <div class="lesson-desc">"Let's get started", "Today we're going to cover…", "Does anyone have questions before we begin?", "Let's move on to the next point", "Any objections?". Como conduzir e como participar como membro.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Vídeo de abertura de meeting corporativo — Anderson anota as expressões que ele não saberia usar. A lista dele guia o foco da aula.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 18</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Pedir esclarecimento + ganhar tempo</div>
+          <div class="lesson-desc">"Sorry, could you repeat that?", "Just to clarify…", "Let me think about that for a moment", "Could you be more specific?", "I want to make sure I understand…". O que fazer quando não entende — sem entrar em pânico.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Esse é o maior medo de muita gente" — validar o medo antes de resolver. Treinar as frases até saírem automáticas. Dramatizar: professora fala rápido e ele precisa usar as frases de verdade.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 19</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Negociação básica — preço, prazo, condição</div>
+          <div class="lesson-desc">"The deadline is tight, but we can…", "We'd prefer to…", "Is there any flexibility on the price?", "What if we…?", "We can offer…". Contexto: conversa com fornecedor de equipamento ou peças.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Já negociou algo com fornecedor estrangeiro, mesmo que por email?" — reconstruir a conversa em inglês com as frases certas. Situação real, não roteiro inventado.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 20</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Simulação de reunião com apoio</div>
+          <div class="lesson-desc">Anderson recebe agenda com tópicos reais (produção, entrega, problema, próximos passos). Conduz ou participa com vocabulário de apoio visível. Preparação total antes — não é roleplay frio, é treinamento estruturado.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Vocabulário do setor dele na tela durante toda a simulação — ele não precisa lembrar tudo de cabeça, só usar. Reduz o medo e aumenta a fluência real.</div>
+          </div>
+        </div>
+      </div>
+      <div class="extra-divider">
+        <span class="extra-divider-label">aulas extras — outubro</span>
+        <span class="extra-divider-line"></span>
+      </div>
+      <div class="lesson extra">
+        <div class="lesson-num">Extra 1</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Small talk profissional — quebrar o gelo antes da reunião</div>
+          <div class="lesson-desc">Os 2–3 minutos antes de uma reunião começar são os mais difíceis para quem tem medo de falar inglês. Tópicos seguros: viagem, clima, fim de semana, esporte, família (sem entrar em território pessoal demais). Frases de transição para o assunto de trabalho: "Anyway, let's get started…"</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"O que tu faz quando entra numa call e ainda faltam 3 minutos pra começar e tem um estrangeiro na sala?" — situação que ele provavelmente evita hoje. Resolver isso muda tudo.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson extra" style="margin-top: 6px;">
+        <div class="lesson-num">Extra 2</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Telefone e videochamada — estratégias de sobrevivência</div>
+          <div class="lesson-desc">Ligar ou receber ligação em inglês é o cenário de maior ansiedade — sem linguagem corporal, sem tempo para pensar. Frases essenciais: como atender, como pedir para repetir, como confirmar que entendeu, como encerrar profissionalmente. "Could you spell that for me?", "Let me just confirm…", "I'll get back to you on that."</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Se tocasse o telefone agora e fosse um fornecedor estrangeiro, o que tu faria?" — a resposta honesta dele é o ponto de partida. A aula dá o kit de sobrevivência.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOVEMBRO -->
+  <div class="tab-panel" id="tab-novembro">
+    <div class="month-header">
+      <span class="month-badge" style="background: var(--green-bg); color: var(--green-text);">Novembro 2026</span>
+      <div>
+        <div class="month-title">Fluência e confiança</div>
+        <div class="month-sub">4 aulas · integrar tudo, ganhar velocidade, perceber o quanto avançou</div>
+      </div>
+    </div>
+    <div class="lesson-list">
+      <div class="lesson">
+        <div class="lesson-num">Aula 21</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Conectores e coesão oral</div>
+          <div class="lesson-desc">However, therefore, as a result, in addition, on the other hand, that's why, which means that. Anderson para de falar em blocos soltos e começa a conectar ideias. Contexto: explicar decisões e raciocínio no trabalho.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Pegar o relato que ele fez em julho (gravação) e comparar com como fala agora usando conectores. Prova visual e auditiva do progresso — a diferença vai ser notável.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 22</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Vocabulário avançado de liderança</div>
+          <div class="lesson-desc">Accountability, performance, KPI, stakeholder, escalate, delegate, prioritize, bottleneck, align, take ownership. Termos que aparecem em reuniões com diretoria e parceiros internacionais.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Qual dessas palavras tu já ouviu mas nunca usou?" — Anderson elege as 5 que mais quer dominar. O foco da aula é definido por ele.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 23</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Situação de pressão — urgência e crise</div>
+          <div class="lesson-desc">"We have a critical issue that needs immediate attention", "I need this resolved by end of day", "What's the current status on…?", "Who's responsible for this?". Tom assertivo sem ser agressivo.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Pensa numa situação de crise real que tu já viveu na fábrica" — reconstruir em inglês com a urgência de verdade. Emoção real ajuda a fixar o vocabulário.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 24</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Apresentação completa — projeto real</div>
+          <div class="lesson-desc">Anderson prepara e apresenta um projeto real (atual ou recente) em inglês. ~5 minutos. Professora faz perguntas ao final como se fosse um gestor ou parceiro. Revisão dos erros recorrentes do semestre.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Gravar o áudio novamente e comparar com o de julho lado a lado. A diferença é a prova mais concreta de evolução que existe. Essa é a virada de chave definitiva do semestre.</div>
+          </div>
+        </div>
+      </div>
+      <div class="extra-divider">
+        <span class="extra-divider-label">aulas extras — novembro</span>
+        <span class="extra-divider-line"></span>
+      </div>
+      <div class="lesson extra">
+        <div class="lesson-num">Extra 1</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Lidar com mal-entendidos e corrigir informação</div>
+          <div class="lesson-desc">"Actually, what I meant was…", "I think there might be a misunderstanding…", "Let me clarify…", "That's not quite what I said…", "Just to make sure we're on the same page…". Habilidade crítica para quem trabalha com estrangeiros — saber se corrigir sem gerar conflito.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Já teve uma situação em que tu disse algo e a pessoa entendeu errado, mas tu não sabia como corrigir em inglês?" — situação real como ponto de partida, solução prática como fechamento.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson extra" style="margin-top: 6px;">
+        <div class="lesson-num">Extra 2</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Inglês informal com colegas — tom relaxado mas profissional</div>
+          <div class="lesson-desc">Diferença entre inglês de reunião formal e inglês de corredor: "How's it going?", "Not bad, you?", "Crazy week, huh?", "Catch you later", "Let me know if you need anything." Como ser cordial e acessível sem soar estranho. Treino com situações de almoço, corredor, e chat informal durante viagem à Argentina.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Na Argentina, depois da reunião formal, como tu age com os colegas?" — o inglês informal é muitas vezes mais difícil do que o formal porque não tem script. Essa aula dá o script.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEZEMBRO -->
+  <div class="tab-panel" id="tab-dezembro">
+    <div class="month-header">
+      <span class="month-badge" style="background: var(--gray-bg); color: var(--gray-text);">Dezembro 2026</span>
+      <div>
+        <div class="month-title">Consolidação + planejamento 2027</div>
+        <div class="month-sub">3 aulas · fechar o ano com clareza, celebrar avanços, definir próximos passos</div>
+      </div>
+    </div>
+    <div class="lesson-list">
+      <div class="lesson">
+        <div class="lesson-num">Aula 25</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Revisão ativa — o que ficou, o que ainda trava</div>
+          <div class="lesson-desc">Não é revisão de conteúdo — é mapeamento de uso real. "Qual situação do trabalho tu ainda se sente inseguro?" Anderson diagnostica ele mesmo, com a professora. Isso revela o quanto ele já sabe ao listar o que ainda não domina.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Anderson faz o diagnóstico com as próprias palavras — ele percebe o quanto aprendeu ao tentar identificar as lacunas que restam. A lista ficou muito menor do que em junho.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 26</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Conversação semi-livre — tema livre, estrutura leve</div>
+          <div class="lesson-desc">Anderson escolhe o tema (viagem, projeto, esporte, família). Conversa com perguntas guiadas mas sem script rígido. Foco em fluidez e espontaneidade, não em perfeição gramatical.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Hoje tu manda — escolhe o assunto." Autonomia como marcador de confiança construída. Ele começa a conversa. A professora entra como interlocutora, não como condutora.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson">
+        <div class="lesson-num">Aula 27</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Retrospectiva do ano + planejamento 2027</div>
+          <div class="lesson-desc">Revisitar os objetivos de junho. O que mudou? O que consegue fazer que não conseguia? O que ainda quer alcançar? Definir próximos objetivos: B1 formal, apresentação para diretoria, viagem com mais confiança?</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">Ouvir o áudio de julho e o de novembro juntos pela última vez. A diferença entre os dois é o semestre inteiro em um minuto. Essa é a prova mais concreta — e mais motivadora — de evolução.</div>
+          </div>
+        </div>
+      </div>
+      <div class="extra-divider">
+        <span class="extra-divider-label">aulas extras — dezembro</span>
+        <span class="extra-divider-line"></span>
+      </div>
+      <div class="lesson extra">
+        <div class="lesson-num">Extra 1</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Aula livre — Anderson escolhe o tema e o formato</div>
+          <div class="lesson-desc">Sem agenda prévia. Anderson decide: quer revisar algo que ainda sente travar? Quer praticar uma situação específica que está por vir? Quer só conversar? A autonomia é intencional — é o marcador final de que ele chegou num ponto em que sabe o que precisa, e isso por si só é progresso.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Hoje é a tua aula. O que tu quer fazer com ela?" — a resposta dele em inglês já é a prova de tudo que foi construído no semestre.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson extra" style="margin-top: 6px;">
+        <div class="lesson-num">Extra 2</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Simulação final — situação real de alta pressão</div>
+          <div class="lesson-desc">Anderson escolhe a situação que mais temia no início do semestre (uma reunião, uma ligação, uma apresentação) e a faz do começo ao fim em inglês. Professora assume o papel do interlocutor. Sem vocabulário de apoio na tela — memória e confiança puras. Encerramento do semestre com a prova máxima de evolução.</div>
+          <div class="lesson-hook">
+            <div class="hook-label">gancho</div>
+            <div class="hook-text">"Qual era a situação que mais te assustava em junho?" — ele escolhe, eles fazem, e ele percebe que consegue. Esse é o fechamento definitivo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  Anderson · Plano Jun–Dez 2026 · Atualizado em junho 2026
+</div>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
