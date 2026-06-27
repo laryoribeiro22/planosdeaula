@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rudi & Thiago — Todas as Aulas</title>
+<style>
+:root {
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --surface-alt: #f0efe9;
+  --border: #e0ddd4;
+  --border-strong: #c5c2b5;
+  --text-primary: #18170f;
+  --text-secondary: #5a5748;
+  --text-muted: #96938a;
+  --accent: #1a55a8;
+  --accent-bg: #e8f0fb;
+  --accent-text: #0f3d8f;
+  --rudi: #c04018;
+  --rudi-bg: #fdf0eb;
+  --thiago: #196e35;
+  --thiago-bg: #eaf5ed;
+  --purple: #6330a0;
+  --purple-bg: #f3ecfb;
+  --amber: #9a5c08;
+  --amber-bg: #fdf4e3;
+  --radius: 8px;
+  --radius-lg: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Georgia', serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+/* HEADER */
+header {
+  background: #18170f;
+  color: #fff;
+  padding: 2.5rem 2rem 2rem;
+}
+.header-inner { max-width: 900px; margin: 0 auto; }
+.header-label {
+  font-family: sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+header h1 { font-size: 1.9rem; font-weight: normal; margin-bottom: 0.25rem; }
+header .meta { font-size: 13px; color: #777; font-family: sans-serif; margin-top: 0.4rem; }
+
+/* NAV */
+nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+}
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+}
+nav button {
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0.85rem 1rem;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+nav button:hover { color: var(--text-primary); }
+nav button.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* MAIN */
+main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* MONTH HEADER */
+.month-header {
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.month-header:first-child { margin-top: 0; }
+.month-count {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* LESSON CARD */
+.lesson-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+.lesson-card.extra {
+  border-style: dashed;
+  background: var(--surface-alt);
+}
+.lesson-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.95rem 1.2rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s;
+}
+.lesson-header:hover { background: var(--surface-alt); }
+.lesson-card.extra .lesson-header:hover { background: #e8e7e0; }
+
+.lesson-num {
+  font-family: sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 26px;
+  flex-shrink: 0;
+}
+.extra-tag {
+  font-family: sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--amber-bg);
+  color: var(--amber);
+  border: 1px solid #e8c888;
+  padding: 1px 6px;
+  border-radius: 10px;
+  margin-right: 4px;
+}
+.lesson-meta { flex: 1; min-width: 0; }
+.lesson-title {
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lesson-sub {
+  font-family: sans-serif;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.badges { display: flex; gap: 4px; flex-shrink: 0; }
+.badge {
+  font-family: sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.b-grammar { background: var(--accent-bg); color: var(--accent-text); }
+.b-vocab { background: var(--amber-bg); color: var(--amber); }
+.b-conversation { background: var(--purple-bg); color: var(--purple); }
+.b-business { background: var(--thiago-bg); color: var(--thiago); }
+.b-project { background: #f0e8fb; color: #6330a0; }
+.b-review { background: #eee; color: #555; }
+
+.chevron {
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+.lesson-card.open .chevron { transform: rotate(180deg); }
+
+/* LESSON BODY */
+.lesson-body {
+  display: none;
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.lesson-card.open .lesson-body { display: block; }
+
+/* TIMELINE */
+.tl { display: flex; gap: 0.75rem; margin-top: 0.9rem; align-items: flex-start; }
+.tl-time {
+  font-family: sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 44px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+.tl-content { flex: 1; }
+.tl-label {
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+.tl-detail { font-size: 13px; color: var(--text-secondary); }
+
+/* TIPS */
+.tip {
+  font-family: sans-serif;
+  font-size: 12.5px;
+  margin-top: 0.9rem;
+  padding: 0.7rem 0.95rem;
+  border-radius: var(--radius);
+}
+.tip-gancho { background: var(--rudi-bg); border: 1px solid #f0c8b0; color: #7a2810; }
+.tip-thiago { background: var(--thiago-bg); border: 1px solid #a0d5b0; color: #0f4a23; }
+.tip-both { background: var(--accent-bg); border: 1px solid #b8d0f5; color: var(--accent-text); }
+.tip-warn { background: var(--amber-bg); border: 1px solid #e8c888; color: var(--amber); }
+.tip strong { font-weight: 700; }
+
+/* VOCAB TABLE */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+.vocab-item {
+  font-family: sans-serif;
+  font-size: 12.5px;
+  padding: 0.4rem 0.6rem;
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+}
+.vocab-item strong { color: var(--text-primary); }
+
+/* SECTION LABEL */
+.section-label {
+  font-family: sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 1.25rem 0 0.6rem;
+}
+
+/* INTRO BOX */
+.intro-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-family: sans-serif;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.intro-box strong { color: var(--text-primary); }
+
+/* ERR SAMPLE */
+.err-wrong { color: #a02020; font-family: monospace; font-size: 12.5px; }
+.err-right { color: #1a6a30; font-family: monospace; font-size: 12.5px; }
+
+/* STATS BAR */
+.month-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.stat-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-label">Plano completo de aulas — Junho a Dezembro 2026</div>
+    <h1>Rudi &amp; Thiago</h1>
+    <div class="meta">28 aulas regulares + 14 aulas extras · Sextas 12h · 60 min · Online · A1 → A2</div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="active" onclick="showTab('jun')">Junho</button>
+    <button onclick="showTab('jul')">Julho</button>
+    <button onclick="showTab('ago')">Agosto</button>
+    <button onclick="showTab('set')">Setembro</button>
+    <button onclick="showTab('out')">Outubro</button>
+    <button onclick="showTab('nov')">Novembro</button>
+    <button onclick="showTab('dez')">Dezembro</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════
+     JUNHO
+═══════════════════════════════════════════ -->
+<div id="tab-jun" class="tab-panel active">
+
+<div class="intro-box">
+  <strong>Junho — Fundação.</strong> Objetivo: construir a base. Present Simple é a âncora. Toda apresentação e comunicação de compras parte daqui. O foco é criar confiança — eles precisam sentir "eu consigo falar alguma coisa". Erro do mês: ainda não há erro fixo — observe e mapeie para julho.
+</div>
+
+<div class="month-stats">
+  <span class="stat-pill">4 aulas regulares</span>
+  <span class="stat-pill">2 aulas extras</span>
+  <span class="stat-pill">Estrutura: Present Simple</span>
+  <span class="stat-pill">Tema: Apresentações profissionais</span>
+</div>
+
+<!-- AULA 1 -->
+<div class="lesson-card" id="j1">
+  <div class="lesson-header" onclick="toggle('j1')">
+    <div class="lesson-num">01</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Diagnóstico + primeiras apresentações</div>
+      <div class="lesson-sub">29/05/2026 (aula de início) · Quem somos, o que fazemos</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Conversa</span><span class="badge b-vocab">Vocab</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–10'</div><div class="tl-content"><div class="tl-label">Boas-vindas e quebra-gelo</div><div class="tl-detail">Peça que cada um diga o próprio nome e uma coisa sobre si mesmo em inglês — sem correção, só para mapear o nível de saída. "Hello, I'm Rudi. I work at WebContinental." Se sair qualquer frase, celebre. Se sair apenas o nome, está ótimo também.</div></div></div>
+    <div class="tl"><div class="tl-time">10–20'</div><div class="tl-content"><div class="tl-label">Mapeamento oral: o que já sabem</div><div class="tl-detail">Faça perguntas simples e observe o que sai: "What is your job?", "Where do you work?", "Do you speak any English?" Não corrija nada ainda. Anote mentalmente: pronúncia, vocabulário de trabalho, erros gramaticais mais frequentes.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Input: frases de apresentação profissional</div><div class="tl-detail">Ensine um bloco de frases prontas: "My name is… / I work at… / I'm a buyer / I work in the purchasing department / I work with suppliers / Nice to meet you." Pratiquem juntos, repetindo em voz alta. Rudi vai querer mais — dê contexto extra. Thiago vai repetir em silêncio primeiro.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Prática: apresentação em dupla</div><div class="tl-detail">Cada um se apresenta para o outro em inglês. Depois, você faz perguntas: "Rudi, where does Thiago work?" — eles praticam falar sobre o outro. Isso ativa he/she de forma natural (sem nomear a estrutura ainda).</div></div></div>
+    <div class="tl"><div class="tl-time">50–60'</div><div class="tl-content"><div class="tl-label">Conversa: expectativas e mapa do semestre</div><div class="tl-detail">Mostre o currículo dos próximos 7 meses. Diga o que cada mês vai trazer. Isso é o que eles pediram — previsibilidade. Pergunte: "What do you want to be able to do in English by December?" Anote as respostas.</div></div></div>
+    <div class="tip tip-both"><strong>Diagnóstico:</strong> Observe pronúncia (Rudi provavelmente já é forte), inserção de vogal no final de palavras, confusão he/she/it. Essas observações vão guiar os meses seguintes.</div>
+  </div>
+</div>
+
+<!-- AULA 2 -->
+<div class="lesson-card" id="j2">
+  <div class="lesson-header" onclick="toggle('j2')">
+    <div class="lesson-num">02</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Present Simple afirmativo — rotina e trabalho</div>
+      <div class="lesson-sub">06/06/2026 · I work / I buy / I manage</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Warm-up: weekend check-in</div><div class="tl-detail">"How was your weekend?" — Rudi abre (espere algo sobre F1 ou carro ou jardinagem). Thiago segue (família, Mel, filhos). Não corrija. Só ouça e faça perguntas de follow-up. "Rudi, did you watch the race? Which driver won?"</div></div></div>
+    <div class="tl"><div class="tl-time">5–15'</div><div class="tl-content"><div class="tl-label">Ativação: "Como você explica seu trabalho para um americano?"</div><div class="tl-detail">Peça que tentem em inglês. Anote os erros mas não corrija — isso vai mostrar o que eles já sabem e o que precisam. Ao final da tentativa, diga: "Ótimo. Agora vou te dar as ferramentas para dizer isso ainda melhor."</div></div></div>
+    <div class="tl"><div class="tl-time">15–30'</div><div class="tl-content"><div class="tl-label">Input: Present Simple — estrutura e uso</div><div class="tl-detail">Apresente a regra de forma direta (Rudi vai querer isso): I/you/we/they + verbo base. Exemplos do contexto deles: "I manage suppliers. We approve purchase orders. They send invoices. You contact clients." Escreva no chat para o Thiago visualizar. Fale a regra em voz alta para o Rudi processar.</div></div></div>
+    <div class="tl"><div class="tl-time">30–45'</div><div class="tl-content"><div class="tl-label">Jogo: "2 truths, 1 lie"</div><div class="tl-detail">Cada um escreve 3 frases sobre o próprio trabalho usando present simple — 2 verdadeiras, 1 mentira. Exemplo: "I work with 15 suppliers. I approve orders every day. I speak Chinese at work." O outro adivinham qual é a mentira. Competição natural, Rudi vai adorar. Thiago vai pensar antes de criar as frases — e vai criar melhores.</div></div></div>
+    <div class="tl"><div class="tl-time">45–55'</div><div class="tl-content"><div class="tl-label">Produção: apresentação profissional de 30 segundos</div><div class="tl-detail">"Imagine que vocês conhecem um comprador americano num evento. 30 segundos para se apresentar." Cada um pratica. Você cronometra. Feedback: 2 elogios específicos + 1 melhoria máxima por pessoa.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Preview da próxima aula</div><div class="tl-detail">"Na próxima aula: perguntas e negativas — 'Do you work with international suppliers?' 'We don't have stock for that.' Isso vai deixar vocês prontos para conversas reais."</div></div></div>
+    <div class="tip tip-gancho"><strong>Gancho Rudi:</strong> "É como o Lewis Hamilton dizendo 'I race for Mercedes. I train every day.' — mesmo estrutura." <strong>Gancho Thiago:</strong> "Grêmio players: 'They play at the Arena. They train twice a day.'"</div>
+  </div>
+</div>
+
+<!-- AULA 3 -->
+<div class="lesson-card" id="j3">
+  <div class="lesson-header" onclick="toggle('j3')">
+    <div class="lesson-num">03</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Present Simple — negativas e perguntas</div>
+      <div class="lesson-sub">13/06/2026 · Do/Does · Don't/Doesn't</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Warm-up rápido</div><div class="tl-detail">"Tell me one thing you do every day at work — in English." Rudi vai em primeiro. Thiago observa, pensa, e fala na sequência. Recast silencioso dos erros.</div></div></div>
+    <div class="tl"><div class="tl-time">5–15'</div><div class="tl-content"><div class="tl-label">Quiz de revisão: Present Simple afirmativo</div><div class="tl-detail">10 itens rápidos no chat: "Complete: We ___ (work/works) with suppliers. / She ___ (manage/manages) the team." Competição entre eles — tabulação de pontos. Quem errar explica a regra em inglês (com sua ajuda se precisar).</div></div></div>
+    <div class="tl"><div class="tl-time">15–30'</div><div class="tl-content"><div class="tl-label">Input: Do/Does + Don't/Doesn't</div><div class="tl-detail">Regra clara: perguntas usam Do (I/you/we/they) e Does (he/she/it). Exemplos reais: "Do you work with international suppliers?" / "Does your company have a warehouse?" / "We don't have stock for this." / "He doesn't approve orders over $10k." Foque em formas que eles vão usar de verdade em calls.</div></div></div>
+    <div class="tl"><div class="tl-time">30–45'</div><div class="tl-content"><div class="tl-label">Roleplay: onboarding de fornecedor</div><div class="tl-detail">Você é um novo fornecedor americano chamado Mike Thompson, da empresa PackagePro. Eles são os compradores da WebContinental. Eles têm que fazer pelo menos 5 perguntas para te conhecer — usando Do/Does. Depois invertem: você os entrevista. Ative perguntas de forma urgente e real.</div></div></div>
+    <div class="tl"><div class="tl-time">45–55'</div><div class="tl-content"><div class="tl-label">Escrita rápida: "Our company profile"</div><div class="tl-detail">Cada um escreve 3 coisas que a WebContinental faz e 2 que não faz: "We work with Brazilian suppliers. We don't have a team in the US. We sell products online." Compartilham e comparam. Corrija junto, não sozinho.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Fechamento + preview</div><div class="tl-detail">"Na semana que vem: e-mail de apresentação completo. Vocês vão usar tudo que aprenderam em junho em uma mensagem real."</div></div></div>
+    <div class="tip tip-warn"><strong>Nota pedagógica:</strong> Se o Rudi terminar rápido, peça que formule frases com "he/she" — você vai notar o erro do -s ausente. Semeie sem nomear. O Thiago vai precisar de mais tempo nas perguntas — dê.</div>
+  </div>
+</div>
+
+<!-- AULA 4 -->
+<div class="lesson-card" id="j4">
+  <div class="lesson-header" onclick="toggle('j4')">
+    <div class="lesson-num">04</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">E-mail de apresentação — projeto integrador de junho</div>
+      <div class="lesson-sub">20/06/2026 · Produção real + revisão do mês</div>
+    </div>
+    <div class="badges"><span class="badge b-business">Business</span><span class="badge b-project">Projeto</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–10'</div><div class="tl-content"><div class="tl-label">Warm-up: "Did you use any English this week?"</div><div class="tl-detail">Pergunte se tentaram usar alguma coisa em inglês no trabalho. Sem cobrança — só curiosidade. Qualquer tentativa é celebrada com detalhe concreto: "Rudi, você usou 'purchase order' numa conversa? Isso é vocabulário real."</div></div></div>
+    <div class="tl"><div class="tl-time">10–30'</div><div class="tl-content"><div class="tl-label">Escrita: e-mail para novo fornecedor americano</div><div class="tl-detail">Contexto: "Chegou um e-mail de uma empresa americana, TechSupply Co., querendo se tornar fornecedor de vocês. Escrevam uma resposta de apresentação da WebContinental." Template com lacunas para guiar, mas eles completam com as próprias palavras. Trabalham individualmente por 10 minutos, depois você orienta.</div></div></div>
+    <div class="tl"><div class="tl-time">30–45'</div><div class="tl-content"><div class="tl-label">Leitura cruzada e feedback</div><div class="tl-detail">Cada um lê o e-mail do outro em voz alta. Você dá feedback: 2 pontos positivos específicos + 1 melhoria para cada. Thiago pode reescrever a linha corrigida — ele vai querer acertar.</div></div></div>
+    <div class="tl"><div class="tl-time">45–55'</div><div class="tl-content"><div class="tl-label">Conversa livre: "What was your favorite thing in June?"</div><div class="tl-detail">Cada um fala o que mais gostou. Você faz perguntas de follow-up. É avaliação disfarçada de conversa. Observe: o que retiveram? O que ainda sai com dificuldade?</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Preview de julho + mapa</div><div class="tl-detail">"Em julho: vocabulário de compras — supplier, PO, deadline, invoice. E-mails de negociação. E vamos trabalhar um padrão gramatical que eu observei nos dois — mas sem pressa, é um processo." Dê o mapa do semestre em formato visual se puder.</div></div></div>
+    <div class="tip tip-both"><strong>Vitória visível:</strong> Diga explicitamente: "Vocês acabaram de escrever um e-mail profissional em inglês. Isso é real. Se enviassem isso hoje para a TechSupply Co., eles entenderiam." Essa frase fecha o ciclo de confiança.</div>
+  </div>
+</div>
+
+<!-- EXTRAS JUNHO -->
+<div class="month-header" style="margin-top:1.5rem;">Aulas extras — Junho <span class="month-count">se houver semana extra ou reposição</span></div>
+
+<div class="lesson-card extra" id="j5e">
+  <div class="lesson-header" onclick="toggle('j5e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Numbers &amp; Prices — vocabulário de compras essencial</div>
+      <div class="lesson-sub">Junho · Números, moedas, porcentagens em contexto profissional</div>
+    </div>
+    <div class="badges"><span class="badge b-vocab">Vocab</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Warm-up: "How much does your product cost?"</div><div class="tl-detail">Peça que cada um tente descrever um preço em inglês. "Rudi, how much does something cost at your company — in dollars?" Mapeie onde travam (dizer números grandes em inglês é um bloqueio real).</div></div></div>
+    <div class="tl"><div class="tl-time">5–20'</div><div class="tl-content"><div class="tl-label">Input: números, preços e quantidades</div><div class="tl-detail">Cubra: números de 1 a 1.000.000 / "fifteen vs. fifty" (erro clássico) / moedas: "five hundred dollars", "two thousand reais" / porcentagens: "a 10 percent discount" / quantidades: "500 units", "a bulk order of 2,000 items". Pratiquem em voz alta — pronúncia é crucial aqui.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Jogo: "Price is Right" — versão compras</div><div class="tl-detail">Você descreve um produto em inglês ("a box of 100 product units, from a Brazilian supplier") e diz um preço em inglês. Eles têm que escrever o número que ouviram. Quem errar menos pontos. Força escuta ativa e diferenciação fifteen/fifty, hundred/thousand.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Roleplay: negociação de preço simples</div><div class="tl-detail">Você é um fornecedor americano. Eles são os compradores. Precisam negociar um desconto. "Can we get a 15% discount for an order of 500 units?" Use apenas frases simples — o foco é usar números com confiança.</div></div></div>
+    <div class="tl"><div class="tl-time">50–60'</div><div class="tl-content"><div class="tl-label">Escrita: "Quick quote request"</div><div class="tl-detail">Cada um escreve um e-mail curto pedindo cotação: "We are interested in ordering 200 units of product X. Can you send us a quote?" Revisão rápida conjunta.</div></div></div>
+    <div class="tip tip-gancho"><strong>Gancho Rudi:</strong> "Sabe quando você vê os valores do Power BI? Agora você sabe como falar esses números em inglês numa reunião." <strong>Gancho Thiago:</strong> "Pensa no salário do Cavani quando assinou com o Grêmio — R$500.000 por mês. Como você falaria isso em inglês?"</div>
+  </div>
+</div>
+
+<div class="lesson-card extra" id="j6e">
+  <div class="lesson-header" onclick="toggle('j6e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Pronunciation Lab — sons do inglês que o português não tem</div>
+      <div class="lesson-sub">Junho · th / v / w / finais de consoante / word stress</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Pronúncia</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Abertura divertida: "Diga estas palavras"</div><div class="tl-detail">Mostre no chat: "three", "through", "think", "this", "that", "weather", "work", "vendor", "waste". Eles tentam. Você registra onde travam. Não corrija ainda — é diagnóstico.</div></div></div>
+    <div class="tl"><div class="tl-time">5–20'</div><div class="tl-content"><div class="tl-label">Input: os sons críticos para compradores</div><div class="tl-detail">Foco em 4 sons que aparecem no vocabulário de compras: (1) "th" — "think, three, this, that, through" / (2) "v" vs "b" — "vendor/vendor, value/value" / (3) "w" — "work, warehouse, we, week, wait" / (4) finais de consoante — "work, send, cost, check, meet". Para cada um: você fala, eles repetem, depois eles falam sozinhos.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Drills contextuais — pronúncia em frases reais</div><div class="tl-detail">Pratiquem em frases, não palavras isoladas: "We think the vendor has a three-week lead time." / "We need to check the warehouse stock this week." / "The value of this work is clear." Repetição em contexto fixa mais do que drill isolado.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Minimal pairs challenge</div><div class="tl-detail">Você fala uma palavra, eles escrevem o que ouviram: "ship / chip / sheep" / "bit / beat / bid" / "send / sand / sent". Depois invertem — eles falam, você "erra" de propósito às vezes, eles te corrigem. Isso ativa consciência fonética de forma lúdica.</div></div></div>
+    <div class="tl"><div class="tl-time">50–60'</div><div class="tl-content"><div class="tl-label">Conversa cronometrada com foco em pronúncia</div><div class="tl-detail">"30 segundos falando sobre o seu fim de semana — eu vou prestar atenção especificamente nos finais de consoante." Gravar e reproduzir (se possível) é muito eficaz. Rudi vai adorar ouvir a própria voz.</div></div></div>
+    <div class="tip tip-gancho"><strong>Gancho Rudi:</strong> Bateristas têm senso rítmico — use isso. "O ritmo do inglês é diferente do português. Em inglês tem uma batida forte e batidas fracas — como uma levada de bateria. Vamos sentir isso nas frases." <strong>Gancho Thiago:</strong> "No jiu-jitsu você aprende os movimentos lentamente antes de aplicar rápido — pronúncia é igual: devagar primeiro."</div>
+  </div>
+</div>
+
+</div><!-- /jun -->
+
+
+<!-- ═══════════════════════════════════════════
+     JULHO
+═══════════════════════════════════════════ -->
+<div id="tab-jul" class="tab-panel">
+
+<div class="intro-box">
+  <strong>Julho — Compras &amp; Negociação.</strong> Vocabulário profissional essencial: supplier, PO, invoice, deadline, lead time. Estruturas: Can/Can't (pedidos e ofertas), There is/There are (estoque e logística). <strong>Erro do mês: He/she/it + -s</strong> — corrija com recast silencioso durante o mês e dedique o último momento de cada aula para consolidar.
+</div>
+
+<div class="month-stats">
+  <span class="stat-pill">4 aulas regulares</span>
+  <span class="stat-pill">2 aulas extras</span>
+  <span class="stat-pill">Estrutura: Can / There is</span>
+  <span class="stat-pill">Erro do mês: he/she/it + -s</span>
+</div>
+
+<!-- AULA 5 -->
+<div class="lesson-card" id="j7">
+  <div class="lesson-header" onclick="toggle('j7')">
+    <div class="lesson-num">05</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">The Buyer's Dictionary — vocabulário essencial de compras</div>
+      <div class="lesson-sub">04/07/2026 · supplier, PO, invoice, deadline, lead time...</div>
+    </div>
+    <div class="badges"><span class="badge b-vocab">Vocab</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Warm-up: "Tell me about a supplier you work with"</div><div class="tl-detail">Rudi abre. Você faz perguntas que ativam o vocabulário do dia sem que eles saibam: "And if they miss the deadline? Do you have a backup supplier?" Thiago complementa depois.</div></div></div>
+    <div class="tl"><div class="tl-time">5–20'</div><div class="tl-content"><div class="tl-label">Input: 15 termos essenciais — em contexto</div><div class="tl-detail">Apresente cada termo numa frase real, não numa lista seca. Escreva no chat enquanto fala em voz alta: supplier / vendor / purchase order (PO) / invoice / deadline / lead time / stock / out of stock / bulk order / freight / payment terms / quote / approval / follow up / negotiate. Peça que cada um use cada termo numa frase própria.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Quiz: "Buyer's Definitions"</div><div class="tl-detail">Você dá a definição em inglês, eles falam o termo: "The document that confirms a purchase" → Purchase Order / "The time between ordering and receiving" → Lead time / "When the product is no longer available" → Out of stock. Quem responde primeiro ganha 1 ponto. Rudi vai competir — deixe a competição acontecer, ela motiva o Thiago também.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Roleplay: "The Delayed Shipment Call"</div><div class="tl-detail">Você é Mike (fornecedor americano). O pedido está 2 semanas atrasado. Eles são os compradores e precisam resolver. Eles têm que usar pelo menos 5 termos novos: "What's the new deadline?", "Can you confirm the PO?", "We need the invoice by Friday", "What's the lead time now?", "We're running out of stock."</div></div></div>
+    <div class="tl"><div class="tl-time">50–58'</div><div class="tl-content"><div class="tl-label">Escrita rápida: glossário pessoal</div><div class="tl-detail">Cada um escreve 5 dos 15 termos numa frase real do próprio trabalho. Compartilham. Você verifica e dá feedback rápido.</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Introdução do erro do mês</div><div class="tl-detail">"A partir de hoje, vou prestar atenção em uma coisa: quando falamos sobre outra pessoa — he, she, it — o verbo muda. 'He works' — não 'he work'. Vou sinalizar quando acontecer, mas sem interromper o fluxo."</div></div></div>
+    <div class="tip tip-gancho"><strong>Gancho Rudi:</strong> "Você já viu esses termos em inglês no Power BI e nos sistemas da empresa — agora você sabe falar sobre eles." <strong>Gancho Thiago:</strong> "O Grêmio tem um departamento de compras também — futebol é negócio, e todos esses termos aparecem nas transferências de jogadores."</div>
+  </div>
+</div>
+
+<!-- AULA 6 -->
+<div class="lesson-card" id="j8">
+  <div class="lesson-header" onclick="toggle('j8')">
+    <div class="lesson-num">06</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Can / Can't — pedidos, permissões e ofertas</div>
+      <div class="lesson-sub">11/07/2026 · "Can you send the invoice?" · Comunicação profissional educada</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Warm-up: revisão do vocabulário da semana passada</div><div class="tl-detail">Quiz relâmpago: 5 termos de compras — cada um responde alternadamente. Quem fizer mais pontos em 3 minutos. Mantém o vocabulário fresco sem parecer revisão.</div></div></div>
+    <div class="tl"><div class="tl-time">5–20'</div><div class="tl-content"><div class="tl-label">Input: Can/Can't — 3 usos</div><div class="tl-detail">Apresente os 3 contextos: (1) Pedido educado: "Can you send the PO by Friday?" / (2) Capacidade: "We can deliver 500 units per week." / (3) Impossibilidade: "We can't approve this without a quote." Use sempre exemplos do contexto deles — compras, fornecedores, WebContinental. Mostre que "can" é a ferramenta mais versátil do inglês básico de negócios.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Prática: transformação de frases</div><div class="tl-detail">Você dá situações em português, eles transformam em inglês com can/can't: "Você precisa que o fornecedor mande a fatura amanhã" → "Can you send the invoice tomorrow?" / "A empresa não tem capacidade de receber o pedido essa semana" → "We can't receive the order this week." 10 situações alternadas entre os dois.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Roleplay: e-mail de pedido com 3 solicitações</div><div class="tl-detail">Cenário: novo fornecedor, primeira compra. Cada um escreve um e-mail com pelo menos 3 solicitações usando "can": "Can you confirm the lead time?", "Can you send a sample?", "Can you offer a discount for bulk orders?" Leem em voz alta depois.</div></div></div>
+    <div class="tl"><div class="tl-time">50–58'</div><div class="tl-content"><div class="tl-label">Diferencial: Could — tom mais formal</div><div class="tl-detail">Introduza brevemente: "Could you send the invoice?" soa mais formal e educado que "Can you". Não aprofunde — é semente para agosto. Deixe-os usar em uma frase apenas.</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Foco no erro do mês</div><div class="tl-detail">Destaque 1 exemplo de he/she/it que apareceu na aula. "Rudi, você disse 'he can work with us' — perfeito. Mas em 'he send' precisaria ser 'he sends'." Breve, concreto, sem sermão.</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 7 -->
+<div class="lesson-card" id="j9">
+  <div class="lesson-header" onclick="toggle('j9')">
+    <div class="lesson-num">07</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">There is / There are — estoque, espaço e logística</div>
+      <div class="lesson-sub">18/07/2026 · "There's no stock" · Situações de armazém e compras</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Warm-up: "Descreva o armazém da sua empresa em inglês"</div><div class="tl-detail">Peça que tentem. Vão usar palavras como "have" onde deveriam usar "there is/are". Observe sem corrigir — isso vai motivar a aprender a estrutura certa.</div></div></div>
+    <div class="tl"><div class="tl-time">5–20'</div><div class="tl-content"><div class="tl-label">Input: There is / There are — regra e uso</div><div class="tl-detail">Regra direta: There is + singular / There are + plural. Negativa: There isn't / There aren't. Pergunta: Is there? / Are there? Exemplos reais: "There are 500 units in stock." / "There isn't a backup supplier." / "Is there a warehouse in São Paulo?" / "There are three buyers on our team." Escreva no chat enquanto fala.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Jogo: "Warehouse Report" — quem descreve mais</div><div class="tl-detail">Você mostra uma "foto" imaginária de um armazém (descreva verbalmente ou mostre uma imagem simples). Eles têm 90 segundos para descrever o que "veem" em inglês usando there is/are. Pontos para cada frase correta. Rudi vai querer vencer. Thiago vai pensar primeiro e depois falar frases mais complexas.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Prática: situações de estoque real</div><div class="tl-detail">10 situações: você descreve em português, eles falam em inglês: "Tem 3 fornecedores disponíveis" → "There are three available suppliers." / "Não tem estoque desse produto" → "There isn't any stock of this product." / "Tem algum desconto disponível?" → "Is there any discount available?"</div></div></div>
+    <div class="tl"><div class="tl-time">50–58'</div><div class="tl-content"><div class="tl-label">Produção oral: "Status update de estoque"</div><div class="tl-detail">Cada um faz um update de estoque imaginário em inglês — 1 minuto, usando there is/are pelo menos 5 vezes. Simula situação real de reunião rápida.</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Erro do mês — consolidação semanal</div><div class="tl-detail">Destaque 1 acerto de he/she/it+s que aconteceu na aula. "Thiago, você disse 'he manages' — correto! Isso é exatamente o padrão que estamos treinando." Celebração com evidência específica.</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 8 -->
+<div class="lesson-card" id="j10">
+  <div class="lesson-header" onclick="toggle('j10')">
+    <div class="lesson-num">08</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">E-mail de negociação de prazo — projeto de julho</div>
+      <div class="lesson-sub">25/07/2026 · Integração: vocab + can + there is</div>
+    </div>
+    <div class="badges"><span class="badge b-business">Business</span><span class="badge b-project">Projeto</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–10'</div><div class="tl-content"><div class="tl-label">Warm-up: quiz mensal de vocabulário</div><div class="tl-detail">15 termos do Buyer's Dictionary — alternando entre eles, cronometrado. Quem acertar mais ganha o "título de melhor comprador de julho". Leveza e competição para abrir o mês.</div></div></div>
+    <div class="tl"><div class="tl-time">10–30'</div><div class="tl-content"><div class="tl-label">Escrita: e-mail de negociação de prazo</div><div class="tl-detail">Cenário: o fornecedor disse que o pedido vai atrasar 3 semanas. Eles precisam escrever um e-mail profissional negociando. O e-mail deve incluir: (1) reconhecer o atraso, (2) explicar o impacto, (3) pedir nova data, (4) oferecer solução alternativa. Usem can, there is/are e vocabulário de julho.</div></div></div>
+    <div class="tl"><div class="tl-time">30–45'</div><div class="tl-content"><div class="tl-label">Roleplay: call de follow-up do e-mail</div><div class="tl-detail">Depois de escrever o e-mail, simulem a call de follow-up. Você é o fornecedor respondendo. Eles têm que negociar oralmente. Força transição escrita → fala, que é o ponto mais difícil.</div></div></div>
+    <div class="tl"><div class="tl-time">45–55'</div><div class="tl-content"><div class="tl-label">Revisão do mês: o que aprendemos em julho</div><div class="tl-detail">Cada um menciona 3 coisas que aprendeu. Você complementa com o que observou de progresso. Evidência de crescimento: "Rudi, no início de julho você não sabia a diferença entre 'vendor' e 'supplier'. Agora você usa os dois no lugar certo."</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Preview de agosto + fechamento do erro</div><div class="tl-detail">"Em agosto: reuniões. Frases para call, como concordar, discordar, pedir esclarecimento. E vamos continuar com he/she/it — que vocês já estão usando muito melhor." Reforce o progresso visível.</div></div></div>
+    <div class="tip tip-both"><strong>Vitória visível de julho:</strong> "Vocês agora conseguem escrever um e-mail profissional de negociação em inglês. Isso é o que a maioria dos compradores não consegue fazer. Vocês conseguem."</div>
+  </div>
+</div>
+
+<!-- EXTRAS JULHO -->
+<div class="month-header" style="margin-top:1.5rem;">Aulas extras — Julho</div>
+
+<div class="lesson-card extra" id="j11e">
+  <div class="lesson-header" onclick="toggle('j11e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Escape Room #1 — "The Missing Shipment"</div>
+      <div class="lesson-sub">Julho · Revisão lúdica: vocabulário + can + there is</div>
+    </div>
+    <div class="badges"><span class="badge b-project">Projeto</span><span class="badge b-review">Revisão</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">Setup</div><div class="tl-content"><div class="tl-label">Missão: "Um pedido de $50.000 sumiu. Vocês têm 60 minutos para resolver."</div><div class="tl-detail">5 etapas = 5 chaves. Só passam para a próxima ao completar a anterior. Trabalham juntos (não é competição — é cooperação nesse formato). Você é o narrador e os personagens.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 1</div><div class="tl-content"><div class="tl-label">E-mail para o fornecedor</div><div class="tl-detail">Escrevam um e-mail urgente perguntando sobre o status do pedido — usando vocabulário de julho e pelo menos 2 perguntas com "can".</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 2</div><div class="tl-content"><div class="tl-label">Call com o armazém</div><div class="tl-detail">Roleplay: ligam para o armazém americano. Você é o gerente. Eles têm que descrever o problema, usar there is/are para descrever o estoque e pedir confirmação.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 3</div><div class="tl-content"><div class="tl-label">Vocabulário quiz</div><div class="tl-detail">10 termos de compras — definições em inglês, eles respondem em inglês. Acertar 8/10 = chave desbloqueada.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 4</div><div class="tl-content"><div class="tl-label">Corrigir e-mail com erros</div><div class="tl-detail">Você mostra um e-mail cheio de erros (incluindo he/she/it sem -s). Eles identificam e corrigem. Mínimo de 5 erros encontrados para desbloquear.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 5</div><div class="tl-content"><div class="tl-label">Apresentação da solução</div><div class="tl-detail">60 segundos cada um: o que aconteceu, qual é a solução proposta, o que o fornecedor precisa fazer. Em inglês, sem notas.</div></div></div>
+    <div class="tip tip-both"><strong>Por que funciona:</strong> Rudi entra em modo solução de problemas (competência dele). Thiago processa cada etapa com calma porque tem tempo em cada chave. Os dois chegam juntos e a revisão acontece sem parecer revisão.</div>
+  </div>
+</div>
+
+<div class="lesson-card extra" id="j12e">
+  <div class="lesson-header" onclick="toggle('j12e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Listening Lab — inglês americano real de compras</div>
+      <div class="lesson-sub">Julho · Compreensão oral com vocabulário profissional</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Listening</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Contexto: "O que você ouve e não entende?"</div><div class="tl-detail">Pergunte: quando tentaram assistir algo em inglês ou ouvir alguém falar, o que foi mais difícil de entender? Conecte a resposta deles com o que você vai trabalhar hoje.</div></div></div>
+    <div class="tl"><div class="tl-time">5–25'</div><div class="tl-content"><div class="tl-label">Você fala — eles entendem (input real)</div><div class="tl-detail">Você simula ser um colega americano deixando um recado de voz: fala em inglês natural (não devagar demais) sobre uma situação de compras. Primeira vez: eles ouvem. Segunda vez: anotam palavras que entenderam. Terceira: discutem o que aconteceu na situação. Isso simula o ambiente real de trabalho deles.</div></div></div>
+    <div class="tl"><div class="tl-time">25–40'</div><div class="tl-content"><div class="tl-label">Frases de "comprador que não entendeu"</div><div class="tl-detail">Ensine como lidar quando não entende: "I'm sorry, could you repeat that?" / "Can you speak more slowly, please?" / "I didn't catch that — did you say...?" / "Just to confirm, you mean...?" Estas frases são salva-vidas em calls reais. Pratiquem em roleplay.</div></div></div>
+    <div class="tl"><div class="tl-time">40–55'</div><div class="tl-content"><div class="tl-label">Roleplay: call com sotaque — sobrevivência</div><div class="tl-detail">Você simula diferentes velocidades e sotaques leves (não exagere). Eles praticam pedir repetição, confirmar, e responder. O objetivo é que saiam desta aula com confiança de que conseguem sobreviver a uma call mesmo sem entender tudo.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Frase do mês para levar</div><div class="tl-detail">"Não precisa entender 100% para se comunicar. 70% de compreensão + as frases certas para pedir repetição = call bem-sucedida." Diga isso explicitamente.</div></div></div>
+  </div>
+</div>
+
+</div><!-- /jul -->
+
+
+<!-- ═══════════════════════════════════════════
+     AGOSTO
+═══════════════════════════════════════════ -->
+<div id="tab-ago" class="tab-panel">
+
+<div class="intro-box">
+  <strong>Agosto — Reuniões &amp; Comunicação.</strong> Foco: sobreviver e participar de reuniões em inglês. Frases funcionais de meeting, Present Continuous para situações em andamento. <strong>Erro do mês: inserção de vogal no final de consoantes</strong> ("work-i", "send-i"). Rudi tem pronúncia forte — use isso para modelar ao Thiago.
+</div>
+
+<div class="month-stats">
+  <span class="stat-pill">4 aulas regulares</span>
+  <span class="stat-pill">2 aulas extras</span>
+  <span class="stat-pill">Estrutura: Present Continuous</span>
+  <span class="stat-pill">Erro do mês: vogal final após consoante</span>
+</div>
+
+<!-- AULA 9 -->
+<div class="lesson-card" id="a1">
+  <div class="lesson-header" onclick="toggle('a1')">
+    <div class="lesson-num">09</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Meeting Room Survival — frases essenciais de reunião</div>
+      <div class="lesson-sub">01/08/2026 · Let me explain · Can you repeat? · I agree</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Conversa</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Warm-up: "Pior reunião da vida"</div><div class="tl-detail">Em português/inglês misturado: "Tell me about a terrible meeting you had. What went wrong?" Eles vão querer falar. Deixe. Isso gera motivação real para aprender as frases — porque elas vão resolver exatamente esses problemas.</div></div></div>
+    <div class="tl"><div class="tl-time">8–22'</div><div class="tl-content"><div class="tl-label">Input: 12 frases essenciais de reunião</div><div class="tl-detail">Apresente em blocos de 3, com pronúncia e uso: ENTENDIMENTO: "Can you repeat that, please?" / "What do you mean by...?" / "Just to confirm..." · PARTICIPAÇÃO: "I agree." / "I disagree." / "That's a good point." / "Let me explain." · ESTRUTURA: "Let's move on." / "Can we go back to...?" / "To summarize..." · COMPROMISSO: "I'll get back to you." / "Let's schedule a follow-up."</div></div></div>
+    <div class="tl"><div class="tl-time">22–38'</div><div class="tl-content"><div class="tl-label">Prática: "Frase do Caos"</div><div class="tl-detail">Você cria situações de reunião caóticas e eles reagem com a frase certa: você fala super rápido → "Can you repeat that?" / você introduz um tópico inesperado → "Can we go back to the main point?" / você diz algo errado → "I disagree — the deadline is actually next Friday." Eles reagem em tempo real.</div></div></div>
+    <div class="tl"><div class="tl-time">38–52'</div><div class="tl-content"><div class="tl-label">Roleplay: mini-reunião de alinhamento</div><div class="tl-detail">Você é o gerente americano. Assunto: "We need to cut purchasing costs by 10% this quarter." Eles participam da reunião usando as frases novas. Meta: cada um usa pelo menos 4 frases diferentes. Você propõe soluções absurdas de vez em quando para forçar "I disagree" e "That's a good point."</div></div></div>
+    <div class="tl"><div class="tl-time">52–58'</div><div class="tl-content"><div class="tl-label">Escrita: "Meeting minutes" de 5 linhas</div><div class="tl-detail">Cada um escreve o resumo da "reunião" que acabou de acontecer: o que foi discutido, o que foi decidido, próximos passos. Pratica escrita de follow-up real.</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Introdução do erro de agosto</div><div class="tl-detail">"Este mês vou prestar atenção nos finais de palavras. Em inglês, consoante final não tem vogal extra. 'Work' termina em K — não em 'ki'. Vou sinalizar quando aparecer."</div></div></div>
+    <div class="tip tip-gancho"><strong>Gancho Rudi:</strong> "Pensa nas entrevistas do Lewis Hamilton pós-corrida — ele usa exatamente essas frases quando discorda de uma decisão da equipe." <strong>Gancho Thiago:</strong> "No HIMYM, Marshall e Lily usam 'I agree / I disagree' nas discussões deles — agora você vai notar."</div>
+  </div>
+</div>
+
+<!-- AULA 10 -->
+<div class="lesson-card" id="a2">
+  <div class="lesson-header" onclick="toggle('a2')">
+    <div class="lesson-num">10</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Present Continuous — o que está acontecendo agora</div>
+      <div class="lesson-sub">08/08/2026 · "We are working on this" · Atualizações em tempo real</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Warm-up: quiz das frases de reunião</div><div class="tl-detail">10 situações rápidas — eles falam a frase certa. Alternado: Rudi primeiro, Thiago segundo. Mantenha o ritmo alto para não perder momentum.</div></div></div>
+    <div class="tl"><div class="tl-time">5–20'</div><div class="tl-content"><div class="tl-label">Input: Present Continuous — estrutura e uso</div><div class="tl-detail">Regra: sujeito + am/is/are + verbo-ing. Use em 3 contextos reais: (1) Ação agora: "I'm writing the PO right now." (2) Projeto em andamento: "We're working on a new supplier contract." (3) Futuro próximo planejado: "We're meeting with TechSupply on Monday." Compare com Present Simple: "I work here" (rotina) vs "I'm working on a report" (agora). Essa distinção é crucial.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Prática: status update oral</div><div class="tl-detail">Cada um dá um update de 2 minutos sobre o que "está acontecendo" no trabalho agora — usando Present Continuous pelo menos 5 vezes. Você pode interromper com perguntas: "And who is managing that project?" — força he/she/is + verbo-ing (consolida o erro do mês passado).</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Roleplay: reunião de status semanal</div><div class="tl-detail">Você é a diretora americana pedindo update da equipe de compras. Eles reportam. "Rudi, what are you working on this week?" / "Thiago, is the team negotiating with any new suppliers?" Força produção oral real no contexto deles.</div></div></div>
+    <div class="tl"><div class="tl-time">50–58'</div><div class="tl-content"><div class="tl-label">Escrita: "Weekly update" de e-mail</div><div class="tl-detail">Cada um escreve um update semanal de 4 frases usando Present Continuous: "We are reviewing two new suppliers. I am preparing the Q3 purchasing report. Thiago is negotiating payment terms with a vendor." Revisão cruzada.</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Erro do mês — foco</div><div class="tl-detail">Pratique finais de consoante com os verbos -ing que apareceram: "working", "sending", "meeting", "checking". Atenção: o -ing não adiciona vogal extra. "Working" — não "working-i".</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 11 -->
+<div class="lesson-card" id="a3">
+  <div class="lesson-header" onclick="toggle('a3')">
+    <div class="lesson-num">11</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Roleplay de reunião completa com fornecedor</div>
+      <div class="lesson-sub">15/08/2026 · Simulação real de 30 minutos · Tudo junto</div>
+    </div>
+    <div class="badges"><span class="badge b-project">Simulação</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Briefing: a missão de hoje</div><div class="tl-detail">"Hoje vocês têm uma reunião real com um fornecedor americano. 30 minutos de simulação. Eu sou a fornecedora — Sarah Williams, diretora comercial da PackagePro USA. Vocês são os compradores da WebContinental." Dê o contexto completo antes de começar.</div></div></div>
+    <div class="tl"><div class="tl-time">5–35'</div><div class="tl-content"><div class="tl-label">Simulação de reunião — 30 minutos reais</div><div class="tl-detail">Pauta: (1) Apresentações (5') (2) Proposta da fornecedora (10') — você apresenta, eles ouvem e fazem perguntas (3) Negociação (10') — preços, prazo, quantidade (4) Próximos passos (5') — confirmação e follow-up. Eles devem usar: frases de reunião, present continuous, vocabulário de compras, can/can't.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Debriefing da reunião</div><div class="tl-detail">Pause a simulação. Discutam: o que funcionou? O que foi difícil? Que frases usaram? Que frases gostariam de ter usado mas não encontraram? Você complementa com o que observou.</div></div></div>
+    <div class="tl"><div class="tl-time">50–58'</div><div class="tl-content"><div class="tl-label">Escrita: e-mail de follow-up da reunião</div><div class="tl-detail">Cada um escreve um e-mail de follow-up para Sarah: agradecimento, resumo dos pontos discutidos, próximos passos. 5 linhas mínimo. Revisão rápida.</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Feedback individualizado</div><div class="tl-detail">Para cada um: 1 ponto forte da reunião + 1 área para desenvolver. Específico e baseado em evidência: "Rudi, você usou 'Let me explain' perfeitamente na hora certa."</div></div></div>
+    <div class="tip tip-both"><strong>Meta desta aula:</strong> que saiam com a sensação "eu participei de uma reunião de negócios em inglês". Mesmo que imperfeita, a experiência de completar uma reunião inteira é transformadora para a autoconfiança.</div>
+  </div>
+</div>
+
+<!-- AULA 12 -->
+<div class="lesson-card" id="a4">
+  <div class="lesson-header" onclick="toggle('a4')">
+    <div class="lesson-num">12</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">E-mail de follow-up profissional — projeto de agosto</div>
+      <div class="lesson-sub">22/08/2026 · Antes e depois da reunião · Templates reais</div>
+    </div>
+    <div class="badges"><span class="badge b-business">Business</span><span class="badge b-project">Projeto</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Warm-up: "Quanto custa um e-mail mal escrito?"</div><div class="tl-detail">Abra com essa pergunta. Deixe-os pensar. "Um e-mail de follow-up mal feito depois de uma reunião pode custar um contrato, um atraso de semanas, ou uma relação com fornecedor." Isso cria urgência real para aprender.</div></div></div>
+    <div class="tl"><div class="tl-time">8–25'</div><div class="tl-content"><div class="tl-label">Input: anatomia do e-mail de follow-up</div><div class="tl-detail">Apresente a estrutura: (1) Assunto claro: "Follow-up: Meeting on August 15 — WebContinental x PackagePro" (2) Abertura: "Thank you for your time today." (3) Resumo: "As discussed, we agreed on..." usando Past tense (preview de setembro) (4) Próximos passos: "Please confirm the lead time by Friday." usando can/please (5) Fechamento: "Looking forward to our collaboration."</div></div></div>
+    <div class="tl"><div class="tl-time">25–42'</div><div class="tl-content"><div class="tl-label">Escrita: e-mail de follow-up real</div><div class="tl-detail">Baseado na reunião simulada da aula 11, cada um escreve um follow-up completo. Devem incluir: assunto, resumo de 2 pontos, 2 próximos passos com responsáveis, prazo. Individualmente, depois compartilham.</div></div></div>
+    <div class="tl"><div class="tl-time">42–52'</div><div class="tl-content"><div class="tl-label">Revisão cruzada + melhoria</div><div class="tl-detail">Cada um lê o e-mail do outro e sugere 1 melhoria. Você media. Reescritem as partes melhoradas. Processo real de edição colaborativa — habilidade valiosa no trabalho.</div></div></div>
+    <div class="tl"><div class="tl-time">52–58'</div><div class="tl-content"><div class="tl-label">Revisão de agosto: vitórias</div><div class="tl-detail">Liste as habilidades adquiridas: frases de reunião, present continuous, e-mail de follow-up. "Você agora pode participar de uma reunião internacional e fazer o follow-up por e-mail. Isso é o que a empresa quer de vocês."</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Preview de setembro</div><div class="tl-detail">"Em setembro: passado. Simple Past — contar o que aconteceu, dar updates históricos, escrever relatórios. Isso vai completar o trio: passado, presente, futuro."</div></div></div>
+  </div>
+</div>
+
+<!-- EXTRAS AGOSTO -->
+<div class="month-header" style="margin-top:1.5rem;">Aulas extras — Agosto</div>
+
+<div class="lesson-card extra" id="a5e">
+  <div class="lesson-header" onclick="toggle('a5e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Small Talk — o inglês antes e depois da reunião</div>
+      <div class="lesson-sub">Agosto · Weather, weekends, sports · Construindo rapport</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Conversa</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">O problema: os primeiros 5 minutos da reunião</div><div class="tl-detail">"O que acontece antes da reunião começar — aqueles 5 minutos de espera? Se você não consegue fazer small talk, fica em silêncio constrangedor. Isso afeta a percepção que o outro tem de você." Pergunte: "O que vocês fariam agora se um americano dissesse 'So, how's everything in Brazil?'"</div></div></div>
+    <div class="tl"><div class="tl-time">8–22'</div><div class="tl-content"><div class="tl-label">Input: 5 tópicos seguros de small talk</div><div class="tl-detail">(1) Clima: "It's been really hot here lately. How's the weather in New York?" (2) Fim de semana: "Did you have a good weekend?" (3) Esportes (internacional): "Did you watch the F1 race this weekend?" (4) Viagem: "Is this your first time working with a Brazilian company?" (5) Trabalho leve: "How long have you been with PackagePro?" Pratiquem cada um com respostas de 2-3 frases.</div></div></div>
+    <div class="tl"><div class="tl-time">22–40'</div><div class="tl-content"><div class="tl-label">Prática: small talk roulette</div><div class="tl-detail">Você sorteia um tópico e eles têm 60 segundos de conversa sobre ele — um começa, o outro continua. Você participa como americano. Tópicos personalizados: F1 para Rudi (garantido), Grêmio para Thiago (com explicação de que futebol brasileiro tem fãs internacionais).</div></div></div>
+    <div class="tl"><div class="tl-time">40–55'</div><div class="tl-content"><div class="tl-label">Roleplay completo: 5 minutos antes da reunião</div><div class="tl-detail">Você é a Sarah Williams (fornecedora). A "reunião" começa em 5 minutos. Eles têm que manter conversa casual com você durante esse tempo — sem silêncio. Crono rodando. Isso simula exatamente o que vai acontecer no trabalho.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Frases de saída elegante</div><div class="tl-detail">"Quando a reunião começar: 'Well, shall we get started?' / Quando terminar: 'It was great talking to you. I'll follow up by email.' Isso fecha o small talk profissionalmente."</div></div></div>
+    <div class="tip tip-gancho"><strong>Gancho Rudi:</strong> "Na F1, os pilotos fazem small talk com os jornalistas em inglês o tempo todo — eles têm frases prontas para cada situação. Você vai ter as suas." <strong>Gancho Thiago:</strong> "É como o aquecimento no jiu-jitsu — você não começa o treino direto na luta. Small talk é o aquecimento da reunião."</div>
+  </div>
+</div>
+
+<div class="lesson-card extra" id="a6e">
+  <div class="lesson-header" onclick="toggle('a6e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Emails em inglês — tom, registro e erros comuns</div>
+      <div class="lesson-sub">Agosto · Formal vs informal · O que nunca escrever</div>
+    </div>
+    <div class="badges"><span class="badge b-business">Business</span><span class="badge b-vocab">Escrita</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Diagnóstico: mostrem um e-mail que receberam</div><div class="tl-detail">Peça que descrevam (não mostrem, se não quiserem) um e-mail em inglês que já receberam no trabalho. Que palavras reconheceram? Que partes foram confusas? Isso conecta a aula à realidade imediata deles.</div></div></div>
+    <div class="tl"><div class="tl-time">8–25'</div><div class="tl-content"><div class="tl-label">Input: vocabulário de e-mail por nível de formalidade</div><div class="tl-detail">FORMAL (fornecedor novo, diretoria): "Dear Mr. Thompson / I am writing to / Please find attached / I look forward to / Best regards" · SEMI-FORMAL (parceiro de trabalho): "Hi Mike / I wanted to follow up / Please let me know / Thanks in advance / Best" · ERROS COMUNS A EVITAR: "Dear friend" (muito informal) / "I need" (agressivo — use "Could you" ou "Please") / "ASAP" sem contexto / Assunto vago como "Update".</div></div></div>
+    <div class="tl"><div class="tl-time">25–42'</div><div class="tl-content"><div class="tl-label">Atividade: reescrever e-mails terríveis</div><div class="tl-detail">Você mostra 3 e-mails mal escritos (muito rudes, muito informais ou muito confusos). Eles reescrevem. Isso é mais eficaz do que aprender com exemplos bons — erros claros ficam na memória.</div></div></div>
+    <div class="tl"><div class="tl-time">42–55'</div><div class="tl-content"><div class="tl-label">Produção: e-mail de primeira abordagem a fornecedor</div><div class="tl-detail">Cada um escreve um cold e-mail para um fornecedor americano que encontraram numa feira. Deve ter: assunto profissional, apresentação, objetivo, próximo passo. Revisão conjunta.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Template pessoal</div><div class="tl-detail">Cada um cria seu template de e-mail de apresentação para guardar e adaptar. Algo que possam usar amanhã no trabalho.</div></div></div>
+  </div>
+</div>
+
+</div><!-- /ago -->
+
+
+<!-- ═══════════════════════════════════════════
+     SETEMBRO
+═══════════════════════════════════════════ -->
+<div id="tab-set" class="tab-panel">
+
+<div class="intro-box">
+  <strong>Setembro — Passado &amp; Relatórios.</strong> Simple Past completa o trio temporal. Foco: contar o que aconteceu, dar updates históricos, escrever relatórios e storytelling profissional. <strong>Erro do mês: artigos a/an/the</strong> — o erro mais invisível mas mais frequente em compradores brasileiros falando inglês.
+</div>
+
+<div class="month-stats">
+  <span class="stat-pill">4 aulas regulares</span>
+  <span class="stat-pill">2 aulas extras</span>
+  <span class="stat-pill">Estrutura: Simple Past</span>
+  <span class="stat-pill">Erro do mês: artigos a/an/the</span>
+</div>
+
+<!-- AULA 13 -->
+<div class="lesson-card" id="s1">
+  <div class="lesson-header" onclick="toggle('s1')">
+    <div class="lesson-num">13</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Simple Past regular — o que fizemos</div>
+      <div class="lesson-sub">05/09/2026 · ordered, received, approved, contacted</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Warm-up: "What happened last week at work?"</div><div class="tl-detail">Peça que contem algo do trabalho da semana passada. Vão usar presente onde deveriam usar passado — não corrija. Anote mentalmente. Use isso para motivar o conteúdo: "Hoje você vai conseguir contar essa história toda no tempo certo."</div></div></div>
+    <div class="tl"><div class="tl-time">5–20'</div><div class="tl-content"><div class="tl-label">Input: Simple Past regular</div><div class="tl-detail">Regra: verbo + -ed (ou -d). Pronunciar os três sons de -ed: /t/ (worked, checked), /d/ (ordered, approved), /ɪd/ (contacted, decided). Exemplos reais: "We ordered 500 units last Monday." / "I contacted the supplier yesterday." / "They approved the PO on Friday." / "She confirmed the deadline." Escreva no chat e fale em voz alta — ambos precisam ouvir e ver.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Drill de pronúncia: -ed com verbos de compras</div><div class="tl-detail">Isso é específico — a pronúncia do -ed é um diferencial de fluência. Liste 15 verbos de compras no passado e practiquem em voz alta: ordered /d/, checked /t/, approved /d/, negotiated /ɪd/, contacted /ɪd/, confirmed /d/, received /d/, requested /ɪd/, shipped /t/, invoiced /t/. Rudi vai pegar rápido. Ajude Thiago a sentir a diferença.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Storytelling: "Conta um problema que você resolveu"</div><div class="tl-detail">Cada um conta (em inglês) sobre um problema profissional que resolveu. Você vai fazendo perguntas para manter o fluxo: "And what did you do next?" / "When did you contact them?" / "How did they respond?" Força uso contínuo do Simple Past em contexto real.</div></div></div>
+    <div class="tl"><div class="tl-time">50–58'</div><div class="tl-content"><div class="tl-label">Escrita: "Last week's report" — 5 linhas</div><div class="tl-detail">Cada um escreve um mini-relatório do que fez na semana passada no trabalho — só Simple Past regular. Revisão conjunta com foco na pronúncia futura do que escreveram.</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Erro do mês: artigos — introdução</div><div class="tl-detail">"Este mês vou prestar atenção nos artigos — a, an, the. Em português não existe essa distinção. Em inglês faz diferença. Vou apontar quando aparecer."</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 14 -->
+<div class="lesson-card" id="s2">
+  <div class="lesson-header" onclick="toggle('s2')">
+    <div class="lesson-num">14</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Simple Past irregular — os verbos mais usados</div>
+      <div class="lesson-sub">12/09/2026 · bought, sent, had, spoke, came, made...</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-vocab">Vocab</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Warm-up: teste diagnóstico</div><div class="tl-detail">"Como você diz no passado: buy, send, have, speak, come, make, get, go, see, say, know, think?" Eles tentam. Não corrija ainda — é para ver o que já sabem. Resultado vai mostrar quais precisam de atenção hoje.</div></div></div>
+    <div class="tl"><div class="tl-time">8–25'</div><div class="tl-content"><div class="tl-label">Input: 20 irregulares essenciais para compradores</div><div class="tl-detail">Em grupos de 5, com pronúncia e frase de contexto real: buy→bought / sell→sold / send→sent / get→got / have→had / make→made / go→went / come→came / say→said / know→knew / think→thought / find→found / give→gave / take→took / see→saw / write→wrote / speak→spoke / tell→told / meet→met / pay→paid. Não mais que 20 — saturação é real.</div></div></div>
+    <div class="tl"><div class="tl-time">25–40'</div><div class="tl-content"><div class="tl-label">Jogo: "Passado Rápido" — competição cronometrada</div><div class="tl-detail">Você fala o infinitivo, eles falam o passado. Crono. Quem errar "perde o direito" por 30 segundos (o outro pode roubar). Pontuação acumulada. Rudi vai entrar em modo competição — o Thiago também vai querer vencer. Isso acelera a memorização.</div></div></div>
+    <div class="tl"><div class="tl-time">40–55'</div><div class="tl-content"><div class="tl-label">Storytelling: "A negotiation story"</div><div class="tl-detail">Cada um conta uma negociação que viveu — real ou inventada — usando o máximo possível de irregulares: "I met the supplier last month. We spoke for two hours. They said the price was too high. I thought about it and made a counter-offer. We got a 15% discount." Você desafia com perguntas para forçar mais irregulares.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Diferenciação + artigos</div><div class="tl-detail">Rudi: desafie com negativas e perguntas no past (didn't buy, did you send?). Thiago: consolide os 20 com flash cards no chat. Destaque 1 erro de artigo de cada na aula.</div></div></div>
+    <div class="tip tip-gancho"><strong>Gancho Rudi:</strong> "Na Breaking Bad, Walter diz 'I did it for me. I liked it. I was good at it.' — passado irregular o tempo todo. Isso é storytelling em inglês." <strong>Gancho Thiago:</strong> "Quando o Grêmio contratou o Pavón — 'They bought him for $3M. He came from Argentina. He met the team in January.' — passado irregular em notícia real."</div>
+  </div>
+</div>
+
+<!-- AULA 15 -->
+<div class="lesson-card" id="s3">
+  <div class="lesson-header" onclick="toggle('s3')">
+    <div class="lesson-num">15</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Storytelling profissional — contar situações com impacto</div>
+      <div class="lesson-sub">19/09/2026 · Narrativa de problema-solução · Comunicação persuasiva</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Conversa</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Abertura: "Qual é a história de compra mais difícil que vocês já viveram?"</div><div class="tl-detail">Deixe-os contar em português misturado com inglês. Isso é o raw material da aula. Você vai ajudá-los a contar essa mesma história em inglês ao final.</div></div></div>
+    <div class="tl"><div class="tl-time">8–22'</div><div class="tl-content"><div class="tl-label">Input: estrutura de narrativa profissional</div><div class="tl-detail">Ensine a estrutura: (1) Contexto: "Last quarter, we had a problem with our main supplier." (2) Problema: "They couldn't deliver on time. We ran out of stock." (3) Ação: "I contacted three alternative vendors. We negotiated urgently." (4) Resultado: "We found a solution in 48 hours. The client didn't notice the delay." (5) Lição: "Now we always have a backup supplier." Conectores: first, then, next, after that, finally, as a result.</div></div></div>
+    <div class="tl"><div class="tl-time">22–40'</div><div class="tl-content"><div class="tl-label">Prática: contar a história estruturada</div><div class="tl-detail">Cada um retoma a história que contou no início e a reconstrói com a estrutura. Você pode interromper gentilmente com prompts: "And then what happened?" / "What was the result?" / "What did you learn from that?" Força progressão natural da narrativa.</div></div></div>
+    <div class="tl"><div class="tl-time">40–55'</div><div class="tl-content"><div class="tl-label">Variação: "Pitch de resultado" para o chefe</div><div class="tl-detail">Agora imaginem que precisam apresentar o resultado dessa situação para o chefe americano. 90 segundos cada um. Foco: contextualizar, mostrar o problema, mostrar o que fizeram, mostrar o resultado em números ou impacto.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Artigos — foco específico</div><div class="tl-detail">Revisão dos artigos que apareceram na aula: "I contacted A supplier" (qualquer um) vs "I contacted THE supplier" (o específico que vocês já conhecem). Mostre 3 exemplos reais da aula com o artigo certo explicado.</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 16 -->
+<div class="lesson-card" id="s4">
+  <div class="lesson-header" onclick="toggle('s4')">
+    <div class="lesson-num">16</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Status update oral e escrito — projeto de setembro</div>
+      <div class="lesson-sub">26/09/2026 · "Last week we... This week we're..." · Passado + presente</div>
+    </div>
+    <div class="badges"><span class="badge b-business">Business</span><span class="badge b-project">Projeto</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–10'</div><div class="tl-content"><div class="tl-label">Quiz integrado: passado + presente</div><div class="tl-detail">10 frases para completar misturando Simple Past e Present Continuous: "Last week we ___ (order) 200 units. Right now we ___ (negotiate) with a new vendor." Alternado entre eles, cronometrado. Isso revisita os dois meses anteriores.</div></div></div>
+    <div class="tl"><div class="tl-time">10–30'</div><div class="tl-content"><div class="tl-label">Simulação: reunião de status mensal</div><div class="tl-detail">Você é o diretor americano de compras. Eles apresentam o status do mês em inglês — o que aconteceu em setembro (passado) e o que está acontecendo agora (presente). Cada um tem 3 minutos de fala ininterrupta. Você faz perguntas depois. Isso simula uma reunião real de reporte para a liderança americana.</div></div></div>
+    <div class="tl"><div class="tl-time">30–45'</div><div class="tl-content"><div class="tl-label">Escrita: relatório executivo de setembro</div><div class="tl-detail">Cada um escreve um mini-relatório de 8 linhas com: título, 3 resultados do mês (passado), 2 ações em andamento (presente), 1 próximo passo. Formatado como e-mail para chefe americano. Isso é algo que poderiam enviar de verdade.</div></div></div>
+    <div class="tl"><div class="tl-time">45–55'</div><div class="tl-content"><div class="tl-label">Revisão cruzada + feedback</div><div class="tl-detail">Trocam os relatórios e dão feedback em inglês: "Good report, but in line 3 you should use 'the' instead of 'a'." Pratica tanto leitura crítica quanto feedback construtivo em inglês.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Preview de outubro + balanço</div><div class="tl-detail">"Em outubro: futuro. Going to e will — planos, previsões, decisões imediatas. Vocês já têm passado e presente. O futuro fecha o ciclo." Mostre o progresso concreto dos 4 meses.</div></div></div>
+    <div class="tip tip-both"><strong>Vitória visível de setembro:</strong> "Vocês agora conseguem falar sobre o passado com detalhes, dar status updates e escrever relatórios em inglês. Isso é o que a empresa precisa de um comprador internacional."</div>
+  </div>
+</div>
+
+<!-- EXTRAS SETEMBRO -->
+<div class="month-header" style="margin-top:1.5rem;">Aulas extras — Setembro</div>
+
+<div class="lesson-card extra" id="s5e">
+  <div class="lesson-header" onclick="toggle('s5e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Escape Room #2 — "The Contract Crisis"</div>
+      <div class="lesson-sub">Setembro · Revisão: past + present + meeting phrases + vocab</div>
+    </div>
+    <div class="badges"><span class="badge b-project">Projeto</span><span class="badge b-review">Revisão</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">Setup</div><div class="tl-content"><div class="tl-label">Missão: "O contrato com o fornecedor principal foi cancelado — vocês têm 60 minutos para resolver antes da reunião com a diretoria."</div><div class="tl-detail">5 chaves, cada uma usando habilidades dos meses anteriores. Cooperação — os dois precisam trabalhar juntos. Você narra e é os personagens.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 1</div><div class="tl-content"><div class="tl-label">Relatório de situação</div><div class="tl-detail">Escrever um e-mail para o diretor americano explicando o que aconteceu (Simple Past) e o que está sendo feito agora (Present Continuous). Mínimo 6 frases.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 2</div><div class="tl-content"><div class="tl-label">Call de emergência com fornecedor alternativo</div><div class="tl-detail">Roleplay: ligar para um fornecedor backup. Usar can/could, there is/are, vocabulário de compras. Convencer o fornecedor a aceitar um prazo urgente.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 3</div><div class="tl-content"><div class="tl-label">Irregular Past quiz</div><div class="tl-detail">20 irregulares em 90 segundos — acertar 15 para desbloquear. Pressão de tempo aumenta ativação.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 4</div><div class="tl-content"><div class="tl-label">Reunião de crise — frases de meeting</div><div class="tl-detail">5 minutos de reunião com o diretor americano (você). Eles precisam usar 8 frases de meeting da aula 9. Você conta quantas usaram.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 5</div><div class="tl-content"><div class="tl-label">Storytelling da solução</div><div class="tl-detail">2 minutos cada: contar o que aconteceu, o que fizeram e qual foi o resultado — formato narrativo profissional. Usando artigos corretamente (a/the).</div></div></div>
+  </div>
+</div>
+
+<div class="lesson-card extra" id="s6e">
+  <div class="lesson-header" onclick="toggle('s6e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Prepositions of Time — in, on, at em contexto profissional</div>
+      <div class="lesson-sub">Setembro · "at 3pm / on Friday / in September" · Erros clássicos</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Diagnóstico: "When is the meeting?"</div><div class="tl-detail">Peça que descrevam quando são as próximas reuniões e prazos deles. Vão usar "in Friday", "at September" — erros clássicos de brasileiros. Anote sem corrigir.</div></div></div>
+    <div class="tl"><div class="tl-time">8–22'</div><div class="tl-content"><div class="tl-label">Input: a regra dos 3</div><div class="tl-detail">AT = horário específico + momentos especiais: "at 3pm, at noon, at midnight, at the meeting" / ON = dias específicos: "on Friday, on September 12, on Monday morning" / IN = períodos: "in September, in 2026, in the morning, in Q3". Dica mnemônica: vai do maior (IN) para o menor (AT). Exemplos de calendário de compras: "The PO is due on Friday at 5pm. We have a supplier visit in October."</div></div></div>
+    <div class="tl"><div class="tl-time">22–40'</div><div class="tl-content"><div class="tl-label">Prática: calendário de compras em inglês</div><div class="tl-detail">Você descreve uma agenda de compras em português — eles falam em inglês com as preposições certas: "Reunião sexta às 14h" → "Meeting on Friday at 2pm." / "Entrega em outubro" → "Delivery in October." / "Prazo amanhã ao meio-dia" → "Deadline tomorrow at noon." 15 situações alternadas.</div></div></div>
+    <div class="tl"><div class="tl-time">40–55'</div><div class="tl-content"><div class="tl-label">Roleplay: agendar reunião por e-mail</div><div class="tl-detail">Cada um escreve um e-mail agendando uma reunião — usando AT, ON e IN corretamente em pelo menos 4 frases. "Can we schedule a call on Friday at 10am? I'm available in the morning." Revisão conjunta.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Consolidação oral</div><div class="tl-detail">Cada um descreve sua agenda real da próxima semana em inglês — só com preposições corretas. Você sinaliza erros com um gesto combinado.</div></div></div>
+  </div>
+</div>
+
+</div><!-- /set -->
+
+
+<!-- ═══════════════════════════════════════════
+     OUTUBRO
+═══════════════════════════════════════════ -->
+<div id="tab-out" class="tab-panel">
+
+<div class="intro-box">
+  <strong>Outubro — Futuro &amp; Planejamento.</strong> Going to (planos definidos) e Will (decisões imediatas e previsões) completam o sistema verbal básico. Vocabulário de planejamento e projeção. <strong>Erro do mês: preposições de lugar</strong> — "in/on/at" com locais, que diferem das preposições de tempo.
+</div>
+
+<div class="month-stats">
+  <span class="stat-pill">4 aulas regulares</span>
+  <span class="stat-pill">2 aulas extras</span>
+  <span class="stat-pill">Estrutura: Going to / Will</span>
+  <span class="stat-pill">Erro do mês: preposições de lugar</span>
+</div>
+
+<!-- AULA 17 -->
+<div class="lesson-card" id="o1">
+  <div class="lesson-header" onclick="toggle('o1')">
+    <div class="lesson-num">17</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Going to — planos definidos e intenções</div>
+      <div class="lesson-sub">03/10/2026 · "We're going to order 500 units" · Planejamento</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Warm-up: "What are your plans for next quarter?"</div><div class="tl-detail">Tentem responder em inglês. Vão usar present ou infinitivo — observe. Isso motiva aprender a estrutura certa.</div></div></div>
+    <div class="tl"><div class="tl-time">5–20'</div><div class="tl-content"><div class="tl-label">Input: Going to — 2 usos principais</div><div class="tl-detail">(1) Plano já decidido: "We're going to order 500 units next month." (2) Evidência visível de algo prestes a acontecer: "Look at their prices — they're going to increase them." Compare: "Going to" = plano = você já sabe o que vai fazer. Formas: I'm going to / He's going to / We're going to / Are you going to...? / We're not going to...</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Prática: plano de compras do Q4</div><div class="tl-detail">Cada um apresenta os planos de compras do próximo trimestre — inventados ou reais — usando going to pelo menos 6 vezes. Você interrompe com perguntas: "And when are you going to place the order?" / "Are they going to approve the budget?"</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Roleplay: reunião de planejamento trimestral</div><div class="tl-detail">Você é o diretor financeiro americano. Eles apresentam o plano de compras para Q4. Precisam justificar cada decisão: "We're going to negotiate with three new suppliers because..." / "We're not going to renew the contract with X because..."</div></div></div>
+    <div class="tl"><div class="tl-time">50–58'</div><div class="tl-content"><div class="tl-label">Escrita: plano de ação em bullet points</div><div class="tl-detail">"Action plan — Q4 2026" — cada um escreve 5 ações usando going to. Formato real de apresentação executiva.</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Erro do mês — início</div><div class="tl-detail">"Este mês: preposições de lugar. 'At the office, in the warehouse, on the second floor.' Vou sinalizar quando sair errado."</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 18 -->
+<div class="lesson-card" id="o2">
+  <div class="lesson-header" onclick="toggle('o2')">
+    <div class="lesson-num">18</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Will — decisões imediatas e previsões</div>
+      <div class="lesson-sub">10/10/2026 · "I'll send it now" · "Prices will increase"</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Contraste direto: Going to vs. Will</div><div class="tl-detail">Mostre o contraste logo de início: "I'm going to send the PO tomorrow" (plano feito antes) vs. "I'll send it right now" (decisão tomada no momento da fala). Isso é o núcleo — não confundam os dois. Contextualize com situações reais de compras.</div></div></div>
+    <div class="tl"><div class="tl-time">8–22'</div><div class="tl-content"><div class="tl-label">Input: Will — 3 usos</div><div class="tl-detail">(1) Decisão imediata: "I'll call them right now." (2) Previsão: "Prices will increase next year." (3) Promessa/oferta: "I'll negotiate the best price for you." / "We won't let you down." Forma: will + base / won't + base / Will you...? Contração: I'll, you'll, he'll, we'll, they'll — muito importante para listening.</div></div></div>
+    <div class="tl"><div class="tl-time">22–37'</div><div class="tl-content"><div class="tl-label">Prática: "Situação de crise — o que você faz?"</div><div class="tl-detail">10 situações de crise de compras — eles respondem com will (decisão imediata): "The supplier just cancelled!" → "I'll call our backup vendor immediately." / "The price went up 30%!" → "I'll talk to the manager and I'll look for alternatives." Rudi vai adorar a urgência. Thiago vai pensar melhor antes de falar — dê alguns segundos.</div></div></div>
+    <div class="tl"><div class="tl-time">37–52'</div><div class="tl-content"><div class="tl-label">Roleplay: negociação com promessas</div><div class="tl-detail">Você é um fornecedor difícil. Eles precisam negociar usando will para promessas e compromissos: "We'll place a bulk order if you give us a discount." / "If you deliver on time, we'll renew the contract." / "We won't work with you again if this happens." Urgência e persuasão em inglês.</div></div></div>
+    <div class="tl"><div class="tl-time">52–60'</div><div class="tl-content"><div class="tl-label">Escrita + erro do mês</div><div class="tl-detail">Cada um escreve 3 previsões para o mercado de compras do próximo ano usando will. Revise 1 erro de preposição de lugar que apareceu na aula. Mostre o padrão: "at the office" vs "in the office" — ambos existem com nuances diferentes.</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 19 -->
+<div class="lesson-card" id="o3">
+  <div class="lesson-header" onclick="toggle('o3')">
+    <div class="lesson-num">19</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Projeto de planejamento — "Q1 2027 Strategy"</div>
+      <div class="lesson-sub">17/10/2026 · Apresentação de plano em inglês · Going to + Will</div>
+    </div>
+    <div class="badges"><span class="badge b-project">Projeto</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Briefing</div><div class="tl-detail">"Hoje vocês são gerentes de compras apresentando a estratégia de Q1 2027 para o board americano." Contexto claro, stakes altos (imaginários), que é o que mantém o Rudi engajado e o Thiago preparado.</div></div></div>
+    <div class="tl"><div class="tl-time">5–25'</div><div class="tl-content"><div class="tl-label">Preparação individual: estrutura do pitch</div><div class="tl-detail">15 minutos para preparar: (1) Contexto do mercado — 2 previsões com will (2) Estratégia de compras — 3 planos com going to (3) Desafios esperados — 2 riscos com might/may (preview) (4) Resultado esperado — 1 meta clara. Escrevem as notas, mas vão apresentar oralmente.</div></div></div>
+    <div class="tl"><div class="tl-time">25–45'</div><div class="tl-content"><div class="tl-label">Apresentação: 5 minutos cada</div><div class="tl-detail">Cada um apresenta para você (o board). Rudi vai de improviso com as notas. Thiago vai precisar das notas mais — deixe. Você faz perguntas desafiadoras: "Why will prices increase?" / "What's your backup plan?" Força argumentação em inglês.</div></div></div>
+    <div class="tl"><div class="tl-time">45–55'</div><div class="tl-content"><div class="tl-label">Feedback estruturado</div><div class="tl-detail">Para cada um: (1) Ponto forte do conteúdo (2) Ponto forte da linguagem (3) Uma melhoria de linguagem (4) Uma melhoria de clareza. Específico e construtivo.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Reflexão + preview</div><div class="tl-detail">"Na semana que vem: simulação completa — e-mail + reunião + follow-up. O mês de outubro em uma aula só." Previsibilidade que eles precisam.</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 20 -->
+<div class="lesson-card" id="o4">
+  <div class="lesson-header" onclick="toggle('o4')">
+    <div class="lesson-num">20</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Simulação completa de ciclo de compra internacional</div>
+      <div class="lesson-sub">24/10/2026 · E-mail + Call + Negociação + Follow-up</div>
+    </div>
+    <div class="badges"><span class="badge b-project">Simulação</span><span class="badge b-review">Revisão</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Setup: contexto completo da simulação</div><div class="tl-detail">"Cenário: a WebContinental quer importar um novo produto de uma empresa americana, a GlobalPack Inc. Vocês são os compradores responsáveis. O processo começa agora." Você é Sarah Williams, diretora comercial da GlobalPack.</div></div></div>
+    <div class="tl"><div class="tl-time">5–15'</div><div class="tl-content"><div class="tl-label">Fase 1: E-mail de primeiro contato</div><div class="tl-detail">Escrevem um e-mail de apresentação e interesse — usando vocabulário de compras, present simple, going to. 10 minutos. Você lê e responde como Sarah com uma proposta.</div></div></div>
+    <div class="tl"><div class="tl-time">15–35'</div><div class="tl-content"><div class="tl-label">Fase 2: Reunião de negociação</div><div class="tl-detail">Call com Sarah. 20 minutos de negociação real: preço, lead time, condições de pagamento, volume. Eles têm que usar frases de reunião, can, will, going to. Você é um fornecedor realista — cede em algumas coisas, mantém posição em outras.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Fase 3: E-mail de follow-up e confirmação</div><div class="tl-detail">Escrevem o follow-up confirmando o que foi acordado. Usam passado (o que discutimos), presente (o que estamos confirmando) e futuro (o que vai acontecer). Integração completa dos 5 meses.</div></div></div>
+    <div class="tl"><div class="tl-time">50–60'</div><div class="tl-content"><div class="tl-label">Debriefing e celebração</div><div class="tl-detail">"Vocês acabaram de completar um ciclo completo de compra internacional em inglês. Do primeiro contato ao follow-up. Isso é o que a empresa precisa de vocês." Elogio específico para cada um + vitórias concretas do mês.</div></div></div>
+  </div>
+</div>
+
+<!-- EXTRAS OUTUBRO -->
+<div class="month-header" style="margin-top:1.5rem;">Aulas extras — Outubro</div>
+
+<div class="lesson-card extra" id="o5e">
+  <div class="lesson-header" onclick="toggle('o5e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Comparatives &amp; Superlatives — comparando fornecedores</div>
+      <div class="lesson-sub">Outubro · "better price / the best lead time" · Vocabulário de avaliação</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Warm-up: "Qual é melhor — Supplier A ou Supplier B?"</div><div class="tl-detail">Descreva dois fornecedores hipotéticos com características diferentes. Peça que expressem a preferência em inglês. Vão usar "more good" ou "gooder" — registre os erros sem corrigir.</div></div></div>
+    <div class="tl"><div class="tl-time">8–22'</div><div class="tl-content"><div class="tl-label">Input: comparativos e superlativos — regras</div><div class="tl-detail">Curtos: fast→faster→fastest / cheap→cheaper→cheapest. Longos: expensive→more expensive→most expensive. Irregulares: good→better→best / bad→worse→worst. Contexto de compras: "Supplier A is cheaper than B." / "This is the most reliable vendor we have." / "Their lead time is better than the competition."</div></div></div>
+    <div class="tl"><div class="tl-time">22–40'</div><div class="tl-content"><div class="tl-label">Atividade: "Supplier Comparison Report"</div><div class="tl-detail">Você dá dados de 3 fornecedores fictícios (preço, prazo, qualidade, confiabilidade). Eles precisam escrever um parágrafo de recomendação comparando os três e justificando a escolha — usando pelo menos 6 comparativos e 2 superlativos.</div></div></div>
+    <div class="tl"><div class="tl-time">40–55'</div><div class="tl-content"><div class="tl-label">Roleplay: defendendo a escolha ao diretor</div><div class="tl-detail">Você é o diretor questionando a escolha. Eles têm que defender com comparativos: "We chose them because they're faster than the others." / "Their prices are the most competitive in the market." Treina argumentação em inglês.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Aplicação rápida</div><div class="tl-detail">Cada um compara dois carros (Rudi vai adorar), dois times de futebol (Thiago) — usando os mesmos comparativos de negócio. Mesmo vocabulário, outro contexto — consolida a estrutura.</div></div></div>
+  </div>
+</div>
+
+<div class="lesson-card extra" id="o6e">
+  <div class="lesson-header" onclick="toggle('o6e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Asking for &amp; Giving Opinions — debate profissional</div>
+      <div class="lesson-sub">Outubro · "What do you think?" · "In my opinion..." · Argumentação</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Conversa</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Abertura: "Qual sua opinião sobre [tema polêmico de negócio]?"</div><div class="tl-detail">Exemplo: "Should companies always choose the cheapest supplier?" Eles tentam argumentar. Observe: conseguem sustentar um argumento em inglês? Onde travam?</div></div></div>
+    <div class="tl"><div class="tl-time">8–22'</div><div class="tl-content"><div class="tl-label">Input: frases de opinião por nível</div><div class="tl-detail">BÁSICO: "I think... / I don't think... / In my opinion..." · MÉDIO: "I agree with you, but... / That's a good point. However... / I see your point, but I disagree because..." · AVANÇADO (preview): "From my perspective... / I'd argue that... / It seems to me that..." Pratiquem cada nível com um tópico de negócio.</div></div></div>
+    <div class="tl"><div class="tl-time">22–45'</div><div class="tl-content"><div class="tl-label">Debate estruturado: 3 tópicos</div><div class="tl-detail">Tópico 1: "Cheap suppliers are always risky." (Rudi defende, Thiago critica — depois invertem.) Tópico 2: "English is essential for promotion in Brazil." Tópico 3: "Working from home is better for buyers." Cada debate 7-8 minutos. Você modera e força o uso das frases.</div></div></div>
+    <div class="tl"><div class="tl-time">45–55'</div><div class="tl-content"><div class="tl-label">Roleplay: reunião com opinião divergente</div><div class="tl-detail">Você propõe uma mudança de estratégia de compras que eles discordam. Eles têm que argumentar educadamente em inglês — sem ser rudes, mas sem ceder sem justificativa. Pratica assertividade profissional em inglês.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Reflexão: o que foi difícil?</div><div class="tl-detail">Cada um identifica onde travou durante o debate. Você aponta o que foi bom. Mapa de desenvolvimento individual.</div></div></div>
+  </div>
+</div>
+
+</div><!-- /out -->
+
+
+<!-- ═══════════════════════════════════════════
+     NOVEMBRO
+═══════════════════════════════════════════ -->
+<div id="tab-nov" class="tab-panel">
+
+<div class="intro-box">
+  <strong>Novembro — Vocabulário Avançado &amp; Fluência.</strong> Expressões idiomáticas de negócio, condicional básico (if + present → will) e conversação mais longa e autônoma. <strong>Erro do mês: Present Continuous vs. Simple Present</strong> — "I am working here every day" em vez de "I work here every day". Hora de fechar esse circuito.
+</div>
+
+<div class="month-stats">
+  <span class="stat-pill">4 aulas regulares</span>
+  <span class="stat-pill">2 aulas extras</span>
+  <span class="stat-pill">Estrutura: Condicional 1 + Idioms</span>
+  <span class="stat-pill">Erro do mês: Cont. vs Simple</span>
+</div>
+
+<!-- AULA 21 -->
+<div class="lesson-card" id="n1">
+  <div class="lesson-header" onclick="toggle('n1')">
+    <div class="lesson-num">21</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Business Idioms — expressões que todo comprador ouve</div>
+      <div class="lesson-sub">07/11/2026 · "touch base" · "ballpark figure" · "get back to you"</div>
+    </div>
+    <div class="badges"><span class="badge b-vocab">Vocab</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Abertura: "Você já ouviu isso e não entendeu?"</div><div class="tl-detail">Pergunte se já ouviram expressões em inglês que não faziam sentido literal. "Touch base" — o que você acha que significa? Diversão garantida. Isso cria o gancho perfeito para a aula.</div></div></div>
+    <div class="tl"><div class="tl-time">8–25'</div><div class="tl-content"><div class="tl-label">Input: 12 expressões essenciais de negócio</div><div class="tl-detail">"Touch base" = entrar em contato brevemente / "Ballpark figure" = número aproximado / "Get back to you" = retornar com resposta / "On the same page" = alinhados / "Move the needle" = fazer diferença / "Low-hanging fruit" = oportunidade fácil / "Circle back" = retornar ao assunto / "Bandwidth" = capacidade / "Take it offline" = resolver fora da reunião / "Heads up" = aviso prévio / "Bottom line" = resultado final / "Deep dive" = análise detalhada. Cada uma com contexto de compras.</div></div></div>
+    <div class="tl"><div class="tl-time">25–40'</div><div class="tl-content"><div class="tl-label">Jogo: "Traduz ou pierde"</div><div class="tl-detail">Você usa a expressão num contexto e eles explicam o significado em português. Alternado, cronometrado, pontuação. "I'll get back to you by Friday" → o que o fornecedor prometeu? Rudi vai tentar adivinhar pelo contexto — ensinável. Thiago vai preferir aprender antes de adivinhar — deixe-o usar as notas.</div></div></div>
+    <div class="tl"><div class="tl-time">40–55'</div><div class="tl-content"><div class="tl-label">Roleplay: call com idioms naturais</div><div class="tl-detail">Simulação de call de negócios onde eles têm que usar pelo menos 5 das expressões de forma natural. Você também usa — e eles têm que entender o que você disse. Integração de listening e speaking.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Erro do mês — abertura</div><div class="tl-detail">"Novembro: Present Continuous vs. Simple. 'I work here every day' — não 'I am working here every day'. Ação habitual = Simple. Ação agora = Continuous. Vou sinalizar ao longo do mês."</div></div></div>
+    <div class="tip tip-gancho"><strong>Gancho Rudi:</strong> "Na F1, os engenheiros de pista usam 'circle back', 'heads up' e 'bottom line' o tempo todo nas comunicações de rádio com os pilotos." <strong>Gancho Thiago:</strong> "No HIMYM, o Marshall usa 'bottom line' e 'heads up' toda hora — agora você vai notar."</div>
+  </div>
+</div>
+
+<!-- AULA 22 -->
+<div class="lesson-card" id="n2">
+  <div class="lesson-header" onclick="toggle('n2')">
+    <div class="lesson-num">22</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Condicional 1 — negociações com condições</div>
+      <div class="lesson-sub">14/11/2026 · "If you order now, we'll give you a discount"</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Warm-up: revisão de idioms da semana passada</div><div class="tl-detail">Quiz rápido: você usa uma expressão em contexto, eles identificam qual é. 6 expressões em 3 minutos. Revisa sem virar revisão formal.</div></div></div>
+    <div class="tl"><div class="tl-time">8–22'</div><div class="tl-content"><div class="tl-label">Input: Condicional 1 — estrutura e usos</div><div class="tl-detail">Estrutura: If + Present Simple → Will. Contextos de compras: "If we order 500 units, they'll give us a 15% discount." / "If you deliver late, we won't renew the contract." / "If prices increase, we'll look for alternatives." / "We'll increase the order if you confirm the lead time." (ordem pode inverter). A negociação perfeita usa condicional o tempo todo.</div></div></div>
+    <div class="tl"><div class="tl-time">22–40'</div><div class="tl-content"><div class="tl-label">Prática: "If game" — condições de negociação</div><div class="tl-detail">Você joga uma condição, eles respondem com a consequência — e vice-versa. "If we place an order today..." → "...you'll get a 10% discount." / "If you agree to net 60 payment terms..." → "...we'll give you priority shipping." Eles também criam condições que você tem que responder. Dinâmica de negociação real.</div></div></div>
+    <div class="tl"><div class="tl-time">40–55'</div><div class="tl-content"><div class="tl-label">Roleplay: negociação com condicional</div><div class="tl-detail">Você é um fornecedor com ofertas condicionais. Eles negociam. O acordo final deve ter pelo menos 3 condições estabelecidas com "If...will". Contexto: novo contrato anual com metas de volume e desconto progressivo.</div></div></div>
+    <div class="tl"><div class="tl-time">55–60'</div><div class="tl-content"><div class="tl-label">Escrita: "Contract conditions" — documento simples</div><div class="tl-detail">Cada um escreve 4 condições de contrato usando condicional. "If the supplier misses the deadline twice, we will cancel the contract." Formato real de cláusula de contrato simplificada.</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 23 -->
+<div class="lesson-card" id="n3">
+  <div class="lesson-header" onclick="toggle('n3')">
+    <div class="lesson-num">23</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Conversa livre — vocabulário acumulado em ação</div>
+      <div class="lesson-sub">21/11/2026 · Tópicos livres com estrutura acumulada · Fluência</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Conversa</span><span class="badge b-review">Revisão</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–10'</div><div class="tl-content"><div class="tl-label">Aquecimento livre: "O que está acontecendo na vida de vocês?"</div><div class="tl-detail">10 minutos de conversa completamente livre — vida pessoal, trabalho, fim de semana. Você participa como colega, não como professora. Observe: o que estão usando automaticamente? O que ainda saindo com esforço?</div></div></div>
+    <div class="tl"><div class="tl-time">10–28'</div><div class="tl-content"><div class="tl-label">Tópico 1: trabalho em detalhes</div><div class="tl-detail">Cada um fala por 4 minutos sobre o próprio trabalho — o que fizeram esse mês, o que estão fazendo agora, o que planejam. Você faz perguntas de follow-up. Avalie (discretamente): quantos tempos verbais diferentes usaram? Quantas expressões de negócio apareceram naturalmente?</div></div></div>
+    <div class="tl"><div class="tl-time">28–45'</div><div class="tl-content"><div class="tl-label">Tópico 2: interesse pessoal em inglês</div><div class="tl-detail">Rudi fala sobre F1 ou carros por 5 minutos em inglês — você faz perguntas mesmo sem saber muito. Depois Thiago fala sobre Grêmio ou HIMYM. O objetivo: fluência fora do contexto profissional também. Um comprador que só fala de trabalho não faz small talk.</div></div></div>
+    <div class="tl"><div class="tl-time">45–57'</div><div class="tl-content"><div class="tl-label">Debate livre: "O que mudou para vocês em inglês desde maio?"</div><div class="tl-detail">Conversam entre si sobre o progresso deles — o que melhorou, o que ainda é difícil, o que querem continuar desenvolvendo. Em inglês. Você modera. Isso é reflexão metacognitiva que consolida o aprendizado.</div></div></div>
+    <div class="tl"><div class="tl-time">57–60'</div><div class="tl-content"><div class="tl-label">Erro do mês — foco final</div><div class="tl-detail">Destaque 1 acerto de Present Continuous vs. Simple que apareceu na conversa livre. "Rudi, você disse 'I work with suppliers every day' — perfeitamente correto. Não 'I am working' para hábito. Isso é progresso real."</div></div></div>
+    <div class="tip tip-both"><strong>Objetivo desta aula:</strong> criar a sensação de "eu consigo ter uma conversa em inglês". Não corrigir tudo. Deixar fluir. Celebrar o que sai bem. Esta é a aula que vai dar confiança para dezembro.</div>
+  </div>
+</div>
+
+<!-- AULA 24 -->
+<div class="lesson-card" id="n4">
+  <div class="lesson-header" onclick="toggle('n4')">
+    <div class="lesson-num">24</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Simulação completa #2 — ciclo integrado com idioms</div>
+      <div class="lesson-sub">28/11/2026 · E-mail + reunião + negociação + follow-up com vocabulário avançado</div>
+    </div>
+    <div class="badges"><span class="badge b-project">Simulação</span><span class="badge b-review">Revisão</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Setup: novo cenário, mesmo ciclo</div><div class="tl-detail">Fornecedor novo: EcoBox USA, empresa sustentável de embalagens. A WebContinental quer migrar para embalagens ecológicas. Eles lideram o projeto. Compare mentalmente com a simulação de outubro — o progresso vai ser visível.</div></div></div>
+    <div class="tl"><div class="tl-time">5–15'</div><div class="tl-content"><div class="tl-label">Fase 1: e-mail de interesse com proposta condicionada</div><div class="tl-detail">E-mail com condições: "If your prices are competitive, we will consider a 12-month contract." Devem usar idioms: "I wanted to touch base about...", "We'd like to get a ballpark figure..." Compara com o primeiro e-mail de outubro — a evolução vai ser clara.</div></div></div>
+    <div class="tl"><div class="tl-time">15–40'</div><div class="tl-content"><div class="tl-label">Fase 2: reunião de negociação — 25 minutos</div><div class="tl-detail">Negociação completa com idioms, condicional, frases de reunião, vocabulário de compras. Você é a Sarah Williams mais exigente desta vez. Eles têm que usar pelo menos 4 idioms naturalmente, não forçado.</div></div></div>
+    <div class="tl"><div class="tl-time">40–52'</div><div class="tl-content"><div class="tl-label">Fase 3: follow-up com summary e próximos passos</div><div class="tl-detail">E-mail de follow-up completo — passado (o que discutimos), presente (o que estamos confirmando), futuro (going to + will + condicionais). Integração total do semestre.</div></div></div>
+    <div class="tl"><div class="tl-time">52–60'</div><div class="tl-content"><div class="tl-label">Celebração + preview de dezembro</div><div class="tl-detail">"Comparem este e-mail com o de junho. Comparem esta reunião com a primeira. Isso é o crescimento de 6 meses." Mostre evidências concretas. Preview de dezembro: revisão, conversa livre e roadmap para A2.</div></div></div>
+  </div>
+</div>
+
+<!-- EXTRAS NOVEMBRO -->
+<div class="month-header" style="margin-top:1.5rem;">Aulas extras — Novembro</div>
+
+<div class="lesson-card extra" id="n5e">
+  <div class="lesson-header" onclick="toggle('n5e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Escape Room #3 — "The International Partnership"</div>
+      <div class="lesson-sub">Novembro · Revisão semestral completa · Todos os recursos</div>
+    </div>
+    <div class="badges"><span class="badge b-project">Projeto</span><span class="badge b-review">Revisão</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">Setup</div><div class="tl-content"><div class="tl-label">Missão: "A WebContinental foi selecionada para uma parceria internacional. Vocês têm 60 minutos para fechar o deal antes que a concorrência chegue."</div><div class="tl-detail">Nível de dificuldade mais alto — este é o escape room final. 6 chaves. Integra absolutamente tudo do semestre. Cooperação total.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 1</div><div class="tl-content"><div class="tl-label">E-mail de candidatura</div><div class="tl-detail">Escrever um e-mail formal apresentando a WebContinental como parceira ideal — presente simple, vocabulário de compras, condicional, idioms. Mínimo 8 frases.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 2</div><div class="tl-content"><div class="tl-label">Apresentação de 2 minutos em inglês</div><div class="tl-detail">Cada um apresenta a empresa e a proposta sem notas. Avaliação: clareza, fluência, uso de estruturas aprendidas.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 3</div><div class="tl-content"><div class="tl-label">Quiz integrado</div><div class="tl-detail">20 perguntas cobrindo: vocabulário de compras (5), tempos verbais (5), frases de reunião (5), idioms (5). Acertar 15/20.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 4</div><div class="tl-content"><div class="tl-label">Negociação difícil</div><div class="tl-detail">15 minutos. Você é um negociador americano exigente. Eles precisam defender seus termos usando todas as estruturas do semestre.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 5</div><div class="tl-content"><div class="tl-label">Storytelling de resultado</div><div class="tl-detail">Contar o que aconteceu no processo todo — passado completo, estruturado, com narrativa profissional.</div></div></div>
+    <div class="tl"><div class="tl-time">Chave 6</div><div class="tl-content"><div class="tl-label">Plano para 2027</div><div class="tl-detail">Apresentar o plano de continuidade da parceria — futuro: going to + will + condicional. "If this partnership succeeds, we're going to expand to three new categories."</div></div></div>
+  </div>
+</div>
+
+<div class="lesson-card extra" id="n6e">
+  <div class="lesson-header" onclick="toggle('n6e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Modal verbs — could, should, might para contexto profissional</div>
+      <div class="lesson-sub">Novembro · "You should consider..." · "We might need to..." · Tom e sugestão</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Contexto: "Como você diz uma sugestão sem parecer rude?"</div><div class="tl-detail">Mostre dois e-mails: "Change the deadline." vs "You might want to consider changing the deadline." Qual soa mais profissional? Por quê? Isso motiva o conteúdo do dia.</div></div></div>
+    <div class="tl"><div class="tl-time">8–25'</div><div class="tl-content"><div class="tl-label">Input: Could / Should / Might</div><div class="tl-detail">COULD = possibilidade / pedido educado: "Could you send the invoice?" / "We could negotiate the terms." · SHOULD = recomendação: "You should contact the supplier directly." / "We should review the contract." · MIGHT = possibilidade incerta: "Prices might increase next quarter." / "They might not be available." Contexto de compras em cada exemplo.</div></div></div>
+    <div class="tl"><div class="tl-time">25–42'</div><div class="tl-content"><div class="tl-label">Prática: transformação de tom</div><div class="tl-detail">Você dá frases diretas/rudes — eles as transformam em sugestões profissionais com modais: "Tell them to lower the price." → "You could ask them to lower the price, or we might consider a volume discount." 10 situações alternadas.</div></div></div>
+    <div class="tl"><div class="tl-time">42–56'</div><div class="tl-content"><div class="tl-label">Roleplay: consultoria de compras</div><div class="tl-detail">Eles são consultores de compras aconselhando um cliente americano fictício. Precisam dar recomendações usando should, could e might — profissional, claro e assertivo sem ser agressivo.</div></div></div>
+    <div class="tl"><div class="tl-time">56–60'</div><div class="tl-content"><div class="tl-label">Escrita rápida: e-mail de recomendação</div><div class="tl-detail">Cada um escreve um parágrafo recomendando uma mudança de estratégia ao chefe usando could/should/might. Revisão conjunta.</div></div></div>
+  </div>
+</div>
+
+</div><!-- /nov -->
+
+
+<!-- ═══════════════════════════════════════════
+     DEZEMBRO
+═══════════════════════════════════════════ -->
+<div id="tab-dez" class="tab-panel">
+
+<div class="intro-box">
+  <strong>Dezembro — Celebração &amp; Próximo Nível.</strong> Revisão temática escolhida pelos alunos, conversa livre avançada, apresentação de progresso e roadmap para A2 em 2027. O dezembro é a aula que eles vão lembrar — precisa ter emoção e evidência concreta de crescimento.
+</div>
+
+<div class="month-stats">
+  <span class="stat-pill">4 aulas regulares</span>
+  <span class="stat-pill">2 aulas extras</span>
+  <span class="stat-pill">Tema: Revisão + Celebração</span>
+  <span class="stat-pill">Entrega: roadmap A2 2027</span>
+</div>
+
+<!-- AULA 25 -->
+<div class="lesson-card" id="d1">
+  <div class="lesson-header" onclick="toggle('d1')">
+    <div class="lesson-num">25</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Revisão escolhida por eles — "O que foi mais útil?"</div>
+      <div class="lesson-sub">05/12/2026 · Cada um escolhe 1 tópico favorito do semestre</div>
+    </div>
+    <div class="badges"><span class="badge b-review">Revisão</span><span class="badge b-conversation">Conversa</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Abertura: "Se você pudesse levar uma coisa desse semestre..."</div><div class="tl-detail">Cada um fala qual tópico, expressão ou habilidade foi mais útil. Em inglês. Isso revela o que realmente ficou — e você usa isso para estruturar a aula.</div></div></div>
+    <div class="tl"><div class="tl-time">8–28'</div><div class="tl-content"><div class="tl-label">Bloco 1: revisão do tópico escolhido pelo Rudi</div><div class="tl-detail">Qualquer que seja a escolha dele — você cria 15 minutos de prática ao redor do tópico. Se ele escolher "meeting phrases": simulação de reunião. Se escolher "idioms": quiz e uso em contexto. Se escolher "negotiation": roleplay. Adapte na hora.</div></div></div>
+    <div class="tl"><div class="tl-time">28–48'</div><div class="tl-content"><div class="tl-label">Bloco 2: revisão do tópico escolhido pelo Thiago</div><div class="tl-detail">Mesmo formato — 20 minutos ao redor do tópico do Thiago. Se ele escolher algo diferente, ótimo — é personalização real. Se escolher o mesmo do Rudi, aprofunde mais.</div></div></div>
+    <div class="tl"><div class="tl-time">48–57'</div><div class="tl-content"><div class="tl-label">Conversa integrada sobre os tópicos</div><div class="tl-content"><div class="tl-label">Conecte os dois tópicos em uma conversa livre de 9 minutos — usando as habilidades de ambos. Exemplo: reunião (Rudi) + storytelling (Thiago) → simulação de reunião onde cada um conta uma história.</div></div></div></div>
+    <div class="tl"><div class="tl-time">57–60'</div><div class="tl-content"><div class="tl-label">Preview das últimas 3 aulas</div><div class="tl-detail">"Na semana que vem: conversa livre sobre o ano. Na seguinte: apresentação do progresso de vocês. E na última: a simulação de encerramento de ano — a mais completa do semestre."</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 26 -->
+<div class="lesson-card" id="d2">
+  <div class="lesson-header" onclick="toggle('d2')">
+    <div class="lesson-num">26</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Conversa livre — "O que vocês aprenderam? O que querem aprender?"</div>
+      <div class="lesson-sub">12/12/2026 · Reflexão em inglês · Planos para 2027</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Conversa</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–15'</div><div class="tl-content"><div class="tl-label">Conversa: "Tell me about your year — in English"</div><div class="tl-detail">Completamente livre. Vida pessoal, trabalho, família, planos. Você participa como colega. Observe e anote (discretamente) o que estão usando com fluência real — vai usar no feedback depois.</div></div></div>
+    <div class="tl"><div class="tl-time">15–30'</div><div class="tl-content"><div class="tl-label">Reflexão guiada: "What changed for you in English?"</div><div class="tl-detail">Cada um fala por 5-6 minutos sobre o progresso deles em inglês desde maio. Você faz perguntas: "What can you do now that you couldn't do in May?" / "What surprised you?" / "What was the hardest thing?" Isso consolida o aprendizado metacognitivamente.</div></div></div>
+    <div class="tl"><div class="tl-time">30–45'</div><div class="tl-content"><div class="tl-label">Planejamento: "What do you want to do in 2027?"</div><div class="tl-detail">Cada um fala sobre planos de 2027 — vida e carreira — usando going to, will e condicional. Você faz perguntas de follow-up. "If you get that promotion, what will change?" Fala real, propósito real.</div></div></div>
+    <div class="tl"><div class="tl-time">45–57'</div><div class="tl-content"><div class="tl-label">Feedback de progresso individual</div><div class="tl-detail">Para cada um: você apresenta o progresso observado ao longo do semestre com evidências concretas. "Rudi, em maio você hesitava antes de cada frase. Hoje você responde sem pausa. Thiago, seu vocabulário de negócios é notavelmente mais rico." Específico. Baseado em evidência. Transformador.</div></div></div>
+    <div class="tl"><div class="tl-time">57–60'</div><div class="tl-content"><div class="tl-label">Preview da penúltima aula</div><div class="tl-detail">"Na semana que vem: apresentação do roadmap de A2 — o que vocês precisam para o próximo nível. Vocês merecem saber exatamente onde estão e para onde vão."</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 27 -->
+<div class="lesson-card" id="d3">
+  <div class="lesson-header" onclick="toggle('d3')">
+    <div class="lesson-num">27</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Roadmap para A2 — "Onde vocês estão, para onde vão"</div>
+      <div class="lesson-sub">19/12/2026 · Progresso documentado + plano de 2027</div>
+    </div>
+    <div class="badges"><span class="badge b-project">Roadmap</span><span class="badge b-review">Balanço</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–20'</div><div class="tl-content"><div class="tl-label">Apresentação: progresso documentado de maio a dezembro</div><div class="tl-detail">Você apresenta um balanço do semestre para cada um: habilidades adquiridas, erros que foram trabalhados, vocabulário consolidado, simulações completadas. Use evidências concretas — citações de frases que saíram bem, e-mails que escreveram, reuniões que simularam. Isso é o documento de progresso que a empresa provavelmente vai querer ver.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">O que vem no A2 — mapa detalhado</div><div class="tl-detail">Apresente o que o A2 traz: Present Perfect (have you ever...?), Past Continuous (was/were + ing), passiva (the order was placed), mais expressões idiomáticas, listening mais avançado, escrita de relatórios completos. Mostre como o A1 que eles construíram é a base sólida para tudo isso.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Conversa: "O que vocês querem no próximo semestre?"</div><div class="tl-detail">Pergunte o que querem priorizar em 2027 — mais conversação, mais escrita, mais vocabulário técnico, mais situações de negócio específicas. Isso constrói o currículo do semestre seguinte ao vivo, com eles.</div></div></div>
+    <div class="tl"><div class="tl-time">50–57'</div><div class="tl-content"><div class="tl-label">Quiz de autoavaliação: "Você consegue...?"</div><div class="tl-detail">Liste 15 habilidades A1 e peça que se avaliem: "Can you write a professional email to a supplier in English?" / "Can you participate in a basic meeting?" / "Can you describe what happened last week?" Para cada "yes", celebre. Para cada "almost", mostre como chegaram perto.</div></div></div>
+    <div class="tl"><div class="tl-time">57–60'</div><div class="tl-content"><div class="tl-label">Preview da última aula</div><div class="tl-detail">"Na semana que vem: a maior simulação do semestre. Vocês vão colocar tudo em prática em uma situação completa de encerramento de ano internacional. Preparem-se."</div></div></div>
+  </div>
+</div>
+
+<!-- AULA 28 -->
+<div class="lesson-card" id="d4">
+  <div class="lesson-header" onclick="toggle('d4')">
+    <div class="lesson-num">28</div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Simulação final — reunião de encerramento de ano internacional</div>
+      <div class="lesson-sub">26/12/2026 · A maior simulação do semestre · Tudo junto</div>
+    </div>
+    <div class="badges"><span class="badge b-project">Simulação final</span><span class="badge b-review">Celebração</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–5'</div><div class="tl-content"><div class="tl-label">Setup: contexto da simulação final</div><div class="tl-detail">"Cenário: fim de ano. A diretoria da GlobalPack USA convidou os compradores da WebContinental para uma end-of-year review call. 40 minutos de reunião real. Eu sou Sarah Williams e o John, o diretor financeiro americano." Atmosfera: profissional, com leveza — é fim de ano.</div></div></div>
+    <div class="tl"><div class="tl-time">5–10'</div><div class="tl-content"><div class="tl-label">Small talk de abertura</div><div class="tl-detail">5 minutos de small talk real — "How was your year?" / "Did you do anything special for the holidays?" Eles navegam com as habilidades de agosto. Compare mentalmente com o primeiro roleplay de junho.</div></div></div>
+    <div class="tl"><div class="tl-time">10–30'</div><div class="tl-content"><div class="tl-label">Revisão de ano — o que aconteceu</div><div class="tl-detail">Cada um apresenta os resultados do parceiro WebContinental no ano — usando Simple Past, Present Continuous e vocabulary de compras. Você faz perguntas como John: "What were the main challenges?" / "How did you resolve the Q3 delay?"</div></div></div>
+    <div class="tl"><div class="tl-time">30–45'</div><div class="tl-content"><div class="tl-label">Planejamento de 2027 — o que vem</div><div class="tl-content"><div class="tl-label">Eles apresentam o plano de parceria para 2027 usando going to, will e condicional. Você negocia como Sarah: "If you increase the volume, we'll offer better terms." Eles contra-propõem.</div></div></div></div>
+    <div class="tl"><div class="tl-time">45–52'</div><div class="tl-content"><div class="tl-label">Encerramento da reunião + e-mail final</div><div class="tl-detail">Encerrem a reunião com frases profissionais. Depois cada um escreve um e-mail de 6 linhas de follow-up — o e-mail mais completo e fluente do semestre.</div></div></div>
+    <div class="tl"><div class="tl-time">52–60'</div><div class="tl-content"><div class="tl-label">Celebração final e encerramento do semestre</div><div class="tl-detail">"Comparem o que vocês acabaram de fazer com o que conseguiam fazer em maio. Vocês passaram de 'Hello, my name is Rudi' para conduzir uma reunião de encerramento de ano internacional em inglês. Isso não é pouco. Isso é um semestre de trabalho que vale uma promoção." Pause. Deixe a frase valer.</div></div></div>
+    <div class="tip tip-both"><strong>Encerramento do semestre:</strong> Esta aula precisa ter emoção. É o resultado de 7 meses. Use a comparação com a aula 1 de forma explícita. Eles vão sair dessa aula sabendo o que conquistaram.</div>
+  </div>
+</div>
+
+<!-- EXTRAS DEZEMBRO -->
+<div class="month-header" style="margin-top:1.5rem;">Aulas extras — Dezembro</div>
+
+<div class="lesson-card extra" id="d5e">
+  <div class="lesson-header" onclick="toggle('d5e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Present Perfect — preview do A2 com contexto profissional</div>
+      <div class="lesson-sub">Dezembro · "Have you ever...?" · "We have worked with them for 3 years"</div>
+    </div>
+    <div class="badges"><span class="badge b-grammar">Grammar</span><span class="badge b-business">Business</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–8'</div><div class="tl-content"><div class="tl-label">Contexto: por que existe o Present Perfect?</div><div class="tl-detail">"Já estiveram numa situação onde não sabiam se usar o passado simples ou algo diferente?" Mostre o problema: "I worked with them" (específico, acabou) vs "I have worked with them for years" (conexão com o presente). O Present Perfect faz essa ponte.</div></div></div>
+    <div class="tl"><div class="tl-time">8–25'</div><div class="tl-content"><div class="tl-label">Input: Present Perfect — 3 usos de negócio</div><div class="tl-detail">(1) Experiência: "Have you ever negotiated with an American supplier?" / "I have worked with vendors from 5 countries." (2) Resultado recente: "We have just received the PO." / "They have already sent the invoice." (3) Duração: "We have worked with them for 3 years." Estrutura: have/has + past participle. Não aprofunde — é preview, não módulo completo.</div></div></div>
+    <div class="tl"><div class="tl-time">25–45'</div><div class="tl-content"><div class="tl-label">Prática: "Experiências profissionais"</div><div class="tl-detail">"Have you ever...?" — cada um responde com experiências reais: "Have you ever worked with an international supplier?" / "Have you ever presented in English?" / "Have you ever negotiated a big discount?" Isso personaliza o conteúdo e cria narrativa de carreira em inglês.</div></div></div>
+    <div class="tl"><div class="tl-time">45–57'</div><div class="tl-content"><div class="tl-label">Escrita: "Professional bio" com Present Perfect</div><div class="tl-detail">Cada um escreve uma bio profissional curta para um perfil LinkedIn: "Rudi has worked in purchasing for 15 years. He has negotiated with suppliers from 10 countries. He has recently started studying English." Isso é A2 real — e é algo que podem usar amanhã.</div></div></div>
+    <div class="tl"><div class="tl-time">57–60'</div><div class="tl-content"><div class="tl-label">Motivação para 2027</div><div class="tl-detail">"O Present Perfect é o primeiro tempo verbal que vocês vão dominar no A2. Já começaram hoje. Chegam em 2027 com vantagem."</div></div></div>
+  </div>
+</div>
+
+<div class="lesson-card extra" id="d6e">
+  <div class="lesson-header" onclick="toggle('d6e')">
+    <div class="lesson-num"><span class="extra-tag">EXTRA</span></div>
+    <div class="lesson-meta">
+      <div class="lesson-title">Conversa livre de encerramento — olhando para frente</div>
+      <div class="lesson-sub">Dezembro · Bate-papo, humor, planos · A aula mais leve do semestre</div>
+    </div>
+    <div class="badges"><span class="badge b-conversation">Conversa</span></div>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="lesson-body">
+    <div class="tl"><div class="tl-time">0–20'</div><div class="tl-content"><div class="tl-label">Conversa totalmente livre — 20 minutos sem agenda</div><div class="tl-detail">Sem tema fixo. Férias, família, planos de fim de ano, trabalho leve. Você participa como pessoa, não como professora. Deixe o humor aparecer — piadas, memes mencionados, situações do trabalho. Esta é a aula que mostra que o inglês pode ser natural e leve.</div></div></div>
+    <div class="tl"><div class="tl-time">20–35'</div><div class="tl-content"><div class="tl-label">Tópico especial: "Se vocês fossem para um evento de compras em inglês amanhã..."</div><div class="tl-detail">Simulação leve: evento de networking de compradores internacionais. Small talk, apresentação, troca de contato, follow-up. Integra todas as habilidades de forma natural sem parecer simulação séria.</div></div></div>
+    <div class="tl"><div class="tl-time">35–50'</div><div class="tl-content"><div class="tl-label">Cada um ensina algo ao outro em inglês</div><div class="tl-detail">Rudi ensina Thiago (e você) algo sobre F1 ou carros em inglês — 5 minutos. Thiago ensina algo sobre jiu-jitsu ou HIMYM — 5 minutos. A troca de papel (aluno vira professor) é uma das experiências mais consolidadoras de vocabulário.</div></div></div>
+    <div class="tl"><div class="tl-time">50–58'</div><div class="tl-content"><div class="tl-label">Mensagem de encerramento de cada um</div><div class="tl-detail">Cada um diz em inglês — sem preparação, de coração — uma coisa que aprendeu, uma coisa que vai levar para 2027, e uma mensagem para o outro colega. Pequeno, mas poderoso.</div></div></div>
+    <div class="tl"><div class="tl-time">58–60'</div><div class="tl-content"><div class="tl-label">Fechamento do semestre</div><div class="tl-detail">Você diz algo específico e verdadeiro para cada um — o que observou de crescimento, o que é único neles como aprendizes. Sem script. De coração. A última frase do semestre precisa valer.</div></div></div>
+    <div class="tip tip-both"><strong>Esta aula é o prêmio deles pelo semestre.</strong> Não é aula de gramática. É celebração de que o inglês pode ser também diversão, leveza e conexão — não só ferramenta de trabalho.</div>
+  </div>
+</div>
+
+</div><!-- /dez -->
+
+</main>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggle(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>
