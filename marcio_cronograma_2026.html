@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronograma Márcio — Jun–Dez 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #F7F6F3;
+    --bg2: #FFFFFF;
+    --bg3: #F0EFE9;
+    --border: #E2E0D8;
+    --border2: #D0CEC4;
+    --text: #1A1917;
+    --text2: #5C5A54;
+    --text3: #9B9890;
+    --blue: #2563EB;
+    --blue-bg: #EFF4FF;
+    --blue-border: #BFCFFD;
+    --teal: #0D8A63;
+    --teal-bg: #EDFAF4;
+    --teal-border: #A3DFC8;
+    --amber: #B45309;
+    --amber-bg: #FFF8ED;
+    --amber-border: #FCD08A;
+    --red: #B91C1C;
+    --red-bg: #FEF2F2;
+    --red-border: #FCCFCF;
+    --purple: #6D28D9;
+    --purple-bg: #F5F3FF;
+    --purple-border: #C4B5FD;
+    --gray: #64625C;
+    --gray-bg: #F4F3F0;
+    --gray-border: #D5D3CC;
+    --pink: #BE185D;
+    --pink-bg: #FDF2F8;
+    --pink-border: #F9A8D4;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 0 0 4rem;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    background: var(--text);
+    color: #fff;
+    padding: 2rem 2.5rem 1.8rem;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .page-header h1 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
+  .page-header p { font-size: 12px; color: #B4B2AA; margin-top: 3px; }
+  .header-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .hpill {
+    font-size: 11px; font-weight: 500; padding: 3px 10px;
+    border-radius: 20px; border: 1px solid rgba(255,255,255,.2);
+    color: rgba(255,255,255,.75);
+  }
+
+  /* ── NAV TABS ── */
+  .nav-bar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; gap: 0; overflow-x: auto;
+    position: sticky; top: 77px; z-index: 99;
+  }
+  .nav-tab {
+    padding: 12px 16px;
+    font-size: 12px; font-weight: 500;
+    color: var(--text3);
+    border-bottom: 2px solid transparent;
+    cursor: pointer; white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    background: none; border-top: none; border-left: none; border-right: none;
+  }
+  .nav-tab:hover { color: var(--text2); }
+  .nav-tab.active { color: var(--text); border-bottom-color: var(--text); }
+
+  /* ── MAIN LAYOUT ── */
+  .content { max-width: 1100px; margin: 0 auto; padding: 2rem 2rem; }
+
+  /* ── SECTION ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 1.5rem; padding: 12px 16px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .leg { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text2); }
+  .leg-dot { width: 9px; height: 9px; border-radius: 3px; flex-shrink: 0; }
+  .d-gram  { background: var(--teal); }
+  .d-pron  { background: var(--blue); }
+  .d-conv  { background: var(--amber); }
+  .d-list  { background: var(--red); }
+  .d-writ  { background: var(--purple); }
+  .d-rev   { background: var(--gray); }
+  .d-new   { background: var(--pink); }
+
+  /* ── MONTH BLOCK ── */
+  .month { margin-bottom: 2.5rem; }
+  .month-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 1rem; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .month-name { font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+  .month-badge {
+    font-size: 10px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; padding: 3px 9px; border-radius: 20px;
+  }
+  .b-phase1 { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+  .b-phase2 { background: var(--teal-bg); color: var(--teal); border: 1px solid var(--teal-border); }
+  .b-trans  { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+  .month-meta { font-size: 12px; color: var(--text3); margin-left: auto; }
+
+  /* ── WEEK ── */
+  .week { margin-bottom: 10px; }
+  .week-label {
+    font-size: 10px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--text3);
+    margin-bottom: 6px; padding-left: 2px;
+  }
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  /* ── DAY CARD ── */
+  .day-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .day-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+  .day-card.gram::before  { background: var(--teal); }
+  .day-card.pron::before  { background: var(--blue); }
+  .day-card.conv::before  { background: var(--amber); }
+  .day-card.list::before  { background: var(--red); }
+  .day-card.writ::before  { background: var(--purple); }
+  .day-card.rev::before   { background: var(--gray); }
+  .day-card.new::before   { background: var(--pink); }
+  .day-card.done { opacity: .45; }
+
+  .day-name {
+    font-size: 10px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--text3); margin-bottom: 5px;
+  }
+  .done-badge {
+    display: inline-block; font-size: 10px; font-weight: 500;
+    padding: 1px 7px; border-radius: 10px; margin-bottom: 5px;
+    background: var(--teal-bg); color: var(--teal); border: 1px solid var(--teal-border);
+  }
+  .day-title {
+    font-size: 12px; font-weight: 600; color: var(--text);
+    margin-bottom: 3px; line-height: 1.4;
+  }
+  .day-sub { font-size: 11px; color: var(--text2); line-height: 1.5; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
+  .tag {
+    font-size: 10px; font-weight: 500; padding: 1px 7px;
+    border-radius: 8px; border: 1px solid;
+  }
+  .t-gram  { background: var(--teal-bg);   color: var(--teal);   border-color: var(--teal-border); }
+  .t-pron  { background: var(--blue-bg);   color: var(--blue);   border-color: var(--blue-border); }
+  .t-conv  { background: var(--amber-bg);  color: var(--amber);  border-color: var(--amber-border); }
+  .t-list  { background: var(--red-bg);    color: var(--red);    border-color: var(--red-border); }
+  .t-writ  { background: var(--purple-bg); color: var(--purple); border-color: var(--purple-border); }
+  .t-rev   { background: var(--gray-bg);   color: var(--gray);   border-color: var(--gray-border); }
+  .t-new   { background: var(--pink-bg);   color: var(--pink);   border-color: var(--pink-border); }
+
+  /* ── MILESTONE ── */
+  .milestone {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-top: 12px; padding: 10px 14px;
+    border-radius: var(--radius);
+    background: var(--bg2); border: 1px solid var(--border);
+    border-left: 3px solid;
+    font-size: 12px; color: var(--text2);
+  }
+  .ms-blue  { border-left-color: var(--blue); }
+  .ms-teal  { border-left-color: var(--teal); }
+  .ms-amber { border-left-color: var(--amber); }
+  .ms-flag { font-size: 15px; flex-shrink: 0; }
+
+  /* ── STRUCT BANNER ── */
+  .struct-banner {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 500; padding: 4px 11px;
+    border-radius: 20px; margin-bottom: 12px;
+    background: var(--pink-bg); color: var(--pink); border: 1px solid var(--pink-border);
+  }
+
+  /* ── EXTRAS SECTION ── */
+  .extras-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+  .extra-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px;
+  }
+  .extra-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .extra-num { font-size: 11px; font-weight: 500; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+  .extra-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+  .extra-body { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
+  .extra-when {
+    font-size: 11px; color: var(--text3); line-height: 1.5;
+    border-top: 1px solid var(--border); padding-top: 10px;
+  }
+  .extra-when strong { color: var(--text2); }
+
+  /* ── FILTER BUTTONS ── */
+  .filter-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+  .f-btn {
+    font-size: 11px; font-weight: 500; padding: 5px 12px;
+    border-radius: 20px; border: 1px solid var(--border);
+    background: var(--bg2); color: var(--text2);
+    cursor: pointer; transition: all .15s;
+  }
+  .f-btn:hover { border-color: var(--border2); color: var(--text); }
+  .f-btn.on { font-weight: 600; }
+  .f-btn.on.fa  { border-color: var(--text); color: var(--text); background: var(--bg3); }
+  .f-btn.on.fp  { border-color: var(--blue);   color: var(--blue);   background: var(--blue-bg); }
+  .f-btn.on.fg  { border-color: var(--teal);   color: var(--teal);   background: var(--teal-bg); }
+  .f-btn.on.fc  { border-color: var(--amber);  color: var(--amber);  background: var(--amber-bg); }
+  .f-btn.on.fl  { border-color: var(--red);    color: var(--red);    background: var(--red-bg); }
+  .f-btn.on.fw  { border-color: var(--purple); color: var(--purple); background: var(--purple-bg); }
+  .f-btn.on.fr  { border-color: var(--gray);   color: var(--gray);   background: var(--gray-bg); }
+  .counter-txt { font-size: 11px; color: var(--text3); margin-bottom: 1rem; }
+
+  /* ── OVERVIEW SECTION ── */
+  .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 2rem; }
+  .ov-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px;
+  }
+  .ov-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .05em; font-weight: 500; }
+  .ov-val { font-size: 22px; font-weight: 600; color: var(--text); letter-spacing: -.03em; }
+  .ov-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+  .progress-bar-wrap { margin-bottom: 2rem; }
+  .pb-label { font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 6px; }
+  .pb { display: flex; height: 28px; border-radius: var(--radius-sm); overflow: hidden; gap: 2px; }
+  .pb-seg {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600; color: #fff; cursor: default;
+  }
+
+  .grammar-seq { margin-bottom: 2rem; }
+  .grammar-seq h3 { font-size: 12px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+  .gseq { display: flex; flex-wrap: wrap; gap: 6px; }
+  .gseq-item {
+    font-size: 12px; font-weight: 500; padding: 5px 12px;
+    border-radius: 20px; border: 1px solid;
+  }
+  .gs-done   { background: var(--teal-bg);  color: var(--teal);  border-color: var(--teal-border); }
+  .gs-now    { background: var(--blue-bg);  color: var(--blue);  border-color: var(--blue-border); }
+  .gs-next   { background: var(--bg3);      color: var(--text2); border-color: var(--border); }
+  .gs-label  { font-size: 10px; font-weight: 600; margin-left: 4px; opacity: .7; }
+
+  .principles { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; margin-bottom: 2rem; }
+  .prin-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+  }
+  .prin-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .prin-body { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .week-grid { grid-template-columns: 1fr; }
+    .content { padding: 1rem; }
+    .page-header { padding: 1.2rem 1rem; }
+    .nav-bar { padding: 0 1rem; }
+    .overview-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div>
+    <h1>Cronograma de Inglês — Márcio</h1>
+    <p>Junho a Dezembro de 2026 · Tauros · Gravataí</p>
+  </div>
+  <div class="header-pills">
+    <span class="hpill">3× por semana</span>
+    <span class="hpill">55 min</span>
+    <span class="hpill">A1 → A2 funcional</span>
+    <span class="hpill">Foco: trabalho</span>
+  </div>
+</header>
+
+<nav class="nav-bar">
+  <button class="nav-tab active" onclick="showTab('overview')">Visão Geral</button>
+  <button class="nav-tab" onclick="showTab('jun')">Junho</button>
+  <button class="nav-tab" onclick="showTab('jul')">Julho</button>
+  <button class="nav-tab" onclick="showTab('ago')">Agosto</button>
+  <button class="nav-tab" onclick="showTab('set')">Setembro</button>
+  <button class="nav-tab" onclick="showTab('out')">Outubro</button>
+  <button class="nav-tab" onclick="showTab('nov')">Novembro</button>
+  <button class="nav-tab" onclick="showTab('dez')">Dezembro</button>
+  <button class="nav-tab" onclick="showTab('extras')">Aulas Extras</button>
+</nav>
+
+<main class="content">
+
+<!-- ═══════════════ VISÃO GERAL ═══════════════ -->
+<section id="overview" class="section active">
+
+  <div class="overview-grid">
+    <div class="ov-card"><div class="ov-label">Total de aulas</div><div class="ov-val">~80</div><div class="ov-sub">Jun–Dez 2026</div></div>
+    <div class="ov-card"><div class="ov-label">Aulas extras</div><div class="ov-val">12</div><div class="ov-sub">Banco de reserva</div></div>
+    <div class="ov-card"><div class="ov-label">Frequência</div><div class="ov-val">3×</div><div class="ov-sub">Seg · Qua · Sex</div></div>
+    <div class="ov-card"><div class="ov-label">Duração</div><div class="ov-val">55'</div><div class="ov-sub">Por aula</div></div>
+    <div class="ov-card"><div class="ov-label">Fases</div><div class="ov-val">2 + 1</div><div class="ov-sub">Consolidação · Expansão · Transição</div></div>
+    <div class="ov-card"><div class="ov-label">Meta</div><div class="ov-val">A2</div><div class="ov-sub">Funcional em trabalho</div></div>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="pb-label">Distribuição do semestre por fase</div>
+    <div class="pb">
+      <div class="pb-seg" style="width:43%;background:#2563EB">Fase 1 — Jun/Jul/Ago</div>
+      <div class="pb-seg" style="width:43%;background:#0D8A63">Fase 2 — Set/Out/Nov</div>
+      <div class="pb-seg" style="width:14%;background:#B45309">Transição — Dez</div>
+    </div>
+  </div>
+
+  <div class="grammar-seq">
+    <h3>Sequência gramatical</h3>
+    <div class="gseq">
+      <span class="gseq-item gs-done">Present Simple ✓</span>
+      <span class="gseq-item gs-done">Present Continuous ✓</span>
+      <span class="gseq-item gs-done">Past Simple (quase) ✓</span>
+      <span class="gseq-item gs-now">Past Continuous ← agora</span>
+      <span class="gseq-item gs-next">Futuro (going to)</span>
+      <span class="gseq-item gs-next">Futuro (will)</span>
+      <span class="gseq-item gs-next">Modal verbs básicos</span>
+      <span class="gseq-item gs-next">Present Perfect (intro)</span>
+    </div>
+  </div>
+
+  <div class="grammar-seq">
+    <h3>Estruturas A1/A2 a cobrir</h3>
+    <div class="gseq">
+      <span class="gseq-item gs-next">Comparatives e superlatives</span>
+      <span class="gseq-item gs-next">Prepositions (time/place/movement)</span>
+      <span class="gseq-item gs-next">Quantifiers</span>
+      <span class="gseq-item gs-next">Imperatives</span>
+      <span class="gseq-item gs-next">Conjunctions</span>
+      <span class="gseq-item gs-next">There is / there are</span>
+    </div>
+  </div>
+
+  <div class="principles">
+    <div class="prin-card">
+      <div class="prin-title">Regra antes da prática</div>
+      <div class="prin-body">Márcio é racional e estruturado. Sempre mostrar a regra e o "porquê" antes de praticar — nunca jogar no exercício sem contexto.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-title">1 conteúdo por aula</div>
+      <div class="prin-body">Se frustra com acúmulo. Um ponto gramatical ou estrutural por aula, desenvolvido com profundidade, é mais eficaz do que dois vistos por cima.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-title">Contexto da Tauros sempre</div>
+      <div class="prin-body">Exemplos com fornecedores, pedidos, e-mails e colegas. A personalização é invisível — ele não precisa saber, mas vai sentir.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-title">Histórias pessoais</div>
+      <div class="prin-body">Família, infância, viagens, futebol. Os melhores drillings acontecem quando ele tem conteúdo genuíno para contar.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-title">Pronúncia: 5 min por aula</div>
+      <div class="prin-body">Erro recorrente: consoante final e -ed. Warm-up de pronúncia no início de cada aula — leve, rápido, consistente.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-title">Listening com apoio</div>
+      <div class="prin-body">Sempre com script até setembro. Depois, retirar o script gradualmente. Nunca frio e nunca sem pré-ativação de vocabulário.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-title">Correção direta</div>
+      <div class="prin-body">Ele reage bem a correção direta e pontual. Não suavizar demais. Corrigir no máximo 2-3 erros por aula, focados no conteúdo do dia.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-title">Fechar com concretude</div>
+      <div class="prin-body">Cada aula termina com um challenge de saída. Ele sai sabendo o que aprendeu — isso é o que o motiva a continuar.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════ JUNHO ═══════════════ -->
+<section id="jun" class="section">
+  <div class="legend">
+    <div class="leg"><div class="leg-dot d-gram"></div>Gramática</div>
+    <div class="leg"><div class="leg-dot d-pron"></div>Pronúncia</div>
+    <div class="leg"><div class="leg-dot d-conv"></div>Conversação</div>
+    <div class="leg"><div class="leg-dot d-list"></div>Listening/Leitura</div>
+    <div class="leg"><div class="leg-dot d-writ"></div>Escrita</div>
+    <div class="leg"><div class="leg-dot d-rev"></div>Revisão</div>
+    <div class="leg"><div class="leg-dot d-new"></div>Estrutura nova</div>
+  </div>
+
+  <div class="month">
+    <div class="month-head">
+      <span class="month-name">Junho 2026</span>
+      <span class="month-badge b-phase1">Fase 1</span>
+      <span class="month-meta">Semanas 1–3 feitas · Semana 4 pendente</span>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semanas 1–3 — Concluídas</div>
+      <div class="week-grid">
+        <div class="day-card pron done">
+          <div class="done-badge">feito</div>
+          <div class="day-title">Pronúncia do -ed</div>
+          <div class="day-sub">/t/ /d/ /ɪd/ com verbos de compras.</div>
+        </div>
+        <div class="day-card gram done">
+          <div class="done-badge">feito</div>
+          <div class="day-title">Verbos irregulares grupos 1, 2 e 3</div>
+          <div class="day-sub">buy, send, go, come, know, say…</div>
+        </div>
+        <div class="day-card gram done">
+          <div class="done-badge">feito</div>
+          <div class="day-title">Past Simple neg. e pergunta</div>
+          <div class="day-sub">Didn't / did you…?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 4</div>
+      <div class="week-grid">
+        <div class="day-card gram">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Wh-questions no passado</div>
+          <div class="day-sub">What/Where/When/Why/Who + did. Perguntas sobre o trabalho.</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card list">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Listening: diálogo de fornecedor</div>
+          <div class="day-sub">Áudio curto com script. Confirmação de pedido. Pré-vocab antes.</div>
+          <div class="tag-row"><span class="tag t-list">listening</span></div>
+        </div>
+        <div class="day-card writ">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">E-mail 1: confirmar pedido</div>
+          <div class="day-sub">Estrutura básica. Modelo fornecido, ele adapta com dados reais da Tauros.</div>
+          <div class="tag-row"><span class="tag t-writ">escrita</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone ms-blue">
+      <span class="ms-flag">🏁</span>
+      <span>Fim de junho: Past Simple sólido. -ed pronunciado com mais consistência. Primeiro e-mail profissional feito.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ JULHO ═══════════════ -->
+<section id="jul" class="section">
+  <div class="month">
+    <div class="month-head">
+      <span class="month-name">Julho 2026</span>
+      <span class="month-badge b-phase1">Fase 1</span>
+      <span class="month-meta">~12 aulas · Past Continuous + Conjunctions + Comparatives</span>
+    </div>
+    <div class="struct-banner">✦ Estruturas novas: conjunctions · comparatives &amp; superlatives</div>
+
+    <div class="week">
+      <div class="week-label">Semana 1</div>
+      <div class="week-grid">
+        <div class="day-card gram">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Intro ao Past Continuous</div>
+          <div class="day-sub">Was/were + -ing. Por que existe: dar contexto ao passado. Situação da Tauros primeiro.</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card gram">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Past Cont. vs Past Simple</div>
+          <div class="day-sub">"I was reviewing the order when the supplier called." 5 frases do trabalho.</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Story: o dia que algo inesperado aconteceu</div>
+          <div class="day-sub">Márcio usa os dois tempos juntos. Correção só nos dois tempos.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 2</div>
+      <div class="week-grid">
+        <div class="day-card new">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Conjunctions: and, but, because, so</div>
+          <div class="day-sub">Frases de 2 cláusulas. "I chose that supplier because the price was lower."</div>
+          <div class="tag-row"><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card pron">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Pronúncia: -ing e was/were</div>
+          <div class="day-sub">Was /wəz/ vs were /wɜr/. Ritmo de frases longas com Past Continuous.</div>
+          <div class="tag-row"><span class="tag t-pron">pronúncia</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Story: rotina de infância</div>
+          <div class="day-sub">Passados + conjunctions. "I was playing football when my dad called, so I had to go home."</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 3</div>
+      <div class="week-grid">
+        <div class="day-card new">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Comparatives</div>
+          <div class="day-sub">cheaper / more expensive / better / worse. Comparar fornecedores e produtos da Tauros.</div>
+          <div class="tag-row"><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card new">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Superlatives</div>
+          <div class="day-sub">the cheapest / the most reliable / the best. Comparar países, cidades, empresas.</div>
+          <div class="tag-row"><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Debate: o melhor e o pior fornecedor</div>
+          <div class="day-sub">Márcio compara fornecedores reais da Tauros usando comparatives e superlatives.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span><span class="tag t-new">estrutura nova</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 4</div>
+      <div class="week-grid">
+        <div class="day-card list">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Listening: sem script pela 1ª vez</div>
+          <div class="day-sub">Áudio curto (1 min), tema familiar. Só compreensão geral. Marco importante.</div>
+          <div class="tag-row"><span class="tag t-list">listening</span></div>
+        </div>
+        <div class="day-card writ">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">E-mail 2: comparar propostas</div>
+          <div class="day-sub">"Supplier A is cheaper, but supplier B is more reliable." Comparatives em e-mail real.</div>
+          <div class="tag-row"><span class="tag t-writ">escrita</span><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card rev">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Revisão: passados + conjunctions + comp.</div>
+          <div class="day-sub">Mini-história do trabalho usando tudo do mês. Márcio narra sem interrupção.</div>
+          <div class="tag-row"><span class="tag t-rev">revisão</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone ms-blue">
+      <span class="ms-flag">🏁</span>
+      <span>Fim de julho: Past Continuous integrado. Frases longas com conjunctions. Comparatives e superlatives em uso. Primeiro listening sem script.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ AGOSTO ═══════════════ -->
+<section id="ago" class="section">
+  <div class="month">
+    <div class="month-head">
+      <span class="month-name">Agosto 2026</span>
+      <span class="month-badge b-phase1">Fase 1</span>
+      <span class="month-meta">~12 aulas · Futuro + Prepositions + Quantifiers</span>
+    </div>
+    <div class="struct-banner">✦ Estruturas novas: prepositions of time/place/movement · quantifiers</div>
+
+    <div class="week">
+      <div class="week-label">Semana 1</div>
+      <div class="week-grid">
+        <div class="day-card gram">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Going to — planos concretos</div>
+          <div class="day-sub">Planos de trabalho e viagem. "We're going to contact the supplier next week."</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card new">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Prepositions of time</div>
+          <div class="day-sub">at, on, in + tempo. "at 9am / on Monday / in March." Erros frequentes de brasileiros.</div>
+          <div class="tag-row"><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Story: planos de trabalho e família</div>
+          <div class="day-sub">Going to + prepositions of time. "I'm going to travel to Argentina in July, on a Monday."</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 2</div>
+      <div class="week-grid">
+        <div class="day-card gram">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Will — promessas e decisões espontâneas</div>
+          <div class="day-sub">Diferença prática entre will e going to. Foco em e-mails e ligações profissionais.</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card new">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Prepositions of place</div>
+          <div class="day-sub">in, on, at, next to, between, opposite. Descrever o trabalho, a fábrica, a cidade.</div>
+          <div class="tag-row"><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card pron">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Pronúncia: gonna, 'll, won't</div>
+          <div class="day-sub">Formas reduzidas do inglês falado. Treinar reconhecimento e uso natural.</div>
+          <div class="tag-row"><span class="tag t-pron">pronúncia</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 3</div>
+      <div class="week-grid">
+        <div class="day-card new">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Prepositions of movement</div>
+          <div class="day-sub">to, from, through, into, out of. Contexto: logística, viagem, deslocamento.</div>
+          <div class="tag-row"><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card new">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Quantifiers: some, any, much, many, a lot of</div>
+          <div class="day-sub">Contáveis vs incontáveis. "How many parts? / How much does it cost?"</div>
+          <div class="tag-row"><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Story: descrever a empresa e o trabalho</div>
+          <div class="day-sub">Quantifiers + prepositions. "There are many suppliers from Argentina. We buy a lot of parts from them."</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span><span class="tag t-new">estrutura nova</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 4</div>
+      <div class="week-grid">
+        <div class="day-card writ">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">E-mail 3: proposta com quantifiers</div>
+          <div class="day-sub">"We need many units. Could you send some samples?" E-mail real de solicitação.</div>
+          <div class="tag-row"><span class="tag t-writ">escrita</span><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card list">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Listening: podcast de negócios</div>
+          <div class="day-sub">2 min sem script. Identificar: o que a empresa vai fazer? Onde? Quando?</div>
+          <div class="tag-row"><span class="tag t-list">listening</span></div>
+        </div>
+        <div class="day-card rev">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Revisão: futuro + prepositions + quantifiers</div>
+          <div class="day-sub">Márcio descreve um projeto futuro da Tauros usando tudo do mês.</div>
+          <div class="tag-row"><span class="tag t-rev">revisão</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone ms-blue">
+      <span class="ms-flag">🏁</span>
+      <span>Fim de agosto: futuro integrado. Preposições sem hesitação. Quantifiers em uso. Fim da Fase 1.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SETEMBRO ═══════════════ -->
+<section id="set" class="section">
+  <div class="month">
+    <div class="month-head">
+      <span class="month-name">Setembro 2026</span>
+      <span class="month-badge b-phase2">Fase 2</span>
+      <span class="month-meta">~12 aulas · Modal verbs + Imperatives</span>
+    </div>
+    <div class="struct-banner">✦ Estruturas novas: imperatives · modais (can, could, should, must, would)</div>
+
+    <div class="week">
+      <div class="week-label">Semana 1</div>
+      <div class="week-grid">
+        <div class="day-card new">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Imperatives — instruções e pedidos</div>
+          <div class="day-sub">Send, check, confirm, avoid, don't forget. Uso em e-mails e instruções de trabalho.</div>
+          <div class="tag-row"><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card gram">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Can e could — habilidade e pedido</div>
+          <div class="day-sub">"Can you send the invoice?" / "Could you check the stock?" Diferença de tom.</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Role-play: ligação com fornecedor</div>
+          <div class="day-sub">Tu és o fornecedor. Márcio pede, instrui, confirma. Imperatives + can/could.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 2</div>
+      <div class="week-grid">
+        <div class="day-card gram">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Should e must</div>
+          <div class="day-sub">Conselho vs obrigação. "You should confirm by email." / "You must deliver by Friday."</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card gram">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Would — pedidos formais</div>
+          <div class="day-sub">"Would you be able to deliver by Friday?" Tom mais sofisticado para clientes externos.</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Debate: o que as empresas deveriam fazer</div>
+          <div class="day-sub">Should em contexto de opinião. Tema de política ou negócios — interesse dele.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 3</div>
+      <div class="week-grid">
+        <div class="day-card pron">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Pronúncia: modais reduzidos</div>
+          <div class="day-sub">Can /kən/, would /wəd/, should /ʃəd/. Ritmo de frases com modais em fala rápida.</div>
+          <div class="tag-row"><span class="tag t-pron">pronúncia</span></div>
+        </div>
+        <div class="day-card writ">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">E-mail 4: negociação de prazo</div>
+          <div class="day-sub">Would + could + imperatives juntos. E-mail de negociação com cliente ou fornecedor externo.</div>
+          <div class="tag-row"><span class="tag t-writ">escrita</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Story: um problema que ele resolveu</div>
+          <div class="day-sub">"I had to find a new supplier. I couldn't wait." Passado + modais integrados.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 4</div>
+      <div class="week-grid">
+        <div class="day-card rev">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Revisão: todos os modais + imperatives</div>
+          <div class="day-sub">Quiz oral situacional: tu descreves, Márcio responde com o modal ou imperativo certo.</div>
+          <div class="tag-row"><span class="tag t-rev">revisão</span></div>
+        </div>
+        <div class="day-card list">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Listening: reunião de trabalho</div>
+          <div class="day-sub">90s sem script. Márcio identifica modais, pedidos, decisões. Discussão depois.</div>
+          <div class="tag-row"><span class="tag t-list">listening</span></div>
+        </div>
+        <div class="day-card pron">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Gravação 1: apresentação profissional</div>
+          <div class="day-sub">Márcio grava 1 min se apresentando. Guardar para comparar em novembro.</div>
+          <div class="tag-row"><span class="tag t-pron">pronúncia</span><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone ms-teal">
+      <span class="ms-flag">🏁</span>
+      <span>Fim de setembro: modais em uso. Role-play de ligação profissional. Imperatives em e-mails e instrução oral.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ OUTUBRO ═══════════════ -->
+<section id="out" class="section">
+  <div class="month">
+    <div class="month-head">
+      <span class="month-name">Outubro 2026</span>
+      <span class="month-badge b-phase2">Fase 2</span>
+      <span class="month-meta">~12 aulas · Present Perfect (intro) + there is/are</span>
+    </div>
+    <div class="struct-banner">✦ Estruturas novas: present perfect · there is/there are (consolidação)</div>
+
+    <div class="week">
+      <div class="week-label">Semana 1</div>
+      <div class="week-grid">
+        <div class="day-card gram">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Intro ao Present Perfect</div>
+          <div class="day-sub">Have + past participle. Por que existe: experiência e resultado presente.</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card gram">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">PP vs Past Simple</div>
+          <div class="day-sub">"I worked there." vs "I've worked there." Foco em uso, não teoria. 5 pares de frases.</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Story: experiências profissionais</div>
+          <div class="day-sub">"Have you ever negotiated with a foreign supplier?" Márcio usa PP naturalmente.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 2</div>
+      <div class="week-grid">
+        <div class="day-card gram">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Ever, never, already, yet</div>
+          <div class="day-sub">Advérbios do PP. "Have you sent the quote yet?" / "I've already confirmed." Uso em e-mails.</div>
+          <div class="tag-row"><span class="tag t-gram">gramática</span></div>
+        </div>
+        <div class="day-card new">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">There is / there are — consolidação</div>
+          <div class="day-sub">"There are many options. There isn't a better price." Contexto: trabalho e compras.</div>
+          <div class="tag-row"><span class="tag t-new">estrutura nova</span></div>
+        </div>
+        <div class="day-card list">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Leitura: artigo de história mundial</div>
+          <div class="day-sub">Tema de interesse dele. Identificar PP e passados. 5 perguntas de compreensão oral.</div>
+          <div class="tag-row"><span class="tag t-list">leitura</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 3</div>
+      <div class="week-grid">
+        <div class="day-card pron">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Pronúncia: have + particípio</div>
+          <div class="day-sub">I've /aɪv/, he's /hiːz/, haven't /hævnt/. Contração natural em fala rápida.</div>
+          <div class="tag-row"><span class="tag t-pron">pronúncia</span></div>
+        </div>
+        <div class="day-card writ">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">E-mail 5: apresentação + histórico</div>
+          <div class="day-sub">"We have supplied parts for 10 years. We have already worked with X." PP em e-mail real.</div>
+          <div class="tag-row"><span class="tag t-writ">escrita</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Role-play: apresentação para cliente novo</div>
+          <div class="day-sub">PP para experiência + modais para tom. Simulação de abertura de relação comercial.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 4</div>
+      <div class="week-grid">
+        <div class="day-card rev">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Revisão: PP + there is/are + modais</div>
+          <div class="day-sub">Linha do tempo de projeto: o que já aconteceu, o que precisa acontecer, o que vai acontecer.</div>
+          <div class="tag-row"><span class="tag t-rev">revisão</span></div>
+        </div>
+        <div class="day-card list">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Listening: vídeo autêntico</div>
+          <div class="day-sub">YouTube — negócios ou política mundial. 2 min sem script. Discussão depois.</div>
+          <div class="tag-row"><span class="tag t-list">listening</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Conversa livre: 20 min sem parar</div>
+          <div class="day-sub">Tema à escolha dele. Medir quanto tempo sustenta sem travar. Registrar.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone ms-teal">
+      <span class="ms-flag">🏁</span>
+      <span>Fim de outubro: Present Perfect em uso básico. 20 min de conversa sustentada. Estruturas A1/A2 todas cobertas.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ NOVEMBRO ═══════════════ -->
+<section id="nov" class="section">
+  <div class="month">
+    <div class="month-head">
+      <span class="month-name">Novembro 2026</span>
+      <span class="month-badge b-phase2">Fase 2</span>
+      <span class="month-meta">~12 aulas · Integração total + situações reais de trabalho</span>
+    </div>
+    <div class="struct-banner">✦ Sem estrutura nova — mês de integração e consolidação oral</div>
+
+    <div class="week">
+      <div class="week-label">Semana 1</div>
+      <div class="week-grid">
+        <div class="day-card conv">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Role-play: call completa com fornecedor</div>
+          <div class="day-sub">Abertura, pedido, negociação, fechamento. Todos os modais, imperatives e tempos juntos.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+        <div class="day-card pron">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Pronúncia: gravação e análise</div>
+          <div class="day-sub">Márcio grava 45s. Ouçam juntos. Ele identifica 3 erros próprios. Comparar com setembro.</div>
+          <div class="tag-row"><span class="tag t-pron">pronúncia</span><span class="tag t-rev">revisão</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Story: o que você já conquistou</div>
+          <div class="day-sub">Carreira, família, futebol. PP em contexto muito pessoal. Aula leve e motivante.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 2</div>
+      <div class="week-grid">
+        <div class="day-card rev">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Comparatives em negociação real</div>
+          <div class="day-sub">Retomar comp./superlatives com vocab mais sofisticado. "The lead time is shorter but the quality is better."</div>
+          <div class="tag-row"><span class="tag t-rev">revisão</span></div>
+        </div>
+        <div class="day-card list">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Listening: entrevista de negócios</div>
+          <div class="day-sub">2 min sem script. O que a pessoa já fez? O que ela vai fazer? Discussão em inglês.</div>
+          <div class="tag-row"><span class="tag t-list">listening</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Debate: política mundial</div>
+          <div class="day-sub">Tema de interesse. Márcio opina com should, comparatives e PP. Scaffolding mínimo.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 3</div>
+      <div class="week-grid">
+        <div class="day-card writ">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">E-mail 6: relatório de fornecedor</div>
+          <div class="day-sub">PP + comparatives + quantifiers + modais. E-mail mais completo até agora. Sem modelo.</div>
+          <div class="tag-row"><span class="tag t-writ">escrita</span><span class="tag t-rev">revisão</span></div>
+        </div>
+        <div class="day-card rev">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Prepositions em contexto de viagem</div>
+          <div class="day-sub">Retomar prepositions com tema de viagem. "I'm going to travel from Porto Alegre to Buenos Aires."</div>
+          <div class="tag-row"><span class="tag t-rev">revisão</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Story: planos de viagem detalhados</div>
+          <div class="day-sub">Futuro + preposições + comparatives + quantifiers. Conversa livre sobre viagem real planejada.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 4</div>
+      <div class="week-grid">
+        <div class="day-card rev">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Revisão geral: todos os tempos verbais</div>
+          <div class="day-sub">Linha do tempo de projeto real da Tauros: passado, presente, futuro. Tudo junto.</div>
+          <div class="tag-row"><span class="tag t-rev">revisão</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Role-play: crise de fornecimento</div>
+          <div class="day-sub">Situação crítica: peça em falta, cliente cobrando, fornecedor atrasando. Márcio gerencia em inglês.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+        <div class="day-card pron">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Gravação 2: apresentação profissional</div>
+          <div class="day-sub">Mesmo prompt de setembro. Comparar as duas gravações juntos. Marco de progresso visível.</div>
+          <div class="tag-row"><span class="tag t-pron">pronúncia</span><span class="tag t-rev">revisão</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone ms-teal">
+      <span class="ms-flag">🏁</span>
+      <span>Fim de novembro: integração total. Role-play de crise profissional. Evolução de pronúncia visível nas gravações.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ DEZEMBRO ═══════════════ -->
+<section id="dez" class="section">
+  <div class="month">
+    <div class="month-head">
+      <span class="month-name">Dezembro 2026</span>
+      <span class="month-badge b-trans">Transição</span>
+      <span class="month-meta">~8 aulas · Consolidação + avaliação + mapa para 2027</span>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 1</div>
+      <div class="week-grid">
+        <div class="day-card rev">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Revisão: estruturas A1/A2 completas</div>
+          <div class="day-sub">Quiz oral com situações mistas. Márcio escolhe estrutura e tempo certos instintivamente.</div>
+          <div class="tag-row"><span class="tag t-rev">revisão</span></div>
+        </div>
+        <div class="day-card writ">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">E-mail 7: do zero, sem modelo</div>
+          <div class="day-sub">Márcio recebe situação real e escreve e-mail completo. Avaliação real de escrita.</div>
+          <div class="tag-row"><span class="tag t-writ">escrita</span><span class="tag t-rev">avaliação</span></div>
+        </div>
+        <div class="day-card list">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Listening: vídeo autêntico 3 min</div>
+          <div class="day-sub">Sem script. Márcio resume em inglês o que entendeu. Avaliação real de compreensão.</div>
+          <div class="tag-row"><span class="tag t-list">listening</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week">
+      <div class="week-label">Semana 2</div>
+      <div class="week-grid">
+        <div class="day-card conv">
+          <div class="day-name">Segunda</div>
+          <div class="day-title">Avaliação oral: 30 min</div>
+          <div class="day-sub">Conversa livre sobre qualquer tema. Medir autonomia, fluência, pronúncia e estruturas.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span><span class="tag t-rev">avaliação</span></div>
+        </div>
+        <div class="day-card rev">
+          <div class="day-name">Quarta</div>
+          <div class="day-title">Feedback e mapa para 2027</div>
+          <div class="day-sub">Revisão do progresso desde fevereiro. O que ficou sólido, o que precisa de atenção. Próximos passos.</div>
+          <div class="tag-row"><span class="tag t-rev">revisão</span></div>
+        </div>
+        <div class="day-card conv">
+          <div class="day-name">Sexta</div>
+          <div class="day-title">Aula livre — tema escolhido por ele</div>
+          <div class="day-sub">Última aula do ano. Márcio comanda. Sem pressão de conteúdo. Celebrar o progresso.</div>
+          <div class="tag-row"><span class="tag t-conv">conversação</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone ms-amber">
+      <span class="ms-flag">🏁</span>
+      <span>Fim de dezembro: todas as estruturas A1/A2 cobertas. Avaliação completa. Márcio entra em 2027 pronto para B1.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ EXTRAS ═══════════════ -->
+<section id="extras" class="section">
+  <p style="font-size:13px;color:var(--text2);margin-bottom:1.2rem;">12 aulas prontas para encaixar quando necessário — falta, semana leve, pronúncia travando ou reforço pontual.</p>
+
+  <div class="filter-row">
+    <button class="f-btn on fa" onclick="filterExtras('all', this)">Todas (12)</button>
+    <button class="f-btn" onclick="filterExtras('pron', this)">Pronúncia</button>
+    <button class="f-btn" onclick="filterExtras('gram', this)">Gramática</button>
+    <button class="f-btn" onclick="filterExtras('conv', this)">Conversação</button>
+    <button class="f-btn" onclick="filterExtras('list', this)">Listening/Leitura</button>
+    <button class="f-btn" onclick="filterExtras('writ', this)">Escrita</button>
+    <button class="f-btn" onclick="filterExtras('rev', this)">Revisão</button>
+  </div>
+  <div class="counter-txt" id="extras-counter">Mostrando 12 de 12</div>
+
+  <div class="extras-grid" id="extras-grid">
+
+    <div class="extra-card" data-cat="pron">
+      <div class="extra-top"><span class="extra-num">Extra 01</span><span class="tag t-pron">Pronúncia</span></div>
+      <div class="extra-title">Minimal pairs — sons que confundem brasileiros</div>
+      <div class="extra-body">ship/sheep, live/leave, full/fool, bet/bat, cut/cat. Drilling com frases do contexto de trabalho. Gravar antes e depois.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> se a pronúncia estiver travando mais do que o esperado. Boa opção para semanas com menos conteúdo novo.</div>
+    </div>
+
+    <div class="extra-card" data-cat="pron">
+      <div class="extra-top"><span class="extra-num">Extra 02</span><span class="tag t-pron">Pronúncia</span></div>
+      <div class="extra-title">Ritmo e stress — sílaba tônica em inglês</div>
+      <div class="extra-body">INcrease vs inCREASE. Palavras de negócios: SUPplier, deLIvery, conFIRM, rePORT. Como o stress muda o significado.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> agosto em diante, quando frases mais longas aparecerem. Encaixa bem depois de comparatives ou modais.</div>
+    </div>
+
+    <div class="extra-card" data-cat="gram">
+      <div class="extra-top"><span class="extra-num">Extra 03</span><span class="tag t-gram">Gramática</span></div>
+      <div class="extra-title">Adverbs of frequency — revisão com aprofundamento</div>
+      <div class="extra-body">Always, usually, often, sometimes, rarely, never. Posição na frase (antes do verbo, depois do be). Rotina de trabalho e academia.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> qualquer momento de julho a setembro, especialmente se a semana tiver menos carga nova. Aula de transição.</div>
+    </div>
+
+    <div class="extra-card" data-cat="gram">
+      <div class="extra-top"><span class="extra-num">Extra 04</span><span class="tag t-gram">Gramática</span></div>
+      <div class="extra-title">Possessives e genitivo saxão</div>
+      <div class="extra-body">my/your/his/her/its/our/their + 's. "The supplier's quote / the company's policy." Frequente em e-mails que ele já escreve.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> junho/julho, logo depois do Past Simple. Curto — encaixa bem em meia aula ou como aquecimento.</div>
+    </div>
+
+    <div class="extra-card" data-cat="gram">
+      <div class="extra-top"><span class="extra-num">Extra 05</span><span class="tag t-gram">Gramática</span></div>
+      <div class="extra-title">Countable vs uncountable — aprofundamento</div>
+      <div class="extra-body">Além dos quantifiers: advice, information, equipment, staff, news. Erros comuns de falantes de português.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> setembro a outubro, depois que quantifiers já tiverem sido vistos. Antes dos e-mails mais complexos de novembro.</div>
+    </div>
+
+    <div class="extra-card" data-cat="conv">
+      <div class="extra-top"><span class="extra-num">Extra 06</span><span class="tag t-conv">Conversação</span></div>
+      <div class="extra-title">Small talk profissional — como quebrar o gelo</div>
+      <div class="extra-body">"How's everything going?" / "Did you have a good weekend?" / "How's the weather over there?" Chunks prontos para início de ligação.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> qualquer momento, especialmente antes de um role-play de ligação. Alta utilidade prática.</div>
+    </div>
+
+    <div class="extra-card" data-cat="conv">
+      <div class="extra-top"><span class="extra-num">Extra 07</span><span class="tag t-conv">Conversação</span></div>
+      <div class="extra-title">Expressões de opinião e concordância</div>
+      <div class="extra-body">I think / I believe / In my opinion / I agree / I'm not sure / That's a good point. Para debates sobre política, história e trabalho.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> outubro a novembro. Aumenta muito a sensação de fluência sem exigir gramática nova.</div>
+    </div>
+
+    <div class="extra-card" data-cat="conv">
+      <div class="extra-top"><span class="extra-num">Extra 08</span><span class="tag t-conv">Conversação</span></div>
+      <div class="extra-title">Como pedir repetição e ganhar tempo</div>
+      <div class="extra-body">"Could you repeat that?" / "Sorry, I didn't catch that." / "Let me think for a moment." Sobrevivência em ligações reais.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> qualquer momento — especialmente antes de role-plays. Uma das aulas mais práticas do banco.</div>
+    </div>
+
+    <div class="extra-card" data-cat="list">
+      <div class="extra-top"><span class="extra-num">Extra 09</span><span class="tag t-list">Listening</span></div>
+      <div class="extra-title">Sotaques diferentes</div>
+      <div class="extra-body">Expor ao inglês britânico, americano e um sotaque não-nativo (espanhol ou asiático). Clientes internacionais não têm sotaque padrão.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> outubro a novembro, depois que o listening sem script estiver mais confortável. Prepara para o mundo real.</div>
+    </div>
+
+    <div class="extra-card" data-cat="list">
+      <div class="extra-top"><span class="extra-num">Extra 10</span><span class="tag t-list">Leitura</span></div>
+      <div class="extra-title">Leitura: receita ou culinária em inglês</div>
+      <div class="extra-body">Tema pessoal forte — ele gosta de cozinhar com a família. Imperatives em contexto natural (chop, add, mix, cook).</div>
+      <div class="extra-when"><strong>Quando usar:</strong> aula mais leve, pós-feriado ou semana de conteúdo pesado. Boa quebra de ritmo sem perder aprendizado.</div>
+    </div>
+
+    <div class="extra-card" data-cat="writ">
+      <div class="extra-top"><span class="extra-num">Extra 11</span><span class="tag t-writ">Escrita</span></div>
+      <div class="extra-title">Tom informal vs formal — quando usar cada um</div>
+      <div class="extra-body">Comparar o mesmo pedido em WhatsApp vs e-mail. "Hey, can you check this?" vs "Could you please review the attached document?"</div>
+      <div class="extra-when"><strong>Quando usar:</strong> setembro a outubro, depois que os modais estiverem no repertório. Boa semana de escrita.</div>
+    </div>
+
+    <div class="extra-card" data-cat="rev">
+      <div class="extra-top"><span class="extra-num">Extra 12</span><span class="tag t-rev">Revisão</span></div>
+      <div class="extra-title">Aula-diagnóstico de meio de semestre</div>
+      <div class="extra-body">Conversa livre de 30 min + mini e-mail escrito do zero. Avaliar o que ficou forte e o que precisa de reforço. Sem conteúdo novo.</div>
+      <div class="extra-when"><strong>Quando usar:</strong> final de setembro ou início de outubro. Checkpoint antes da Fase 2 avançar. Pode substituir qualquer revisão do cronograma.</div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+const catClasses = { pron:'fp', gram:'fg', conv:'fc', list:'fl', writ:'fw', rev:'fr', all:'fa' };
+
+function filterExtras(cat, btn) {
+  document.querySelectorAll('.filter-row .f-btn').forEach(b => {
+    b.classList.remove('on', 'fa','fp','fg','fc','fl','fw','fr');
+  });
+  btn.classList.add('on', catClasses[cat]);
+  const cards = document.querySelectorAll('#extras-grid .extra-card');
+  let shown = 0;
+  cards.forEach(c => {
+    const show = cat === 'all' || c.dataset.cat === cat;
+    c.style.display = show ? '' : 'none';
+    if (show) shown++;
+  });
+  document.getElementById('extras-counter').textContent = 'Mostrando ' + shown + ' de 12';
+}
+</script>
+</body>
+</html>
