@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap de Progresso — Business English A1 → C2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+:root {
+  --ink:#13120e;--ink-mid:#4a4840;--ink-light:#8a8880;
+  --paper:#f6f4ef;--paper-warm:#efecea;--paper-card:#ffffff;
+  --rule:#dddad2;--rule-strong:#b8b4a8;
+  --a1:#c04018;--a1-bg:#fdf1ec;--a1-bg2:#fff8f5;
+  --a2:#b07010;--a2-bg:#fdf6e8;--a2-bg2:#fffaf0;
+  --b1:#2a7a38;--b1-bg:#edf7ef;--b1-bg2:#f5fbf6;
+  --b2:#1a5fad;--b2-bg:#e8f0fb;--b2-bg2:#f3f8fd;
+  --c1:#6330a0;--c1-bg:#f3ecfb;--c1-bg2:#f9f5fd;
+  --c2:#444240;--c2-bg:#ececec;--c2-bg2:#f5f5f5;
+  --radius:6px;--radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.6;}
+
+.hero{background:var(--ink);padding:3.5rem 2rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(192,64,24,.18) 0%,transparent 65%),radial-gradient(ellipse at 20% 80%,rgba(26,95,173,.12) 0%,transparent 55%);pointer-events:none;}
+.hero-label{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#777;margin-bottom:1rem;}
+.hero h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:400;color:#fff;line-height:1.15;margin-bottom:.6rem;}
+.hero h1 em{font-style:italic;color:#f0a878;}
+.hero-sub{font-size:13.5px;color:#888;max-width:520px;margin:0 auto;}
+
+nav{background:var(--paper-card);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:100;overflow-x:auto;}
+.nav-inner{max-width:920px;margin:0 auto;display:flex;}
+nav button{font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;padding:.85rem 1rem;border:none;background:none;color:var(--ink-mid);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
+nav button:hover{color:var(--ink);}
+nav button.active{color:var(--a1);border-bottom-color:var(--a1);}
+
+main{max-width:920px;margin:0 auto;padding:2.2rem 1.4rem 5rem;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* OVERVIEW TRACK */
+.path-track{display:flex;align-items:stretch;gap:0;margin:1.5rem 0 2rem;overflow-x:auto;padding-bottom:.5rem;}
+.path-step{flex:1;min-width:120px;position:relative;display:flex;flex-direction:column;align-items:center;cursor:pointer;}
+.path-step::before{content:'';position:absolute;top:19px;left:50%;right:-50%;height:2px;background:var(--rule);z-index:0;}
+.path-step:last-child::before{display:none;}
+.path-node{width:38px;height:38px;border-radius:50%;border:2px solid;background:var(--paper-card);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;position:relative;z-index:1;margin-bottom:.5rem;transition:transform .15s;}
+.path-step:hover .path-node{transform:scale(1.12);}
+.path-label{font-size:11px;font-weight:600;color:var(--ink-mid);text-align:center;line-height:1.3;}
+.path-sub{font-size:9.5px;color:var(--ink-light);text-align:center;margin-top:1px;}
+
+.section-label{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light);margin:1.75rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule);}
+.highlight{border-radius:var(--radius);padding:.85rem 1rem;font-size:13.5px;line-height:1.6;margin:1rem 0;}
+.highlight strong{font-weight:700;}
+
+table.summary{width:100%;border-collapse:collapse;font-size:12.5px;margin:1rem 0;}
+table.summary th{text-align:left;padding:8px 10px;background:var(--paper-warm);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-light);font-weight:700;border-bottom:1px solid var(--rule);}
+table.summary td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}
+table.summary tr:last-child td{border-bottom:none;}
+.td-level{font-weight:700;white-space:nowrap;}
+
+/* OVERALL PROGRESS BAR (top of overview) */
+.global-progress{background:var(--paper-card);border:1px solid var(--rule);border-radius:var(--radius-lg);padding:1.1rem 1.3rem;margin-bottom:1.5rem;}
+.gp-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.6rem;}
+.gp-row:last-child{margin-bottom:0;}
+.gp-label{font-size:12px;font-weight:600;min-width:90px;color:var(--ink-mid);}
+.gp-bar-bg{flex:1;height:8px;background:var(--rule);border-radius:4px;overflow:hidden;}
+.gp-bar-fill{height:100%;border-radius:4px;transition:width .3s;}
+.gp-pct{font-size:11.5px;font-weight:700;min-width:34px;text-align:right;color:var(--ink-light);}
+
+/* LEVEL HEADER BLOCK (within each tab) */
+.level-banner{border-radius:var(--radius-lg);padding:1.4rem 1.5rem;margin-bottom:1.5rem;}
+.level-banner-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.level-title{font-family:'DM Serif Display',serif;font-size:1.5rem;}
+.level-stats{display:flex;gap:1.2rem;font-size:12px;flex-wrap:wrap;}
+.level-stat{display:flex;flex-direction:column;}
+.level-stat-num{font-size:18px;font-weight:800;}
+.level-stat-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-light);}
+.level-desc{font-size:13px;color:var(--ink-mid);line-height:1.6;margin-top:.6rem;}
+
+/* CATEGORY BLOCK */
+.cat-block{background:var(--paper-card);border:1px solid var(--rule);border-radius:var(--radius-lg);margin-bottom:1rem;overflow:hidden;}
+.cat-header{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.2rem;cursor:pointer;user-select:none;transition:background .12s;}
+.cat-header:hover{background:var(--paper-warm);}
+.cat-header-left{display:flex;align-items:center;gap:.6rem;}
+.cat-icon{font-size:16px;}
+.cat-name{font-size:14px;font-weight:700;}
+.cat-progress-text{font-size:11px;color:var(--ink-light);font-weight:600;}
+.cat-chevron{font-size:9px;color:var(--ink-light);transition:transform .2s;}
+.cat-block.open .cat-chevron{transform:rotate(180deg);}
+.cat-mini-bar{height:4px;background:var(--rule);}
+.cat-mini-fill{height:100%;transition:width .25s;}
+
+.cat-body{display:none;padding:.3rem 1.2rem 1.1rem;}
+.cat-block.open .cat-body{display:block;}
+
+.check-item{display:flex;align-items:flex-start;gap:.65rem;padding:.5rem 0;border-bottom:1px solid var(--paper-warm);cursor:pointer;}
+.check-item:last-child{border-bottom:none;}
+.check-box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--rule-strong);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;transition:all .15s;}
+.check-item.checked .check-box{color:#fff;}
+.check-text{font-size:13px;color:var(--ink-mid);line-height:1.45;flex:1;}
+.check-item.checked .check-text{color:var(--ink-light);text-decoration:line-through;text-decoration-color:var(--rule-strong);}
+.check-example{font-size:11.5px;color:var(--ink-light);font-style:italic;display:block;margin-top:2px;}
+
+/* TIMELINE / PACING TABLE */
+.pacing-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:.75rem 0;}
+.pacing-table th{text-align:left;padding:7px 9px;background:var(--paper-warm);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-light);font-weight:700;}
+.pacing-table td{padding:8px 9px;border-bottom:1px solid var(--rule);}
+.pacing-table tr:last-child td{border-bottom:none;}
+
+/* PRACTICE TIPS */
+.practice-block{background:var(--paper-card);border:1px solid var(--rule);border-radius:var(--radius-lg);padding:1.2rem 1.4rem;margin-bottom:1rem;}
+.practice-title{font-family:'DM Serif Display',serif;font-size:15.5px;margin-bottom:.7rem;}
+.practice-item{display:flex;gap:.9rem;padding:.65rem 0;border-bottom:1px solid var(--rule);align-items:flex-start;}
+.practice-item:last-child{border-bottom:none;}
+.practice-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.practice-content{flex:1;}
+.practice-name{font-size:13px;font-weight:600;margin-bottom:2px;}
+.practice-desc{font-size:12px;color:var(--ink-mid);line-height:1.5;}
+.practice-time{font-size:10.5px;font-weight:700;color:var(--ink-light);white-space:nowrap;margin-top:2px;}
+
+.skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin:.9rem 0;}
+@media(max-width:560px){.skill-grid{grid-template-columns:1fr;}}
+.skill-item{font-size:12.5px;padding:.5rem .7rem;background:var(--paper-warm);border-radius:var(--radius);color:var(--ink-mid);display:flex;align-items:flex-start;gap:6px;}
+.skill-item::before{content:'→';color:var(--ink-light);flex-shrink:0;margin-top:1px;}
+
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:1rem 0;}
+.week-day{border-radius:var(--radius);padding:7px 3px;text-align:center;font-size:10px;}
+.week-day .day-name{font-weight:700;color:var(--ink-light);margin-bottom:3px;}
+.week-day .day-task{font-size:9.5px;color:var(--ink-mid);line-height:1.25;}
+.week-day.active{background:var(--a1-bg);border:1px solid #f0c8b0;}
+.week-day.active .day-name{color:var(--a1);}
+.week-day.rest{background:var(--paper-warm);}
+.week-day.practice{background:var(--b1-bg);border:1px solid #a8dbb8;}
+.week-day.practice .day-name{color:var(--b1);}
+
+.reset-btn{font-size:11.5px;font-weight:600;color:var(--ink-light);background:var(--paper-warm);border:1px solid var(--rule);border-radius:20px;padding:5px 12px;cursor:pointer;float:right;margin-top:-2.6rem;}
+.reset-btn:hover{background:var(--rule);color:var(--ink);}
+
+p{margin-bottom:.8rem;}p:last-child{margin-bottom:0;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Business English · Tracker de Progresso</div>
+  <h1>Roadmap completo:<br><em>A1 até C2</em></h1>
+  <p class="hero-sub">Checklist de competências por nível, tempo estimado em aulas e horas, e dicas de prática semanal. Clique nas caixas para marcar o progresso.</p>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <button class="active" onclick="showTab('visao',this)">Visão Geral</button>
+    <button onclick="showTab('a1a2',this)">A1 → A2</button>
+    <button onclick="showTab('a2b1',this)">A2 → B1</button>
+    <button onclick="showTab('b1b2',this)">B1 → B2</button>
+    <button onclick="showTab('b2c1',this)">B2 → C1</button>
+    <button onclick="showTab('c1c2',this)">C1 → C2</button>
+    <button onclick="showTab('pratica',this)">Prática em casa</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════ VISÃO GERAL ═══════════ -->
+<div id="tab-visao" class="tab-panel active">
+
+  <div class="global-progress">
+    <div class="gp-row">
+      <span class="gp-label" style="color:#c04018;">A1 → A2</span>
+      <div class="gp-bar-bg"><div class="gp-bar-fill" id="gp-bar-a1a2" style="width:0%;background:#c04018;"></div></div>
+      <span class="gp-pct" id="gp-pct-a1a2">0%</span>
+    </div>
+    <div class="gp-row">
+      <span class="gp-label" style="color:#b07010;">A2 → B1</span>
+      <div class="gp-bar-bg"><div class="gp-bar-fill" id="gp-bar-a2b1" style="width:0%;background:#b07010;"></div></div>
+      <span class="gp-pct" id="gp-pct-a2b1">0%</span>
+    </div>
+    <div class="gp-row">
+      <span class="gp-label" style="color:#2a7a38;">B1 → B2</span>
+      <div class="gp-bar-bg"><div class="gp-bar-fill" id="gp-bar-b1b2" style="width:0%;background:#2a7a38;"></div></div>
+      <span class="gp-pct" id="gp-pct-b1b2">0%</span>
+    </div>
+    <div class="gp-row">
+      <span class="gp-label" style="color:#1a5fad;">B2 → C1</span>
+      <div class="gp-bar-bg"><div class="gp-bar-fill" id="gp-bar-b2c1" style="width:0%;background:#1a5fad;"></div></div>
+      <span class="gp-pct" id="gp-pct-b2c1">0%</span>
+    </div>
+    <div class="gp-row">
+      <span class="gp-label" style="color:#6330a0;">C1 → C2</span>
+      <div class="gp-bar-bg"><div class="gp-bar-fill" id="gp-bar-c1c2" style="width:0%;background:#6330a0;"></div></div>
+      <span class="gp-pct" id="gp-pct-c1c2">0%</span>
+    </div>
+  </div>
+
+  <div class="section-label">Caminho completo</div>
+  <div class="path-track">
+    <div class="path-step" onclick="showTab('a1a2',null)">
+      <div class="path-node" style="border-color:#c04018;color:#c04018;">A1→A2</div>
+      <div class="path-label">Básico</div>
+      <div class="path-sub">~38 aulas</div>
+    </div>
+    <div class="path-step" onclick="showTab('a2b1',null)">
+      <div class="path-node" style="border-color:#b07010;color:#b07010;">A2→B1</div>
+      <div class="path-label">Elementar</div>
+      <div class="path-sub">~46 aulas</div>
+    </div>
+    <div class="path-step" onclick="showTab('b1b2',null)">
+      <div class="path-node" style="border-color:#2a7a38;color:#2a7a38;">B1→B2</div>
+      <div class="path-label">Intermediário</div>
+      <div class="path-sub">~50 aulas</div>
+    </div>
+    <div class="path-step" onclick="showTab('b2c1',null)">
+      <div class="path-node" style="border-color:#1a5fad;color:#1a5fad;">B2→C1</div>
+      <div class="path-label">Int. Superior</div>
+      <div class="path-sub">~52 aulas</div>
+    </div>
+    <div class="path-step" onclick="showTab('c1c2',null)">
+      <div class="path-node" style="border-color:#6330a0;color:#6330a0;">C1→C2</div>
+      <div class="path-label">Avançado</div>
+      <div class="path-sub">~48 aulas</div>
+    </div>
+  </div>
+
+  <div class="section-label">Resumo de tempo por transição</div>
+  <table class="summary">
+    <thead>
+      <tr><th>Transição</th><th>Aulas (1/sem)</th><th>Horas de aula</th><th>Horas de prática*</th><th>Tempo total estimado</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="td-level" style="color:#c04018;">A1 → A2</span></td>
+        <td>~38 aulas</td>
+        <td>~38h</td>
+        <td>~38h</td>
+        <td><strong>~9–10 meses</strong></td>
+      </tr>
+      <tr>
+        <td><span class="td-level" style="color:#b07010;">A2 → B1</span></td>
+        <td>~46 aulas</td>
+        <td>~46h</td>
+        <td>~46h</td>
+        <td><strong>~11–12 meses</strong></td>
+      </tr>
+      <tr>
+        <td><span class="td-level" style="color:#2a7a38;">B1 → B2</span></td>
+        <td>~50 aulas</td>
+        <td>~50h</td>
+        <td>~50h</td>
+        <td><strong>~12 meses</strong></td>
+      </tr>
+      <tr>
+        <td><span class="td-level" style="color:#1a5fad;">B2 → C1</span></td>
+        <td>~52 aulas</td>
+        <td>~52h</td>
+        <td>~52h</td>
+        <td><strong>~12–13 meses</strong></td>
+      </tr>
+      <tr>
+        <td><span class="td-level" style="color:#6330a0;">C1 → C2</span></td>
+        <td>~48 aulas</td>
+        <td>~48h</td>
+        <td>~48h</td>
+        <td><strong>~12 meses</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11.5px;color:var(--ink-light);">*Considerando 1 aula semanal de 1h + 1h de prática autônoma por semana, sem pausas longas.</p>
+
+  <div class="highlight" style="background:#fdf1ec;border:1px solid #f0c8b0;">
+    <strong>Como o tempo foi calculado:</strong> cada competência do checklist (uma estrutura gramatical, um bloco de vocabulário ou um tipo de comunicação) corresponde a aproximadamente 1 aula de foco principal — embora na prática seja revisitada e reforçada ao longo de várias aulas seguintes. Total: aulas necessárias ÷ 1 aula por semana = semanas de aula. Some 1h de prática autônoma por semana e o nível se consolida no tempo indicado.
+  </div>
+
+  <div class="section-label">Tempo total estimado: A1 até C2</div>
+  <div class="highlight" style="background:var(--paper-warm);border:1px solid var(--rule);">
+    <strong>~5 a 5,5 anos</strong> do zero ao C2, com 1 aula semanal + 1h de prática consistente — sem pausas longas durante feriados e férias. Esse é o caminho mais longo e completo do CEFR; a maioria dos profissionais de negócio para no B2 ou C1, que já garante fluência plena para qualquer situação de trabalho internacional.
+  </div>
+
+  <div class="section-label">O que acelera ou atrasa o progresso</div>
+  <div class="skill-grid">
+    <div class="skill-item">Consistência da prática semanal — o fator nº1</div>
+    <div class="skill-item">Uso real do inglês no trabalho (e-mails, calls, reuniões)</div>
+    <div class="skill-item">Exposição a conteúdo autêntico (séries, podcasts, notícias)</div>
+    <div class="skill-item">Revisar vocabulário novo nas 24h após a aula</div>
+    <div class="skill-item">Manter a prática mesmo durante feriados e férias</div>
+    <div class="skill-item">Aceitar errar e continuar falando sem travar</div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════ A1 → A2 ═══════════ -->
+<div id="tab-a1a2" class="tab-panel level-panel" data-level="a1a2">
+
+  <div class="level-banner" style="background:var(--a1-bg2);border:1px solid #f0c8b0;">
+    <button class="reset-btn" onclick="resetLevel('a1a2')">↺ resetar progresso</button>
+    <div class="level-banner-top">
+      <div class="level-title" style="color:#c04018;">A1 → A2</div>
+      <div class="level-stats">
+        <div class="level-stat"><span class="level-stat-num" style="color:#c04018;">~38</span><span class="level-stat-label">aulas</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#c04018;">~76h</span><span class="level-stat-label">aula + prática</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#c04018;">~9–10</span><span class="level-stat-label">meses</span></div>
+      </div>
+    </div>
+    <div class="level-desc">Do inglês sobrevivência ao inglês funcional no trabalho. Ao final, é possível escrever e-mails simples, participar de reuniões básicas com frases prontas, contar o que aconteceu e o que vai acontecer, e entender a estrutura geral de uma conversa de negócios.</div>
+  </div>
+
+  <div class="section-label">Gramática</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📐</span><span class="cat-name">Tempos verbais e estruturas básicas</span></div>
+      <span class="cat-progress-text">0/10</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#c04018;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="a1a2-g1"><div class="check-box">✓</div><div class="check-text">Verb to be (am/is/are) — afirmativo, negativo, interrogativo<span class="check-example">I am a buyer. She isn't available. Are you free today?</span></div></div>
+      <div class="check-item" data-id="a1a2-g2"><div class="check-box">✓</div><div class="check-text">Present Simple — afirmativo<span class="check-example">I work with suppliers. He manages the team.</span></div></div>
+      <div class="check-item" data-id="a1a2-g3"><div class="check-box">✓</div><div class="check-text">Present Simple — negativo e interrogativo (Do/Does)<span class="check-example">Do you work with international suppliers? We don't have stock.</span></div></div>
+      <div class="check-item" data-id="a1a2-g4"><div class="check-box">✓</div><div class="check-text">Can / Can't — pedidos, capacidade e permissão<span class="check-example">Can you send the invoice? We can deliver next week.</span></div></div>
+      <div class="check-item" data-id="a1a2-g5"><div class="check-box">✓</div><div class="check-text">There is / There are — afirmativo, negativo, interrogativo<span class="check-example">There are 500 units in stock. Is there a backup supplier?</span></div></div>
+      <div class="check-item" data-id="a1a2-g6"><div class="check-box">✓</div><div class="check-text">Present Continuous — ações em andamento<span class="check-example">We are working on a new contract right now.</span></div></div>
+      <div class="check-item" data-id="a1a2-g7"><div class="check-box">✓</div><div class="check-text">Simple Past — verbos regulares (-ed)<span class="check-example">We ordered 500 units. They approved the PO.</span></div></div>
+      <div class="check-item" data-id="a1a2-g8"><div class="check-box">✓</div><div class="check-text">Simple Past — verbos irregulares (top 20)<span class="check-example">We bought, sent, had, made, went, came, said...</span></div></div>
+      <div class="check-item" data-id="a1a2-g9"><div class="check-box">✓</div><div class="check-text">Going to — planos definidos<span class="check-example">We're going to order 500 units next month.</span></div></div>
+      <div class="check-item" data-id="a1a2-g10"><div class="check-box">✓</div><div class="check-text">Will — decisões imediatas e previsões<span class="check-example">I'll send it right now. Prices will increase next year.</span></div></div>
+    </div>
+  </div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">🔤</span><span class="cat-name">Outras estruturas</span></div>
+      <span class="cat-progress-text">0/6</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#c04018;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="a1a2-g11"><div class="check-box">✓</div><div class="check-text">Artigos — a / an / the<span class="check-example">I contacted a supplier. I contacted THE supplier we always use.</span></div></div>
+      <div class="check-item" data-id="a1a2-g12"><div class="check-box">✓</div><div class="check-text">Preposições de tempo — in / on / at<span class="check-example">The meeting is on Friday at 3pm. We have a visit in October.</span></div></div>
+      <div class="check-item" data-id="a1a2-g13"><div class="check-box">✓</div><div class="check-text">Plural regular e irregular de substantivos<span class="check-example">suppliers, boxes, companies / man→men, child→children</span></div></div>
+      <div class="check-item" data-id="a1a2-g14"><div class="check-box">✓</div><div class="check-text">Pronomes pessoais e possessivos<span class="check-example">I, you, he, she, it, we, they / my, your, his, her, our</span></div></div>
+      <div class="check-item" data-id="a1a2-g15"><div class="check-box">✓</div><div class="check-text">Comparativos e superlativos básicos<span class="check-example">cheaper, more expensive, the best, the cheapest</span></div></div>
+      <div class="check-item" data-id="a1a2-g16"><div class="check-box">✓</div><div class="check-text">Wh- questions (what, where, when, who, why, how)<span class="check-example">What does your company do? When is the deadline?</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Vocabulário</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📦</span><span class="cat-name">Vocabulário de negócio</span></div>
+      <span class="cat-progress-text">0/8</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#c04018;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="a1a2-v1"><div class="check-box">✓</div><div class="check-text">Vocabulário de compras essencial (15–20 termos)<span class="check-example">supplier, purchase order, invoice, deadline, lead time, stock</span></div></div>
+      <div class="check-item" data-id="a1a2-v2"><div class="check-box">✓</div><div class="check-text">Cargos e departamentos da empresa<span class="check-example">buyer, manager, purchasing department, logistics, sales</span></div></div>
+      <div class="check-item" data-id="a1a2-v3"><div class="check-box">✓</div><div class="check-text">Números, preços e quantidades<span class="check-example">five hundred dollars, a 10 percent discount, 500 units</span></div></div>
+      <div class="check-item" data-id="a1a2-v4"><div class="check-box">✓</div><div class="check-text">Dias, meses e expressões de tempo<span class="check-example">last week, next month, on Monday, in Q3</span></div></div>
+      <div class="check-item" data-id="a1a2-v5"><div class="check-box">✓</div><div class="check-text">12 frases essenciais de reunião<span class="check-example">Let me explain. Can you repeat that? I agree / disagree.</span></div></div>
+      <div class="check-item" data-id="a1a2-v6"><div class="check-box">✓</div><div class="check-text">Verbos de ação do dia a dia profissional<span class="check-example">contact, confirm, approve, negotiate, request, follow up</span></div></div>
+      <div class="check-item" data-id="a1a2-v7"><div class="check-box">✓</div><div class="check-text">Adjetivos básicos de avaliação<span class="check-example">cheap, expensive, fast, slow, reliable, urgent</span></div></div>
+      <div class="check-item" data-id="a1a2-v8"><div class="check-box">✓</div><div class="check-text">Small talk — clima, fim de semana, esportes<span class="check-example">How was your weekend? It's been hot lately.</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Tipos de comunicação</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">💬</span><span class="cat-name">E-mails, reuniões e conversas</span></div>
+      <span class="cat-progress-text">0/8</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#c04018;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="a1a2-c1"><div class="check-box">✓</div><div class="check-text">E-mail de apresentação a um novo fornecedor</div></div>
+      <div class="check-item" data-id="a1a2-c2"><div class="check-box">✓</div><div class="check-text">E-mail de pedido simples (cotação, prazo, condições)</div></div>
+      <div class="check-item" data-id="a1a2-c3"><div class="check-box">✓</div><div class="check-text">E-mail de follow-up depois de uma reunião</div></div>
+      <div class="check-item" data-id="a1a2-c4"><div class="check-box">✓</div><div class="check-text">Participar de uma reunião curta com frases funcionais</div></div>
+      <div class="check-item" data-id="a1a2-c5"><div class="check-box">✓</div><div class="check-text">Dar um status update oral (o que fez / está fazendo)</div></div>
+      <div class="check-item" data-id="a1a2-c6"><div class="check-box">✓</div><div class="check-text">Negociar prazo e preço com vocabulário básico</div></div>
+      <div class="check-item" data-id="a1a2-c7"><div class="check-box">✓</div><div class="check-text">Fazer e responder a small talk por 3–5 minutos</div></div>
+      <div class="check-item" data-id="a1a2-c8"><div class="check-box">✓</div><div class="check-text">Pedir repetição ou esclarecimento quando não entender</div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Ritmo sugerido (1 aula/semana)</div>
+  <table class="pacing-table">
+    <thead><tr><th>Bloco</th><th>Conteúdo</th><th>Aulas aprox.</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>To be, Present Simple (afirm./neg./interrog.)</td><td>3</td></tr>
+      <tr><td>2</td><td>Can/can't, There is/are</td><td>2</td></tr>
+      <tr><td>3</td><td>Vocabulário de compras + números e preços</td><td>2</td></tr>
+      <tr><td>4</td><td>Frases de reunião + Present Continuous</td><td>3</td></tr>
+      <tr><td>5</td><td>Simple Past regular e irregular</td><td>4</td></tr>
+      <tr><td>6</td><td>Artigos, preposições de tempo</td><td>2</td></tr>
+      <tr><td>7</td><td>Going to / Will</td><td>3</td></tr>
+      <tr><td>8</td><td>Comparativos, wh-questions</td><td>2</td></tr>
+      <tr><td>9</td><td>E-mails e reuniões — prática integrada</td><td>4</td></tr>
+      <tr><td>10</td><td>Simulações completas e revisão</td><td>4</td></tr>
+      <tr><td colspan="2" style="text-align:right;font-weight:700;">Total aproximado</td><td style="font-weight:700;">~38 aulas (1 sem cada, sem pausas)</td></tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- ═══════════ A2 → B1 ═══════════ -->
+<div id="tab-a2b1" class="tab-panel level-panel" data-level="a2b1">
+
+  <div class="level-banner" style="background:var(--a2-bg2);border:1px solid #e8c888;">
+    <button class="reset-btn" onclick="resetLevel('a2b1')">↺ resetar progresso</button>
+    <div class="level-banner-top">
+      <div class="level-title" style="color:#b07010;">A2 → B1</div>
+      <div class="level-stats">
+        <div class="level-stat"><span class="level-stat-num" style="color:#b07010;">~46</span><span class="level-stat-label">aulas</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#b07010;">~92h</span><span class="level-stat-label">aula + prática</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#b07010;">~11–12</span><span class="level-stat-label">meses</span></div>
+      </div>
+    </div>
+    <div class="level-desc">Do inglês funcional ao inglês confiante no trabalho. Ao final, é possível conduzir uma negociação do início ao fim, escrever relatórios, dar opiniões com justificativa e participar de calls com fornecedores sem apoio constante.</div>
+  </div>
+
+  <div class="section-label">Gramática</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📐</span><span class="cat-name">Tempos verbais avançados</span></div>
+      <span class="cat-progress-text">0/8</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#b07010;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="a2b1-g1"><div class="check-box">✓</div><div class="check-text">Present Perfect — experiência<span class="check-example">Have you ever negotiated with an American supplier?</span></div></div>
+      <div class="check-item" data-id="a2b1-g2"><div class="check-box">✓</div><div class="check-text">Present Perfect — resultado recente e duração<span class="check-example">We have just received the PO. We've worked with them for 3 years.</span></div></div>
+      <div class="check-item" data-id="a2b1-g3"><div class="check-box">✓</div><div class="check-text">Present Perfect vs. Simple Past (contraste)<span class="check-example">I worked there in 2020 (terminado) vs. I have worked there for 3 years (contínuo)</span></div></div>
+      <div class="check-item" data-id="a2b1-g4"><div class="check-box">✓</div><div class="check-text">Past Continuous<span class="check-example">We were negotiating when the call dropped.</span></div></div>
+      <div class="check-item" data-id="a2b1-g5"><div class="check-box">✓</div><div class="check-text">Modal verbs — could, should, might, would<span class="check-example">You should contact them directly. Prices might increase.</span></div></div>
+      <div class="check-item" data-id="a2b1-g6"><div class="check-box">✓</div><div class="check-text">Voz passiva — presente e passado<span class="check-example">The order was placed last week. The invoice is sent automatically.</span></div></div>
+      <div class="check-item" data-id="a2b1-g7"><div class="check-box">✓</div><div class="check-text">Conditional 1 — if + present, will<span class="check-example">If we order now, they'll give us a discount.</span></div></div>
+      <div class="check-item" data-id="a2b1-g8"><div class="check-box">✓</div><div class="check-text">Conditional 2 — if + past, would<span class="check-example">If we had a bigger budget, we would order more.</span></div></div>
+    </div>
+  </div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">🔤</span><span class="cat-name">Estruturas complementares</span></div>
+      <span class="cat-progress-text">0/5</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#b07010;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="a2b1-g9"><div class="check-box">✓</div><div class="check-text">Comparativos e superlativos avançados<span class="check-example">This supplier is far more reliable than the previous one.</span></div></div>
+      <div class="check-item" data-id="a2b1-g10"><div class="check-box">✓</div><div class="check-text">Quantifiers — much, many, a lot of, few, little<span class="check-example">We don't have much time. Few suppliers offer this.</span></div></div>
+      <div class="check-item" data-id="a2b1-g11"><div class="check-box">✓</div><div class="check-text">Phrasal verbs de negócio (15–20)<span class="check-example">follow up, look into, get back to, deal with, carry out</span></div></div>
+      <div class="check-item" data-id="a2b1-g12"><div class="check-box">✓</div><div class="check-text">Conectores de discurso<span class="check-example">however, therefore, in addition, as a result, on the other hand</span></div></div>
+      <div class="check-item" data-id="a2b1-g13"><div class="check-box">✓</div><div class="check-text">Question tags<span class="check-example">The deadline is Friday, isn't it?</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Vocabulário</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📦</span><span class="cat-name">Vocabulário de negócio expandido</span></div>
+      <span class="cat-progress-text">0/7</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#b07010;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="a2b1-v1"><div class="check-box">✓</div><div class="check-text">Vocabulário de negociação e contratos<span class="check-example">payment terms, contract renewal, penalty clause, bulk discount</span></div></div>
+      <div class="check-item" data-id="a2b1-v2"><div class="check-box">✓</div><div class="check-text">Vocabulário de logística e cadeia de suprimentos<span class="check-example">freight, customs, lead time, warehouse, supply chain</span></div></div>
+      <div class="check-item" data-id="a2b1-v3"><div class="check-box">✓</div><div class="check-text">20+ expressões idiomáticas de negócio<span class="check-example">touch base, ballpark figure, get back to you, circle back</span></div></div>
+      <div class="check-item" data-id="a2b1-v4"><div class="check-box">✓</div><div class="check-text">Vocabulário de apresentação e relatório<span class="check-example">overview, key findings, in summary, next steps</span></div></div>
+      <div class="check-item" data-id="a2b1-v5"><div class="check-box">✓</div><div class="check-text">Vocabulário de opinião e argumentação<span class="check-example">I'd argue that..., from my perspective, on balance</span></div></div>
+      <div class="check-item" data-id="a2b1-v6"><div class="check-box">✓</div><div class="check-text">Adjetivos descritivos avançados<span class="check-example">competitive, sustainable, cost-effective, strategic</span></div></div>
+      <div class="check-item" data-id="a2b1-v7"><div class="check-box">✓</div><div class="check-text">Vocabulário de viagem de negócios<span class="check-example">check-in, boarding pass, business trip, itinerary, expenses</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Tipos de comunicação</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">💬</span><span class="cat-name">E-mails, reuniões e negociações</span></div>
+      <span class="cat-progress-text">0/9</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#b07010;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="a2b1-c1"><div class="check-box">✓</div><div class="check-text">Conduzir uma negociação completa (e-mail + call + follow-up)</div></div>
+      <div class="check-item" data-id="a2b1-c2"><div class="check-box">✓</div><div class="check-text">Escrever um relatório mensal de compras</div></div>
+      <div class="check-item" data-id="a2b1-c3"><div class="check-box">✓</div><div class="check-text">Apresentar um plano trimestral com slides simples</div></div>
+      <div class="check-item" data-id="a2b1-c4"><div class="check-box">✓</div><div class="check-text">Participar de reunião de status semanal/mensal</div></div>
+      <div class="check-item" data-id="a2b1-c5"><div class="check-box">✓</div><div class="check-text">Expressar e justificar uma opinião profissionalmente</div></div>
+      <div class="check-item" data-id="a2b1-c6"><div class="check-box">✓</div><div class="check-text">Concordar e discordar com educação em reunião</div></div>
+      <div class="check-item" data-id="a2b1-c7"><div class="check-box">✓</div><div class="check-text">Escrever e-mail de reclamação/resolução de problema</div></div>
+      <div class="check-item" data-id="a2b1-c8"><div class="check-box">✓</div><div class="check-text">Fazer e responder perguntas em entrevista de avaliação</div></div>
+      <div class="check-item" data-id="a2b1-c9"><div class="check-box">✓</div><div class="check-text">Comunicação básica em viagem de trabalho (aeroporto, hotel, táxi)</div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Ritmo sugerido (1 aula/semana)</div>
+  <table class="pacing-table">
+    <thead><tr><th>Bloco</th><th>Conteúdo</th><th>Aulas aprox.</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Present Perfect (experiência, resultado, duração)</td><td>4</td></tr>
+      <tr><td>2</td><td>Present Perfect vs. Simple Past + Past Continuous</td><td>3</td></tr>
+      <tr><td>3</td><td>Modal verbs (could, should, might, would)</td><td>3</td></tr>
+      <tr><td>4</td><td>Voz passiva</td><td>3</td></tr>
+      <tr><td>5</td><td>Conditionals 1 e 2</td><td>4</td></tr>
+      <tr><td>6</td><td>Phrasal verbs + conectores de discurso</td><td>3</td></tr>
+      <tr><td>7</td><td>Vocabulário de negociação e logística</td><td>4</td></tr>
+      <tr><td>8</td><td>Expressões idiomáticas de negócio</td><td>3</td></tr>
+      <tr><td>9</td><td>Vocabulário de apresentação e argumentação</td><td>3</td></tr>
+      <tr><td>10</td><td>Relatórios e apresentações — prática</td><td>5</td></tr>
+      <tr><td>11</td><td>Negociações completas e viagem de negócios</td><td>5</td></tr>
+      <tr><td>12</td><td>Simulações integradas e revisão</td><td>6</td></tr>
+      <tr><td colspan="2" style="text-align:right;font-weight:700;">Total aproximado</td><td style="font-weight:700;">~46 aulas (1 sem cada, sem pausas)</td></tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- ═══════════ B1 → B2 ═══════════ -->
+<div id="tab-b1b2" class="tab-panel level-panel" data-level="b1b2">
+
+  <div class="level-banner" style="background:var(--b1-bg2);border:1px solid #a8dbb8;">
+    <button class="reset-btn" onclick="resetLevel('b1b2')">↺ resetar progresso</button>
+    <div class="level-banner-top">
+      <div class="level-title" style="color:#2a7a38;">B1 → B2</div>
+      <div class="level-stats">
+        <div class="level-stat"><span class="level-stat-num" style="color:#2a7a38;">~50</span><span class="level-stat-label">aulas</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#2a7a38;">~100h</span><span class="level-stat-label">aula + prática</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#2a7a38;">~12</span><span class="level-stat-label">meses</span></div>
+      </div>
+    </div>
+    <div class="level-desc">Do inglês confiante ao inglês fluido. Ao final, é possível liderar reuniões internacionais, resolver conflitos por conta própria, escrever propostas executivas e entender a maior parte de uma call com nativo sem legenda.</div>
+  </div>
+
+  <div class="section-label">Gramática</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📐</span><span class="cat-name">Tempos e estruturas complexas</span></div>
+      <span class="cat-progress-text">0/8</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#2a7a38;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="b1b2-g1"><div class="check-box">✓</div><div class="check-text">Past Perfect<span class="check-example">We had already sent the invoice when they called.</span></div></div>
+      <div class="check-item" data-id="b1b2-g2"><div class="check-box">✓</div><div class="check-text">Past Perfect Continuous<span class="check-example">We had been negotiating for hours before they agreed.</span></div></div>
+      <div class="check-item" data-id="b1b2-g3"><div class="check-box">✓</div><div class="check-text">Reported speech (discurso indireto)<span class="check-example">He said that the deadline was Friday. She told me to call back.</span></div></div>
+      <div class="check-item" data-id="b1b2-g4"><div class="check-box">✓</div><div class="check-text">Conditional 3 — if + past perfect, would have<span class="check-example">If we had ordered earlier, we would have avoided the delay.</span></div></div>
+      <div class="check-item" data-id="b1b2-g5"><div class="check-box">✓</div><div class="check-text">Mixed conditionals<span class="check-example">If we had signed the contract, we would be shipping by now.</span></div></div>
+      <div class="check-item" data-id="b1b2-g6"><div class="check-box">✓</div><div class="check-text">Voz passiva em múltiplos tempos<span class="check-example">The order has been shipped. The contract will be reviewed.</span></div></div>
+      <div class="check-item" data-id="b1b2-g7"><div class="check-box">✓</div><div class="check-text">Gerunds vs. Infinitives<span class="check-example">We enjoy working with them. We need to confirm the order.</span></div></div>
+      <div class="check-item" data-id="b1b2-g8"><div class="check-box">✓</div><div class="check-text">Relative clauses (defining/non-defining)<span class="check-example">The supplier who delivered late lost the contract.</span></div></div>
+    </div>
+  </div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">🔤</span><span class="cat-name">Refinamento estrutural</span></div>
+      <span class="cat-progress-text">0/4</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#2a7a38;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="b1b2-g9"><div class="check-box">✓</div><div class="check-text">Inversão para ênfase<span class="check-example">Never have we seen such demand. Not only did they deliver late...</span></div></div>
+      <div class="check-item" data-id="b1b2-g10"><div class="check-box">✓</div><div class="check-text">Causative form (have/get something done)<span class="check-example">We had the contract reviewed by legal.</span></div></div>
+      <div class="check-item" data-id="b1b2-g11"><div class="check-box">✓</div><div class="check-text">Phrasal verbs avançados de negócio (20+)<span class="check-example">iron out, scale back, ramp up, branch out, roll out</span></div></div>
+      <div class="check-item" data-id="b1b2-g12"><div class="check-box">✓</div><div class="check-text">Linking words formais para escrita<span class="check-example">furthermore, notwithstanding, given that, provided that</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Vocabulário</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📦</span><span class="cat-name">Vocabulário profissional avançado</span></div>
+      <span class="cat-progress-text">0/7</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#2a7a38;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="b1b2-v1"><div class="check-box">✓</div><div class="check-text">Vocabulário de gestão de conflitos<span class="check-example">to escalate, breach of contract, to mediate, common ground</span></div></div>
+      <div class="check-item" data-id="b1b2-v2"><div class="check-box">✓</div><div class="check-text">Vocabulário financeiro e de orçamento<span class="check-example">cost reduction, ROI, budget allocation, cash flow</span></div></div>
+      <div class="check-item" data-id="b1b2-v3"><div class="check-box">✓</div><div class="check-text">Vocabulário de liderança e gestão de equipe<span class="check-example">to delegate, accountability, performance review, mentoring</span></div></div>
+      <div class="check-item" data-id="b1b2-v4"><div class="check-box">✓</div><div class="check-text">Vocabulário de estratégia e planejamento<span class="check-example">long-term goals, market analysis, competitive advantage</span></div></div>
+      <div class="check-item" data-id="b1b2-v5"><div class="check-box">✓</div><div class="check-text">50+ expressões idiomáticas de uso natural<span class="check-example">cut corners, think outside the box, on the same page</span></div></div>
+      <div class="check-item" data-id="b1b2-v6"><div class="check-box">✓</div><div class="check-text">Vocabulário de diferenças culturais de negócio<span class="check-example">direct vs. indirect communication, hierarchy, small talk norms</span></div></div>
+      <div class="check-item" data-id="b1b2-v7"><div class="check-box">✓</div><div class="check-text">Registro formal vs. informal — reconhecer e alternar<span class="check-example">"I was wondering if..." vs. "Can you...?"</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Tipos de comunicação</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">💬</span><span class="cat-name">Liderança, escrita executiva e resolução de problemas</span></div>
+      <span class="cat-progress-text">0/9</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#2a7a38;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="b1b2-c1"><div class="check-box">✓</div><div class="check-text">Liderar uma reunião internacional do início ao fim</div></div>
+      <div class="check-item" data-id="b1b2-c2"><div class="check-box">✓</div><div class="check-text">Resolver um conflito com fornecedor por call sem apoio</div></div>
+      <div class="check-item" data-id="b1b2-c3"><div class="check-box">✓</div><div class="check-text">Escrever uma proposta ou justificativa executiva completa</div></div>
+      <div class="check-item" data-id="b1b2-c4"><div class="check-box">✓</div><div class="check-text">Escrever e-mail de negociação de contrato complexo</div></div>
+      <div class="check-item" data-id="b1b2-c5"><div class="check-box">✓</div><div class="check-text">Dar feedback construtivo para um colega ou fornecedor</div></div>
+      <div class="check-item" data-id="b1b2-c6"><div class="check-box">✓</div><div class="check-text">Participar de uma entrevista de emprego em inglês</div></div>
+      <div class="check-item" data-id="b1b2-c7"><div class="check-box">✓</div><div class="check-text">Fazer uma apresentação de 10+ minutos com perguntas e respostas</div></div>
+      <div class="check-item" data-id="b1b2-c8"><div class="check-box">✓</div><div class="check-text">Conduzir comunicação completa de uma viagem de negócios</div></div>
+      <div class="check-item" data-id="b1b2-c9"><div class="check-box">✓</div><div class="check-text">Entender 85–90% de uma call com nativo sem legenda</div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Ritmo sugerido (1 aula/semana)</div>
+  <table class="pacing-table">
+    <thead><tr><th>Bloco</th><th>Conteúdo</th><th>Aulas aprox.</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Past Perfect (simples e contínuo)</td><td>3</td></tr>
+      <tr><td>2</td><td>Reported speech</td><td>3</td></tr>
+      <tr><td>3</td><td>Conditional 3 + mixed conditionals</td><td>4</td></tr>
+      <tr><td>4</td><td>Voz passiva avançada + gerunds/infinitives</td><td>4</td></tr>
+      <tr><td>5</td><td>Relative clauses + inversão + causative</td><td>4</td></tr>
+      <tr><td>6</td><td>Phrasal verbs e linking words formais</td><td>3</td></tr>
+      <tr><td>7</td><td>Vocabulário de conflito, finanças e liderança</td><td>5</td></tr>
+      <tr><td>8</td><td>Idioms avançados + diferenças culturais</td><td>4</td></tr>
+      <tr><td>9</td><td>Escrita executiva (propostas, contratos)</td><td>5</td></tr>
+      <tr><td>10</td><td>Liderança de reunião e resolução de conflito</td><td>5</td></tr>
+      <tr><td>11</td><td>Apresentações longas com Q&amp;A</td><td>4</td></tr>
+      <tr><td>12</td><td>Simulações integradas e revisão</td><td>6</td></tr>
+      <tr><td colspan="2" style="text-align:right;font-weight:700;">Total aproximado</td><td style="font-weight:700;">~50 aulas (1 sem cada, sem pausas)</td></tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- ═══════════ B2 → C1 ═══════════ -->
+<div id="tab-b2c1" class="tab-panel level-panel" data-level="b2c1">
+
+  <div class="level-banner" style="background:var(--b2-bg2);border:1px solid #b8d0f5;">
+    <button class="reset-btn" onclick="resetLevel('b2c1')">↺ resetar progresso</button>
+    <div class="level-banner-top">
+      <div class="level-title" style="color:#1a5fad;">B2 → C1</div>
+      <div class="level-stats">
+        <div class="level-stat"><span class="level-stat-num" style="color:#1a5fad;">~52</span><span class="level-stat-label">aulas</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#1a5fad;">~104h</span><span class="level-stat-label">aula + prática</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#1a5fad;">~12–13</span><span class="level-stat-label">meses</span></div>
+      </div>
+    </div>
+    <div class="level-desc">Do inglês fluido ao inglês de domínio profissional pleno. Ao final, o inglês deixa de ser uma habilidade "em desenvolvimento" — passa a ser uma ferramenta de trabalho confiável em qualquer contexto, incluindo negociação estratégica e liderança internacional.</div>
+  </div>
+
+  <div class="section-label">Gramática</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📐</span><span class="cat-name">Precisão e nuance gramatical</span></div>
+      <span class="cat-progress-text">0/7</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#1a5fad;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="b2c1-g1"><div class="check-box">✓</div><div class="check-text">Nuances entre tempos verbais em contexto ambíguo<span class="check-example">Diferença sutil entre "I've been working" e "I've worked" em contexto de negócio</span></div></div>
+      <div class="check-item" data-id="b2c1-g2"><div class="check-box">✓</div><div class="check-text">Modais de especulação e dedução no passado<span class="check-example">They must have missed the email. She might have called already.</span></div></div>
+      <div class="check-item" data-id="b2c1-g3"><div class="check-box">✓</div><div class="check-text">Estruturas hipotéticas avançadas (wish, if only)<span class="check-example">I wish we had negotiated better terms. If only they had confirmed sooner.</span></div></div>
+      <div class="check-item" data-id="b2c1-g4"><div class="check-box">✓</div><div class="check-text">Cleft sentences para ênfase<span class="check-example">What we need is a faster supplier. It was the delay that caused the loss.</span></div></div>
+      <div class="check-item" data-id="b2c1-g5"><div class="check-box">✓</div><div class="check-text">Nominalização para registro formal/acadêmico<span class="check-example">"The implementation of the new policy" em vez de "We implemented the policy"</span></div></div>
+      <div class="check-item" data-id="b2c1-g6"><div class="check-box">✓</div><div class="check-text">Hedging — suavizar afirmações de forma profissional<span class="check-example">It would seem that..., This may suggest..., Arguably...</span></div></div>
+      <div class="check-item" data-id="b2c1-g7"><div class="check-box">✓</div><div class="check-text">Estruturas de coesão textual em textos longos<span class="check-example">Uso fluido de referência, substituição e elipse em relatórios</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Vocabulário</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📦</span><span class="cat-name">Vocabulário de domínio e registro</span></div>
+      <span class="cat-progress-text">0/8</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#1a5fad;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="b2c1-v1"><div class="check-box">✓</div><div class="check-text">Vocabulário jurídico-comercial básico<span class="check-example">indemnity, liability, force majeure, jurisdiction</span></div></div>
+      <div class="check-item" data-id="b2c1-v2"><div class="check-box">✓</div><div class="check-text">Vocabulário de M&amp;A e parcerias estratégicas<span class="check-example">due diligence, joint venture, stakeholder, equity</span></div></div>
+      <div class="check-item" data-id="b2c1-v3"><div class="check-box">✓</div><div class="check-text">Collocations naturais de negócio (50+)<span class="check-example">to strike a deal, to meet expectations, to drive growth</span></div></div>
+      <div class="check-item" data-id="b2c1-v4"><div class="check-box">✓</div><div class="check-text">Humor, ironia e sarcasmo em contexto profissional<span class="check-example">Reconhecer e usar humor sutil sem perder o tom profissional</span></div></div>
+      <div class="check-item" data-id="b2c1-v5"><div class="check-box">✓</div><div class="check-text">Gírias e expressões informais de escritório<span class="check-example">to be swamped, a no-brainer, to pick someone's brain</span></div></div>
+      <div class="check-item" data-id="b2c1-v6"><div class="check-box">✓</div><div class="check-text">Vocabulário de sustentabilidade e ESG<span class="check-example">carbon footprint, supply chain transparency, compliance</span></div></div>
+      <div class="check-item" data-id="b2c1-v7"><div class="check-box">✓</div><div class="check-text">Diferenciação de sotaques (americano, britânico, outros)<span class="check-example">Reconhecer vocabulário e pronúncia variando por região</span></div></div>
+      <div class="check-item" data-id="b2c1-v8"><div class="check-box">✓</div><div class="check-text">Adaptação de registro entre formal/semi-formal/informal<span class="check-example">Alternar com naturalidade conforme o interlocutor e contexto</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Tipos de comunicação</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">💬</span><span class="cat-name">Negociação estratégica e comunicação executiva</span></div>
+      <span class="cat-progress-text">0/9</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#1a5fad;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="b2c1-c1"><div class="check-box">✓</div><div class="check-text">Conduzir negociação estratégica de alto valor</div></div>
+      <div class="check-item" data-id="b2c1-c2"><div class="check-box">✓</div><div class="check-text">Apresentar para board/diretoria sem apoio ou roteiro</div></div>
+      <div class="check-item" data-id="b2c1-c3"><div class="check-box">✓</div><div class="check-text">Escrever relatório executivo longo e bem estruturado</div></div>
+      <div class="check-item" data-id="b2c1-c4"><div class="check-box">✓</div><div class="check-text">Mediar um desacordo entre duas partes em inglês</div></div>
+      <div class="check-item" data-id="b2c1-c5"><div class="check-box">✓</div><div class="check-text">Liderar e dar feedback a uma equipe internacional</div></div>
+      <div class="check-item" data-id="b2c1-c6"><div class="check-box">✓</div><div class="check-text">Participar de painel ou debate com múltiplos interlocutores</div></div>
+      <div class="check-item" data-id="b2c1-c7"><div class="check-box">✓</div><div class="check-text">Socializar e fazer networking informal com nativos</div></div>
+      <div class="check-item" data-id="b2c1-c8"><div class="check-box">✓</div><div class="check-text">Candidatar-se e ser aprovado em processo seletivo internacional</div></div>
+      <div class="check-item" data-id="b2c1-c9"><div class="check-box">✓</div><div class="check-text">Consumir podcasts e conteúdo nativo sem esforço consciente</div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Ritmo sugerido (1 aula/semana)</div>
+  <table class="pacing-table">
+    <thead><tr><th>Bloco</th><th>Conteúdo</th><th>Aulas aprox.</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Nuances de tempo verbal + modais de dedução</td><td>5</td></tr>
+      <tr><td>2</td><td>Estruturas hipotéticas + cleft sentences</td><td>4</td></tr>
+      <tr><td>3</td><td>Nominalização + hedging para registro formal</td><td>4</td></tr>
+      <tr><td>4</td><td>Coesão textual em relatórios longos</td><td>3</td></tr>
+      <tr><td>5</td><td>Vocabulário jurídico-comercial e M&amp;A</td><td>5</td></tr>
+      <tr><td>6</td><td>Collocations naturais + humor/ironia</td><td>5</td></tr>
+      <tr><td>7</td><td>Gírias de escritório + sotaques variados</td><td>4</td></tr>
+      <tr><td>8</td><td>Negociação estratégica — prática intensiva</td><td>6</td></tr>
+      <tr><td>9</td><td>Apresentações executivas sem roteiro</td><td>5</td></tr>
+      <tr><td>10</td><td>Mediação, liderança e feedback de equipe</td><td>5</td></tr>
+      <tr><td>11</td><td>Networking e simulações sociais</td><td>3</td></tr>
+      <tr><td>12</td><td>Simulações integradas e revisão</td><td>3</td></tr>
+      <tr><td colspan="2" style="text-align:right;font-weight:700;">Total aproximado</td><td style="font-weight:700;">~52 aulas (1 sem cada, sem pausas)</td></tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- ═══════════ C1 → C2 ═══════════ -->
+<div id="tab-c1c2" class="tab-panel level-panel" data-level="c1c2">
+
+  <div class="level-banner" style="background:var(--c1-bg2);border:1px solid #c8a0f0;">
+    <button class="reset-btn" onclick="resetLevel('c1c2')">↺ resetar progresso</button>
+    <div class="level-banner-top">
+      <div class="level-title" style="color:#6330a0;">C1 → C2</div>
+      <div class="level-stats">
+        <div class="level-stat"><span class="level-stat-num" style="color:#6330a0;">~48</span><span class="level-stat-label">aulas</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#6330a0;">~96h</span><span class="level-stat-label">aula + prática</span></div>
+        <div class="level-stat"><span class="level-stat-num" style="color:#6330a0;">~12</span><span class="level-stat-label">meses</span></div>
+      </div>
+    </div>
+    <div class="level-desc">Do domínio profissional pleno à maestria quase nativa. O C2 não é "falar perfeito" — é ter controle total sobre nuance, tom, persuasão e improviso em qualquer situação, incluindo as mais complexas e ambíguas. Poucos profissionais (mesmo nativos avançados) atingem esse nível formalmente — é o topo da escala do CEFR.</div>
+  </div>
+
+  <div class="section-label">Gramática</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📐</span><span class="cat-name">Maestria e flexibilidade total</span></div>
+      <span class="cat-progress-text">0/6</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#6330a0;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="c1c2-g1"><div class="check-box">✓</div><div class="check-text">Controle automático de todas as estruturas em discurso espontâneo<span class="check-example">Nenhuma pausa perceptível para "montar" a frase corretamente</span></div></div>
+      <div class="check-item" data-id="c1c2-g2"><div class="check-box">✓</div><div class="check-text">Uso criativo e flexível da língua para efeito retórico<span class="check-example">Quebrar regras gramaticais intencionalmente para ênfase, como um nativo faria</span></div></div>
+      <div class="check-item" data-id="c1c2-g3"><div class="check-box">✓</div><div class="check-text">Domínio de registros extremos (muito formal a muito coloquial)<span class="check-example">Alternar de um discurso jurídico para uma piada de escritório sem esforço</span></div></div>
+      <div class="check-item" data-id="c1c2-g4"><div class="check-box">✓</div><div class="check-text">Correção automática de auto-erros em tempo real<span class="check-example">Perceber e corrigir o próprio erro no meio da frase, naturalmente</span></div></div>
+      <div class="check-item" data-id="c1c2-g5"><div class="check-box">✓</div><div class="check-text">Estruturas retóricas de persuasão avançada<span class="check-example">Uso de antítese, paralelismo e repetição estratégica em discursos</span></div></div>
+      <div class="check-item" data-id="c1c2-g6"><div class="check-box">✓</div><div class="check-text">Compreensão de estruturas arcaicas ou literárias quando necessário<span class="check-example">Reconhecer referências a textos clássicos ou citações em discurso formal</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Vocabulário</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">📦</span><span class="cat-name">Precisão lexical de nível nativo</span></div>
+      <span class="cat-progress-text">0/7</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#6330a0;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="c1c2-v1"><div class="check-box">✓</div><div class="check-text">Distinção precisa entre sinônimos próximos<span class="check-example">Diferença de tom entre "fire", "let go", "terminate" e "downsize"</span></div></div>
+      <div class="check-item" data-id="c1c2-v2"><div class="check-box">✓</div><div class="check-text">Vocabulário técnico-jurídico avançado e contratual<span class="check-example">indemnification, warranties, representations, covenants</span></div></div>
+      <div class="check-item" data-id="c1c2-v3"><div class="check-box">✓</div><div class="check-text">Referências culturais e históricas de negócio nos EUA/UK<span class="check-example">Entender alusões a eventos, marcas ou expressões culturalmente carregadas</span></div></div>
+      <div class="check-item" data-id="c1c2-v4"><div class="check-box">✓</div><div class="check-text">Idioms raros e expressões regionais específicas<span class="check-example">Expressões usadas apenas em certas indústrias ou regiões dos EUA</span></div></div>
+      <div class="check-item" data-id="c1c2-v5"><div class="check-box">✓</div><div class="check-text">Vocabulário de crise e gestão de risco em alto nível<span class="check-example">contingency planning, reputational risk, crisis communication</span></div></div>
+      <div class="check-item" data-id="c1c2-v6"><div class="check-box">✓</div><div class="check-text">Nuance emocional e tom através de escolha lexical<span class="check-example">Transmitir firmeza, empatia ou urgência apenas pela escolha de palavras</span></div></div>
+      <div class="check-item" data-id="c1c2-v7"><div class="check-box">✓</div><div class="check-text">Trocadilhos, jogos de palavras e humor sofisticado<span class="check-example">Criar e entender humor baseado em ambiguidade linguística</span></div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Tipos de comunicação</div>
+
+  <div class="cat-block">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <div class="cat-header-left"><span class="cat-icon">💬</span><span class="cat-name">Domínio situacional completo</span></div>
+      <span class="cat-progress-text">0/8</span>
+    </div>
+    <div class="cat-mini-bar"><div class="cat-mini-fill" style="background:#6330a0;width:0%;"></div></div>
+    <div class="cat-body">
+      <div class="check-item" data-id="c1c2-c1"><div class="check-box">✓</div><div class="check-text">Negociar acordos de altíssimo risco/complexidade sem assessoria linguística</div></div>
+      <div class="check-item" data-id="c1c2-c2"><div class="check-box">✓</div><div class="check-text">Conduzir comunicação de crise (PR, problemas públicos) em inglês</div></div>
+      <div class="check-item" data-id="c1c2-c3"><div class="check-box">✓</div><div class="check-text">Redigir e revisar contratos e documentos legais formais</div></div>
+      <div class="check-item" data-id="c1c2-c4"><div class="check-box">✓</div><div class="check-text">Improvisar resposta a pergunta hostil ou inesperada em público</div></div>
+      <div class="check-item" data-id="c1c2-c5"><div class="check-box">✓</div><div class="check-text">Atuar como porta-voz oficial da empresa em inglês</div></div>
+      <div class="check-item" data-id="c1c2-c6"><div class="check-box">✓</div><div class="check-text">Ensinar, treinar ou mentorar outros em inglês de negócios</div></div>
+      <div class="check-item" data-id="c1c2-c7"><div class="check-box">✓</div><div class="check-text">Adaptar discurso instantaneamente para audiências muito diferentes</div></div>
+      <div class="check-item" data-id="c1c2-c8"><div class="check-box">✓</div><div class="check-text">Indistinguível de um falante nativo em contexto profissional</div></div>
+    </div>
+  </div>
+
+  <div class="section-label">Ritmo sugerido (1 aula/semana)</div>
+  <table class="pacing-table">
+    <thead><tr><th>Bloco</th><th>Conteúdo</th><th>Aulas aprox.</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Discurso espontâneo sem hesitação + auto-correção</td><td>5</td></tr>
+      <tr><td>2</td><td>Registros extremos (formal ↔ coloquial)</td><td>4</td></tr>
+      <tr><td>3</td><td>Retórica de persuasão avançada</td><td>4</td></tr>
+      <tr><td>4</td><td>Sinônimos precisos + vocabulário jurídico avançado</td><td>5</td></tr>
+      <tr><td>5</td><td>Referências culturais e idioms regionais</td><td>4</td></tr>
+      <tr><td>6</td><td>Nuance emocional e humor sofisticado</td><td>4</td></tr>
+      <tr><td>7</td><td>Negociação de altíssimo risco — prática</td><td>5</td></tr>
+      <tr><td>8</td><td>Comunicação de crise e porta-voz</td><td>4</td></tr>
+      <tr><td>9</td><td>Redação e revisão de documentos legais</td><td>4</td></tr>
+      <tr><td>10</td><td>Improviso sob pressão (Q&amp;A hostil, debates)</td><td>4</td></tr>
+      <tr><td>11</td><td>Mentoria e adaptação de audiência</td><td>3</td></tr>
+      <tr><td>12</td><td>Simulações finais de altíssima exigência</td><td>2</td></tr>
+      <tr><td colspan="2" style="text-align:right;font-weight:700;">Total aproximado</td><td style="font-weight:700;">~48 aulas (1 sem cada, sem pausas)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight" style="background:var(--paper-warm);border:1px solid var(--rule);margin-top:1rem;">
+    <strong>Nota sobre o C2:</strong> poucos profissionais não-nativos buscam o C2 formalmente — o B2/C1 já garante autonomia total no trabalho internacional. O C2 vale a pena para quem pretende atuar como porta-voz, negociador-chefe ou em papéis de visibilidade pública internacional.
+  </div>
+
+</div>
+
+<!-- ═══════════ PRÁTICA EM CASA ═══════════ -->
+<div id="tab-pratica" class="tab-panel">
+
+  <div class="highlight" style="background:var(--paper-warm);border:1px solid var(--rule);margin-bottom:1.5rem;">
+    <strong>1 hora por semana fora das aulas — sem exceções.</strong> É pouco tempo, mas suficiente para dobrar a velocidade de progressão se usado com consistência. O segredo é <em>repetição espaçada</em> (revisitar antes de esquecer) + <em>contexto real</em> (não exercício artificial). Feriados e férias não são pausas — são semanas normais de prática.
+  </div>
+
+  <div class="section-label">Semana ideal de prática</div>
+  <div class="week-grid">
+    <div class="week-day rest"><div class="day-name">SEG</div><div class="day-task">livre</div></div>
+    <div class="week-day rest"><div class="day-name">TER</div><div class="day-task">livre</div></div>
+    <div class="week-day rest"><div class="day-name">QUA</div><div class="day-task">livre</div></div>
+    <div class="week-day rest"><div class="day-name">QUI</div><div class="day-task">aquece 5min</div></div>
+    <div class="week-day active"><div class="day-name">SEX</div><div class="day-task">AULA 60min</div></div>
+    <div class="week-day practice"><div class="day-name">SÁB</div><div class="day-task">revisão 30min</div></div>
+    <div class="week-day practice"><div class="day-name">DOM</div><div class="day-task">prática 30min</div></div>
+  </div>
+  <p style="font-size:12px;color:var(--ink-light);margin-top:.5rem;">Adapte os dias ao calendário real das aulas. O princípio importa mais que o dia exato: revisão logo depois da aula, e uma segunda sessão de prática alguns dias depois.</p>
+
+  <div class="section-label">Speaking &amp; Listening</div>
+  <div class="practice-block">
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#f3ecfb;">💬</div>
+      <div class="practice-content">
+        <div class="practice-name">Mensagem de voz em inglês</div>
+        <div class="practice-desc">Uma vez por semana, grave uma mensagem de voz de 30 segundos em inglês — para um colega, parceiro de estudo, ou até para si mesmo. Trabalho, fim de semana, qualquer assunto. Baixa pressão, prática real de produção oral.</div>
+        <div class="practice-time">5 min · qualquer dia</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#f3ecfb;">🗣️</div>
+      <div class="practice-content">
+        <div class="practice-name">Falar sozinho em inglês por 3 minutos</div>
+        <div class="practice-desc">No carro, no banho, andando. Narre o que está fazendo ou o que aconteceu no trabalho. "Today I had a meeting with a supplier. They said the deadline is next Friday." Parece estranho, mas é um dos exercícios de speaking mais eficientes sem parceiro disponível.</div>
+        <div class="practice-time">3–5 min · qualquer dia</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#f3ecfb;">🎧</div>
+      <div class="practice-content">
+        <div class="practice-name">Podcast "6 Minute English" (BBC Learning English)</div>
+        <div class="practice-desc">Episódios de exatamente 6 minutos, falados em inglês claro, com vocabulário temático variado. Gratuito. Ideal para o deslocamento — não precisa entender tudo, a exposição ao ritmo já conta.</div>
+        <div class="practice-time">6–10 min · no deslocamento</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#f3ecfb;">🎙️</div>
+      <div class="practice-content">
+        <div class="practice-name">Podcast "Business English Pod" (a partir do A2)</div>
+        <div class="practice-desc">Episódios temáticos de 10–20 minutos com vocabulário de negócios em contexto real: reuniões, negociações, apresentações, e-mails. Transcript disponível para acompanhar.</div>
+        <div class="practice-time">15–20 min · semana</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Leitura &amp; Escrita</div>
+  <div class="practice-block">
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#e8f0fb;">📧</div>
+      <div class="practice-content">
+        <div class="practice-name">Rascunhar 1 e-mail de trabalho em inglês por semana</div>
+        <div class="practice-desc">Mesmo que envie em português depois. Escolha um e-mail real da semana e escreva o rascunho em inglês primeiro. Aplica o vocabulário da aula em contexto imediato.</div>
+        <div class="practice-time">15 min · qualquer dia útil</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#e8f0fb;">✍️</div>
+      <div class="practice-content">
+        <div class="practice-name">3 frases em inglês antes de dormir</div>
+        <div class="practice-desc">"Today I worked on... / Tomorrow I will... / I learned that..." — simples, rápido, consolida os tempos verbais trabalhados em aula. Não precisa ser perfeito; o hábito importa mais que a precisão no início.</div>
+        <div class="practice-time">5 min · qualquer noite</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#e8f0fb;">📰</div>
+      <div class="practice-content">
+        <div class="practice-name">Ler 1 notícia em inglês por semana</div>
+        <div class="practice-desc">Sobre qualquer tema de interesse pessoal. Não precisa entender tudo — leia o título e o primeiro parágrafo, anote 3 palavras novas. Sites com inglês claro: BBC News, Reuters, AP News.</div>
+        <div class="practice-time">10–15 min · fim de semana</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#e8f0fb;">📋</div>
+      <div class="practice-content">
+        <div class="practice-name">App Anki — flashcards com repetição espaçada</div>
+        <div class="practice-desc">Gratuito (Android/web). Crie cartões com o vocabulário novo de cada aula: frente em inglês, verso com contexto em português. O algoritmo mostra cada cartão no momento certo antes de esquecer. 8–10 cartões novos por semana.</div>
+        <div class="practice-time">5–10 min · diário</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Imersão passiva — custo zero de tempo extra</div>
+  <div class="practice-block">
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#edf7ef;">🌐</div>
+      <div class="practice-content">
+        <div class="practice-name">Mudar o celular e apps para inglês</div>
+        <div class="practice-desc">Configuração única, impacto permanente. O celular é consultado dezenas de vezes por dia. Com a interface em inglês, palavras como "Settings", "Share", "Reply" viram automáticas em poucas semanas — sem esforço consciente.</div>
+        <div class="practice-time">0 min extra · configuração única</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#edf7ef;">🎵</div>
+      <div class="practice-content">
+        <div class="practice-name">Playlist em inglês para o dia a dia</div>
+        <div class="practice-desc">Músicas em inglês durante o trabalho, treino ou trajeto. O ouvido se acostuma com sons e ritmo do idioma sem esforço ativo — quanto mais variado o estilo, melhor para a percepção fonética.</div>
+        <div class="practice-time">0 min extra · exposição contínua</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#edf7ef;">📱</div>
+      <div class="practice-content">
+        <div class="practice-name">Ferramentas de trabalho em inglês</div>
+        <div class="practice-desc">Sistemas usados no dia a dia (planilhas, ERPs, dashboards) — mude o idioma para inglês quando possível. O vocabulário técnico que aparece toda semana é absorvido naturalmente.</div>
+        <div class="practice-time">0 min extra · impacto alto</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Séries &amp; Vídeos — com intenção</div>
+  <div class="practice-block">
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#fdf6e8;">🎬</div>
+      <div class="practice-content">
+        <div class="practice-name">Language Reactor — legenda dupla no Netflix</div>
+        <div class="practice-desc">Extensão gratuita de navegador que coloca legenda em inglês + português ao mesmo tempo. Clique em qualquer palavra para ver tradução e ouvir a pronúncia. Para A1/A2: séries com inglês simples e situações cotidianas. Para B1+: qualquer série que já conheçam em português.</div>
+        <div class="practice-time">15–20 min · fim de semana</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#fdf6e8;">📺</div>
+      <div class="practice-content">
+        <div class="practice-name">1 cena por semana — assistir de forma ativa</div>
+        <div class="practice-desc">Escolha uma cena de 3–5 minutos de uma série favorita. Assista uma vez com legenda em português, depois sem legenda nenhuma. Tente contar o que aconteceu em inglês. Essa sequência ativa é muito mais eficaz do que apenas assistir passivamente.</div>
+        <div class="practice-time">15 min · fim de semana</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Uso real no trabalho — o maior acelerador</div>
+  <div class="practice-block">
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#fdf1ec;">🌍</div>
+      <div class="practice-content">
+        <div class="practice-name">Aplicar o inglês em situações reais de trabalho</div>
+        <div class="practice-desc">A partir do A2: responder pelo menos 1 e-mail de fornecedor em inglês por semana, mesmo que seja só um parágrafo. Ou fazer 1 pergunta em inglês numa call. O uso real é o maior acelerador possível — nenhuma prática isolada substitui isso.</div>
+        <div class="practice-time">5–15 min · semana de trabalho</div>
+      </div>
+    </div>
+    <div class="practice-item">
+      <div class="practice-icon" style="background:#fdf1ec;">🔁</div>
+      <div class="practice-content">
+        <div class="practice-name">Revisão nas 24h seguintes à aula</div>
+        <div class="practice-desc">A memória retém muito mais quando revisamos no dia seguinte à aula. Reserve 15 minutos para reler anotações ou repetir em voz alta as frases novas enquanto ainda estão frescas.</div>
+        <div class="practice-time">15 min · dia seguinte à aula</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">O que NÃO fazer</div>
+  <div class="skill-grid">
+    <div class="skill-item">Estudar 3h de uma vez e parar por semanas — regularidade bate volume</div>
+    <div class="skill-item">Traduzir tudo palavra por palavra — capte o sentido geral</div>
+    <div class="skill-item">Esperar "estar pronto" para falar — o erro faz parte do processo</div>
+    <div class="skill-item">Usar apps de gamificação como prática principal — são suplemento, não base</div>
+    <div class="skill-item">Pular a revisão do dia seguinte à aula</div>
+    <div class="skill-item">Pausar nos feriados e férias — 1 semana sem prática custa 2 de recuperação</div>
+  </div>
+
+</div>
+
+</main>
+
+<script>
+// ============ PROGRESS TRACKING ============
+const STORAGE_KEY = 'be_roadmap_progress_v1';
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) { return {}; }
+}
+function saveProgress(data) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+let progress = loadProgress();
+
+function toggleCheck(id, el) {
+  progress[id] = !progress[id];
+  saveProgress(progress);
+  el.classList.toggle('checked', progress[id]);
+  updateAllProgressBars();
+}
+
+function toggleCat(headerEl) {
+  headerEl.closest('.cat-block').classList.toggle('open');
+}
+
+function updateAllProgressBars() {
+  document.querySelectorAll('.cat-block').forEach(cat => {
+    const items = cat.querySelectorAll('.check-item');
+    const total = items.length;
+    let checked = 0;
+    items.forEach(it => { if (progress[it.dataset.id]) checked++; });
+    const pct = total ? Math.round((checked/total)*100) : 0;
+    const fill = cat.querySelector('.cat-mini-fill');
+    const text = cat.querySelector('.cat-progress-text');
+    if (fill) fill.style.width = pct + '%';
+    if (text) text.textContent = checked + '/' + total;
+  });
+
+  document.querySelectorAll('.level-panel').forEach(panel => {
+    const items = panel.querySelectorAll('.check-item');
+    const total = items.length;
+    let checked = 0;
+    items.forEach(it => { if (progress[it.dataset.id]) checked++; });
+    const pct = total ? Math.round((checked/total)*100) : 0;
+    const bar = document.getElementById('gp-bar-' + panel.dataset.level);
+    const pctEl = document.getElementById('gp-pct-' + panel.dataset.level);
+    if (bar) bar.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
+  });
+}
+
+function resetLevel(levelId) {
+  if (!confirm('Resetar todo o progresso desse nível?')) return;
+  document.querySelectorAll('#tab-' + levelId + ' .check-item').forEach(it => {
+    progress[it.dataset.id] = false;
+    it.classList.remove('checked');
+  });
+  saveProgress(progress);
+  updateAllProgressBars();
+}
+
+function initChecks() {
+  document.querySelectorAll('.check-item').forEach(it => {
+    if (progress[it.dataset.id]) it.classList.add('checked');
+    it.addEventListener('click', () => toggleCheck(it.dataset.id, it));
+  });
+  updateAllProgressBars();
+}
+
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  else {
+    document.querySelectorAll('nav button').forEach(b => {
+      if (b.getAttribute('onclick').includes("'" + id + "'")) b.classList.add('active');
+    });
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', initChecks);
+</script>
+</body>
+</html>
