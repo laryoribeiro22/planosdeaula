@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>José — Planejamento Jun→Dez 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --border: #E4E0D8;
+    --text-primary: #1A1916;
+    --text-secondary: #5C5A55;
+    --text-tertiary: #9A9791;
+    --accent: #2C5F8A;
+
+    --jun: #185FA5;
+    --jul: #0F6E56;
+    --ago: #534AB7;
+    --set: #854F0B;
+    --out: #993C1D;
+    --nov: #3B6D11;
+    --dez: #5F5E5A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--text-primary);
+    color: #fff;
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: 30px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .header-inner { max-width: 800px; margin: 0 auto; position: relative; }
+  .header-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.5);
+    margin-bottom: 0.75rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  header h1 em { font-style: italic; color: rgba(255,255,255,0.6); }
+  .header-meta {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    margin-top: 1.25rem;
+    display: flex; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .header-meta span { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+
+  /* STUDENT SNAPSHOT */
+  .snapshot {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+  }
+  .snapshot-inner { max-width: 800px; margin: 0 auto; }
+  .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+  .snap-item { }
+  .snap-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 4px; }
+  .snap-value { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+  /* NAV */
+  nav.month-nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky; top: 0; z-index: 100;
+    overflow-x: auto;
+  }
+  .nav-inner {
+    max-width: 800px; margin: 0 auto;
+    display: flex; gap: 0;
+  }
+  .nav-btn {
+    padding: 14px 18px;
+    font-size: 13px; font-weight: 500;
+    color: var(--text-tertiary);
+    border: none; background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.18s;
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+  }
+  .nav-btn:hover { color: var(--text-primary); }
+  .nav-btn.active { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  /* MAIN */
+  main { max-width: 800px; margin: 0 auto; padding: 2rem; }
+
+  /* MONTH PANEL */
+  .month-panel { display: none; }
+  .month-panel.visible { display: block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .month-hero {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .month-tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 10px;
+    border-radius: 999px; margin-bottom: 0.75rem;
+  }
+  .month-hero h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px; font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+  .month-hero .month-subtema {
+    font-size: 14px; color: var(--text-secondary); font-style: italic;
+  }
+
+  /* META ROW */
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+  .meta-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px; color: var(--text-secondary);
+  }
+  .meta-chip strong { color: var(--text-primary); font-weight: 500; }
+  .chip-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-tertiary);
+    margin-bottom: 0.75rem; margin-top: 1.5rem;
+  }
+
+  /* AULAS */
+  .aulas-grid { display: grid; gap: 10px; margin-bottom: 1.5rem; }
+  .aula-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 0 14px;
+    align-items: start;
+  }
+  .aula-num-badge {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+    color: #fff;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .aula-content { }
+  .aula-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .aula-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+  .aula-optional { font-size: 10px; color: var(--text-tertiary); margin-top: 3px; font-style: italic; }
+
+  /* BOTTOM GRID */
+  .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1.5rem; }
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .info-card-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px;
+  }
+  .info-card p, .info-card li { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+  .info-card ul { padding-left: 16px; }
+  .info-card li { margin-bottom: 3px; }
+
+  /* PILL TAGS */
+  .pill-tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 3px 9px; border-radius: 999px;
+    margin: 2px 3px 2px 0;
+    border: 1px solid transparent;
+  }
+
+  /* NOTICE */
+  .notice-bar {
+    background: #FEF7E6;
+    border: 1px solid #F0C85A;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px; color: #7A5800;
+    margin-top: 1rem;
+  }
+
+  /* PROGRESS ARC */
+  .arc-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .arc-section h3 {
+    font-size: 13px; font-weight: 600;
+    margin-bottom: 1rem; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px;
+  }
+  .arc-track {
+    display: flex; align-items: stretch; gap: 0;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .arc-month {
+    flex: 1; padding: 8px 4px;
+    text-align: center; font-size: 11px; font-weight: 500;
+    color: #fff; cursor: pointer;
+    transition: opacity 0.15s; min-width: 0;
+  }
+  .arc-month:hover { opacity: 0.85; }
+  .arc-month .arc-m { font-size: 10px; font-weight: 600; margin-bottom: 2px; }
+  .arc-month .arc-t { font-size: 9px; opacity: 0.8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 11px; color: var(--text-tertiary);
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 540px) {
+    header, .snapshot, main { padding-left: 1rem; padding-right: 1rem; }
+    .bottom-grid { grid-template-columns: 1fr; }
+    .aula-card { grid-template-columns: 36px 1fr; gap: 0 10px; }
+    nav.month-nav { padding: 0 1rem; }
+    .nav-btn { padding: 12px 12px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-eyebrow">Planejamento de aulas · 2026</div>
+    <h1>José — <em>June to December</em></h1>
+    <div class="header-meta">
+      <span><span class="dot"></span>A1 → A2</span>
+      <span><span class="dot"></span>7 meses</span>
+      <span><span class="dot"></span>3–4 aulas/mês</span>
+      <span><span class="dot"></span>Misto: tema + gramática</span>
+    </div>
+  </div>
+</header>
+
+<div class="snapshot">
+  <div class="snapshot-inner">
+    <div class="snapshot-grid">
+      <div class="snap-item"><div class="snap-label">Idade</div><div class="snap-value">22 anos</div></div>
+      <div class="snap-item"><div class="snap-label">Trabalho</div><div class="snap-value">Customer Service · Instituto Caldeira</div></div>
+      <div class="snap-item"><div class="snap-label">Faculdade</div><div class="snap-value">ADM · Cesuca · 5º sem.</div></div>
+      <div class="snap-item"><div class="snap-label">Interesses</div><div class="snap-value">Futebol, Jiu-jitsu, História, Igreja, Música</div></div>
+      <div class="snap-item"><div class="snap-label">Objetivo</div><div class="snap-value">Conversar em viagens · EUA e Europa</div></div>
+      <div class="snap-item"><div class="snap-label">Perfil</div><div class="snap-value">Visual, competitivo, humor fácil, falante</div></div>
+    </div>
+  </div>
+</div>
+
+<nav class="month-nav" id="mainNav">
+  <div class="nav-inner" id="navInner"></div>
+</nav>
+
+<main>
+  <!-- ARC OVERVIEW (shown only on first load via JS) -->
+  <div id="arcSection" class="arc-section">
+    <h3>Arco do ano</h3>
+    <div class="arc-track" id="arcTrack"></div>
+  </div>
+
+  <div id="panels"></div>
+</main>
+
+<footer>
+  José · Planejamento Jun→Dez 2026 · Gerado em maio de 2026
+</footer>
+
+<script>
+const MONTHS = [
+  {
+    id: "jun", short: "Jun", name: "Junho 2026",
+    tagLabel: "Abertura", color: "#185FA5",
+    tema: "Trabalho, rotina e apresentações",
+    subtema: "Quem é o José em inglês?",
+    gramatica: ["Can / Can't", "There is / There are", "Adverbs of frequency"],
+    habilidade: "Speaking + Vocabulary",
+    arcTema: "Quem sou eu?",
+    aulas: [
+      { num: "01", title: "Who are you?", optional: false, desc: "Apresentação pessoal ampliada: trabalho, faculdade, jiu-jitsu. Vocabulário de profissões e rotina. Grammar: can/can't. 'I can speak Portuguese fluently. I can't speak English yet — but I'm learning.'" },
+      { num: "02", title: "My daily routine", optional: false, desc: "Descrever a rotina dele em inglês. Adverbs of frequency (always, usually, sometimes, never). Jogo: adivinhar a rotina da professora com perguntas de sim/não." },
+      { num: "03", title: "My city, my places", optional: false, desc: "There is / There are com lugares em Cachoeirinha e Porto Alegre. Listening: descrição de cidade curta. Desafio: descrever o Instituto Caldeira em inglês para um colega estrangeiro." },
+      { num: "04", title: "Revisão + speaking livre", optional: true, desc: "Mini-teste gamificado com tudo de junho. Conversa: 'What do you want to do in English this year?' — ele define a meta em voz alta em inglês." }
+    ],
+    personaliz: "Usar o Instituto Caldeira e a faculdade como contexto real. 'How do you describe your job to a foreigner?' cria conexão imediata. Ele vai querer acertar porque é orgulhoso do que faz.",
+    tarefa: "3 frases descrevendo a semana dele usando Simple Past — o que aconteceu desde a última aula.",
+    obs: ""
+  },
+  {
+    id: "jul", short: "Jul", name: "Julho 2026",
+    tagLabel: "1 ano de aulas 🎉", color: "#0F6E56",
+    tema: "Viagens e sonhos",
+    subtema: "EUA e Europa na prática",
+    gramatica: ["Going to (futuro)", "Would like", "How much / How many"],
+    habilidade: "Speaking + Listening",
+    arcTema: "Viagem dos sonhos",
+    aulas: [
+      { num: "01", title: "I'm going to travel!", optional: false, desc: "Going to para planos e intenções. Contexto: planejando uma viagem para Nova York ou Londres. Vocabulário de aeroporto, passaporte e malas." },
+      { num: "02", title: "At the airport", optional: false, desc: "Simulação: check-in, controle de passaporte, embarque. Listening: anúncio de voo real. Would like em situações de viagem: 'I would like a window seat, please.'" },
+      { num: "03", title: "Hotel & restaurant", optional: false, desc: "How much / How many com preços e quantidades. Situações reais: pedindo quarto no hotel, pedindo comida. Vocabulário de hospedagem e refeições." },
+      { num: "04", title: "Dream trip", optional: true, desc: "Conversa livre: 'If you could go anywhere, where and why?' Prática de going to + would like juntos. Revisão leve do mês. Mini-balanço de 1 ano de aulas." }
+    ],
+    personaliz: "Julho é o aniversário de 1 ano de aulas (15/07) — vale marcar com ele. Trazer o sonho real de viagem dele (EUA/Europa) para dentro das atividades. 'You're already planning this trip in English.'",
+    tarefa: "5 frases: 'I'm going to [fazer algo] when I travel to [lugar].' — usando coisas que ele genuinamente quer fazer.",
+    obs: "Marco: 1 ano de aulas em 15/07. Pode fazer um mini-balanço do que ele já sabe — vocabulário, estruturas, situações que já consegue navegar. Ele é competitivo e vai gostar de ver o progresso quantificado."
+  },
+  {
+    id: "ago", short: "Ago", name: "Agosto 2026",
+    tagLabel: "Consolidação", color: "#534AB7",
+    tema: "Comparações e opiniões",
+    subtema: "O mundo segundo o José",
+    gramatica: ["Comparativos e superlativos", "Some / Any", "Revisão de tempos verbais"],
+    habilidade: "Speaking + Grammar",
+    arcTema: "Opinião e comparação",
+    aulas: [
+      { num: "01", title: "Better, bigger, best", optional: false, desc: "Comparativos e superlativos com contexto de esportes e séries. 'Jiu-jitsu is harder than volleyball. Percy Jackson is better than Harry Potter.' Jogo de ranking com os interesses dele." },
+      { num: "02", title: "Do you have any...?", optional: false, desc: "Some / Any em perguntas e respostas naturais. Contexto: fazer compras antes de viagem, pedir informação. Listening: diálogo curto em loja ou mercado." },
+      { num: "03", title: "Tense battle ⚔️", optional: false, desc: "Revisão gamificada: Simple Present vs Present Continuous vs Simple Past. Foco direto no erro recorrente dele (I'm working vs I work). Cards de frases para classificar — ele vs professora, quem acerta mais." },
+      { num: "04", title: "My opinion in English", optional: true, desc: "Expressões de opinião: I think, I believe, In my opinion, I agree / I disagree. Debate curto: 'Is chess a real sport?' — tema que ele pratica e vai defender com convicção." }
+    ],
+    personaliz: "Agosto é o mês certo para trabalhar opinião — ele gosta de debater e defender ideias. Usar comparações com esportes que ele pratica (futebol, jiu-jitsu, vôlei, basquete, xadrez) mantém o engajamento alto e o vocabulário vem naturalmente.",
+    tarefa: "Parágrafo curto: 'My favorite sport is [X] because it is [comparativo]...' — usando pelo menos 3 comparativos.",
+    obs: ""
+  },
+  {
+    id: "set", short: "Set", name: "Setembro 2026",
+    tagLabel: "Expansão", color: "#854F0B",
+    tema: "Trabalho e vida profissional",
+    subtema: "English for his career",
+    gramatica: ["Present Perfect (introdução)", "Past Continuous", "Preposições de lugar e tempo"],
+    habilidade: "Listening + Reading + Writing",
+    arcTema: "Inglês no trabalho",
+    aulas: [
+      { num: "01", title: "Have you ever...?", optional: false, desc: "Present Perfect introdutório com experiências de vida. 'Have you ever traveled abroad? Have you ever spoken English with a foreigner?' Vocabulário de experiências e conquistas pessoais." },
+      { num: "02", title: "What were you doing?", optional: false, desc: "Past Continuous para descrever situações em andamento no passado. 'I was working when my boss called.' Muito natural na rotina dele — cria frases reais imediatamente." },
+      { num: "03", title: "English at work", optional: false, desc: "Vocabulário de Customer Service em inglês: greet, help, solve, follow up, escalate. E-mail curto de resposta a cliente. Leitura de notícia curta de tech/business em inglês." },
+      { num: "04", title: "Prepositions in context", optional: true, desc: "In / on / at / next to / between com lugares, horários e situações. Jogo de mapa: descrever onde as coisas estão. Revisão do mês com humor — 'Where is the English teacher? She's in your screen.'" }
+    ],
+    personaliz: "Customer Service é o trabalho dele — vocabulário real dessa área é altamente motivador. 'How would you greet an international client?' conecta o inglês com a carreira dele de forma concreta e imediata.",
+    tarefa: "Escrever um e-mail curto em inglês (4–5 linhas) respondendo a um cliente fictício com um problema simples de atendimento.",
+    obs: ""
+  },
+  {
+    id: "out", short: "Out", name: "Outubro 2026",
+    tagLabel: "Fluidez", color: "#993C1D",
+    tema: "Histórias e narrativas",
+    subtema: "Tell me a story",
+    gramatica: ["Past Simple + Past Continuous juntos", "Connectors (and, but, because, so, then)", "Revisão geral A1"],
+    habilidade: "Speaking + Writing",
+    arcTema: "Narrar e conectar",
+    aulas: [
+      { num: "01", title: "Tell me about your week", optional: false, desc: "Narrativa oral espontânea usando Simple Past + Past Continuous. Ele conta a semana em inglês. Professora anota os erros sem interromper e devolve de forma leve no final da aula." },
+      { num: "02", title: "Connectors challenge", optional: false, desc: "And, but, because, so, then para conectar ideias e criar fluxo. Atividade: reescrever frases curtas e soltas transformando em uma mini-história fluida. Trecho curto de Percy Jackson em inglês como modelo." },
+      { num: "03", title: "A story from history", optional: false, desc: "Hiperfoco dele: História Antiga ou Idade Média. Texto curto sobre um evento ou personagem histórico. Jogo: adivinhar o personagem histórico fazendo perguntas em inglês — 'Is this person a king? Did he live in Rome?'" },
+      { num: "04", title: "Revisão A1 completa", optional: true, desc: "Quiz gamificado cobrindo todos os pontos do A1 estudados no ano. Pontuação, placar, desafio versus si mesmo. Preparação simbólica para entrar no território A2." }
+    ],
+    personaliz: "Outubro é o mês da narrativa — ele tem boa fluência oral e gosta de contar coisas. O tema de História Antiga/Idade Média é um hiperfoco real: uma aula inteira sobre isso vai render muito mais do que parece.",
+    tarefa: "8–10 frases contando uma história (real ou inventada) usando conectores. Pode ser algo que aconteceu na semana, no trabalho, no jiu-jitsu.",
+    obs: ""
+  },
+  {
+    id: "nov", short: "Nov", name: "Novembro 2026",
+    tagLabel: "A2 — início", color: "#3B6D11",
+    tema: "Transição A1 → A2",
+    subtema: "Você já foi longe",
+    gramatica: ["Will (futuro simples)", "Should / Shouldn't", "Present Perfect — consolidação"],
+    habilidade: "Todas — revisão integrada",
+    arcTema: "Transição A2",
+    aulas: [
+      { num: "01", title: "What will you do?", optional: false, desc: "Will para previsões e decisões espontâneas. Diferença prática com going to. Contexto: planos para o próximo ano, viagem, trabalho, namorada. Frases reais sobre a vida dele." },
+      { num: "02", title: "You should...", optional: false, desc: "Should / shouldn't para dar e receber conselhos. Jogo: situações-problema, o outro dá conselhos em inglês. 'You should study more English.' — vai virar piada interna garantida." },
+      { num: "03", title: "What have you learned?", optional: false, desc: "Present Perfect para falar do próprio aprendizado: 'I've learned how to use the past tense. I've already traveled to... I haven't visited Europe yet.' Reflexão motivadora sobre o percurso." },
+      { num: "04", title: "Free conversation + balanço", optional: true, desc: "Conversa livre de 30 minutos em inglês — qualquer tema que ele escolher. Depois: balanço do ano. O que ele sabe hoje que não sabia há um ano. Celebração real do progresso." }
+    ],
+    personaliz: "Novembro é o momento de fazer ele perceber o quanto avançou. 'Have you ever spoken English for 30 minutes straight before?' — a resposta vai ser não, e isso precisa ser celebrado em voz alta.",
+    tarefa: "Gravar um áudio de 1 minuto em inglês se apresentando — nome, trabalho, rotina, planos. Guardar para comparar com o começo do ano.",
+    obs: ""
+  },
+  {
+    id: "dez", short: "Dez", name: "Dezembro 2026",
+    tagLabel: "Especial 🎄", color: "#5F5E5A",
+    tema: "Inglês no mundo real — festas e fim de ano",
+    subtema: "Leve, comemorativo, real",
+    gramatica: ["Sem conteúdo novo", "Expressões sociais de fim de ano", "Small talk em inglês"],
+    habilidade: "Speaking + Listening",
+    arcTema: "Celebração",
+    aulas: [
+      { num: "01", title: "Holiday conversations", optional: false, desc: "Expressões sociais de fim de ano: Happy New Year, Merry Christmas, How was your year? Small talk em inglês para situações sociais reais — festa, reunião de família, encontro com amigos." },
+      { num: "02", title: "My year in English", optional: false, desc: "Conversa livre: contar o ano em inglês — o que aconteceu, o que conquistou, o que quer para 2027. Revisão completamente espontânea, sem estrutura rígida, sem pressão de conteúdo novo." }
+    ],
+    personaliz: "Dezembro tem menos aulas pelo ritmo das festas e fim de semestre na faculdade. Não forçar conteúdo novo — usar o tempo para consolidar, respirar e celebrar. Duas aulas leves com conversa real é exatamente o que o momento pede.",
+    tarefa: "Opcional e leve: mandar uma mensagem de fim de ano em inglês para alguém — WhatsApp, Instagram, o que preferir.",
+    obs: "Mês reduzido — apenas 2 aulas previstas. Foco total em fluência e celebração do progresso anual."
+  }
+];
+
+// Build nav
+const navInner = document.getElementById('navInner');
+const panels = document.getElementById('panels');
+const arcTrack = document.getElementById('arcTrack');
+
+MONTHS.forEach((m, i) => {
+  // Nav button
+  const btn = document.createElement('button');
+  btn.className = 'nav-btn' + (i === 0 ? ' active' : '');
+  btn.textContent = m.short;
+  btn.dataset.id = m.id;
+  btn.onclick = () => showMonth(m.id);
+  navInner.appendChild(btn);
+
+  // Arc track
+  const arc = document.createElement('div');
+  arc.className = 'arc-month';
+  arc.style.background = m.color;
+  arc.innerHTML = `<div class="arc-m">${m.short}</div><div class="arc-t">${m.arcTema}</div>`;
+  arc.onclick = () => showMonth(m.id);
+  arcTrack.appendChild(arc);
+
+  // Panel
+  const panel = document.createElement('div');
+  panel.className = 'month-panel' + (i === 0 ? ' visible' : '');
+  panel.id = 'panel-' + m.id;
+
+  const gramPills = m.gramatica.map(g =>
+    `<span class="pill-tag" style="background:${m.color}18; color:${m.color}; border-color:${m.color}33;">${g}</span>`
+  ).join('');
+
+  const aulasHTML = m.aulas.map(a => `
+    <div class="aula-card">
+      <div class="aula-num-badge" style="background:${m.color};">${a.num}</div>
+      <div class="aula-content">
+        <div class="aula-title">${a.title}</div>
+        <div class="aula-desc">${a.desc}</div>
+        ${a.optional ? '<div class="aula-optional">Aula extra — se houver 4º encontro no mês</div>' : ''}
+      </div>
+    </div>
+  `).join('');
+
+  const obsHTML = m.obs ? `<div class="notice-bar">⚠️ ${m.obs}</div>` : '';
+
+  panel.innerHTML = `
+    <div class="month-hero">
+      <span class="month-tag" style="background:${m.color}18; color:${m.color};">${m.tagLabel}</span>
+      <h2>${m.name}</h2>
+      <div class="month-subtema">${m.tema} — ${m.subtema}</div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-chip">
+        <span class="chip-dot" style="background:${m.color};"></span>
+        <span><strong>Foco:</strong> ${m.habilidade}</span>
+      </div>
+      <div class="meta-chip" style="flex-wrap:wrap; gap:4px;">
+        <span><strong>Gramática:</strong></span> ${gramPills}
+      </div>
+    </div>
+
+    <div class="section-label">Aulas do mês</div>
+    <div class="aulas-grid">${aulasHTML}</div>
+
+    <div class="bottom-grid">
+      <div class="info-card">
+        <div class="info-card-label">Personalização</div>
+        <p>${m.personaliz}</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Sugestão de tarefa</div>
+        <p>${m.tarefa}</p>
+      </div>
+    </div>
+    ${obsHTML}
+  `;
+
+  panels.appendChild(panel);
+});
+
+function showMonth(id) {
+  document.querySelectorAll('.month-panel').forEach(p => p.classList.remove('visible'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('visible');
+  document.querySelector(`.nav-btn[data-id="${id}"]`).classList.add('active');
+  // Hide arc after first navigation
+  document.getElementById('arcSection').style.display = 'none';
+}
+</script>
+</body>
+</html>
