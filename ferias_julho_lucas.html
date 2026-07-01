@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas — July Holiday Study Plan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,600;1,400&display=swap');
+
+  :root {
+    --bg: #F7F6F2;
+    --card: #FFFFFF;
+    --border: #E2E0D8;
+    --text: #1A1916;
+    --muted: #6B6960;
+    --faint: #9B9A94;
+
+    /* Week accent colors */
+    --w1: #2D5F8A;   --w1-bg: #EAF2FA;  --w1-mid: #C5DDEF;
+    --w2: #5A3E8A;   --w2-bg: #F0EBFA;  --w2-mid: #D5C8F0;
+    --w3: #1E7A56;   --w3-bg: #E8F7F1;  --w3-mid: #BAE6D4;
+    --w4: #8A4E1E;   --w4-bg: #FAF0E8;  --w4-mid: #F0D4BA;
+
+    --radius: 12px;
+    --radius-sm: 7px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--text);
+    color: #F7F6F2;
+    padding: 48px 32px 40px;
+    text-align: center;
+  }
+  .hero-eye {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9B9A94;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: #C5DDEF;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: #9B9A94;
+    max-width: 480px;
+    margin: 0 auto 24px;
+  }
+  .meta-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .meta-pill {
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid #3A3936;
+    color: #C8C7C2;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 860px; margin: 0 auto; padding: 36px 20px 72px; }
+
+  /* ── HOW TO USE ── */
+  .how-to {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 36px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .how-item { display: flex; gap: 10px; align-items: flex-start; }
+  .how-icon { font-size: 18px; line-height: 1; padding-top: 1px; flex-shrink: 0; }
+  .how-text { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .how-text strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 13px; }
+
+  /* ── WEEK BLOCK ── */
+  .week {
+    margin-bottom: 40px;
+    scroll-margin-top: 16px;
+  }
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid currentColor;
+  }
+  .week-num {
+    font-family: 'Lora', serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1;
+    opacity: 0.18;
+  }
+  .week-meta { flex: 1; }
+  .week-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    opacity: 0.7;
+  }
+  .week-title {
+    font-family: 'Lora', serif;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .week-dates {
+    font-size: 11px;
+    color: var(--faint);
+    margin-top: 3px;
+  }
+
+  .w1 .week-header { color: var(--w1); border-color: var(--w1); }
+  .w2 .week-header { color: var(--w2); border-color: var(--w2); }
+  .w3 .week-header { color: var(--w3); border-color: var(--w3); }
+  .w4 .week-header { color: var(--w4); border-color: var(--w4); }
+
+  /* ── DAY CARD ── */
+  .days { display: flex; flex-direction: column; gap: 10px; }
+
+  .day-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .day-top {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .day-stripe {
+    width: 5px;
+    flex-shrink: 0;
+  }
+  .w1 .day-stripe { background: var(--w1); }
+  .w2 .day-stripe { background: var(--w2); }
+  .w3 .day-stripe { background: var(--w3); }
+  .w4 .day-stripe { background: var(--w4); }
+
+  .day-main {
+    flex: 1;
+    padding: 14px 16px 14px;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .day-date {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .day-name {
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .badges { display: flex; gap: 5px; flex-wrap: wrap; }
+  .badge {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .badge-gram { background: #EAF2FA; color: #1D4E75; }
+  .badge-read { background: #FFF3E0; color: #7A4100; }
+  .badge-write { background: #F0EBFA; color: #3E2278; }
+  .badge-listen { background: #E8F7F1; color: #135840; }
+  .badge-speak { background: #FBEAF0; color: #6B1D3A; }
+  .badge-uoe { background: #F3F0E8; color: #4A4530; }
+
+  .blocks { display: flex; flex-direction: column; gap: 8px; }
+
+  .block {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+  }
+
+  .block-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+  .block-time {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--faint);
+    white-space: nowrap;
+    min-width: 38px;
+  }
+  .block-title {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .block-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+    padding-left: 46px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-left: 46px;
+    margin-top: 6px;
+  }
+  .link-btn {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: opacity 0.15s;
+    background: var(--card);
+  }
+  .link-btn:hover { opacity: 0.7; }
+
+  .tip {
+    margin-top: 10px;
+    background: #FFFBF0;
+    border-left: 3px solid #F0C040;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #5A4A10;
+    line-height: 1.5;
+  }
+  .tip strong { font-weight: 600; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--faint);
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 36px 20px 32px; }
+    .how-to { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eye">Lucas · Self-Study Plan</div>
+  <h1>July Holiday<br><em>FCE Training</em></h1>
+  <p class="hero-sub">1 hour a day · 5 days a week · 06 – 31 July 2026</p>
+  <div class="meta-pills">
+    <span class="meta-pill">20 study days</span>
+    <span class="meta-pill">Grammar + FCE skills daily</span>
+    <span class="meta-pill">~60 min/day</span>
+    <span class="meta-pill">B2 → FCE ready</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- HOW TO USE -->
+  <div class="how-to">
+    <div class="how-item">
+      <div class="how-icon">⏱</div>
+      <div class="how-text"><strong>Structure</strong>Each day has two blocks: ~25 min grammar + ~35 min FCE skill. You can swap the order.</div>
+    </div>
+    <div class="how-item">
+      <div class="how-icon">📌</div>
+      <div class="how-text"><strong>Flexibility</strong>Missing a day is fine — just pick up where you left off. Don't skip two days in a row.</div>
+    </div>
+    <div class="how-item">
+      <div class="how-icon">✏️</div>
+      <div class="how-text"><strong>Grammar focus</strong>Watch for your own errors as you do FCE tasks — especially tenses and he/she/it.</div>
+    </div>
+    <div class="how-item">
+      <div class="how-icon">🎵</div>
+      <div class="how-text"><strong>Music tip</strong>If you get bored, swap any day's content for analysing a Taylor Swift song using the week's grammar theme.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ WEEK 1 ══════════════════════════════ -->
+  <div class="week w1" id="week1">
+    <div class="week-header">
+      <div class="week-num">1</div>
+      <div class="week-meta">
+        <div class="week-label">Week 1 · Grammar focus</div>
+        <div class="week-title">Narrative Tenses</div>
+        <div class="week-dates">06 – 10 July</div>
+      </div>
+    </div>
+
+    <div class="days">
+
+      <!-- DAY 1 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Mon 06/07</span>
+              <span class="day-name">Narrative Tenses — Input day</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-read">Reading</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">25 min</span><span class="block-title">Grammar: the 3 narrative tenses</span></div>
+                <div class="block-desc">Read the grammar explanation on British Council. Focus on: Simple Past (the main events), Past Continuous (background/interrupted actions), Past Perfect (what happened before). Write 5 example sentences from your own life.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/past-tense-review" target="_blank">🔗 British Council — Past Tense Review</a>
+                  <a class="link-btn" href="https://www.perfect-english-grammar.com/narrative-tenses.html" target="_blank">🔗 Perfect English Grammar — Narrative Tenses</a>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">35 min</span><span class="block-title">FCE Reading Part 5</span></div>
+                <div class="block-desc">Do one full Part 5 practice text. Focus on finding evidence in the text for each answer — don't go by instinct alone. After finishing, read the whole text again without the questions and notice how the writer uses narrative tenses.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=reading" target="_blank">🔗 Cambridge — Reading activities</a>
+                  <a class="link-btn" href="https://www.flo-joe.co.uk/fce/students/tests/rtindex.htm" target="_blank">🔗 Flo-Joe FCE Reading</a>
+                </div>
+              </div>
+            </div>
+            <div class="tip"><strong>Today's self-check:</strong> Did you mix present and past while doing the reading exercises? Notice it — don't correct retroactively, just become aware.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 2 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Tue 07/07</span>
+              <span class="day-name">Narrative Tenses — Practice</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-write">Writing</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">25 min</span><span class="block-title">Grammar: gap-fill exercises</span></div>
+                <div class="block-desc">Do 2 exercises specifically on narrative tenses. For each wrong answer, write the reason: was it a timeline issue? A background vs. event confusion? Irregular verb?</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.perfect-english-grammar.com/narrative-tenses-exercise-1.html" target="_blank">🔗 Exercise 1 — Perfect English Grammar</a>
+                  <a class="link-btn" href="https://www.perfect-english-grammar.com/narrative-tenses-exercise-2.html" target="_blank">🔗 Exercise 2</a>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">35 min</span><span class="block-title">FCE Writing Part 1 — Essay</span></div>
+                <div class="block-desc">Write a full FCE essay (140–190 words). Topic: <em>"Technology has made it harder for young people to focus. Do you agree?"</em> Use the 4-paragraph structure: intro → point 1 → point 2 → conclusion. Don't edit as you go — write first, then revise once.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.cambridgeenglish.org/images/173977-writing-sample-answers-and-examiner-comments.pdf" target="_blank">🔗 Cambridge sample essays + examiner comments</a>
+                </div>
+              </div>
+            </div>
+            <div class="tip"><strong>Writing challenge:</strong> Your essay is about the present, but your intro might want to reference the past (<em>"Before smartphones existed…"</em>). That's a great chance to use narrative tenses naturally.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 3 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Wed 08/07</span>
+              <span class="day-name">Narrative Tenses — Listening</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-listen">Listening</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: narrative tenses in songs</span></div>
+                <div class="block-desc">Open the lyrics of <em>All Too Well (10 Minute Version)</em> by Taylor Swift. Go through the first 3 verses and identify every verb. Label each one: Simple Past / Past Continuous / Past Perfect. There are examples of all three.</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Listening Parts 1 & 2</span></div>
+                <div class="block-desc">Do one full Listening Part 1 (multiple choice, short extracts) and one Part 2 (sentence completion). For Part 2, pay attention to word form — the answer is usually the exact word or phrase you hear, not a paraphrase.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=listening" target="_blank">🔗 Cambridge Listening activities</a>
+                  <a class="link-btn" href="https://www.examenglish.com/FCE/FCE_listening.htm" target="_blank">🔗 Exam English — FCE Listening</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 4 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Thu 09/07</span>
+              <span class="day-name">Narrative Tenses — Speaking</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-speak">Speaking</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">15 min</span><span class="block-title">Grammar: quick review</span></div>
+                <div class="block-desc">Without looking at any notes, write the 3 narrative tenses and one example sentence for each from memory. Then check. This is retrieval practice — struggling to remember is actually where the learning happens.</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">45 min</span><span class="block-title">FCE Speaking Parts 1 & 2 — Record yourself</span></div>
+                <div class="block-desc">Use your phone to record yourself. Part 1: answer these 3 questions out loud (30 sec each): <em>"Tell me about a time you felt really proud of yourself."</em> / <em>"What was the last film you watched that you really enjoyed?"</em> / <em>"Describe a place that's important to you."</em> Then do Part 2: describe and compare two photos from Google Images (search "people helping each other"). Speak for 1 minute. Listen back and count: how many tense errors do you notice yourself?</div>
+              </div>
+            </div>
+            <div class="tip"><strong>Speaking tip:</strong> All 3 Part 1 questions above naturally require past tenses. That's deliberate — use them to practise narrative tenses in a speaking context.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 5 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Fri 10/07</span>
+              <span class="day-name">Narrative Tenses — Full review day</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-uoe">Use of English</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: error hunt</span></div>
+                <div class="block-desc">Go back to the essay you wrote on Tuesday. Read it out loud. Find and correct any tense errors. Then rewrite any sentence where you used Simple Past when Past Perfect would be more accurate (i.e. something that happened before another past event).</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Use of English Parts 1 & 2</span></div>
+                <div class="block-desc">Do one Part 1 (multiple choice cloze) and one Part 2 (open cloze). These test vocabulary and grammar in context together. For each wrong answer, identify whether it was a vocabulary gap or a grammar issue.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.flo-joe.co.uk/fce/students/tests/ueindex.htm" target="_blank">🔗 Flo-Joe — Use of English</a>
+                  <a class="link-btn" href="https://www.examenglish.com/FCE/fce_use_of_english_part1.htm" target="_blank">🔗 Exam English — Part 1</a>
+                </div>
+              </div>
+            </div>
+            <div class="tip"><strong>End of week 1:</strong> You've now seen narrative tenses in reading, writing, listening, speaking, and use of english. That's the whole exam in one week.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ WEEK 2 ══════════════════════════════ -->
+  <div class="week w2" id="week2">
+    <div class="week-header">
+      <div class="week-num">2</div>
+      <div class="week-meta">
+        <div class="week-label">Week 2 · Grammar focus</div>
+        <div class="week-title">Conditionals (2 & 3)</div>
+        <div class="week-dates">13 – 17 July</div>
+      </div>
+    </div>
+
+    <div class="days">
+
+      <!-- DAY 6 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Mon 13/07</span>
+              <span class="day-name">Conditionals — Input day</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-read">Reading</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">25 min</span><span class="block-title">Grammar: Conditionals 2 & 3</span></div>
+                <div class="block-desc">Read the explanation, then write 4 sentences of your own: 2 with conditional 2 (hypothetical present/future: <em>If I were…, I would…</em>) and 2 with conditional 3 (hypothetical past: <em>If I had…, I would have…</em>). Make them about real things — your course, your relationship, Narnia, Hunger Games, faith.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/conditionals-2" target="_blank">🔗 British Council — Conditional 2</a>
+                  <a class="link-btn" href="https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/conditionals-3" target="_blank">🔗 British Council — Conditional 3</a>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">35 min</span><span class="block-title">FCE Reading Part 6 — Gapped text</span></div>
+                <div class="block-desc">This is the hardest Reading part. You remove 6 sentences from a text and choose where each one goes back. Focus on linking devices (however, therefore, moreover) and pronoun reference (he, she, it, they, this) to find the right position.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.flo-joe.co.uk/fce/students/tests/rtindex.htm" target="_blank">🔗 Flo-Joe — Reading Part 6</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 7 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Tue 14/07</span>
+              <span class="day-name">Conditionals — Hunger Games</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-speak">Speaking</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">25 min</span><span class="block-title">Grammar: conditionals in storytelling</span></div>
+                <div class="block-desc">Think about The Hunger Games. Write answers to these prompts using conditional 3: <em>"If Katniss hadn't volunteered, what would have happened to Prim?"</em> / <em>"If Peeta hadn't helped Katniss in the forest, what would she have done?"</em> / <em>"If the Capitol hadn't existed, how would Panem have been different?"</em> Aim for 2–3 sentences per answer.</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">35 min</span><span class="block-title">FCE Speaking Part 3 & 4 practice</span></div>
+                <div class="block-desc">Part 3 is a collaborative task (usually done with a partner). Alone, talk through this task out loud: <em>You're deciding which activities would help young people develop important life skills — discuss: learning to cook / doing voluntary work / playing team sports / learning a musical instrument / travelling abroad.</em> Then answer Part 4 questions: <em>"Do you think schools do enough to prepare young people for adult life?"</em> Record yourself.</div>
+              </div>
+            </div>
+            <div class="tip"><strong>Connection:</strong> Conditional 3 is perfect for discussing Hunger Games, Narnia, or any story where things could have gone differently. It also appears constantly in FCE Writing and Speaking.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 8 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Wed 15/07</span>
+              <span class="day-name">Conditionals — Writing</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-write">Writing</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-time"></span><span class="block-title">Grammar: mixed conditionals</span></div>
+                <div class="block-desc">A mixed conditional combines a past condition with a present result: <em>"If I had studied harder last year, I would be at C1 now."</em> Write 3 mixed conditional sentences that are genuinely true for you. These are harder — take your time.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.perfect-english-grammar.com/mixed-conditionals.html" target="_blank">🔗 Mixed Conditionals — Perfect English Grammar</a>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Writing Part 2 — Article</span></div>
+                <div class="block-desc">Write a magazine article (140–190 words) for a student magazine. Title: <em>"What would the world look like without social media?"</em> Use at least 2 conditionals naturally in your article. Think about: engaging opening, two or three ideas, conclusion that leaves the reader thinking.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 9 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Thu 16/07</span>
+              <span class="day-name">Conditionals — Use of English</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-uoe">Use of English</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: key word transformation with conditionals</span></div>
+                <div class="block-desc">This is Use of English Part 4. The key words for conditionals are often: <em>unless, provided, as long as, had, were, if only</em>. Practice: rewrite these sentences keeping the meaning: <em>"You will only pass the exam if you study."</em> → key word: UNLESS / <em>"I regret not going to bed earlier."</em> → key word: HAD</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.flo-joe.co.uk/fce/students/tests/ueindex.htm" target="_blank">🔗 Flo-Joe — Key Word Transformations</a>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Use of English Parts 3 & 4</span></div>
+                <div class="block-desc">Part 3 is word formation (adding prefixes/suffixes). Part 4 is key word transformation (6 sentences, rewrite using the key word, 2–5 words). These two parts together are worth a lot — worth practising them every week.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.examenglish.com/FCE/fce_use_of_english_part3.htm" target="_blank">🔗 Part 3 — Word Formation</a>
+                  <a class="link-btn" href="https://www.examenglish.com/FCE/fce_use_of_english_part4.htm" target="_blank">🔗 Part 4 — Key Word Transformation</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 10 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Fri 17/07</span>
+              <span class="day-name">Conditionals — Free day</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-listen">Listening</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: in music</span></div>
+                <div class="block-desc">Find a Taylor Swift song that uses conditionals. Good options: <em>The 1</em> ("If one thing had been different…"), <em>Back to December</em>, <em>Last Kiss</em>. Write out the conditional sentences you find and label them: conditional 2, 3, or mixed.</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Listening Parts 3 & 4</span></div>
+                <div class="block-desc">Part 3 is multiple matching (5 speakers, 8 options). Part 4 is multiple choice (7 questions, longer extract). Listen twice each time. Don't just match the first word you hear — the correct answer usually paraphrases what the speaker says.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.examenglish.com/FCE/FCE_listening.htm" target="_blank">🔗 Exam English — FCE Listening</a>
+                </div>
+              </div>
+            </div>
+            <div class="tip"><strong>End of week 2:</strong> Conditionals 2 and 3 are some of the most common structures in FCE Writing and Speaking. If they feel natural now, that's a big advantage going into the exam.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ WEEK 3 ══════════════════════════════ -->
+  <div class="week w3" id="week3">
+    <div class="week-header">
+      <div class="week-num">3</div>
+      <div class="week-meta">
+        <div class="week-label">Week 3 · Grammar focus</div>
+        <div class="week-title">Modal Verbs & Speculation</div>
+        <div class="week-dates">20 – 24 July</div>
+      </div>
+    </div>
+
+    <div class="days">
+
+      <!-- DAY 11 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Mon 20/07</span>
+              <span class="day-name">Modals — Input day</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-read">Reading</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">25 min</span><span class="block-title">Grammar: modals for speculation</span></div>
+                <div class="block-desc">Focus on these 6 modal uses: <em>must be</em> (strong deduction), <em>can't be</em> (strong negative deduction), <em>might/could be</em> (possibility), <em>must have been</em> (past deduction), <em>can't have been</em> (past negative deduction), <em>might have been</em> (past possibility). Write one sentence for each using people or situations you know.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/modal-verbs-for-deduction" target="_blank">🔗 British Council — Modals for Deduction</a>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">35 min</span><span class="block-title">FCE Reading Part 7 — Multiple matching</span></div>
+                <div class="block-desc">Part 7 has 10 questions matched to 4–5 short texts. Read all texts first, then go through the questions. Key skill: recognise paraphrasing — the question rarely uses the same words as the text.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.flo-joe.co.uk/fce/students/tests/rtindex.htm" target="_blank">🔗 Flo-Joe — Reading Part 7</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 12 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Tue 21/07</span>
+              <span class="day-name">Modals — FCE Speaking Part 2</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-speak">Speaking</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: modals in photo descriptions</span></div>
+                <div class="block-desc">FCE Speaking Part 2 requires speculation about photos. Practise these phrases out loud: <em>"They might be…" / "She could be feeling…" / "It looks as if…" / "I imagine they must be…" / "He can't be very happy because…"</em>. Say each one out loud 3 times, then use them in a sentence about a real situation.</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Speaking Part 2 — 4 rounds</span></div>
+                <div class="block-desc">Go to Google Images and search these 4 pairs, one at a time. Describe each pair for 1 minute, then answer the short follow-up question. Record yourself each time.<br><br>
+                  1. Search: "people celebrating outdoors" → <em>Why might these people be celebrating?</em><br>
+                  2. Search: "students studying together" → <em>Which situation looks more productive?</em><br>
+                  3. Search: "person alone in city" → <em>How might this person be feeling?</em><br>
+                  4. Search: "technology in everyday life" → <em>What do these images say about modern life?</em>
+                </div>
+              </div>
+            </div>
+            <div class="tip"><strong>Key insight:</strong> Modals are the grammar of Speaking Part 2. Every time you speculate about a photo, you're using them. The examiner is listening for variety — don't just use "might" for everything.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 13 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Wed 22/07</span>
+              <span class="day-name">Modals — Writing</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-write">Writing</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: modals in essays</span></div>
+                <div class="block-desc">Modals make essays more nuanced and less absolute. Compare: <em>"Technology is bad for relationships"</em> vs. <em>"Technology might damage relationships if used excessively."</em> Rewrite these sentences to make them more nuanced using modals: <em>"AI will replace all jobs." / "Social media causes depression." / "Young people don't read anymore."</em></div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Writing Part 2 — Email</span></div>
+                <div class="block-desc">Write a semi-formal email (140–190 words). Situation: <em>You've seen an advertisement for a summer language course abroad. Write an email to the school asking for more information about the course, accommodation and costs.</em> Focus on register: polite but not too formal. Use <em>could you, would it be possible, I'd like to know.</em></div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.cambridgeenglish.org/images/173977-writing-sample-answers-and-examiner-comments.pdf" target="_blank">🔗 Cambridge sample answers</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 14 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Thu 23/07</span>
+              <span class="day-name">Modals — Listening deep dive</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-listen">Listening</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: modals + past — error correction</span></div>
+                <div class="block-desc">Find and correct the errors in these sentences: <em>"She must went home early." / "He can't have see the message." / "They might have been not ready." / "You must not have told her yet."</em> Then write the correct version and explain why each one was wrong.</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Listening — Full practice set</span></div>
+                <div class="block-desc">Do a complete FCE Listening test (Parts 1–4). Time yourself: the real test takes about 40 minutes including transfer time. After finishing, go back to any question you got wrong and listen again — identify the exact moment where the correct answer appears.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.cambridgeenglish.org/learning-english/activities-for-learners/?skill=listening" target="_blank">🔗 Cambridge Listening</a>
+                  <a class="link-btn" href="https://www.examenglish.com/FCE/FCE_listening.htm" target="_blank">🔗 Exam English — Full set</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 15 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Fri 24/07</span>
+              <span class="day-name">Modals — Full review</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-uoe">Use of English</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: retrieval practice</span></div>
+                <div class="block-desc">Without notes: write the 6 modal structures from Monday from memory. Then write one original sentence for each. Check only after you've finished.</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Use of English — Full Parts 1–4</span></div>
+                <div class="block-desc">Do all four parts in one sitting, timed. The real test allows 75 minutes for Reading + Use of English together. Use 35 minutes for all 4 Use of English parts. After correcting, categorise your errors: vocabulary? grammar? word form?</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.flo-joe.co.uk/fce/students/tests/ueindex.htm" target="_blank">🔗 Flo-Joe — Full Use of English</a>
+                </div>
+              </div>
+            </div>
+            <div class="tip"><strong>End of week 3:</strong> Three weeks in, three grammar areas covered. These three — narrative tenses, conditionals, modals — cover a huge proportion of what FCE tests in Use of English and Writing.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ WEEK 4 ══════════════════════════════ -->
+  <div class="week w4" id="week4">
+    <div class="week-header">
+      <div class="week-num">4</div>
+      <div class="week-meta">
+        <div class="week-label">Week 4 · Grammar focus</div>
+        <div class="week-title">Passive Voice & Reported Speech</div>
+        <div class="week-dates">27 – 31 July</div>
+      </div>
+    </div>
+
+    <div class="days">
+
+      <!-- DAY 16 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Mon 27/07</span>
+              <span class="day-name">Passive & Reported Speech — Input</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-read">Reading</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">25 min</span><span class="block-title">Grammar: passive voice</span></div>
+                <div class="block-desc">The passive appears constantly in FCE Use of English Part 4. Focus on: present passive (<em>is made</em>), past passive (<em>was built</em>), and perfect passive (<em>has been discovered</em>). Write 3 sentences about music using the passive: <em>"This song was written by…" / "The album has been listened to by millions…"</em></div>
+                <div class="links">
+                  <a class="link-btn" href="https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/the-passive" target="_blank">🔗 British Council — Passive Voice</a>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">35 min</span><span class="block-title">FCE Reading — Full Part 5 timed</span></div>
+                <div class="block-desc">Do one full Part 5 text timed: 18 minutes maximum. After correcting, go back to the questions you got wrong and find the exact sentence(s) in the text that prove the correct answer.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.flo-joe.co.uk/fce/students/tests/rtindex.htm" target="_blank">🔗 Flo-Joe — Reading Part 5</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 17 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Tue 28/07</span>
+              <span class="day-name">Reported Speech — Input & Practice</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-write">Writing</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">25 min</span><span class="block-title">Grammar: reported speech</span></div>
+                <div class="block-desc">Focus on tense backshift: <em>"I love this song" → She said she loved that song.</em> Practise with 5 sentences. Use things people in your life actually said this week — it makes it much easier to remember.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/reported-speech-statements-and-questions" target="_blank">🔗 British Council — Reported Speech</a>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">35 min</span><span class="block-title">FCE Writing — Essay + self-assessment</span></div>
+                <div class="block-desc">Write a final essay (140–190 words): <em>"Some people think that faith and science cannot coexist. Do you agree?"</em> After writing, score yourself on 4 criteria (1–5): Content / Organisation / Language range / Accuracy. Be honest.</div>
+              </div>
+            </div>
+            <div class="tip"><strong>Personal challenge:</strong> This essay topic connects science and faith — two things you actually think about. Write something you actually believe, not the "safe" version.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 18 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Wed 29/07</span>
+              <span class="day-name">Passive + Reported — Use of English</span>
+              <div class="badges"><span class="badge badge-gram">Grammar</span><span class="badge badge-uoe">Use of English</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: Part 4 transformation practice</span></div>
+                <div class="block-desc">Practise the most common FCE Part 4 transformation types using passive and reported speech. Key words to know: <em>SAID, TOLD, REPORTED, KNOWN, BELIEVED, SUPPOSED TO.</em> Example: <em>"People believe he is innocent." → KEY WORD: BELIEVED → "He is believed to be innocent."</em> Find 5 more examples online and practise them.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.flo-joe.co.uk/fce/students/tests/ueindex.htm" target="_blank">🔗 Flo-Joe — Part 4 transformations</a>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Use of English — timed Parts 3 & 4</span></div>
+                <div class="block-desc">Do Part 3 (10 min) and Part 4 (15 min) under timed conditions. These two parts are where passive and reported speech transformations appear most. After correcting, write a note next to each error explaining what you should have known.</div>
+                <div class="links">
+                  <a class="link-btn" href="https://www.examenglish.com/FCE/fce_use_of_english_part4.htm" target="_blank">🔗 Exam English — Part 4</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 19 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Thu 30/07</span>
+              <span class="day-name">Month review — Speaking</span>
+              <div class="badges"><span class="badge badge-speak">Speaking</span><span class="badge badge-gram">Grammar</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">20 min</span><span class="block-title">Grammar: month recap</span></div>
+                <div class="block-desc">From memory, write one example sentence for each of the 4 grammar themes of the month: Narrative Tenses / Conditionals 2 & 3 / Modals for speculation / Passive voice. Don't look back at your notes until after.</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">40 min</span><span class="block-title">FCE Speaking — Full mock (Parts 1–4)</span></div>
+                <div class="block-desc">Record a full speaking simulation. <br><br>
+                  <em>Part 1 (2 min):</em> Answer these: "Tell me about something you enjoyed doing this month." / "What kind of music do you usually listen to and why?" / "What are your plans for the coming months?"<br><br>
+                  <em>Part 2 (4 min):</em> Compare two photos from Google Images: search "people learning something new" — describe, compare, and speculate for 1 minute each.<br><br>
+                  <em>Part 3 (3 min):</em> Discuss out loud: <em>What makes a good friend?</em> — go through 5 qualities (honesty / humour / loyalty / support / shared interests) and decide which 2 are most important.<br><br>
+                  <em>Part 4 (3 min):</em> Answer: "Do you think it's easier to make friends now than it was for previous generations? Why/why not?"
+                </div>
+              </div>
+            </div>
+            <div class="tip"><strong>Slow down:</strong> You tend to accelerate when speaking. Before each Part, take one breath and start at 80% of your natural speed. It sounds more confident, not less.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 20 -->
+      <div class="day-card">
+        <div class="day-top">
+          <div class="day-stripe"></div>
+          <div class="day-main">
+            <div class="day-header">
+              <span class="day-date">Fri 31/07</span>
+              <span class="day-name">Final day — Listen back & celebrate</span>
+              <div class="badges"><span class="badge badge-speak">Speaking</span><span class="badge badge-listen">Listening</span></div>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <div class="block-top"><span class="block-time">30 min</span><span class="block-title">Listen to your Day 4 & Day 19 recordings</span></div>
+                <div class="block-desc">Put them side by side. Listen for: tense consistency, he/she/it, speed, vocabulary range, how you handle pauses. You are not looking for perfection — you are looking for the distance between where you started and where you are now. Write down 3 things that improved.</div>
+              </div>
+              <div class="block">
+                <div class="block-top"><span class="block-time">30 min</span><span class="block-title">Free choice</span></div>
+                <div class="block-desc">Do whatever part of FCE you enjoyed most this month, or the part you feel least confident in. Your call. You've done 20 days — you've earned the choice.</div>
+              </div>
+            </div>
+            <div class="tip"><strong>Well done.</strong> 20 days, 4 grammar areas, all 5 FCE skills. That's real preparation — not just reading about the exam, but actually doing it. The classes in August will feel completely different because of this month.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    Lucas · July 2026 Holiday Study Plan · Prepared by Lari
+  </footer>
+
+</div>
+</body>
+</html>
